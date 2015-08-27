@@ -285,17 +285,9 @@
 </li>
 <li><p>random.sample<br>random.sample的函数原型为：random.sample(sequence, k)，从指定序列中随机获取指定长度的片断。sample函数不会修改原有序列。  </p>
   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	<span class="built_in">list</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line">	slice = random.sample(<span class="built_in">list</span>, <span class="number">5</span>)  <span class="preprocessor">#从list中随机获取<span class="number">5</span>个元素，作为一个片断返回</span></span><br><span class="line">	print slice</span><br><span class="line">	print <span class="built_in">list</span> <span class="preprocessor">#原有序列并没有改变。</span></span><br><span class="line">	```  </span><br><span class="line">	</span><br><span class="line">&gt;上面这些方法是random模块中最常用的，在Python手册中，还介绍其他的方法。感兴趣的朋友可以通过查询Python手册了解更详细的信息。所有代码如下：</span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>import random<br>print random.random()<br>  0.72487604051<br>print random.uniform(10, 30)<br>  17.6255210608</p>
-<p>print random.randint(10, 20)<br>  16</p>
-<h1 id="注意生成的是整数">注意生成的是整数</h1><p>  …<br>print random.randrange(1, 100 ,5)<br>  11<br>print random.randrange(0, 100 ,5)<br>  10<br>print random.choice([1, ‘hello’, ‘python’, 23])<br>  python<br>print random.choice([1, ‘hello’, ‘python’, 23])<br>  1<br>print randon.choice(‘hellopython’)<br>  Traceback (most recent call last):</p>
+<p>  import random<br>  print random.random()<br>  0.72487604051<br>  print random.uniform(10, 30)<br>  17.6255210608<br>  print random.randint(10, 20)<br>  16<br>  ＃ 注意生成的是整数<br>  …<br>  print random.randrange(1, 100 ,5)<br>  11<br>  print random.randrange(0, 100 ,5)<br>  10<br>  print random.choice([1, ‘hello’, ‘python’, 23])<br>  python<br>  print random.choice([1, ‘hello’, ‘python’, 23])<br>  1<br>  print randon.choice(‘hellopython’)<br>  Traceback (most recent call last):</p>
 <pre><code><span class="constant">File</span> <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;<span class="class"><span class="keyword">module</span>&gt;</span>
-</code></pre><p>  NameError: name ‘randon’ is not defined<br>print random.choice(‘hellopython’)<br>  h<br>print random.choice(‘hellopython’)<br>  o<br>print random.choice(‘hellopython’)<br>  h<br>print random.shuffle([1, ‘hello’, ‘python’, 23])<br>  None<br>print random.shuffle([1, ‘hello’, ‘python’, 23])<br>  None<br>p = [1, ‘hello’, ‘python’, 23]<br>random.shuffle(p)<br>print p<br>  [23, ‘hello’, 1, ‘python’]<br>sp = random.sample(p, 2)<br>print sp<br>  [1, ‘hello’]</p>
-</blockquote>
-</blockquote>
-</blockquote>
+</code></pre><p>  NameError: name ‘randon’ is not defined<br>  print random.choice(‘hellopython’)<br>  h<br>  print random.choice(‘hellopython’)<br>  o<br>  print random.choice(‘hellopython’)<br>  h<br>  print random.shuffle([1, ‘hello’, ‘python’, 23])<br>  None<br>  print random.shuffle([1, ‘hello’, ‘python’, 23])<br>  None<br>  p = [1, ‘hello’, ‘python’, 23]<br>  random.shuffle(p)<br>  print p<br>  [23, ‘hello’, 1, ‘python’]<br>  sp = random.sample(p, 2)<br>  print sp<br>  [1, ‘hello’]</p>
 <pre><code><span class="escape">``</span>`
 </code></pre></li>
 </ul>
