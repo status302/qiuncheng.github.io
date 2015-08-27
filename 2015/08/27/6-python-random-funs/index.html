@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>换Mac了，高兴的心情无法抑制！ | Qiuncheng&#39;s Blog</title>
+  <title>python中random模块简析 | Qiuncheng&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -247,59 +247,65 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2015-08-25T12:03:59.000Z" itemprop="datePublished">
-          August 25 2015
+      <time datetime="2015-08-27T02:44:20.000Z" itemprop="datePublished">
+          August 27 2015
       </time>
     
     
     | 
-    <a href='/tags/Mac/'>Mac</a>
+    <a href='/tags/python/'>python</a>
     
     
 </span>
-                <h1>换Mac了，高兴的心情无法抑制！</h1>
+                <h1>python中random模块简析</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
       		<blockquote>
-<p>之前把我联想U410的超级本升级了win10，本来用着还不错，可是依然无法是性能不足，不能满足我的某些需求。我承认，U410是我用过的比较好的PC之一（我总共就用过两台PC　）。但当我前天收到了早前下单的Mac之后，我再也不认为U410是一个好的笔记本了。没错，现在真的是认为MacBook是最好的笔记本。  </p>
+<p>Python中的random用于生成随机数。下面简析下random中常用的几个函数。  </p>
 </blockquote>
-<p>怎么说呢，买这个MacBook Pro（Retina）真的是历程艰险，记得当时我身上只能拿出一千块钱，然后就把我想买电脑的事情跟我母亲说了，她当时只说，没事，到时候我给你2K，可是2K呀。当时说真的，我一下子觉得多了点希望，于是我就想着各种办法弄钱呀，其中把我原来的U410卖掉了1500，找表哥借了1500，找同学借了1200，可是还差1K多，黄天不负有心人，最好的人就在你身边，他们就是你身边的父母，于是当我父亲听到我想换电脑还差点钱时果断给了我一千。哈哈，齐了。<br>于是在8月19号的下午，我在Apple官网下单了，原因很简单，因为Apple在开学季买Mac送beats solo2耳机。哈哈，瞬间觉得Apple公司真的是太有爱了。<br>不多说了，直接上图：</p>
 <ul>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/1.pic.jpg" alt="image description"></li>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/3.pic.jpg" alt=""></li>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/2.pic.jpg" alt=""></li>
-</ul>
-<p>其实Mac上的操作真的让人无话说，太流畅了，太省电了，电池太顶用了。软件也很丰富，虽然游戏很少，大多都收费，但是我真的是太喜欢这台电脑了。屏幕就和我的iPad屏幕一样清晰。<br>先说这么多吧，更多体验等我以后用多了我想自然就有了吧。</p>
-<p>额，其实也还是有几条不足的：  </p>
-<ul>
-<li>Markdown编辑器我还是觉得markdownPad好用，虽然Mac上有很多md编辑器，但始终没有mdpad的感觉，也许这就是相思吧。</li>
-<li>hexo博客的环境从win上换到Mac上有很多地方需要注意，ssh、node.js、brew等等。</li>
-<li>Mac的硬盘内存比较小，只有128G</li>
-<li>还有其他的等等，</li>
+<li><p>random.random<br>random.random()用于生成一个0到1的随机浮点数: 0 &lt;= n &lt; 1.0</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;print random.random()</span><br><span class="line"><span class="number">0.690448381007</span> <span class="preprocessor"># 输出<span class="number">1</span></span></span><br><span class="line"><span class="number">0.89515663051</span>  <span class="preprocessor"># 输出<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.uniform<br>random.uniform的函数原型为：random.uniform(a, b)，用于生成一个指定范围内的随机符点数，两个参数其中一个是上限，一个是下限。如果a &gt; b，则生成的随机数n: b &lt;= n &lt;= a。如果 a &lt;b， 则 a &lt;= n &lt;= b。  </p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    &gt;&gt;&gt;print <span class="built_in">random</span>.uniform(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">    <span class="number">19.5205130852</span></span><br><span class="line">&gt;&gt;&gt;print <span class="built_in">random</span>.uniform(<span class="number">30</span>, <span class="number">20</span>)</span><br><span class="line">    <span class="number">22.3666600118</span></span><br><span class="line">    <span class="comment"># 不同的机器可能显示的结果不相同。</span></span><br><span class="line">```  </span><br><span class="line">- <span class="built_in">random</span>.randint  </span><br><span class="line"><span class="built_in">random</span>.randint()的函数原型为：<span class="built_in">random</span>.randint(<span class="operator">a</span>, b)，用于生成一个指定范围内的整数。其中参数<span class="operator">a</span>是下限，参数b是上限，生成的随机数n: <span class="operator">a</span> &lt;= n &lt;= b</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <blockquote>
-<p>顺便说一下，那个beats solo2耳机我真的觉得没啥用处呀，所以我想便宜点卖掉呀，有谁想要的请直接在下方评论处说明。　</p>
+<blockquote>
+<blockquote>
+<p>print random.randint(12,20)  #生成的随机数n: 12 &lt;= n &lt;= 20<br>print random.randint(20,20)  #结果永远是20  </p>
+<p>#print random.randint(20, 10)   #该语句是错误的。下限必须小于上限。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- random.randrange  </span><br><span class="line">random.randrange的函数原型为：random.randrange([start], stop[, step])，从指定范围内，按指定基数递增的集合中 获取一个随机数。如：random.randrange(<span class="number">10</span>, <span class="number">100</span>, <span class="number">2</span>)，结果相当于从[<span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">16</span>, ... <span class="number">96</span>, <span class="number">98</span>]序列中获取一个随机数。random.randrange(<span class="number">10</span>, <span class="number">100</span>, <span class="number">2</span>)在结果上与 random.choice(range(<span class="number">10</span>, <span class="number">100</span>, <span class="number">2</span>) 等效。</span><br></pre></td></tr></table></figure></p>
+<p>print random.randrange(10,100,2) #从10开始到100结束，步长为2的序列中，随机选一个<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- random.choice  </span><br><span class="line">random.choice从序列中获取一个随机元素。其函数原型为：random.choice(<span class="keyword">sequence</span>)。参数<span class="keyword">sequence</span>表示一个有序类型。这里要说明 一下：<span class="keyword">sequence</span>在python不是一种特定的类型，而是泛指一系列的类型。list, <span class="keyword">tuple</span>, 字符串都属于<span class="keyword">sequence</span>。有关<span class="keyword">sequence</span>可以查看python手册数据模型这一章，也可以参考：http:<span class="comment">//www.17xie.com/read-37422.html 。下面是使用choice的一些例子：</span></span><br></pre></td></tr></table></figure></p>
+<p>print random.choice(“学习Python”) #从字符串里随机选取一个字符，但是我发现还会出现‘？’这个是怎么回事还有待解决。<br>print random.choice([“JGood”,”is”, “a”,”handsome”, “boy”])<br>print random.choice((“Tuple”,”List”, “Dict”))<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- random<span class="class">.shuffle</span>  </span><br><span class="line">random.shuffle的函数原型为：random.<span class="function"><span class="title">shuffle</span><span class="params">(x[, random])</span></span>，用于将一个列表中的元素打乱。如:</span><br></pre></td></tr></table></figure></p>
+<p>p = [“Python”,”is”, “powerful”,”simple”, “and so on…”]<br>random.shuffle(p)<br>print p  </p>
+<p>#—- 结果（不同机器上的结果可能不一样。）  </p>
+<p>#[‘powerful’, ‘simple’, ‘is’, ‘Python’, ‘and so on…’]<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- random<span class="class">.sample</span>  </span><br><span class="line">random.sample的函数原型为：random.<span class="function"><span class="title">sample</span><span class="params">(sequence, k)</span></span>，从指定序列中随机获取指定长度的片断。sample函数不会修改原有序列。</span><br></pre></td></tr></table></figure></p>
+<p>list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>slice = random.sample(list, 5)  &gt;&gt;&gt;#从list中随机获取5个元素，作为一个片断返回<br>print slice<br>print list #原有序列并没有改变。<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;上面这些方法是<span class="built_in">random</span>模块中最常用的，在Python手册中，还介绍其他的方法。感兴趣的朋友可以通过查询Python手册了解更详细的信息。所有代码如下：</span><br></pre></td></tr></table></figure></p>
+<p>import random<br>print random.random()<br>    0.72487604051<br>print random.uniform(10, 30)<br>    17.6255210608</p>
+<p>print random.randint(10, 20)<br>    16</p>
+<h1 id="注意生成的是整数">注意生成的是整数</h1><pre><code><span class="bullet">... </span>
+</code></pre><p>print random.randrange(1, 100 ,5)<br>    11<br>print random.randrange(0, 100 ,5)<br>    10<br>print random.choice([1, ‘hello’, ‘python’, 23])<br>    python<br>print random.choice([1, ‘hello’, ‘python’, 23])<br>    1<br>print randon.choice(‘hellopython’)<br>    Traceback (most recent call last):<br>      File “<stdin>“, line 1, in <module><br>    NameError: name ‘randon’ is not defined<br>print random.choice(‘hellopython’)<br>    h<br>print random.choice(‘hellopython’)<br>    o<br>print random.choice(‘hellopython’)<br>    h<br>print random.shuffle([1, ‘hello’, ‘python’, 23])<br>    None<br>print random.shuffle([1, ‘hello’, ‘python’, 23])<br>    None<br>p = [1, ‘hello’, ‘python’, 23]<br>random.shuffle(p)<br>print p<br>    [23, ‘hello’, 1, ‘python’]<br>sp = random.sample(p, 2)<br>print sp<br>    [1, ‘hello’]</module></stdin></p>
 </blockquote>
-
+</blockquote>
+</blockquote>
+<pre><code><span class="escape">``</span>`
+</code></pre>
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2015/08/27/6-python-random-funs/" style="float: left;">
-        ← python中random模块简析
-    </a>
     
-    
-    <a class="pull-right" href="/2015/08/05/4-win10-update/">
-        升级win10的一点小小的心得 →
+    <a class="pull-right" href="/2015/08/25/5-change-to-mac/">
+        换Mac了，高兴的心情无法抑制！ →
     </a>
     
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="2015/08/25/5-change-to-mac/" data-title="换Mac了，高兴的心情无法抑制！" data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/"></div>
+<div class="ds-thread" data-thread-key="2015/08/27/6-python-random-funs/" data-title="python中random模块简析" data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"qiuncheng"};
 (function() {
