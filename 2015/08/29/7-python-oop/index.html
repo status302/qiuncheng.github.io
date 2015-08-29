@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2015 | Qiuncheng&#39;s Blog</title>
+  <title>python面向对象－类和封装 | Qiuncheng&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -244,76 +244,95 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/08/29/7-python-oop/">python面向对象－类和封装</a></h4>
-                            
-                            <p><time datetime="2015-08-29T01:50:47.000Z"><a href="/2015/08/29/7-python-oop/">August 29 2015</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/08/27/6-python-random-funs/">python中random模块简析</a></h4>
-                            
-                            <p><time datetime="2015-08-27T02:44:20.000Z"><a href="/2015/08/27/6-python-random-funs/">August 27 2015</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/08/25/5-change-to-mac/">换Mac了，高兴的心情无法抑制！</a></h4>
-                            
-                            <p><time datetime="2015-08-25T12:03:59.000Z"><a href="/2015/08/25/5-change-to-mac/">August 25 2015</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/08/05/4-win10-update/">升级win10的一点小小的心得</a></h4>
-                            
-                            <p><time datetime="2015-08-05T02:16:39.000Z"><a href="/2015/08/05/4-win10-update/">August 05 2015</a></time></p>
-                        </div>
-                    
-                        
-                            </div><div class="row boxes">
-                            
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/08/03/3-img-markdown-desc/">MarkDown改进-图片说明实现</a></h4>
-                            
-                            <p><time datetime="2015-08-03T02:03:40.000Z"><a href="/2015/08/03/3-img-markdown-desc/">August 03 2015</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-08-29T01:50:47.000Z" itemprop="datePublished">
+          August 29 2015
+      </time>
+    
+    
+    | 
+    <a href='/tags/python/'>python</a>
+    
+    
+</span>
+                <h1>python面向对象－类和封装</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<blockquote>
+<p>之前学过java，也了解过面向对象。类与对象：类的封装、多态与继承也就是面向对象的三大特性。也可以理解说一切集合都是类，自然界中的一切都是对象。但是python中的面向对象很明显给我的感觉就是“好写”。  </p>
+</blockquote>
+<ul>
+<li>类和实例：  </li>
+</ul>
+<ol>
+<li>定义类：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>class</code>后面是类名，即<code>Student</code>与java中相同，类名通常首字母大写。紧接着是<code>(object)</code>，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用<code>object</code>类，这是所有类最终都会继承的类。</p>
+<ol>
+<li>实例化：<br>定义好了<code>Student</code>类，就可以根据<code>Student</code>类创建出<code>Student</code>的实例，创建实例是通过<code>类名+()</code>实现的：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bart = <span class="function"><span class="title">Student</span><span class="params">()</span></span></span><br><span class="line">bart</span><br><span class="line">&lt;__main__<span class="class">.Student</span> <span class="tag">object</span> at <span class="number">0</span>x10a67a590&gt;</span><br><span class="line">Student</span><br><span class="line">&lt;class <span class="string">'__main__.Student'</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以看到，变量bart指向的就是一个<code>Student</code>的<code>object</code>，后面的0x10a67a590是内存地址，每个<code>object</code>的地址都不一样，而<code>Student</code>本身则是一个类。  </p>
+<blockquote>
+<p>深层解析:  </p>
+</blockquote>
+<p> 由于类可以起到模板的作用，因此，可以在创建实例的时候，把一些我们认为必须绑定的属性强制填写进去。通过定义一个特殊的<strong>init</strong>方法，在创建实例的时候，就把name，score等属性绑上去(其实这个可以理解为java中的构造器)：  </p>
+<pre><code><span class="comment"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure></span>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。  
+
+有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去：  
+<span class="comment"><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart Simpson'</span>, <span class="number">59</span>)</span><br><span class="line">bart.name</span><br><span class="line"><span class="preprocessor"># 'Bart Simpson'</span></span><br><span class="line">bart.score</span><br><span class="line"><span class="preprocessor"># 59</span></span><br></pre></td></tr></table></figure></span>
+</code></pre><ul>
+<li>数据封装：</li>
+</ul>
+<ol>
+<li><p>面向对象编程的一个重要特点就是数据封装。在上面的<code>Student</code>类中，每个实例就拥有各自的<code>name</code>和<code>score</code>这些数据。我们可以通过函数来访问这些数据，比如打印一个学生的成绩：<br>可以直接在<code>Student</code>类的内部定义访问数据的函数  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_info</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s: %s'</span> % (self.name, self.score)</span><br></pre></td></tr></table></figure>
+<p> 这样可以直接调用就可以了</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart.<span class="function"><span class="title">print_score</span><span class="params">()</span></span></span><br><span class="line">Bart Simpson: <span class="number">59</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>具体这样的实现方式还有很多，比如你可以用像java中的set和get方法来实现数据的封装。等等，我在这里就不一一详细解析了。</p>
+</blockquote>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2015/08/27/6-python-random-funs/">
+        python中random模块简析 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2015/08/29/7-python-oop/" data-title="python面向对象－类和封装" data-url="http://qiuncheng.com/2015/08/29/7-python-oop/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"qiuncheng"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
