@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2015/8 | Qiuncheng&#39;s Blog</title>
+  <title>偏函数是什么－飘逸的python | Qiuncheng&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -244,37 +244,74 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/08/02/2-domain-github-dnspod/">域名和github绑定的问题</a></h4>
-                            
-                            <p><time datetime="2015-08-02T03:14:07.000Z"><a href="/2015/08/02/2-domain-github-dnspod/">August 02 2015</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-09-06T04:12:51.000Z" itemprop="datePublished">
+          September 06 2015
+      </time>
+    
+    
+    | 
+    <a href='/tags/python/'>python</a>
+    
+    
+</span>
+                <h1>偏函数是什么－飘逸的python</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<blockquote>
+<p>偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  </p>
+</blockquote>
+<ul>
+<li><p>偏函数是干嘛的？<br>简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  </p>
+<pre><code>import functools
+int2 = functools.<span class="function"><span class="title">partial</span><span class="params">(int, base=<span class="number">2</span>)</span></span>
+<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1000000'</span>)</span></span>
+<span class="number">64</span>
+<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1010101'</span>)</span></span>
+<span class="number">85</span>
+</code></pre><p>  其中的int2()就是一个偏函数。  </p>
+</li>
+<li>偏函数能解决哪些问题？<br>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</li>
+</ul>
+<blockquote>
+<p>具体想了解更多关于偏函数的情况请移步到<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819893624a7edc0e3e3df4d5d852a352b037c93ec000" target="_blank" rel="external">廖雪峰的python教程官网</a>。或者移步到官网，考虑到官网是英语，就不放链接上来了。</p>
+</blockquote>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2015/08/29/7-python-oop/">
+        python面向对象－类和封装 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2015/09/06/8-python-functools-partial/" data-title="偏函数是什么－飘逸的python" data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"qiuncheng"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
