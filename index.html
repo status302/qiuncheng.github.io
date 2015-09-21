@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Qiuncheng&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Qiuncheng's Blog">
+<meta property="og:url" content="http://qiuncheng.com/index.html">
+<meta property="og:site_name" content="Qiuncheng's Blog">
+<meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qiuncheng's Blog">
+<meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
+  
+    <link rel="alternative" href="/atom.xml" title="Qiuncheng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Qiuncheng&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Welcome to Qiuncheng&#39;s Blog!</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qiuncheng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-13-hexo-git-problem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/21/13-hexo-git-problem/" class="article-date">
+  <time datetime="2015-09-21T10:20:25.000Z" itemprop="datePublished">September 21 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/21/13-hexo-git-problem/">git: fatal unable to auto-detect email address</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。<strong>git: fatal unable to auto-detect email address</strong> </p>
+<hr>
+<p>解决方法如下：<br>在终端里进入hexo所在目录，执行如下两段代码。<br><code>$git config --global user.email &quot;you@example.com&quot;</code><br><code>$git config --global user.name &quot;user.name&quot;</code>  </p>
+<p><em>PS：其中you@example.com为你Github邮箱，user.name为你的名字。OK，完美解决！</em><br>当你解决后你会发现执行<code>hexo deploy</code>之后会提示你create了什么！就像下图所示。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-4@2x.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cieu2ok3x001ggyhuxbvdimfr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-12-mac-hostname" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/21/12-mac-hostname/" class="article-date">
+  <time datetime="2015-09-21T01:18:45.000Z" itemprop="datePublished">September 21 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/21/12-mac-hostname/">mac主机名变成了bogon</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>如下图，今天打开Mac terminal终端，发现主机名突然变成了bogon，google了一下，发现大致可能是与dns有关，修改一下dns就好了，于是我修改的是DNS8.8.8.8  </p>
+</blockquote>
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-2@2x.png" alt=""></p>
+<p>修改正常后为：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-1@2x.png" alt=""><br><strong>OK，完美！</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cieu2ok3u001cgyhubtvmlve6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-11-English-artical" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/20/11-English-artical/" class="article-date">
+  <time datetime="2015-09-20T12:47:15.000Z" itemprop="datePublished">September 20 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/20/11-English-artical/">其实英语文章并没有那么难看懂</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语水平都不应该低的，初中三年＋高中三年＋大学两年，为什么你还是不敢看英文文章或者说出英文呢？况且我们大多人都是过了英语四级的。可是英文文章你敢看吗？  </p>
+</blockquote>
+<p>哈哈，说的有些重，其实英文文章并没有那么难看懂，真的，根据我这么多天的学习，我发现要是让我说英语的话可能有很大的难度，但是让我来看英语文章的话，那简直真的是真的是<em>SO EASY</em>！并没有想象中的难。<br>当我这样说的时候肯定有些童鞋会说我得瑟，可能还会<em>“呵呵”</em>我！哈哈，下面我就向各位介绍下几点看英文文章的技巧。重在体验哈，大家看完技巧后可一定要去实验哈，不然看了也是白看! <em><img src="emoji/panda_face" width="18"><img src="emoji/panda_face" width="18"><img src="emoji/panda_face" width="18"><img src="emoji/panda_face" width="18"></em><br>奥，对了，先给大家看一篇英文文章，真的没有几个特别难的词汇，请看下面图片哈。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/thumb_IMG_0057_1024.jpg" alt="the Swift Programming Language"><br>这里面又特别难懂的词汇嘛？<br>或许这些吧。</p>
+<ul>
+<li>closure</li>
+<li>delegate </li>
+<li>omit</li>
+<li>iimplicitly<br>貌似只有这些呀。可是这些影响你阅读嘛，基本上不影响，在你了解了这段主要讲的是<strong>闭包</strong>之后，我想你能更好地理解这段文字了。</li>
+</ul>
+<p>下面是诚恳的给大家今后看英文文章的建议：</p>
+<ol>
+<li>要理解各类英文文章的写作思路以及英语人说话方式</li>
+<li>手机或者电脑里常备有<strong>英文词典</strong></li>
+<li>开始的时候要提取段落的关键词，大致了解整段落的意思（必要的时候勾画出来），不要遇到不会的单词就要查词典</li>
+<li>不要总是精读，有些不重要的可以一笔带过</li>
+<li>注意小标题</li>
+<li>注意总结部分</li>
+<li>最后再将不会的单词查询意思，并做好记录 </li>
+</ol>
+<p><strong>还有最主要的是要多看英文东西，比如杂志、新闻学术论文等，往往你看一篇文章的收获要大约你看100篇阅读技巧。。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cieu2ok3g000sgyhu4kqy5h3l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-10-python-talkfreely" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/09/10-python-talkfreely/" class="article-date">
+  <time datetime="2015-09-09T01:00:08.000Z" itemprop="datePublished">September 09 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/转载/">转载</a>►<a class="article-category-link" href="/categories/转载/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/09/10-python-talkfreely/">每个程序员都应该学习使用Python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="每个程序员都应该学习使用Python或Ruby">每个程序员都应该学习使用Python或Ruby</h3><p>如果你是个学生,你应该会C，C++和Java。还会一些VB，或C#/.NET。多少你还可能开发过一些Web网页，你知道一些HTML，CSS和JavaScript知识。总体上说，我们很难发现会有学生显露出掌握超出这几种语言范围外的语言的才能。这真让人遗憾，因为还有很多种编程语言，它们能让你成为一个更好的程序员。</p>
+<p>在这篇文章里，我将会告诉你，为什么你一定要学习Python或Ruby语言。</p>
+<ul>
+<li><p>跟C/C++/Java相比 — Python/Ruby能让你用少的多的多的代码写出相同的程序。有人计算过，Python或Ruby写出的程序的代码行数只相当于相对应的Java代码的行数的五分之一。如果没有绝对的必要，为什么要花这么多时间写出这么多的代码呢？而且，有人说，一个优秀的程序员能维护的代码量最多是2万行。这不区分用的语言究竟是汇编，C还是Python/Ruby/PHP/Lisp。所以，如果你用Python/Ruby写，你一个人干的，不管是干什么，如果换用Java/C/C++，那都需要一个5人的小团队来干。</p>
+</li>
+<li><p>跟VB/PHP比较 — 跟PHP/VB相比，Python/Ruby的是一种从设计上讲比它们好的不知多少倍的语言。PHP和VB分别是在开发网站和桌面应用程序上非常流行的语言。它们流行的原因是非常的易学。不懂计算机的人也很容易的上手。如果你用这些语言开发过大型的项目，你就会发现这些语言的设计是如此的糟糕。是朋友，他就不会劝你使用PHP/VB。</p>
+</li>
+<li><p>跟Lisp/Scala/Haskell/Closure/Erlang相比 — Python/Ruby跟它们比起来显得相当的“主流”。确实，这些语言每种都有其很酷的特征，对于高级编程人员，了解这些语言能给他们对编程的思考带来实际的提升。但这些应该在你以后的职业生涯中才去决定学哪一两种。对于现在，Python/Ruby是在语言功能和实际运用之间平衡后的更好的选择。</p>
+</li>
+<li><p>跟Perl相比 — Python和Ruby都受恩于Perl，在这两种语言异军突起前，Perl是最好、最大的一种动态语言。但现在，Perl已是明日黄花，越来越多的人转向Ruby/Python。我感觉Perl的面向对象机制有点做作，很不好用。通常认为，Perl一种比较难学的语言，因为它提供你了太多不同的方法去完成同一个任务，它的语法有点像密码，非常不直观 — 除非你对它掌握的非常好。总之，我感觉Perl是一种对于学生来说不是很合适的语言—除非你有特殊的理由去学它(例如，你有很多正则表达式要处理，这是Perl的闪光点)。</p>
+</li>
+<li><p>跟sh/sed/awk/bash相比 — 如果你使用Linux/Unix，你可能需要做一些shell编程，甚至会编写一些不小的程序。但是，对于这些语言，一旦程序达到一定的行数，事情就会开始变得让你痛苦不堪，你最好是用Python去做这些事情。当然，做这种事情，Perl是最好的选择，Python排第二。(Ruby对于系统shell脚本不是很合适)。</p>
+</li>
+</ul>
+<p>你可以在Google上搜一下“为什么X比Y好” — 其中把X换成Python或Ruby，把Y换成另外一种语言 — 你就会发现，有无数的文章来说明它们为什么这么好。</p>
+<p>如果你有选择你的毕业设计使用的编程语言的自由，你应该选择Python或Ruby，它们能让你在开发项目的过程中节省一半的时间(除非你要开发的是移动应用，这样你必须要使用Java或Objective-C)。</p>
+<p>下面是xkcd上的一幅漫画，告诉你掌握Python后你会变得多么的强大：</p>
+<h2 id=""><img src="http://7xk67j.com1.z0.glb.clouddn.com/155708fczocdcc0d7liuut.png" alt=""></h2><blockquote>
+<p>本文由“外刊IT评论”网(www.aqee.net)荣誉出品<br>[英文原文：Why every programmer should learn Python or Ruby ]</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cieu2ok2z0007gyhuy44y5756" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-9-python-coding-regular" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/06/9-python-coding-regular/" class="article-date">
+  <time datetime="2015-09-06T09:09:35.000Z" itemprop="datePublished">September 06 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>►<a class="article-category-link" href="/categories/python/转载/">转载</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/06/9-python-coding-regular/">【python】python编码规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="PEP介绍">PEP介绍</h3><p>PEP是 Python Enhancement Proposal 的缩写，是Python增强建议书的意思。<br>Python的代码风格由<a href="https://www.python.org/dev/peps/pep-0008/#id37" target="_blank" rel="external">PEP 8</a>描述。这个文档描述了Python编程风格的方方面面。在遵守这个文档的条件下，不同程序员编写的Python代码可以保持最大程度的相似风格。这样就易于阅读，易于在程序员之间交流。</p>
+<h3 id="命名规则">命名规则</h3><h3 id="不同的命名风格">不同的命名风格</h3><p>有许多不同的命名风格。以下的有助于辨认正在使用的命名风格，这独立于它们的作用。</p>
+<blockquote>
+<p>•    小写串 (lowercase)<br>•    带下划线的小写串 (lower_case_with_underscores)<br>•    大写串 (UPPERCASE)<br>•    带下划线的大写串 (UPPER_CASE_WITH_UNDERSCORES)<br>•    首字母大写单词串 (CapitalizedWords) (或 CapWords、CamelCase,因其字母看起来错落有致，故得此名)<br>•    注意: 在CapWords中使用缩写，需要把缩写的所有字母大写。故HTTPServerError比HttpServerError更好。<br>•    混合大小写串 (mixedCase) (与首字母大写串不同之处在于第一个字符是小写的！)<br>•    带下划线的首字母大写串 (Capitalized_Words_With_Underscores) (丑陋！)  </p>
+</blockquote>
+<h3 id="避免采用的名字">避免采用的名字</h3><p>决不能使用字母’l’(L的小写字母)、’O’(o的大写字母)、’I’(i的大写字母)) 作为单个字符的变量名。<br>在一些字体中，这些字符不能与数字1和0区别开。当想要使用’l’时，用’L’代替它。</p>
+<h3 id="包和模块名(Package_and_Module_Names)">包和模块名(Package and Module Names)</h3><p>模块名应该是简短的、全部小写的名字。可以在模块名中使用下划线以提高可读性。Python包名也应该是简短的、全部小写的名字，尽管不推荐使用下划线。<br>因为模块名被映射到文件名，有些文件系统大小写不敏感并且截短长名字，所以把 模块名选择为相当短就很重要了——这在Unix上不是问题，但当把代码迁移到Mac、Windows或DOS上时，就可能是个问题了。<br>当一个用C或C++写的扩展模块，有一个伴随的Python模块来提供一个更高层(例如，更面向对象)的接口时，C/C++ 模块名有一个前导下划线 (如：_socket)。</p>
+<h3 id="类名(Class_Names)">类名(Class Names)</h3><p>几乎没有例外，类名使用首字母大写单词串(CapWords)的约定。内部使用的类使用一个额外的前导下划线。</p>
+<h3 id="异常名_(Exception_Names)">异常名 (Exception Names)</h3><p>因为异常应该是类，故类命名约定也适用于异常。然而，你应该对异常名添加后缀”Error”(如果该异常的确是一个错误)。</p>
+<h3 id="全局变量名(Global_Variable_Names)">全局变量名(Global Variable Names)</h3><p>(我们希望这些变量只打算用于一个模块内部)。<br>对设计为通过”from M import “来使用的模块，应采用all机制来防止导出全局变量；或者使用旧的约定，为该类全局变量加一个前导下划线(可能你想表明这些全局变量是只限制在该模块内部使用，”module non-public”)。<br>补充：<br>在python的module中，可以使用 all 函数来定义这个module像其他引用自己的module导入的变量：<br><strong>all</strong> = <a href="">‘bar’, ‘baz’</a><br>waz = 5<br>bar = 10<br>当另一个模块中使用import *声明，waz和bar变量不会被导入，all可以隐藏不想被import的默认值。</p>
+<h3 id="函数名(Function_Names)">函数名(Function Names)</h3><p>函数名应该为小写，必要时可用下划线分隔单词以增加可读性。<br>混合大小写 (mixedCase) 仅被允许用于这种风格已经占优势的上下文 (如: threading.py)，以便保持向后兼容。</p>
+<h3 id="函数和方法的参数(Function_and_method_arguments)">函数和方法的参数(Function and method arguments)</h3><p>对实例的方法，总是用’self’做第一个参数。<br>对类的方法，总是用’cls’做第一个参数。<br>（如果函数的参数名与保留关键字冲突，在参数名后加一个下划线，比用缩写、错误的拼写要好。因此”print_”比 “prnt”好。也许使用同义词来避免冲突更好）<br>补充：<br>python的类中，普通方法的第一个参数需要是self，它表示一个具体的实例本身；如果用了staticmethod，那么就可以无视这个self，而将这个方法当成一个普通的函数使用；而对于classmethod，它的第一个参数不是self，是cls，它表示这个类本身。<br>    <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class <span class="function"><span class="title">A</span><span class="params">(object)</span></span>:</span><br><span class="line">def <span class="function"><span class="title">foo1</span><span class="params">(self)</span></span>:</span><br><span class="line">   print <span class="string">"Hello"</span>,self</span><br><span class="line">@staticmethod</span><br><span class="line">def <span class="function"><span class="title">foo2</span><span class="params">()</span></span>:</span><br><span class="line">print <span class="string">"hello"</span></span><br><span class="line">@classmethod</span><br><span class="line">def <span class="function"><span class="title">foo3</span><span class="params">(cls)</span></span>:</span><br><span class="line">print <span class="string">"hello"</span>,cls</span><br><span class="line"></span><br><span class="line"><span class="tag">a</span> = <span class="function"><span class="title">A</span><span class="params">()</span></span></span><br><span class="line"><span class="tag">a</span>.<span class="function"><span class="title">foo1</span><span class="params">()</span></span>          #最常见的调用方式，但与下面的方式相同</span><br><span class="line">Hello \&lt;__main__<span class="class">.A</span> <span class="tag">object</span> at <span class="number">0</span>x9f6abec\&gt;</span><br><span class="line">A.<span class="function"><span class="title">foo1</span><span class="params">(a)</span></span>         #这里传入实例a，相当于普通方法的self</span><br><span class="line">Hello \&lt;__main__<span class="class">.A</span> <span class="tag">object</span> at <span class="number">0</span>x9f6abec\&gt;</span><br><span class="line">A.<span class="function"><span class="title">foo2</span><span class="params">()</span></span>          #这里，由于静态方法没有参数，故可以不传东西</span><br><span class="line">hello</span><br><span class="line">A.<span class="function"><span class="title">foo3</span><span class="params">()</span></span>          #这里，由于是类方法，因此，它的第一个参数为类本身。</span><br><span class="line">hello \&lt;class <span class="string">'__main__.A'</span>\&gt;</span><br><span class="line">A                 #可以看到，直接输入A，与上面那种调用返回同样的信息。</span><br><span class="line">\&lt;class <span class="string">'__main__.A'</span>\&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="方法名和实例变量(Method_Names_and_Instance_Variables)">方法名和实例变量(Method Names and Instance Variables)</h3><p>采用函数命名规则：小写单词，必要时可用下划线分隔单词以增加可读性。<br>仅对 non-public 方法和实例变量采用一个前导下划线。<br>为避免与子类命名冲突，采用两个前导下划线来触发 Python 的命名重整规则。<br>Python用类名重整这些名字：如果类Foo有一个属性名为a，它不能以Foo.a访问(执著的用户还是可以通过Foo._Foo__a得到访问权)。通常，双 前导下划线仅被用来避免与基类的属性发生名字冲突。</p>
+<h3 id="谨记python特色的命名惯例">谨记python特色的命名惯例</h3><p>•    公开属性应该没有前导下划线<br>•    如果公开属性名和保留关键字冲突，在你的属性名后添加一个后置下划线<br>•    对简单的公开数据属性 (data attribute)，最好只暴露属性名，没有复杂的访问/修改方法<br>•    谨记Python为将来增强提供了一条容易的途径，你应该发现简单数据属性需要增加功能行为。在那种情况，用特性(properties)把功能实现隐藏在简单数据属性访问语法后面。<br>•    以单一下划线的变量名(_X)不会被from module import *语句导入。一个前导下划线的函数是私有函数。<br>•    Python 中不存在私有变量一说，若是遇到需要保护的变量，使用小写和一个前导下划线。但这只是程序员之间的一个约定，用于警告说明这是一个私有变量，外部类不要去访问它。但实际上，外部类还是可以访问到这个变量。<br>•    前后有两个下划线的变量名(X)是系统定义的变量名，对解释器有特殊意义。包括两个前导下划线，两个后置下划线的函数名，这种风格只应用于特殊函数，比如操作符重载等。<br>•    以两个下划线开头，但结尾没有两个下划线的变量名(__X)是类的本地变量</p>
+<h3 id="代码布局">代码布局</h3><h3 id="缩进(Indentation)">缩进(Indentation)</h3><p>每级缩进用 4 个空格。<br>绝不要混合使用 tab 和空格。<br>最流行的 Python 缩进方式是仅使用空格，其次是仅使用制表符。混合着制表符和空 格缩进的代码将被转换成仅使用空格。调用 Python 命令行解释器时使用 -t 选项， 可对代码中不合法的混用制表符和空格发出警告 (warnings)。使用 -tt 时警告将变 成错误。这些选项是被高度推荐的。<br>对新项目，强烈推荐只用空格，而不是用tabs。大多数编辑器拥有使之易于实现的功能。</p>
+<h3 id="最大行宽(Maximum_Line_Length)">最大行宽(Maximum Line Length)</h3><p>限制所有行的最大行宽为79字符。<br>折叠长行的首选方法是使用Python支持的圆括号、方括号(brackets)和花括号(braces)内的行延续。如果需要，你可以在表达式周围增加一对额外的圆括号，但是有时使用反斜杠看起来更好。确认恰当地缩进了延续的行。<br>class Rectangle(Blob):<br>def <strong>init</strong>(self, width, height,<br>color=’black’, emphasis=None, highlight=0):<br>if width == 0 and height == 0 and \<br>color == ‘red’ and emphasis == ‘strong’ or \ highlight > 100:<br>raise ValueError(“sorry, you lose”)<br>if width == 0 and height == 0 and (color == ‘red’ or<br>emphasis is None):<br>raise ValueError(“I don’t think so”)<br>Blob.<strong>init</strong>(self, width, height,<br>color, emphasis, highlight)</p>
+<h3 id="空行(Blank_Lines)">空行(Blank Lines)</h3><p>用两行空行分割顶层函数和类的定义。<br>类内方法的定义用单个空行分割。<br>在函数中使用空行时，请谨慎的用于表示一个逻辑段落。</p>
+<h3 id="导入_(Imports)">导入 (Imports)</h3><p>•    通常应该在单独的行中导入：<br>•    Yes: import os<br>•    import sys<br>No: import sys, os<br>但是这样也是可以的：<br>from subprocess import Popen, PIPE<br>•    Imports通常被放置在文件的顶部，仅在模块注释和文档字符串之后，在模块的全局变量和常量之前。<br>•    Imports应该按照如下顺序成组安放：<br>•    标准库的导入<br>•    相关的第三方包的导入<br>•    本地应用/库的特定导入<br>•    对于内部包的导入是非常不推荐使用相对导入的。对所有导入总是使用包的绝对路径<br>•    从一个包含类的模块中导入类时，通常可以写成这样：<br>from myclass import MyClass<br>from foo.bar.yourclass import YourClass<br>如果这样写导致了本地名字冲突，那么就这样写：<br>import myclass<br>import foo.bar.yourclass<br>并使用”myclass.MyClass” and “foo.bar.yourclass.YourClass” </p>
+<h3 id="在表达式和语句中的空格(Whitespace_in_Expressions_and_Statements)">在表达式和语句中的空格(Whitespace in Expressions and Statements)</h3><p>•    紧挨着圆括号、方括号和花括号：<br>•    Yes: spam(ham<a href="">1</a>, {eggs: 2})<br>•    No: spam( ham<a href=""> 1 </a>, { eggs: 2 } )<br>•    紧贴在逗号、分号或冒号前：<br>•    Yes: if x == 4: print x, y; x, y = y, x<br>•    No: if x == 4 : print x , y ; x , y = y , x<br>•    紧贴着函数调用的参数列表前的开式括号：<br>•    Yes: spam(1)<br>•    No: spam (1)<br>•    紧贴在索引或切片 (indexing or slicing) 开始的开式括号前：<br>•    Yes: dct<a href="">‘key’</a> = lst<a href="">index</a><br>•    No: dct <a href="">‘key’</a> = lst <a href="">index</a><br>•    在赋值 (或其他) 运算符周围的用于和其他语句对齐的一个以上的空格：<br>•    Yes:<br>•    x = 1<br>•    y = 2<br>•    long_variable = 3<br>•    No:<br>•    x = 1<br>•    y = 2<br>•    long_variable = 3</p>
+<h3 id="注释(Comments)">注释(Comments)</h3><p>同代码不一致的注释比没注释更差。当代码修改时，始终优先更新注释！<br>注释应该是完整的句子。如果注释是一个短语或句子，首字母应该大写，除非它是一个以小写字母开头的标识符(永远不要修改标识符的大小写)。<br>如果注释很短，可以省略末尾的句号。注释块通常由一个或多个段落组成，段落是由完整的句子构成的，每个句子应该以句号结尾。<br>你应该在结束语句的句点(a sentence-ending period)后使用两个空格。<br>非英语国家的Python程序员：请用英语书写你的注释，除非你120%的确信代码永远不会被不懂你的语言的人阅读。</p>
+<h3 id="注释块(Block_Comments)">注释块(Block Comments)</h3><p>注释块通常应用于跟随其后的一些 (或者全部) 代码，并和这些代码有着相同的缩进 层次。注释块中每行以 ‘#’ 和一个空格开始 (除非它是注释内的缩进文本)。<br>注释块内的段落以仅含单个 ‘#’ 的行分割。</p>
+<h3 id="行内注释(Inline_Comments)">行内注释(Inline Comments)</h3><p>节俭使用行内注释。<br>一个行内注释是和语句在同一行的注释。行内注释应该至少用两个空格和语句分开。 它们应该以一个 ‘#’ 和单个空格开始。<br>行内注释不是必需的，事实上，如果说的是显而易见事，还会使人分心。不要这样做 ：<br>x = x + 1 # Increment x<br>但是有时，这样是有益的:<br>x = x + 1 # Compensate for border</p>
+<h3 id="参考资料">参考资料</h3><p><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-pylint/" target="_blank" rel="external">如何使用Pylint来规范Python代码风格</a><br><a href="https://www.python.org/dev/peps/pep-0008" target="_blank" rel="external">PEP 8 - Style Guide for Python Code</a></p>
+<blockquote>
+<p>文章转载自简书，作者JasonDing,原文网址：<a href="http://www.jianshu.com/p/8f3c80ca096e?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note" target="_blank" rel="external">http://www.jianshu.com/p/8f3c80ca096e?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cieu2ok3k0010gyhuju2w8kai" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-8-python-functools-partial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/06/8-python-functools-partial/" class="article-date">
+  <time datetime="2015-09-06T04:12:51.000Z" itemprop="datePublished">September 06 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/06/8-python-functools-partial/">偏函数是什么－飘逸的python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  </p>
+</blockquote>
+<ul>
+<li><p>偏函数是干嘛的？<br>简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  </p>
+<pre><code>import functools
+int2 = functools.<span class="function"><span class="title">partial</span><span class="params">(int, base=<span class="number">2</span>)</span></span>
+<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1000000'</span>)</span></span>
+<span class="number">64</span>
+<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1010101'</span>)</span></span>
+<span class="number">85</span>
+</code></pre><p>  其中的int2()就是一个偏函数。  </p>
+</li>
+<li>偏函数能解决哪些问题？<br>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</li>
+</ul>
+<blockquote>
+<p>具体想了解更多关于偏函数的情况请移步到<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819893624a7edc0e3e3df4d5d852a352b037c93ec000" target="_blank" rel="external">廖雪峰的python教程官网</a>。或者移步到官网，考虑到官网是英语，就不放链接上来了。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cieu2ok3j000wgyhu1wh9awbq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-7-python-oop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/29/7-python-oop/" class="article-date">
+  <time datetime="2015-08-29T01:50:47.000Z" itemprop="datePublished">August 29 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/29/7-python-oop/">python面向对象－类和封装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>之前学过java，也了解过面向对象。类与对象：类的封装、多态与继承也就是面向对象的三大特性。也可以理解说一切集合都是类，自然界中的一切都是对象。但是python中的面向对象很明显给我的感觉就是“好写”。  </p>
+</blockquote>
+<ul>
+<li>类和实例：  </li>
+</ul>
+<ol>
+<li>定义类：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>class</code>后面是类名，即<code>Student</code>与java中相同，类名通常首字母大写。紧接着是<code>(object)</code>，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用<code>object</code>类，这是所有类最终都会继承的类。</p>
+<ol>
+<li>实例化：<br>定义好了<code>Student</code>类，就可以根据<code>Student</code>类创建出<code>Student</code>的实例，创建实例是通过<code>类名+()</code>实现的：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bart = <span class="function"><span class="title">Student</span><span class="params">()</span></span></span><br><span class="line">bart</span><br><span class="line">&lt;__main__<span class="class">.Student</span> <span class="tag">object</span> at <span class="number">0</span>x10a67a590&gt;</span><br><span class="line">Student</span><br><span class="line">&lt;class <span class="string">'__main__.Student'</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可以看到，变量bart指向的就是一个<code>Student</code>的<code>object</code>，后面的0x10a67a590是内存地址，每个<code>object</code>的地址都不一样，而<code>Student</code>本身则是一个类。  </p>
+<blockquote>
+<p>深层解析:  </p>
+</blockquote>
+<p> 由于类可以起到模板的作用，因此，可以在创建实例的时候，把一些我们认为必须绑定的属性强制填写进去。通过定义一个特殊的<strong>init</strong>方法，在创建实例的时候，就把name，score等属性绑上去(其实这个可以理解为java中的构造器)：  </p>
+<pre><code><span class="comment"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure></span>
+
+注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。  
+
+有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去：  
+<span class="comment"><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart Simpson'</span>, <span class="number">59</span>)</span><br><span class="line">bart.name</span><br><span class="line"><span class="preprocessor"># 'Bart Simpson'</span></span><br><span class="line">bart.score</span><br><span class="line"><span class="preprocessor"># 59</span></span><br></pre></td></tr></table></figure></span>
+</code></pre><ul>
+<li>数据封装：</li>
+</ul>
+<ol>
+<li><p>面向对象编程的一个重要特点就是数据封装。在上面的<code>Student</code>类中，每个实例就拥有各自的<code>name</code>和<code>score</code>这些数据。我们可以通过函数来访问这些数据，比如打印一个学生的成绩：<br>可以直接在<code>Student</code>类的内部定义访问数据的函数  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_info</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s: %s'</span> % (self.name, self.score)</span><br></pre></td></tr></table></figure>
+<p> 这样可以直接调用就可以了</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart.<span class="function"><span class="title">print_score</span><span class="params">()</span></span></span><br><span class="line">Bart Simpson: <span class="number">59</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>具体这样的实现方式还有很多，比如你可以用像java中的set和get方法来实现数据的封装。等等，我在这里就不一一详细解析了。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cieu2ok3o0016gyhuwq9oxbza" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-6-python-random-funs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/27/6-python-random-funs/" class="article-date">
+  <time datetime="2015-08-27T02:44:20.000Z" itemprop="datePublished">August 27 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/27/6-python-random-funs/">python中random模块简析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Python中的random用于生成随机数。下面简析下random中常用的几个函数。  </p>
+</blockquote>
+<ul>
+<li><p>random.random<br>random.random()用于生成一个0到1的随机浮点数: 0 &lt;= n &lt; 1.0</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.random()</span><br><span class="line"><span class="number">0.690448381007</span> <span class="preprocessor"># 输出<span class="number">1</span></span></span><br><span class="line"><span class="number">0.89515663051</span>  <span class="preprocessor"># 输出<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.uniform<br>random.uniform的函数原型为：random.uniform(a, b)，用于生成一个指定范围内的随机符点数，两个参数其中一个是上限，一个是下限。如果a &gt; b，则生成的随机数n: b &lt;= n &lt;= a。如果 a &lt;b， 则 a &lt;= n &lt;= b。  </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   print random.uniform(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">19.5205130852</span></span><br><span class="line">print random.uniform(<span class="number">30</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">22.3666600118</span></span><br><span class="line">   <span class="preprocessor"># 不同的机器可能显示的结果不相同。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.randint<br>random.randint()的函数原型为：random.randint(a, b)，用于生成一个指定范围内的整数。其中参数a是下限，参数b是上限，生成的随机数n: a &lt;= n &lt;= b</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.randint(<span class="number">12</span>,<span class="number">20</span>)  <span class="preprocessor">#生成的随机数n: <span class="number">12</span> &lt;= n &lt;= <span class="number">20</span>  </span></span><br><span class="line">print random.randint(<span class="number">20</span>,<span class="number">20</span>)  <span class="preprocessor">#结果永远是<span class="number">20</span>  </span></span><br><span class="line"><span class="preprocessor">#print random.randint(<span class="number">20</span>, <span class="number">10</span>)   #该语句是错误的。下限必须小于上限。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.randrange<br>random.randrange的函数原型为：random.randrange([start], stop[, step])，从指定范围内，按指定基数递增的集合中 获取一个随机数。如：random.randrange(10, 100, 2)，结果相当于从[10, 12, 14, 16, … 96, 98]序列中获取一个随机数。random.randrange(10, 100, 2)在结果上与 random.choice(range(10, 100, 2) 等效。</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print random.randrange(<span class="number">10</span>,<span class="number">100</span>,<span class="number">2</span>) <span class="preprocessor">#从<span class="number">10</span>开始到<span class="number">100</span>结束，步长为<span class="number">2</span>的序列中，随机选一个</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.choice<br>random.choice从序列中获取一个随机元素。其函数原型为：random.choice(sequence)。参数sequence表示一个有序类型。这里要说明 一下：sequence在python不是一种特定的类型，而是泛指一系列的类型。list, tuple, 字符串都属于sequence。有关sequence可以查看python手册数据模型这一章，也可以参考：<a href="http://www.17xie.com/read-37422.html" target="_blank" rel="external">http://www.17xie.com/read-37422.html</a> 。下面是使用choice的一些例子：</p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">"学习Python"</span>)</span></span>         #从字符串里随机选取一个字符，但是我发现还会出现‘？’这个是怎么回事还有待解决。</span><br><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="string">"JGood"</span>,<span class="string">"is"</span>, <span class="string">"a"</span>,<span class="string">"handsome"</span>, <span class="string">"boy"</span>])</span></span>  </span><br><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">((<span class="string">"Tuple"</span>,<span class="string">"List"</span>, <span class="string">"Dict"</span>)</span></span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.shuffle<br>random.shuffle的函数原型为：random.shuffle(x[, random])，用于将一个列表中的元素打乱。如:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span> = [<span class="string">"Python"</span>,<span class="string">"is"</span>, <span class="string">"powerful"</span>,<span class="string">"simple"</span>, <span class="string">"and so on..."</span>]  </span><br><span class="line">random.<span class="function"><span class="title">shuffle</span><span class="params">(p)</span></span>  </span><br><span class="line">print <span class="tag">p</span>  </span><br><span class="line">#---- 结果（不同机器上的结果可能不一样。）  </span><br><span class="line">#[<span class="string">'powerful'</span>, <span class="string">'simple'</span>, <span class="string">'is'</span>, <span class="string">'Python'</span>, <span class="string">'and so on...'</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>random.sample<br>random.sample的函数原型为：random.sample(sequence, k)，从指定序列中随机获取指定长度的片断。sample函数不会修改原有序列。  </p>
+<pre><code><span class="built_in">list</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]
+slice = random.sample(<span class="built_in">list</span>, <span class="number">5</span>)  <span class="preprocessor">#从list中随机获取<span class="number">5</span>个元素，作为一个片断返回</span>
+print slice
+print <span class="built_in">list</span> <span class="preprocessor">#原有序列并没有改变。</span>
+</code></pre></li>
+</ul>
+<blockquote>
+<p>上面这些方法是random模块中最常用的，在Python手册中，还介绍其他的方法。感兴趣的朋友可以通过查询Python手册了解更详细的信息。所有代码如下：  </p>
+</blockquote>
+<pre><code>import random
+print random.<span class="function"><span class="title">random</span><span class="params">()</span></span>
+<span class="number">0.72487604051</span>
+print random.<span class="function"><span class="title">uniform</span><span class="params">(<span class="number">10</span>, <span class="number">30</span>)</span></span>
+<span class="number">17.6255210608</span>
+print random.<span class="function"><span class="title">randint</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>
+<span class="number">16</span>
+＃ 注意生成的是整数
+... 
+print random.<span class="function"><span class="title">randrange</span><span class="params">(<span class="number">1</span>, <span class="number">100</span> ,<span class="number">5</span>)</span></span>
+<span class="number">11</span>
+print random.<span class="function"><span class="title">randrange</span><span class="params">(<span class="number">0</span>, <span class="number">100</span> ,<span class="number">5</span>)</span></span>
+<span class="number">10</span>
+print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
+python
+print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
+<span class="number">1</span>
+print randon.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
+Traceback (most recent call last):
+  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;
+NameError: name <span class="string">'randon'</span> is not defined
+print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
+h
+print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
+o
+print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
+h
+print random.<span class="function"><span class="title">shuffle</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
+None
+print random.<span class="function"><span class="title">shuffle</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
+None
+<span class="tag">p</span> = [<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>]
+random.<span class="function"><span class="title">shuffle</span><span class="params">(p)</span></span>
+print <span class="tag">p</span>
+[<span class="number">23</span>, <span class="string">'hello'</span>, <span class="number">1</span>, <span class="string">'python'</span>]
+sp = random.<span class="function"><span class="title">sample</span><span class="params">(p, <span class="number">2</span>)</span></span>
+print sp
+[<span class="number">1</span>, <span class="string">'hello'</span>]
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cieu2ok3q0019gyhu6dfloqi4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-5-change-to-mac" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/25/5-change-to-mac/" class="article-date">
+  <time datetime="2015-08-25T12:03:59.000Z" itemprop="datePublished">August 25 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/25/5-change-to-mac/">换Mac了，高兴的心情无法抑制！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>之前把我联想U410的超级本升级了win10，本来用着还不错，可是依然无法是性能不足，不能满足我的某些需求。我承认，U410是我用过的比较好的PC之一（我总共就用过两台PC　）。但当我前天收到了早前下单的Mac之后，我再也不认为U410是一个好的笔记本了。没错，现在真的是认为MacBook是最好的笔记本。  </p>
+</blockquote>
+<p>怎么说呢，买这个MacBook Pro（Retina）真的是历程艰险，记得当时我身上只能拿出一千块钱，然后就把我想买电脑的事情跟我母亲说了，她当时只说，没事，到时候我给你2K，可是2K呀。当时说真的，我一下子觉得多了点希望，于是我就想着各种办法弄钱呀，其中把我原来的U410卖掉了1500，找表哥借了1500，找同学借了1200，可是还差1K多，黄天不负有心人，最好的人就在你身边，他们就是你身边的父母，于是当我父亲听到我想换电脑还差点钱时果断给了我一千。哈哈，齐了。<br>于是在8月19号的下午，我在Apple官网下单了，原因很简单，因为Apple在开学季买Mac送beats solo2耳机。哈哈，瞬间觉得Apple公司真的是太有爱了。<br>不多说了，直接上图：</p>
+<ul>
+<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/1.pic.jpg" alt="image description"></li>
+<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/3.pic.jpg" alt=""></li>
+<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/2.pic.jpg" alt=""></li>
+</ul>
+<p>其实Mac上的操作真的让人无话说，太流畅了，太省电了，电池太顶用了。软件也很丰富，虽然游戏很少，大多都收费，但是我真的是太喜欢这台电脑了。屏幕就和我的iPad屏幕一样清晰。<br>先说这么多吧，更多体验等我以后用多了我想自然就有了吧。</p>
+<p>额，其实也还是有几条不足的：  </p>
+<ul>
+<li>Markdown编辑器我还是觉得markdownPad好用，虽然Mac上有很多md编辑器，但始终没有mdpad的感觉，也许这就是相思吧。</li>
+<li>hexo博客的环境从win上换到Mac上有很多地方需要注意，ssh、node.js、brew等等。</li>
+<li>Mac的硬盘内存比较小，只有128G</li>
+<li>还有其他的等等，</li>
+</ul>
+<blockquote>
+<p>顺便说一下，那个beats solo2耳机我真的觉得没啥用处呀，所以我想便宜点卖掉呀，有谁想要的请直接在下方评论处说明。　</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cieu2ok36000ggyhum14zvz00" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-4-win10-update" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/05/4-win10-update/" class="article-date">
+  <time datetime="2015-08-05T02:16:39.000Z" itemprop="datePublished">August 05 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Life/">Life</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/05/4-win10-update/">升级win10的一点小小的心得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><span style="font-family:'微软雅黑'；font-style:normal">7月29日win10正式版发布了，我当时没有一点感觉，因为我觉得我的win7旗舰版用的就特别好，另外我自己也加了内存，加了固态，觉得win7旗舰版跑起来简直飞起。但是我舍友29号晚上就升级了win10，让我有些小小的激动。但仅仅只是心动而已，并没有什么欲望要升级。<br>但是8月4日晚上早上我偶然间看到win10的评测，据说支持多窗口多桌面切换，这个对我真是个吸引，于是果断一狠心升了。</span></p>
+</blockquote>
+<h2 id="哈哈，之前说了好多废话，那就开始正文吧。由于我只是用了win7升级win10，所以只能谈谈win7升级到win10咯~"><span style="font-family:'微软雅黑';font-size:16px;font-style:normal"> 哈哈，之前说了好多废话，那就开始正文吧。由于我只是用了win7升级win10，所以只能谈谈win7升级到win10咯~</span></h2><ul>
+<li><p>将win7更新打开，并且要更新到最新，即win7需要更新到server pack 1（sp1），那么如何更新到最新的sp1呢，请看下图。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengsp1.png" alt=""></p>
+</li>
+<li><p>接下来就是重要的升级部分了。主要有以下三种方式（请看图）：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiuncheng方法.png" alt=""><br>PS:这里推荐大家使用微软官方推送的方式，也就是方式1，因为第二种方式强烈不建议大家使用，装完后各种毛病全都出来了，而且据说他两现在停止提供更新了，这真是一件好事，对于方式3，对于能折腾的人来说，还可以，但是平常人的话就算了吧，由于我的电脑里各种软件，各种环境变量比较多，所以我坚决的用第3种方式的。</p>
+</li>
+<li><p>按照微软官方的说法，升级win10是要提前预约的，如图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/win升级预约.png" alt=""><br>也就是说如果你已经预约的话，你的升级已经在准备当中，升级通知会在未来几天或者未来几周内发送。但是对于像我这样从来都没有收到微软预约通知的人来说，很是捉急呀！  </p>
+</li>
+<li><p>接下来我发现一种简单的升级方式，也就是即使你没有预约，只要你已经升级到sp1最新，那么你照样可以升级win10。通常情况下升级都是有一个升级助手在，所以说只要找到那个升级助手那么你就可以轻松的升级。OK，let’s go.请看win10问答第一条：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/win10问答.png" alt=""><br>最后一句话明确指出如果你是技术爱好者，您可以使用 <a href="https://www.microsoft.com/zh-cn/software-download/windows10" title="Media Creation Tool" target="_blank" rel="external">Media Creation Tool </a>在一台或多台设备上即刻安装 Windows 10。(对的，没错就是这个Media Creation Tool,你也可以把他叫做“升级助手”之类的吧)。那么你就快去下载升级助手吧。</p>
+</li>
+<li><p>其实也就是这么简单，用<a href="https://www.microsoft.com/zh-cn/software-download/windows10" title="Media Creation Tool" target="_blank" rel="external">Media Creation Tool </a>可以摆脱你预约，等待微软推送通知的苦恼，岂不是很棒。</p>
+</li>
+<li>升级的过程简单而又漫长，(不过只要你的网足够快，也是不慢的)由于我昨天校园网突然连接不上，我竟然用了CMCC完成了下载并更新成功，醉了~~下面给出几张我升级的过程图。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/升级.jpg" alt=""><blockquote>
+<center>Sorry,貌似只拍了一张图。</center>
+
+</blockquote>
+</li>
+</ul>
+<p><span style="font-size:16px;font-family:'微软雅黑'">不过还是可以欣赏几张win10的截图的</span></p>
+<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/任务视图.png" alt="任务视图"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">任务视图</div></div>
+
+<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/回归的开始菜单.png" alt="回归的开始菜单"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">回归的开始菜单</div></div>
+
+<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/winedge.png" alt="Windows Edge浏览器"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">Windows Edge浏览器</div></div>
+
+<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/全新的设置.png" alt="全新的设置"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">全新的设置</div></div>
+
+<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/微软小娜.png" alt="微软小娜"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">微软小娜</div></div>
+
+<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/通知中心.png" alt="通知中心"><div style="font-family:'微软雅黑'；font-size:12px;font-style:italic;text-decoration:underline">通知中心</div></div>
+
+
+<blockquote>
+<p><span style="font-size:15px;font-family:'微软雅黑'"><strong>PS</strong>：很喜欢win10的样子，看上去也比win8好多了。希望大家喜欢的话就去升级吧，有什么问题及时百度谷歌，或者在下面留言评论，我会会尽力帮助大家~愿大家升级愉快~</span></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cieu2ok3c000ogyhun1rheqg8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Win10升级/">Win10升级</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/HTML-CSS/">HTML/CSS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/转载/">转载</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/python/">python</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/HTML-CSS/" style="font-size: 10px;">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.67px;">Hexo</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Win10升级/" style="font-size: 10px;">Win10升级</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/转载/" style="font-size: 13.33px;">转载</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/09/21/13-hexo-git-problem/">git: fatal unable to auto-detect email address</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/21/12-mac-hostname/">mac主机名变成了bogon</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/20/11-English-artical/">其实英语文章并没有那么难看懂</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/09/10-python-talkfreely/">每个程序员都应该学习使用Python</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/06/9-python-coding-regular/">【python】python编码规范</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Qiuncheng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
