@@ -272,7 +272,7 @@
       		<p>如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。<strong>git: fatal unable to auto-detect email address</strong> </p>
 <hr>
 <p>解决方法如下：<br>在终端里进入hexo所在目录，执行如下两段代码。<br><code>$git config --global user.email &quot;you@example.com&quot;</code><br><code>$git config --global user.name &quot;user.name&quot;</code>  </p>
-<p><em>PS：其中you@example.com为你Github邮箱，user.name为你的名字。OK，完美解决！</em></p>
+<p><em>PS：其中you@example.com为你Github邮箱，user.name为你的名字。OK，完美解决！</em><br>当你解决后你会发现执行<code>hexo deploy</code>之后会提示你create了什么！就像下图所示。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-4@2x.png" alt=""></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
