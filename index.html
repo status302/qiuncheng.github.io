@@ -118,7 +118,7 @@
 				  	
 				    <li><a href="/categories/Hexo/HTML-CSS/" class="animsition-link">HTML/CSS<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/Hexo/" class="animsition-link">Hexo<small>(3)</small></a></li>
+				    <li><a href="/categories/Hexo/" class="animsition-link">Hexo<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/Life/" class="animsition-link">Life<small>(4)</small></a></li>
 				    
@@ -253,6 +253,43 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2015/09/21/13-hexo-git-problem/">git: fatal unable to auto-detect email address</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2015-09-21T10:20:25.000Z" itemprop="datePublished">
+          September 21 2015
+      </time>
+    
+    
+    | 
+    <a href='/tags/Hexo/'>Hexo</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。git: fatal unable to auto-detect email address 
+
+解决方法如下：在终端里进入hexo
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2015/09/21/13-hexo-git-problem/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -404,50 +441,6 @@
                     
                     <p class="pull-right readMore">
                         <a href="/2015/09/06/9-python-coding-regular/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/09/06/8-python-functools-partial/">偏函数是什么－飘逸的python</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-09-06T04:12:51.000Z" itemprop="datePublished">
-          September 06 2015
-      </time>
-    
-    
-    | 
-    <a href='/tags/python/'>python</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  
-
-
-偏函数是干嘛的？简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  
-import functools
-int2 = functools.partial(int, base=2)
-int2('1000000')
-64
-in
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/09/06/8-python-functools-partial/">阅读更多...</a>
                     </p>
                     
                 </div>

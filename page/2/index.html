@@ -118,7 +118,7 @@
 				  	
 				    <li><a href="/categories/Hexo/HTML-CSS/" class="animsition-link">HTML/CSS<small>(1)</small></a></li>
 				    
-				    <li><a href="/categories/Hexo/" class="animsition-link">Hexo<small>(3)</small></a></li>
+				    <li><a href="/categories/Hexo/" class="animsition-link">Hexo<small>(4)</small></a></li>
 				    
 				    <li><a href="/categories/Life/" class="animsition-link">Life<small>(4)</small></a></li>
 				    
@@ -253,6 +253,50 @@
 
 <section id="intro">
     <div class="container">
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2015/09/06/8-python-functools-partial/">偏函数是什么－飘逸的python</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2015-09-06T04:12:51.000Z" itemprop="datePublished">
+          September 06 2015
+      </time>
+    
+    
+    | 
+    <a href='/tags/python/'>python</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  
+
+
+偏函数是干嘛的？简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  
+import functools
+int2 = functools.partial(int, base=2)
+int2('1000000')
+64
+in
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2015/09/06/8-python-functools-partial/">阅读更多...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
         
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
@@ -409,55 +453,6 @@ random.uniformrandom.uniform的函数原型为：random.
                     
                     <p class="pull-right readMore">
                         <a href="/2015/08/05/4-win10-update/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/08/03/3-img-markdown-desc/">MarkDown改进-图片说明实现</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-08-03T02:03:40.000Z" itemprop="datePublished">
-          August 03 2015
-      </time>
-    
-    
-    | 
-    <a href='/tags/HTML-CSS/'>HTML/CSS</a>,
-    
-    <a href='/tags/Markdown/'>Markdown</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        一直有个困惑，就是我无法在添加图片的时候在图片的下方添加图片说明，之前在简书上写文章时一直会有个提示，让你添加说明。但是如何在Markdown上添加呢？  
-
-这是我之前在Markdown添加的，很尴尬的是我把图片说明写在下面了  
-
-
-这是我在简书上添加的,下面的说明好看多了。  
-
-
-
-
-这个让我想起了Markdown语法是兼容HTML的，是不是可以用HTML来实现呢？我就尝试了一下，没错，居然可行！
-具体的代码如下：
-&lt;di
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/08/03/3-img-markdown-desc/">阅读更多...</a>
                     </p>
                     
                 </div>

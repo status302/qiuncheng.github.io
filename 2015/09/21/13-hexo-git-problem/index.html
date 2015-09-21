@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Tag: 转载 | Qiuncheng&#39;s Blog</title>
+  <title>git: fatal unable to auto-detect email address | Qiuncheng&#39;s Blog</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -250,46 +250,60 @@
 
         <!-- ============================ END Hero Image =========================== -->
       
-
-
-<section id="services">
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/09/09/10-python-talkfreely/">每个程序员都应该学习使用Python</a></h4>
-                            
-                            <p><time datetime="2015-09-09T01:00:08.000Z"><a href="/2015/09/09/10-python-talkfreely/">September 09 2015</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2015/09/06/9-python-coding-regular/">【python】python编码规范</a></h4>
-                            
-                            <p><time datetime="2015-09-06T09:09:35.000Z"><a href="/2015/09/06/9-python-coding-regular/">September 06 2015</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-09-21T10:20:25.000Z" itemprop="datePublished">
+          September 21 2015
+      </time>
+    
+    
+    | 
+    <a href='/tags/Hexo/'>Hexo</a>
+    
+    
+</span>
+                <h1>git: fatal unable to auto-detect email address</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p>如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。<strong>git: fatal unable to auto-detect email address</strong> </p>
+<hr>
+<p>解决方法如下：<br>在终端里进入hexo所在目录，执行如下两段代码。<br><code>$git config --global user.email &quot;you@example.com&quot;</code><br><code>$git config --global user.name &quot;user.name&quot;</code>  </p>
+<p><em>PS：其中you@example.com为你Github邮箱，user.name为你的名字。OK，完美解决！</em></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2015/09/21/12-mac-hostname/">
+        mac主机名变成了bogon →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2015/09/21/13-hexo-git-problem/" data-title="git: fatal unable to auto-detect email address" data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"qiuncheng"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
