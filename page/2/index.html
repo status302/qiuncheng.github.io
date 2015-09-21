@@ -257,16 +257,18 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2015/09/06/8-python-functools-partial/">偏函数是什么－飘逸的python</a></h3>
+                    <h3><a href="/2015/08/03/3-img-markdown-desc/">MarkDown改进-图片说明实现</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2015-09-06T04:12:51.000Z" itemprop="datePublished">
-          September 06 2015
+      <time datetime="2015-08-03T02:03:40.000Z" itemprop="datePublished">
+          August 03 2015
       </time>
     
     
     | 
-    <a href='/tags/python/'>python</a>
+    <a href='/tags/HTML-CSS/'>HTML/CSS</a>,
+    
+    <a href='/tags/Markdown/'>Markdown</a>
     
     
 </span>
@@ -275,21 +277,24 @@
                 <div class="col-md-8">
                     <p>
                       
-                        
-偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  
+                        一直有个困惑，就是我无法在添加图片的时候在图片的下方添加图片说明，之前在简书上写文章时一直会有个提示，让你添加说明。但是如何在Markdown上添加呢？  
+
+这是我之前在Markdown添加的，很尴尬的是我把图片说明写在下面了  
 
 
-偏函数是干嘛的？简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  
-import functools
-int2 = functools.partial(int, base=2)
-int2('1000000')
-64
-in
+这是我在简书上添加的,下面的说明好看多了。  
+
+
+
+
+这个让我想起了Markdown语法是兼容HTML的，是不是可以用HTML来实现呢？我就尝试了一下，没错，居然可行！
+具体的代码如下：
+&lt;di
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2015/09/06/8-python-functools-partial/">阅读更多...</a>
+                        <a href="/2015/08/03/3-img-markdown-desc/">阅读更多...</a>
                     </p>
                     
                 </div>
@@ -301,16 +306,16 @@ in
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2015/08/29/7-python-oop/">python面向对象－类和封装</a></h3>
+                    <h3><a href="/2015/08/02/2-domain-github-dnspod/">域名和github绑定的问题</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2015-08-29T01:50:47.000Z" itemprop="datePublished">
-          August 29 2015
+      <time datetime="2015-08-02T03:14:07.000Z" itemprop="datePublished">
+          August 02 2015
       </time>
     
     
     | 
-    <a href='/tags/python/'>python</a>
+    <a href='/tags/Hexo/'>Hexo</a>
     
     
 </span>
@@ -319,22 +324,21 @@ in
                 <div class="col-md-8">
                     <p>
                       
-                        
-之前学过java，也了解过面向对象。类与对象：类的封装、多态与继承也就是面向对象的三大特性。也可以理解说一切集合都是类，自然界中的一切都是对象。但是python中的面向对象很明显给我的感觉就是“好写”。  
+                        之前没太注意，网上的教程在域名方面都推荐去goDaddy买域名，但前两天我买域名去了goDaddy上发现比国内的域名要贵些，于是果断在万网买了域名（没错，就是qiuncheng.com）但是万网的域名解析时候需要注意几点：
+
+DNS地址解析  
+
+这里需要注意的是万网域名的DNS解析一定要修改的，就像上图那样。如何修改请看下图：
 
 
-类和实例：  
+注册DNSpod，添加域名，添加记录，如下图设置。
 
-
-定义类：  12class Student(object):    pass
-
-
-class后面是类名，即Student与java中相同，类名通常首字母大写。紧接着是(object)，表示该类是从哪个类继承
+在source文件夹里创建CNAME文件，不带任何
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2015/08/29/7-python-oop/">阅读更多...</a>
+                        <a href="/2015/08/02/2-domain-github-dnspod/">阅读更多...</a>
                     </p>
                     
                 </div>
@@ -346,16 +350,16 @@ class后面是类名，即Student与java中相同，类名通常首字母大写�
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2015/08/27/6-python-random-funs/">python中random模块简析</a></h3>
+                    <h3><a href="/2015/07/29/1-new-domain-personal/">博客正式启用了，欢迎访问！</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2015-08-27T02:44:20.000Z" itemprop="datePublished">
-          August 27 2015
+      <time datetime="2015-07-29T10:01:30.000Z" itemprop="datePublished">
+          July 29 2015
       </time>
     
     
     | 
-    <a href='/tags/python/'>python</a>
+    <a href='/tags/Hexo/'>Hexo</a>
     
     
 </span>
@@ -365,94 +369,17 @@ class后面是类名，即Student与java中相同，类名通常首字母大写�
                     <p>
                       
                         
-Python中的random用于生成随机数。下面简析下random中常用的几个函数。  
+Hi, I am coming.
 
 
-random.randomrandom.random()用于生成一个0到1的随机浮点数: 0 &lt;= n &lt; 1.0
-123print random.random()0.690448381007 # 输出10.89515663051  # 输出2
 
-random.uniformrandom.uniform的函数原型为：random.
+很早之前自己就一直想要有个个人blog，苦于那会儿自己什么都不知道。但是最近突然发现了Hexo，真的是太方便了，让我用了两个下午就搭起了自己的个人站点，目前blog是托管在Github上的，国内访问起来偶尔会卡吧,（最重要的还是偶尔会丢失数据）苦于还正在找方式放到国内的Gitcafe上。
+今天启用了个人域名，http://qiuncheng.com(没错，这就是我)。如果你觉得博文有些帮助，也可
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2015/08/27/6-python-random-funs/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/08/25/5-change-to-mac/">换Mac了，高兴的心情无法抑制！</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-08-25T12:03:59.000Z" itemprop="datePublished">
-          August 25 2015
-      </time>
-    
-    
-    | 
-    <a href='/tags/Mac/'>Mac</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-之前把我联想U410的超级本升级了win10，本来用着还不错，可是依然无法是性能不足，不能满足我的某些需求。我承认，U410是我用过的比较好的PC之一（我总共就用过两台PC　）。但当我前天收到了早前下单的Mac之后，我再也不认为U410是一个好的笔记本了。没错，现在真的是认为MacBook是最好的笔记本。  
-
-怎么说呢，买这个MacBook Pro（Retina）真的是历程艰险，记得当时我身上只能拿出一千块钱，然后就把我想买电脑的事
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/08/25/5-change-to-mac/">阅读更多...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2015/08/05/4-win10-update/">升级win10的一点小小的心得</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2015-08-05T02:16:39.000Z" itemprop="datePublished">
-          August 05 2015
-      </time>
-    
-    
-    | 
-    <a href='/tags/Win10升级/'>Win10升级</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-7月29日win10正式版发布了，我当时没有一点感觉，因为我觉得我的win7旗舰版用的就特别好，另外我自己也加了内存，加了固态，觉得win7旗舰版跑起来简直飞起。但是我舍友29号晚上就升级了win10，让我有些小小的激动。但仅仅只是心动而已，并没有什么欲望要升级。但是8月4日晚上早上我偶然间看到win10的评测，据说支持多窗口多桌面切换，这个对我真是个吸引，于是果断一狠心升了。
-
- 哈哈，之前说了好多废话，那就开始正文吧。由于我只是用
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2015/08/05/4-win10-update/">阅读更多...</a>
+                        <a href="/2015/07/29/1-new-domain-personal/">阅读更多...</a>
                     </p>
                     
                 </div>
@@ -463,7 +390,7 @@ random.uniformrandom.uniform的函数原型为：random.
         
         <nav class="pagination" role="pagination">
           <a class="pull-left" href="/">← Newer Posts</a>
-          <a class="pull-right" href="/page/3/">Older Posts →</a>
+          
         </nav>
     </div>
 </section>
