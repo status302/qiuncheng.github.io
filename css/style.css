@@ -392,13 +392,12 @@ body {
   position: absolute;
   top: 50%;
   left: 0;
-  color: #ff0;
   margin-top: -20px;
 }
 #logo,
 #subtitle {
   text-decoration: none;
-  color: #fff;
+  color: #f00;
   font-weight: 300;
   text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
