@@ -392,6 +392,7 @@ body {
   position: absolute;
   top: 50%;
   left: 0;
+  color: #ff0;
   margin-top: -20px;
 }
 #logo,
