@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-10-01T14:04:28.000Z</updated>
+  <updated>2015-10-01T14:07:14.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,16 +19,15 @@
     <link href="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/"/>
     <id>http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/</id>
     <published>2015-09-29T08:45:17.000Z</published>
-    <updated>2015-10-01T14:04:28.000Z</updated>
+    <updated>2015-10-01T14:07:14.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>我叫叶良辰，我有一千种方式让你无法在这里呆下去。  </p>
 </blockquote>
 <p>这句话我拿来借鉴，特别借此想对Swift说，毕竟原来想做一个android开发工程师，但是现在转了Swift，所以这句话可以让你对学习Swift充满信心。</p>
-<p>我好像最近发现了Xcode7.0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加<code>button</code>的时候是没有问题的，但是当我在给这个<code>button</code>添加<code>action</code>的时候就出了问题。<code>action</code>总是添加不上去。<a id="more"></a></p>
-<ul>
+<h2 id="我好像最近发现了Xcode7-0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加button的时候是没有问题的，但是当我在给这个button添加action的时候就出了问题。action总是添加不上去。<!-more->">我好像最近发现了Xcode7.0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加<code>button</code>的时候是没有问题的，但是当我在给这个<code>button</code>添加<code>action</code>的时候就出了问题。<code>action</code>总是添加不上去。<a id="more"></a></h2><ul>
 <li>添加<code>button</code>的代码如下：</li>
 </ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    let <span class="tag">button</span> = <span class="function"><span class="title">UIButton</span><span class="params">(frame: CGRect(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">44</span>, height: <span class="number">44</span>)</span></span>)  </span><br><span class="line">    <span class="tag">button</span><span class="class">.backgroundColor</span> = UIColor.<span class="function"><span class="title">redColor</span><span class="params">()</span></span></span><br><span class="line">                </span><br><span class="line">    <span class="tag">button</span>.<span class="function"><span class="title">addTarget</span><span class="params">(self, action: <span class="string">"ratingButtonTapped:"</span>, forControlEvents: UIControlEvents.TouchDown)</span></span></span><br><span class="line">                </span><br><span class="line">    ratingButtons += [button]</span><br><span class="line">    <span class="function"><span class="title">addSubview</span><span class="params">(button)</span></span></span><br><span class="line">```  </span><br><span class="line">- 添加`action`的代码为：</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let <span class="tag">button</span> = <span class="function"><span class="title">UIButton</span><span class="params">(frame: CGRect(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">44</span>, height: <span class="number">44</span>)</span></span>)  </span><br><span class="line">    <span class="tag">button</span><span class="class">.backgroundColor</span> = UIColor.<span class="function"><span class="title">redColor</span><span class="params">()</span></span></span><br><span class="line">                </span><br><span class="line">    <span class="tag">button</span>.<span class="function"><span class="title">addTarget</span><span class="params">(self, action: <span class="string">"ratingButtonTapped:"</span>, forControlEvents: UIControlEvents.TouchDown)</span></span></span><br><span class="line">                </span><br><span class="line">    ratingButtons += [button]</span><br><span class="line">    <span class="function"><span class="title">addSubview</span><span class="params">(button)</span></span></span><br><span class="line">```  </span><br><span class="line">---</span><br><span class="line">- 添加`action`的代码为：</span><br></pre></td></tr></table></figure>
 <p>func ratingButtonTapped(btn: UIButton) {<br>        print(“Button pressed 👍”)<br>        NSLog(“Button pressed 👍”)<br>    }<br>```</p>
 <p>正常情况下在这里应该会有打印输出的，以及<code>Log</code>的，但是我在运行后却没有输出，代码应该是没有错的，我觉得可能是编辑器的问题仔细查看了一下搜索的东西，却没有发现类似的问题。苦恼ing，请万能的朋友们帮我下。</p>
 ]]></content>
@@ -37,7 +36,7 @@
 <p>我叫叶良辰，我有一千种方式让你无法在这里呆下去。  </p>
 </blockquote>
 <p>这句话我拿来借鉴，特别借此想对Swift说，毕竟原来想做一个android开发工程师，但是现在转了Swift，所以这句话可以让你对学习Swift充满信心。</p>
-<p>我好像最近发现了Xcode7.0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加<code>button</code>的时候是没有问题的，但是当我在给这个<code>button</code>添加<code>action</code>的时候就出了问题。<code>action</code>总是添加不上去。]]>
+<h2 id="我好像最近发现了Xcode7-0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加button的时候是没有问题的，但是当我在给这个button添加action的时候就出了问题。action总是添加不上去。<!-more->">我好像最近发现了Xcode7.0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加<code>button</code>的时候是没有问题的，但是当我在给这个<code>button</code>添加<code>action</code>的时候就出了问题。<code>action</code>总是添加不上去。]]>
     
     </summary>
     
