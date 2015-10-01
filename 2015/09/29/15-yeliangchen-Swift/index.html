@@ -3,19 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mac主机名变成了bogon | Qiuncheng&#39;s Blog</title>
+  <title>在下叶良辰！ | Qiuncheng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac主机名变成了bogon">
-<meta property="og:url" content="http://qiuncheng.com/2015/09/21/12-mac-hostname/index.html">
+<meta property="og:title" content="在下叶良辰！">
+<meta property="og:url" content="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/index.html">
 <meta property="og:site_name" content="Qiuncheng's Blog">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-2@2x.png">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-1@2x.png">
-<meta property="og:updated_time" content="2015-09-21T17:11:19.000Z">
+<meta property="og:updated_time" content="2015-10-01T14:00:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac主机名变成了bogon">
+<meta name="twitter:title" content="在下叶良辰！">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
   
     <link rel="alternative" href="/atom.xml" title="Qiuncheng&#39;s Blog" type="application/atom+xml">
@@ -83,17 +81,17 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-12-mac-hostname" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-15-yeliangchen-Swift" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/09/21/12-mac-hostname/" class="article-date">
-  <time datetime="2015-09-21T01:18:45.000Z" itemprop="datePublished">九月 21 2015</time>
+<a href="/2015/09/29/15-yeliangchen-Swift/" class="article-date">
+  <time datetime="2015-09-29T08:45:17.000Z" itemprop="datePublished">九月 29 2015</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Life/">Life</a>
+    <a class="article-category-link" href="/categories/Swift/">Swift</a>
   </div>
 
   </div>
@@ -104,7 +102,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      mac主机名变成了bogon
+      在下叶良辰！
     </h1>
   
 
@@ -121,9 +119,16 @@ var _hmt = _hmt || [];
 		</div>
 		
         <blockquote>
-<p>如下图，今天打开Mac terminal终端，发现主机名突然变成了bogon，google了一下，发现大致可能是与dns有关，修改一下dns就好了，于是我修改的是DNS8.8.8.8<br><a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-2@2x.png" alt=""></p>
+<p>我叫叶良辰，我有一千种方式让你无法在这里呆下去。  </p>
 </blockquote>
-<p>修改正常后为：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-1@2x.png" alt=""><br><strong>OK，完美！</strong></p>
+<p>这句话我拿来借鉴，特别借此想对Swift说，毕竟原来想做一个android开发工程师，但是现在转了Swift，所以这句话可以让你对学习Swift充满信心。</p>
+<p>我好像最近发现了Xcode7.0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加<code>button</code>的时候是没有问题的，但是当我在给这个<code>button</code>添加<code>action</code>的时候就出了问题。<code>action</code>总是添加不上去。</p>
+<ul>
+<li>添加<code>button</code>的代码如下：</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    let <span class="tag">button</span> = <span class="function"><span class="title">UIButton</span><span class="params">(frame: CGRect(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">44</span>, height: <span class="number">44</span>)</span></span>)  </span><br><span class="line">    <span class="tag">button</span><span class="class">.backgroundColor</span> = UIColor.<span class="function"><span class="title">redColor</span><span class="params">()</span></span></span><br><span class="line">                </span><br><span class="line">    <span class="tag">button</span>.<span class="function"><span class="title">addTarget</span><span class="params">(self, action: <span class="string">"ratingButtonTapped:"</span>, forControlEvents: UIControlEvents.TouchDown)</span></span></span><br><span class="line">                </span><br><span class="line">    ratingButtons += [button]</span><br><span class="line">    <span class="function"><span class="title">addSubview</span><span class="params">(button)</span></span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">- 添加`action`的代码为：</span><br></pre></td></tr></table></figure>
+<p>func ratingButtonTapped(btn: UIButton) {<br>        print(“Button pressed 👍”)<br>        NSLog(“Button pressed 👍”)<br>    }<br>```</p>
+<p>正常情况下在这里应该会有打印输出的，以及<code>Log</code>的，但是我在运行后却没有输出，代码应该是没有错的，我觉得可能是编辑器的问题仔细查看了一下搜索的东西，却没有发现类似的问题。苦恼ing，请万能的朋友们帮我下。</p>
 
       
     </div>
@@ -134,11 +139,11 @@ var _hmt = _hmt || [];
 	  <!-- 百度分享 End -->
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
 
 	  
 <span>
-更新日期:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">九月 22 2015</time>
+更新日期:<time datetime="2015-10-01T14:00:21.000Z" itemprop="dateModified">十月 01 2015</time>
 </span>
 
 
@@ -148,19 +153,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2015/09/21/13-hexo-git-problem/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          git: fatal unable to auto-detect email address
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/20/11-English-artical/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/09/26/14-laoluo-GreatFeeling/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">其实英语文章并没有那么难看懂</div>
+      <div class="article-nav-title">不忘初心，方得始终</div>
     </a>
   
 </nav>
@@ -173,7 +169,7 @@ var _hmt = _hmt || [];
 <!-- 多说评论框 start -->
 
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2015/09/21/12-mac-hostname/" data-title="mac主机名变成了bogon" data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2015/09/29/15-yeliangchen-Swift/" data-title="在下叶良辰！" data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -330,7 +326,7 @@ LGY_calendar.prototype = {
             html+='<span class="g-calendar-grey">'+(last_date-(first_day-1)+i)+'</span>';
         }
         //本月的显示天数
-        var postdate = new Date("Mon Sep 21 2015 09:18:45 GMT+0800"); 
+        var postdate = new Date("Tue Sep 29 2015 16:45:17 GMT+0800"); 
         if (true && postdate.getFullYear() == year && postdate.getMonth() == month) { 
             html += '<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span><a href="/2015/09/06/8-python-functools-partial/" title="当天有2篇博客,第一篇:偏函数是什么－飘逸的python">6</a></span><span>7</span><span>8</span><span><a href="/2015/09/09/10-python-talkfreely/" title="每个程序员都应该学习使用Python">9</a></span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span><a href="/2015/09/20/11-English-artical/" title="其实英语文章并没有那么难看懂">20</a></span><span><a href="/2015/09/21/12-mac-hostname/" title="当天有2篇博客,第一篇:mac主机名变成了bogon">21</a></span><span>22</span><span>23</span><span>24</span><span>25</span><span><a href="/2015/09/26/14-laoluo-GreatFeeling/" title="不忘初心，方得始终">26</a></span><span>27</span><span>28</span><span><a href="/2015/09/29/15-yeliangchen-Swift/" title="在下叶良辰！">29</a></span><span>30</span><span>31</span>';
         } else {
@@ -370,7 +366,7 @@ LGY_calendar.prototype = {
         var _that = this;
         if(this.oBack != undefined) {
             this.oBack.onclick = function(){
-                var postdate = new Date("Mon Sep 21 2015 09:18:45 GMT+0800"); 
+                var postdate = new Date("Tue Sep 29 2015 16:45:17 GMT+0800"); 
                 _that.year = postdate.getFullYear();
                 _that.month = postdate.getMonth();
                 // 填充日历
