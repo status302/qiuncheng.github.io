@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Welcome to Qiuncheng&#39;s Blog! | Qiuncheng&#39;s Blog</title>
+  <title>iOS上简易图片浏览器的实现 | Qiuncheng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Welcome to Qiuncheng's Blog!">
-<meta property="og:url" content="http://qiuncheng.com/about.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS上简易图片浏览器的实现">
+<meta property="og:url" content="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/index.html">
 <meta property="og:site_name" content="Qiuncheng's Blog">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:updated_time" content="2015-10-01T14:17:52.000Z">
+<meta property="og:updated_time" content="2015-10-17T11:47:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Welcome to Qiuncheng's Blog!">
+<meta name="twitter:title" content="iOS上简易图片浏览器的实现">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
   
     <link rel="alternative" href="/atom.xml" title="Qiuncheng&#39;s Blog" type="application/atom+xml">
@@ -83,15 +83,19 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-17-iOS-image-browser" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/about.html" class="article-date">
-  <time datetime="2015-07-28T04:34:22.000Z" itemprop="datePublished">七月 28 2015</time>
+<a href="/2015/10/16/17-iOS-image-browser/" class="article-date">
+  <time datetime="2015-10-16T14:26:28.000Z" itemprop="datePublished">十月 16 2015</time>
 </a>
 
 
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -100,7 +104,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Welcome to Qiuncheng&#39;s Blog!
+      iOS上简易图片浏览器的实现
     </h1>
   
 
@@ -112,13 +116,39 @@ var _hmt = _hmt || [];
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>文章目录</span></h2>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#About_me"><span class="toc-number">1.</span> <span class="toc-text">About me</span></a></li></ol>
+			
 		
 		</div>
 		
         <blockquote>
-<h3 id="About_me"><strong>About me</strong></h3><p><strong>Name: Qiuncheng</strong><br><strong>Email: mc_hello@163.com</strong><br><strong>Location: Xidian University</strong></p>
+<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。目前还不支持从手机相册中调用图片来实现浏览，只是单纯的将图片添加到应用包中。好了，不多说了，let’s begin it！  </p>
 </blockquote>
+<ul>
+<li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="" alt=""></p>
+</li>
+<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<br><img src="" alt=""></p>
+</li>
+<li><p>使用辅助窗口control拖拽法将视图和代码之间建立联系。<br>结果如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">UIKit</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView1: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicBusttonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加图片资源到<code>Assets.xcassets</code>中，我在这里添加9张图片。</p>
+</li>
+<li><p>接下来的任务就是要编辑代码来实现图片的切换了。</p>
+<ol>
+<li>添加9张图片的<code>name</code>为:<br><code>var imagesNameString = [&quot;17&quot;,&quot;18&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot;,&quot;24&quot;,&quot;25&quot;,&quot;26&quot;]</code></li>
+<li>设置标记数<code>flagNum</code>:<br><code>var flagNum:Int = 0</code></li>
+<li><p>实现上一张和下一张方法，通过点击两个按钮来进行图片切换。具体代码实现如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> flagNum == (imagesNameString.<span class="built_in">count</span>-<span class="number">1</span>)&#123;</span><br><span class="line">        flagNum = <span class="number">0</span></span><br><span class="line">        flagNum++</span><br><span class="line">        imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        flagNum++</span><br><span class="line">        imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> flagNum == <span class="number">0</span>&#123;</span><br><span class="line">        flagNum = (imagesNameString.<span class="built_in">count</span>-<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    flagNum--</span><br><span class="line">    imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>重点的时刻来了，通常我们的图片浏览器的话都是通过滑动实现切换图片的，下面我们将添加左右滑动切换图片资源。在此之前我们必须要对上面的两个方法体中的内容实现封装。所以我们在这里新建两个方法，分别为：nextPic()和lastPic()。</p>
+<blockquote>
+<p>刚学会ui怎么可能会gesture呢，233333，本周更新使用gesture实现图片切换。</p>
+</blockquote>
+</li>
+</ul>
 
       
     </div>
@@ -129,9 +159,11 @@ var _hmt = _hmt || [];
 	  <!-- 百度分享 End -->
 	  
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
 	  
 <span>
-更新日期:<time datetime="2015-10-01T14:17:52.000Z" itemprop="dateModified">十月 01 2015</time>
+更新日期:<time datetime="2015-10-17T11:47:48.000Z" itemprop="dateModified">十月 17 2015</time>
 </span>
 
 
@@ -139,6 +171,16 @@ var _hmt = _hmt || [];
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2015/10/09/16-interesting-ios-nav/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">“IOS上一个很有意思能解释“栈”的东西”</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -147,7 +189,7 @@ var _hmt = _hmt || [];
 <!-- 多说评论框 start -->
 
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/about.html" data-title="Welcome to Qiuncheng&#39;s Blog!" data-url="http://qiuncheng.com/about.html" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2015/10/16/17-iOS-image-browser/" data-title="iOS上简易图片浏览器的实现" data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -157,6 +199,13 @@ var _hmt = _hmt || [];
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">文章目录</h2>
+    
+        
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -225,6 +274,9 @@ var _hmt = _hmt || [];
     <div id="g-calendar" class="g-calendar">
         <span class="g-calendar-prev"></span>
 		 
+        <span class="g-calendar-back"></span>
+        <span class="g-calendar-now"></span>
+		 
         <span class="g-calendar-next"></span>
         <div class="g-calendar-hd"></div>
         <div class="g-calendar-tit"></div>
@@ -292,9 +344,9 @@ LGY_calendar.prototype = {
             html+='<span class="g-calendar-grey">'+(last_date-(first_day-1)+i)+'</span>';
         }
         //本月的显示天数
-        var postdate = new Date("Tue Jul 28 2015 12:34:22 GMT+0800"); 
-        if (false && postdate.getFullYear() == year && postdate.getMonth() == month) { 
-            html += '<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span><a href="/2015/07/29/1-new-domain-personal/" title="博客正式启用了，欢迎访问！">29</a></span><span>30</span>';
+        var postdate = new Date("Fri Oct 16 2015 22:26:28 GMT+0800"); 
+        if (true && postdate.getFullYear() == year && postdate.getMonth() == month) { 
+            html += '<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span><a href="/2015/10/09/16-interesting-ios-nav/" title="“IOS上一个很有意思能解释“栈”的东西”">9</a></span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span><a href="/2015/10/16/17-iOS-image-browser/" title="iOS上简易图片浏览器的实现">16</a></span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>';
         } else {
             for(var j=0;j<final_date;j++){        
                 html+='<span id="d'+(j+1)+'">'+(j+1)+'</span>';
@@ -332,7 +384,7 @@ LGY_calendar.prototype = {
         var _that = this;
         if(this.oBack != undefined) {
             this.oBack.onclick = function(){
-                var postdate = new Date("Tue Jul 28 2015 12:34:22 GMT+0800"); 
+                var postdate = new Date("Fri Oct 16 2015 22:26:28 GMT+0800"); 
                 _that.year = postdate.getFullYear();
                 _that.month = postdate.getMonth();
                 // 填充日历
@@ -514,6 +566,11 @@ new LGY_calendar('g-calendar');
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js" type="text/javascript"></script>

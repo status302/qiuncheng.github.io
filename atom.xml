@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-10-09T13:52:53.000Z</updated>
+  <updated>2015-10-17T11:47:48.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[iOS上简易图片浏览器的实现]]></title>
+    <link href="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/"/>
+    <id>http://qiuncheng.com/2015/10/16/17-iOS-image-browser/</id>
+    <published>2015-10-16T14:26:28.000Z</published>
+    <updated>2015-10-17T11:47:48.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。目前还不支持从手机相册中调用图片来实现浏览，只是单纯的将图片添加到应用包中。好了，不多说了，let’s begin it！  </p>
+</blockquote>
+<ul>
+<li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="" alt=""></p>
+</li>
+<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<br><img src="" alt=""></p>
+</li>
+<li><p>使用辅助窗口control拖拽法将视图和代码之间建立联系。<br>结果如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">UIKit</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView1: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicBusttonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加图片资源到<code>Assets.xcassets</code>中，我在这里添加9张图片。</p>
+</li>
+<li><p>接下来的任务就是要编辑代码来实现图片的切换了。</p>
+<ol>
+<li>添加9张图片的<code>name</code>为:<br><code>var imagesNameString = [&quot;17&quot;,&quot;18&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot;,&quot;24&quot;,&quot;25&quot;,&quot;26&quot;]</code></li>
+<li>设置标记数<code>flagNum</code>:<br><code>var flagNum:Int = 0</code></li>
+<li><p>实现上一张和下一张方法，通过点击两个按钮来进行图片切换。具体代码实现如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> flagNum == (imagesNameString.<span class="built_in">count</span>-<span class="number">1</span>)&#123;</span><br><span class="line">        flagNum = <span class="number">0</span></span><br><span class="line">        flagNum++</span><br><span class="line">        imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        flagNum++</span><br><span class="line">        imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> flagNum == <span class="number">0</span>&#123;</span><br><span class="line">        flagNum = (imagesNameString.<span class="built_in">count</span>-<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    flagNum--</span><br><span class="line">    imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>重点的时刻来了，通常我们的图片浏览器的话都是通过滑动实现切换图片的，下面我们将添加左右滑动切换图片资源。在此之前我们必须要对上面的两个方法体中的内容实现封装。所以我们在这里新建两个方法，分别为：nextPic()和lastPic()。</p>
+<blockquote>
+<p>刚学会ui怎么可能会gesture呢，233333，本周更新使用gesture实现图片切换。</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[“IOS上一个很有意思能解释“栈”的东西”]]></title>
