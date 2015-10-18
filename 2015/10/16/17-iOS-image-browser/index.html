@@ -11,7 +11,10 @@
 <meta property="og:url" content="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/index.html">
 <meta property="og:site_name" content="Qiuncheng's Blog">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:updated_time" content="2015-10-17T11:47:48.000Z">
+<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/storyboard.tiff">
+<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/control拖拽.tiff">
+<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/imageViewGif.gif">
+<meta property="og:updated_time" content="2015-10-18T01:23:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS上简易图片浏览器的实现">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
@@ -121,12 +124,12 @@ var _hmt = _hmt || [];
 		</div>
 		
         <blockquote>
-<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。目前还不支持从手机相册中调用图片来实现浏览，只是单纯的将图片添加到应用包中。好了，不多说了，let’s begin it！  </p>
+<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。目前还不支持从手机相册中调用图片来实现浏览，只是单纯的将图片添加到应用包中。好了，不多说了，let’s get it！  </p>
 </blockquote>
 <ul>
-<li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="" alt=""></p>
+<li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/storyboard.tiff" alt="工程大略"></p>
 </li>
-<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<br><img src="" alt=""></p>
+<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/control拖拽.tiff" alt="将试图和代码建立联系"></p>
 </li>
 <li><p>使用辅助窗口control拖拽法将视图和代码之间建立联系。<br>结果如下：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">UIKit</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView1: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicBusttonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -143,9 +146,11 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 </li>
-<li><p>重点的时刻来了，通常我们的图片浏览器的话都是通过滑动实现切换图片的，下面我们将添加左右滑动切换图片资源。在此之前我们必须要对上面的两个方法体中的内容实现封装。所以我们在这里新建两个方法，分别为：nextPic()和lastPic()。</p>
+<li><p>重点的时刻来了，通常我们的图片浏览器的话都是通过滑动实现切换图片的，下面我们将添加左右滑动切换图片资源。在此之前我们必须要对上面的两个方法体中的内容实现封装。所以我们在这里新建两个方法，分别为：nextPic()和lastPic()。  </p>
+</li>
+<li><p>先让我们来大致看下效果图吧。GIF走起！<br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/imageViewGif.gif" alt=""></center></p>
 <blockquote>
-<p>刚学会ui怎么可能会gesture呢，233333，本周更新使用gesture实现图片切换。</p>
+<p>刚学会ui怎么可能会gesture呢，233333，本周继续更新《使用gesture实现图片切换》。</p>
 </blockquote>
 </li>
 </ul>
@@ -163,7 +168,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-更新日期:<time datetime="2015-10-17T11:47:48.000Z" itemprop="dateModified">十月 17 2015</time>
+更新日期:<time datetime="2015-10-18T01:23:53.000Z" itemprop="dateModified">十月 18 2015</time>
 </span>
 
 
