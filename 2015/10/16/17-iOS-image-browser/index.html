@@ -14,7 +14,7 @@
 <meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/storyboard.tiff">
 <meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/control拖拽.tiff">
 <meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/imageViewGif.gif">
-<meta property="og:updated_time" content="2015-10-18T01:25:22.000Z">
+<meta property="og:updated_time" content="2015-10-18T01:28:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS上简易图片浏览器的实现">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
@@ -129,9 +129,9 @@ var _hmt = _hmt || [];
 <ul>
 <li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/storyboard.tiff" alt="工程大略"></p>
 </li>
-<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/control拖拽.tiff" alt="将试图和代码建立联系"></p>
+<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/control拖拽.tiff" alt="将试图和代码建立联系"></p>
 </li>
-<li><p>使用辅助窗口control拖拽法将视图和代码之间建立联系。<br>结果如下：<a id="more"></a></p>
+<li><p>使用辅助窗口control拖拽法将视图和代码之间建立联系。<br>结果如下：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">UIKit</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView1: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicBusttonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>添加图片资源到<code>Assets.xcassets</code>中，我在这里添加9张图片。</p>
@@ -168,7 +168,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-更新日期:<time datetime="2015-10-18T01:25:22.000Z" itemprop="dateModified">十月 18 2015</time>
+更新日期:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">十月 18 2015</time>
 </span>
 
 
