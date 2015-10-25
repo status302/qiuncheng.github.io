@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-10-18T01:28:51.000Z</updated>
+  <updated>2015-10-24T03:32:20.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[如何在UITableView的底部添加其他视图控件]]></title>
+    <link href="http://qiuncheng.com/2015/10/24//"/>
+    <id>http://qiuncheng.com/2015/10/24//</id>
+    <published>2015-10-24T03:29:13.000Z</published>
+    <updated>2015-10-24T03:32:20.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>怎么开头呢？按照我通常的习惯来说我都是以一段引用的话来开头，不知为啥，可是今天找不到引用的话了。开发不是那么容易的，所以做项目过程中会遇到很多问题，还是老实地一个一个地解决吧。</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>怎么开头呢？按照我通常的习惯来说我都是以一段引用的话来开头，不知为啥，可是今天找不到引用的话了。开发不是那么容易的，所以做项目过程中会遇到很多问题，还是老实地一个一个地解决吧。</p>
+</blockquote>
+]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[iOS上简易图片浏览器的实现]]></title>
