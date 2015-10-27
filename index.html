@@ -113,40 +113,14 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			
-		
-		</div>
-		
         <p><em>切换试图的两种方式，虽然经常用到，但还不是很了解，也是就去上网查询了一下，发现他两却有很大区别。</em>  </p>
 <ul>
 <li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>
-<p>  这里给出OC的<code>push</code>源码:  </p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    	- (<span class="keyword">void</span>)pushViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Uses a horizontal slide transition. Has no effect if the view controller is already in the stack.</span></span><br><span class="line">    - (<span class="built_in">UIViewController</span> *)popViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Returns the popped controller.</span></span><br><span class="line">    - (<span class="built_in">NSArray</span> *)popToViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Pops view controllers until the one specified is on top. Returns the popped controllers.</span></span><br><span class="line">    - (<span class="built_in">NSArray</span> *)popToRootViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Pops until there's only a single view controller left on the stack. Returns the popped controllers.</span></span><br><span class="line">    	```  </span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">- modal方法跳转控制器只是把目标控制器的View加到了现有控制器上，添加后的View依旧需要目标来管理，而且源控制也不会随新Modal来得View而移除销毁。Modal一般适用于两个不相关的控制器切换（Modal的效果是从屏幕底部向上覆盖源控制器的View)。  </span><br><span class="line">    这里给出OC的`modal`的源码：  </span><br><span class="line">    ```objectivec</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">      The next two methods are replacements for presentModalViewController:animated and dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented</span><br><span class="line">      controllers viewDidAppear: callback is invoked.</span><br><span class="line">    */</span></span><br><span class="line">    - (<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span> *)viewControllerToPresent animated: (<span class="built_in">BOOL</span>)flag completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line">    <span class="comment">// 关闭当初Modal出来的控制器</span></span><br><span class="line">    - (<span class="keyword">void</span>)dismissViewControllerAnimated: (<span class="built_in">BOOL</span>)flag completion: (<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>这里通过源码也可以很容易的看出他俩之间的不同还是很大的，那么既然如此，在我看来modal主要用在最后的界面上，也就是说到了这个界面后你只能够返回去，不能再跳转到其他界面了，比如about界面，分享界面等等，而push照理说还是用的比较多的，这里就不在举例说明了。</strong>  </p>
-<ul>
-<li><p>下面说说storyboard中通过segue跳转的几种类型：  </p>
-<ul>
-<li>自动型：点击某个控件（比如按钮）的时候自动跳转到下一个控制器（按住Control键，直接从控件拖线到目标控制器，适用于不需要做任何判断的跳转）  </li>
-<li><p>手动型：需要通过写代码手动执行Segue(必须由来源控制器执行Segue)，才能完成界面跳转（按住Control键，从来源控制器拖线到目标控制器，适用于需要做一些判断后再跳转的情况，比如登录的时候判断账号密码）</p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跳转前做的一些准备工作</span></span><br><span class="line">- (<span class="keyword">void</span>)prepareForSegue:(<span class="built_in">UIStoryboardSegue</span> *)segue sender:(<span class="keyword">id</span>)sender <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line"><span class="comment">// 用来源控制器手动执行此方法</span></span><br><span class="line">- (<span class="keyword">void</span>)performSegueWithIdentifier:(<span class="built_in">NSString</span> *)identifier sender:(<span class="keyword">id</span>)sender <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果segue的style是push<br>取得sourceViewController所在的UINavigationController<br>调用UINavigationController的push方法将destinationViewController压入栈中，完成跳转</p>
-</li>
-<li>如果segue的style是modal<br>调用sourceViewController的presentViewController方法将destinationViewController展示出来</li>
-<li>Storyboard上每一根用来界面跳转的线，都是一个UIStoryboardSegue对象（简称Segue）<blockquote>
-<p>文章参考一篇博客,原文<a href="https://www.zybuluo.com/SanMao/note/139495" target="_blank" rel="external">地址.</a>觉得不错，所以分享到我的空间。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-
+        
+          <p class="article-more-link">
+            <a href="/2015/10/27/19-ios-push-modal/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -163,7 +137,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2015-10-27T11:34:16.000Z" itemprop="dateModified">October 27 2015</time>
+Updated:<time datetime="2015-10-27T11:35:50.000Z" itemprop="dateModified">October 27 2015</time>
 </span>
 
 
