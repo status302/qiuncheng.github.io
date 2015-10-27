@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>如何在UITableView的底部添加其他视图控件 | Qiuncheng&#39;s Blog</title>
+  <title>push 与 modal的区别 | Qiuncheng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何在UITableView的底部添加其他视图控件">
-<meta property="og:url" content="http://qiuncheng.com/2015/10/24//index.html">
+<meta property="og:title" content="push 与 modal的区别">
+<meta property="og:url" content="http://qiuncheng.com/2015/10/27/19-ios-push-modal/index.html">
 <meta property="og:site_name" content="Qiuncheng's Blog">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:updated_time" content="2015-10-24T03:32:20.000Z">
+<meta property="og:updated_time" content="2015-10-27T11:26:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何在UITableView的底部添加其他视图控件">
+<meta name="twitter:title" content="push 与 modal的区别">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
   
     <link rel="alternative" href="/atom.xml" title="Qiuncheng&#39;s Blog" type="application/atom+xml">
@@ -83,11 +83,11 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-19-ios-push-modal" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/10/24//" class="article-date">
-  <time datetime="2015-10-24T03:29:13.000Z" itemprop="datePublished">October 24 2015</time>
+<a href="/2015/10/27/19-ios-push-modal/" class="article-date">
+  <time datetime="2015-10-27T11:25:26.000Z" itemprop="datePublished">October 27 2015</time>
 </a>
 
 
@@ -104,7 +104,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      如何在UITableView的底部添加其他视图控件
+      push 与 modal的区别
     </h1>
   
 
@@ -120,9 +120,34 @@ var _hmt = _hmt || [];
 		
 		</div>
 		
-        <blockquote>
-<p>怎么开头呢？按照我通常的习惯来说我都是以一段引用的话来开头，不知为啥，可是今天找不到引用的话了。开发不是那么容易的，所以做项目过程中会遇到很多问题，还是老实地一个一个地解决吧。</p>
+        <p><em>切换试图的两种方式，虽然经常用到，但还不是很了解，也是就去上网查询了一下，发现他两却有很大区别。</em>  </p>
+<ul>
+<li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>
+<p>  这里给出OC的<code>push</code>源码:  </p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	- (<span class="keyword">void</span>)pushViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Uses a horizontal slide transition. Has no effect if the view controller is already in the stack.</span></span><br><span class="line">- (<span class="built_in">UIViewController</span> *)popViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Returns the popped controller.</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)popToViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Pops view controllers until the one specified is on top. Returns the popped controllers.</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)popToRootViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Pops until there's only a single view controller left on the stack. Returns the popped controllers.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>modal方法跳转控制器只是把目标控制器的View加到了现有控制器上，添加后的View依旧需要目标来管理，而且源控制也不会随新Modal来得View而移除销毁。Modal一般适用于两个不相关的控制器切换（Modal的效果是从屏幕底部向上覆盖源控制器的View)。<br>  这里给出OC的<code>modal</code>的源码：  </p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  The next two methods are replacements for presentModalViewController:animated and dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented</span><br><span class="line">  controllers viewDidAppear: callback is invoked.</span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span> *)viewControllerToPresent animated: (<span class="built_in">BOOL</span>)flag completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line"><span class="comment">// 关闭当初Modal出来的控制器</span></span><br><span class="line">- (<span class="keyword">void</span>)dismissViewControllerAnimated: (<span class="built_in">BOOL</span>)flag completion: (<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>这里通过源码也可以很容易的看出他俩之间的不同还是很大的，那么既然如此，在我看来modal主要用在最后的界面上，也就是说到了这个界面后你只能够返回去，不能再跳转到其他界面了，比如about界面，分享界面等等，而push照理说还是用的比较多的，这里就不在举例说明了。</strong>  </p>
+<ul>
+<li><p>下面说说storyboard中通过segue跳转的几种类型：  </p>
+<ul>
+<li>自动型：点击某个控件（比如按钮）的时候自动跳转到下一个控制器（按住Control键，直接从控件拖线到目标控制器，适用于不需要做任何判断的跳转）  </li>
+<li><p>手动型：需要通过写代码手动执行Segue(必须由来源控制器执行Segue)，才能完成界面跳转（按住Control键，从来源控制器拖线到目标控制器，适用于需要做一些判断后再跳转的情况，比如登录的时候判断账号密码）</p>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跳转前做的一些准备工作</span></span><br><span class="line">- (<span class="keyword">void</span>)prepareForSegue:(<span class="built_in">UIStoryboardSegue</span> *)segue sender:(<span class="keyword">id</span>)sender <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line"><span class="comment">// 用来源控制器手动执行此方法</span></span><br><span class="line">- (<span class="keyword">void</span>)performSegueWithIdentifier:(<span class="built_in">NSString</span> *)identifier sender:(<span class="keyword">id</span>)sender <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果segue的style是push<br>取得sourceViewController所在的UINavigationController<br>调用UINavigationController的push方法将destinationViewController压入栈中，完成跳转</p>
+</li>
+<li>如果segue的style是modal<br>调用sourceViewController的presentViewController方法将destinationViewController展示出来</li>
+<li>Storyboard上每一根用来界面跳转的线，都是一个UIStoryboardSegue对象（简称Segue）<blockquote>
+<p>文章参考一篇博客,<a href="https://www.zybuluo.com/SanMao/note/139495" target="_blank" rel="external">地址.</a>觉得不错，所以分享到我的空间。</p>
 </blockquote>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -137,7 +162,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2015-10-24T03:32:20.000Z" itemprop="dateModified">October 24 2015</time>
+Updated:<time datetime="2015-10-27T11:26:02.000Z" itemprop="dateModified">October 27 2015</time>
 </span>
 
 
@@ -163,7 +188,7 @@ Updated:<time datetime="2015-10-24T03:32:20.000Z" itemprop="dateModified">Octobe
 <!-- 多说评论框 start -->
 
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2015/10/24//" data-title="如何在UITableView的底部添加其他视图控件" data-url="http://qiuncheng.com/2015/10/24//" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2015/10/27/19-ios-push-modal/" data-title="push 与 modal的区别" data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -327,9 +352,9 @@ LGY_calendar.prototype = {
             html+='<span class="g-calendar-grey">'+(last_date-(first_day-1)+i)+'</span>';
         }
         //本月的显示天数
-        var postdate = new Date("Sat Oct 24 2015 11:29:13 GMT+0800"); 
+        var postdate = new Date("Tue Oct 27 2015 19:25:26 GMT+0800"); 
         if (true && postdate.getFullYear() == year && postdate.getMonth() == month) { 
-            html += '<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span><a href="/2015/10/09/16-interesting-ios-nav/" title="“IOS上一个很有意思能解释“栈”的东西”">9</a></span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span><a href="/2015/10/16/17-iOS-image-browser/" title="iOS上简易图片浏览器的实现">16</a></span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span><a href="/2015/10/24//" title="如何在UITableView的底部添加其他视图控件">24</a></span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>';
+            html += '<span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span><a href="/2015/10/09/16-interesting-ios-nav/" title="“IOS上一个很有意思能解释“栈”的东西”">9</a></span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span><a href="/2015/10/16/17-iOS-image-browser/" title="iOS上简易图片浏览器的实现">16</a></span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span><a href="/2015/10/27/19-ios-push-modal/" title="push 与 modal的区别">27</a></span><span>28</span><span>29</span><span>30</span>';
         } else {
             for(var j=0;j<final_date;j++){        
                 html+='<span id="d'+(j+1)+'">'+(j+1)+'</span>';
@@ -367,7 +392,7 @@ LGY_calendar.prototype = {
         var _that = this;
         if(this.oBack != undefined) {
             this.oBack.onclick = function(){
-                var postdate = new Date("Sat Oct 24 2015 11:29:13 GMT+0800"); 
+                var postdate = new Date("Tue Oct 27 2015 19:25:26 GMT+0800"); 
                 _that.year = postdate.getFullYear();
                 _that.month = postdate.getMonth();
                 // 填充日历
@@ -431,7 +456,7 @@ new LGY_calendar('g-calendar');
       <ul>
         
           <li>
-            <a href="/2015/10/24//">如何在UITableView的底部添加其他视图控件</a>
+            <a href="/2015/10/27/19-ios-push-modal/">push 与 modal的区别</a>
           </li>
         
           <li>
