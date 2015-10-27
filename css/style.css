@@ -245,101 +245,128 @@ body {
   border-radius: 3px;
 }
 .article-entry h1,
-.widget h1 {
+.widget h1,
+.widget-weibo h1 {
   font-size: 2em;
 }
 .article-entry h2,
-.widget h2 {
+.widget h2,
+.widget-weibo h2 {
   font-size: 1.5em;
 }
 .article-entry h3,
-.widget h3 {
+.widget h3,
+.widget-weibo h3 {
   font-size: 1.3em;
 }
 .article-entry h4,
-.widget h4 {
+.widget h4,
+.widget-weibo h4 {
   font-size: 1.2em;
 }
 .article-entry h5,
-.widget h5 {
+.widget h5,
+.widget-weibo h5 {
   font-size: 1em;
 }
 .article-entry h6,
-.widget h6 {
+.widget h6,
+.widget-weibo h6 {
   font-size: 1em;
   color: #999;
 }
 .article-entry hr,
-.widget hr {
+.widget hr,
+.widget-weibo hr {
   border: 1px dashed #ddd;
 }
 .article-entry strong,
-.widget strong {
+.widget strong,
+.widget-weibo strong {
   font-weight: bold;
 }
 .article-entry em,
 .widget em,
+.widget-weibo em,
 .article-entry cite,
-.widget cite {
+.widget cite,
+.widget-weibo cite {
   font-style: italic;
 }
 .article-entry sup,
 .widget sup,
+.widget-weibo sup,
 .article-entry sub,
-.widget sub {
+.widget sub,
+.widget-weibo sub {
   font-size: 0.75em;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 .article-entry sup,
-.widget sup {
+.widget sup,
+.widget-weibo sup {
   top: -0.5em;
 }
 .article-entry sub,
-.widget sub {
+.widget sub,
+.widget-weibo sub {
   bottom: -0.2em;
 }
 .article-entry small,
-.widget small {
+.widget small,
+.widget-weibo small {
   font-size: 0.85em;
 }
 .article-entry acronym,
 .widget acronym,
+.widget-weibo acronym,
 .article-entry abbr,
-.widget abbr {
+.widget abbr,
+.widget-weibo abbr {
   border-bottom: 1px dotted;
 }
 .article-entry ul,
 .widget ul,
+.widget-weibo ul,
 .article-entry ol,
 .widget ol,
+.widget-weibo ol,
 .article-entry dl,
-.widget dl {
+.widget dl,
+.widget-weibo dl {
   margin: 0 20px;
   line-height: 1.6em;
 }
 .article-entry ul ul,
 .widget ul ul,
+.widget-weibo ul ul,
 .article-entry ol ul,
 .widget ol ul,
+.widget-weibo ol ul,
 .article-entry ul ol,
 .widget ul ol,
+.widget-weibo ul ol,
 .article-entry ol ol,
-.widget ol ol {
+.widget ol ol,
+.widget-weibo ol ol {
   margin-top: 0;
   margin-bottom: 0;
 }
 .article-entry ul,
-.widget ul {
+.widget ul,
+.widget-weibo ul {
   list-style: disc;
 }
 .article-entry ol,
-.widget ol {
+.widget ol,
+.widget-weibo ol {
   list-style: decimal;
 }
 .article-entry dt,
-.widget dt {
+.widget dt,
+.widget-weibo dt {
   font-weight: bold;
 }
 #header {
@@ -1872,4 +1899,36 @@ pre .javascript .function {
 .tagcloud a {
   margin-right: 5px;
   display: inline-block;
+}
+.widget-weibo {
+  line-height: 1.6em;
+  word-wrap: break-word;
+  font-size: 0.9em;
+  color: #777;
+  text-shadow: 0 1px #fff;
+  background: #fff;
+  -webkit-box-shadow: 0 -1px 4px color--widgetborder inset;
+  box-shadow: 0 -1px 4px color--widgetborder inset;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.widget-weibo ul,
+.widget-weibo ol {
+  list-style: none;
+  margin: 0;
+}
+.widget-weibo ul ul,
+.widget-weibo ol ul,
+.widget-weibo ul ol,
+.widget-weibo ol ol {
+  margin: 0 20px;
+}
+.widget-weibo ul ul,
+.widget-weibo ol ul {
+  list-style: disc;
+}
+.widget-weibo ul ol,
+.widget-weibo ol ol {
+  list-style: decimal;
 }

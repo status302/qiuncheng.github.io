@@ -125,10 +125,7 @@ var _hmt = _hmt || [];
 <ul>
 <li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>
 <p>  这里给出OC的<code>push</code>源码:  </p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	- (<span class="keyword">void</span>)pushViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Uses a horizontal slide transition. Has no effect if the view controller is already in the stack.</span></span><br><span class="line">- (<span class="built_in">UIViewController</span> *)popViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Returns the popped controller.</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)popToViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Pops view controllers until the one specified is on top. Returns the popped controllers.</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)popToRootViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Pops until there's only a single view controller left on the stack. Returns the popped controllers.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>modal方法跳转控制器只是把目标控制器的View加到了现有控制器上，添加后的View依旧需要目标来管理，而且源控制也不会随新Modal来得View而移除销毁。Modal一般适用于两个不相关的控制器切换（Modal的效果是从屏幕底部向上覆盖源控制器的View)。<br>  这里给出OC的<code>modal</code>的源码：  </p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  The next two methods are replacements for presentModalViewController:animated and dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented</span><br><span class="line">  controllers viewDidAppear: callback is invoked.</span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span> *)viewControllerToPresent animated: (<span class="built_in">BOOL</span>)flag completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line"><span class="comment">// 关闭当初Modal出来的控制器</span></span><br><span class="line">- (<span class="keyword">void</span>)dismissViewControllerAnimated: (<span class="built_in">BOOL</span>)flag completion: (<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
+  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    	- (<span class="keyword">void</span>)pushViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Uses a horizontal slide transition. Has no effect if the view controller is already in the stack.</span></span><br><span class="line">    - (<span class="built_in">UIViewController</span> *)popViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Returns the popped controller.</span></span><br><span class="line">    - (<span class="built_in">NSArray</span> *)popToViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Pops view controllers until the one specified is on top. Returns the popped controllers.</span></span><br><span class="line">    - (<span class="built_in">NSArray</span> *)popToRootViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line">    <span class="comment">// Pops until there's only a single view controller left on the stack. Returns the popped controllers.</span></span><br><span class="line">    	```&lt;!--more--&gt;</span><br><span class="line">- modal方法跳转控制器只是把目标控制器的View加到了现有控制器上，添加后的View依旧需要目标来管理，而且源控制也不会随新Modal来得View而移除销毁。Modal一般适用于两个不相关的控制器切换（Modal的效果是从屏幕底部向上覆盖源控制器的View)。  </span><br><span class="line">    这里给出OC的`modal`的源码：  </span><br><span class="line">    ```objectivec</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">      The next two methods are replacements for presentModalViewController:animated and dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented</span><br><span class="line">      controllers viewDidAppear: callback is invoked.</span><br><span class="line">    */</span></span><br><span class="line">    - (<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span> *)viewControllerToPresent animated: (<span class="built_in">BOOL</span>)flag completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line">    <span class="comment">// 关闭当初Modal出来的控制器</span></span><br><span class="line">    - (<span class="keyword">void</span>)dismissViewControllerAnimated: (<span class="built_in">BOOL</span>)flag completion: (<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><strong>这里通过源码也可以很容易的看出他俩之间的不同还是很大的，那么既然如此，在我看来modal主要用在最后的界面上，也就是说到了这个界面后你只能够返回去，不能再跳转到其他界面了，比如about界面，分享界面等等，而push照理说还是用的比较多的，这里就不在举例说明了。</strong>  </p>
@@ -143,7 +140,7 @@ var _hmt = _hmt || [];
 </li>
 <li>如果segue的style是modal<br>调用sourceViewController的presentViewController方法将destinationViewController展示出来</li>
 <li>Storyboard上每一根用来界面跳转的线，都是一个UIStoryboardSegue对象（简称Segue）<blockquote>
-<p>文章参考一篇博客,<a href="https://www.zybuluo.com/SanMao/note/139495" target="_blank" rel="external">地址.</a>觉得不错，所以分享到我的空间。</p>
+<p>文章参考一篇博客,原文<a href="https://www.zybuluo.com/SanMao/note/139495" target="_blank" rel="external">地址.</a>觉得不错，所以分享到我的空间。</p>
 </blockquote>
 </li>
 </ul>
@@ -154,7 +151,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cig9afy2q0000e4fy96g8ebik" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cig9aig60001mekfyc6mfl06c" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -166,7 +163,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2015-10-27T11:26:02.000Z" itemprop="dateModified">October 27 2015</time>
+Updated:<time datetime="2015-10-27T11:28:36.000Z" itemprop="dateModified">October 27 2015</time>
 </span>
 
 
@@ -228,7 +225,7 @@ Updated:<time datetime="2015-10-27T11:26:02.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cig5xwpod001tlgfyjbxeav1u" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cig9aig66001tekfy835nd3b3" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -300,7 +297,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cig5xwpo3001glgfybsdmd1gg" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cig9aig5s001bekfyed6dxv0b" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -372,7 +369,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cig5xwpnj000slgfygxn4tkjv" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cig9aig59000nekfykzbcnr50" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -448,7 +445,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cig5xwpnm000xlgfy9j31l24e" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cig9aig5c000sekfytxf55mme" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -520,7 +517,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cig5xwpog001wlgfynag5ri5n" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cig9aig69001wekfygz52x43h" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -589,7 +586,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cig5xwpob001plgfyntl9qai8" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cig9aig63001pekfywkst27os" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -660,7 +657,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cig5xwpnw0015lgfyqls9i20z" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cig9aig5i0010ekfyrn96dl0i" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -729,7 +726,7 @@ Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cig5xwpmx0006lgfypl5s0ak3" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cig9aig500006ekfy4m8vvbs2" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
       
 
       
@@ -797,7 +794,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cig5xwpo0001blgfyroorrrvu" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cig9aig5q0016ekfyybo2du29" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
       
 
       
