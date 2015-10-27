@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-10-27T14:39:36.000Z</updated>
+  <updated>2015-10-27T14:41:45.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://qiuncheng.com/2015/10/27/19-ios-push-modal/"/>
     <id>http://qiuncheng.com/2015/10/27/19-ios-push-modal/</id>
     <published>2015-10-27T11:25:26.000Z</published>
-    <updated>2015-10-27T14:39:36.000Z</updated>
+    <updated>2015-10-27T14:41:45.000Z</updated>
     <content type="html"><![CDATA[<p><em>切换试图的两种方式，虽然经常用到，但还不是很了解，也是就去上网查询了一下，发现他两却有很大区别。</em>  </p>
 <ul>
 <li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>
