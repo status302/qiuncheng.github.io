@@ -84,6 +84,88 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-20-iOS-Stanford-iOS8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2015/11/11/20-iOS-Stanford-iOS8/" class="article-date">
+  <time datetime="2015-11-11T02:45:11.000Z" itemprop="datePublished">November 11 2015</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/11/20-iOS-Stanford-iOS8/">每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Demo_#未完待续"><span class="toc-number">2.1.</span> <span class="toc-text">Demo #未完待续</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#结尾"><span class="toc-number">2.2.</span> <span class="toc-text">结尾</span></a></li></ol></li></ol>
+		
+		</div>
+		
+        <h5 id="前言">前言</h5><p>不得不承认，在Swift出现以前对于没有天赋的人自学iOS开发确实有一定的难度，但是自从Apple推出了全新的编程语言Swift，我觉得人人都是程序员的口号越来越近了。<br>我是今年9月底无意中接触了Swift，当时我还在一股脑子得学Python，想着将来靠Python发大财，可是突然有天iPad的iBooks里多了本《The Swift Programming Language》，于是在一个月高风黑的晚上我独自一人看起了Swift，第一个晚上一下子把《Language Guide》看了个大半，从此就一发不可收拾，可能是我之前写过Python的原因，她两的语法现在时太像了。简洁优雅形容不过。<br>于是我就索性搞起了iOS。。。</p>
+<h5 id="正文">正文</h5><p>我先是看的是<code>麦子学院</code>的Sundy老师的Swift入门视频，外加《The Swift Programming Language》和《Using Swift With Cocoa and Objective-C》这两本书，后来随着学习的深入，略微发现自己学的简直是太浅，不能马上运用起来，比如我想做一款“Classmates”的应用，想象着很美，甚至连原型图都画好了，结果做起来各种问题都跑出来了，说到底还是我了解的太少了，做一款应用需要的太多了，而且我的了解都是快速的碎片化的记忆，所以我就跑去网上找各种学习资源，果然黄天不负有心人，我终于找到了这个Stanford University的白胡子老师的视频，现在看到了第十集的UITableView,讲的真是好，虽然有些没有听懂，但还是很满足，至少让我对编程有了一个重新的认识，这样说吧，我举个很简单的例子，他的很多代码都值得我们去仔细好好研究下，每一个实例Demo里都充分运用Struct、Enum、Setter、Getter等等，这些小技巧能让你在今后代码重构，代码测试中省去好多事情。<br>我是那种不能光看视频的人，于是我在看视频的事后基本上把他写的东西又重新敲了一遍，有时候理解不等于会写，看什么都能够理解，但是当你去写的时候你发现自己不知怎么下手，所以看视频最好的边看边写，这样在理解的基础上能够加深认识。下面我想简单滴介绍下我之前跟着白胡子老师做的几个小Demo：  </p>
+<h6 id="Demo_#未完待续">Demo #未完待续</h6><ul>
+<li>Calculator：这个可以说是我见过比较复杂的计算器之一，我说他复杂并不是他的功能，当然它的功能很简单的，只有四则运算和一个求平方根的运算。我说是它的逻辑，在这个Demo里充分运用到了闭包，以及MVC思想，我并不知道怎么来形容这个，但是在我看来这个Demo比国内好多其他老师的Demo好多了，主要是思想。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Calculator" target="_blank" rel="external">https://github.com/qiuncheng/Calculator</a></em></li>
+<li>Psychologist: 这个嘛我学到最多的就是进一步加深了MVC以及手势识别，didSet和willSet的用法，这个在我之前真的是没有遇到过，貌似我还特地查了下didSetwillSet的用法，结果关东升老师的博客一下子点透了我，我特别喜欢这个项目的是那个笑脸，我最近还想着要给这个笑脸添加一些功能呢，比如改变颜色，自由搭配等等。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Psychologist" target="_blank" rel="external">https://github.com/qiuncheng/Psychologist</a></em></li>
+<li>AutoLayout: 这个并不想多说，我觉得想要了解AutoLayout的必看，然后再结合这个Demo反复了解下绝对没有问题的。可能以后开发中会遇到些小问题，那就到时候再依次解决吧。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Autolayout" target="_blank" rel="external">https://github.com/qiuncheng/Autolayout</a></em></li>
+<li>Cassini: 这个是我这几天看视频跟着做的Demo里面最后一个了。这个主要运用了ScrollView，但是也是有一些小问题的，在使用http的时候，这个可以结合我上篇博文看下，我觉得这个Demo里最主要是对多线程有了一个小小的认识，也算是了解吧。以后还得多加深对多线程的练习。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Casini" target="_blank" rel="external">https://github.com/qiuncheng/Casini</a></em><h6 id="结尾">结尾</h6>说了这么多，我总觉得少了些什么！原来是少了视频资源的地址，当时我是从学校资源网下载的。不过我这里还有百度云盘的下载地址：<a href="http://pan.baidu.com/s/1sjkU08X" target="_blank" rel="external">Developing iOS 8 Apps with Swift</a>,中文字幕转到<a href="https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift" target="_blank" rel="external">Github有一个翻译项目</a>  <blockquote>
+<p>或许你一定还想要源码，白胡子老师码字速度太快，😂😂。别急，在这里。<a href="https://github.com/m2mtech" target="_blank" rel="external">源码地址</a></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="ciguae64a000fvcfyu0181zku" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/11/11/20-iOS-Stanford-iOS8/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2015-11-11T04:08:18.000Z" itemprop="dateModified">November 11 2015</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
     <article id="post-19-iOS-http" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -123,7 +205,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cigu78ikt000nhqfyckci33o9" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="ciguae64h000svcfysb3kqsoz" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -193,7 +275,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cigu78ils001phqfyghotsfa5" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="ciguae65b001svcfylrwvumvj" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -267,7 +349,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cigu78ily001whqfy4y390qob" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="ciguae65f001zvcfyz8ew2ewb" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -339,7 +421,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cigu78ilj001ghqfym5r8vvmy" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="ciguae64y001jvcfyi48k6tv6" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -411,7 +493,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cigu78ikx000shqfysqmkr914" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="ciguae64j000vvcfyq063kb67" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -487,7 +569,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cigu78ikz000xhqfy55rqgj99" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="ciguae64m0010vcfyccmeyv0d" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -559,7 +641,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cigu78ilz001zhqfyjoo4vt2e" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="ciguae65g0022vcfyrlrhgk4m" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -628,7 +710,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cigu78ilw001shqfytafmzi83" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="ciguae65d001vvcfyeuci2bm3" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -699,7 +781,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cigu78il60015hqfycctbsjub" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="ciguae64s0018vcfy9l2pcfjg" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -712,75 +794,6 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
 	  
 <span>
 Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">September 22 2015</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-<!-- 多说评论框 start -->
-
-<!-- 多说评论框 end -->
-<!-- more -->
-
-  
-    <article id="post-10-python-talkfreely" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2015/09/09/10-python-talkfreely/" class="article-date">
-  <time datetime="2015-09-09T01:00:08.000Z" itemprop="datePublished">September 09 2015</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>►<a class="article-category-link" href="/categories/python/转载/">转载</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/09/10-python-talkfreely/">每个程序员都应该学习使用Python</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="每个程序员都应该学习使用Python或Ruby">每个程序员都应该学习使用Python或Ruby</h3><p>如果你是个学生,你应该会C，C++和Java。还会一些VB，或C#/.NET。多少你还可能开发过一些Web网页，你知道一些HTML，CSS和JavaScript知识。总体上说，我们很难发现会有学生显露出掌握超出这几种语言范围外的语言的才能。这真让人遗憾，因为还有很多种编程语言，它们能让你成为一个更好的程序员。</p>
-<p>在这篇文章里，我将会告诉你，为什么你一定要学习Python或Ruby语言。
-        
-          <p class="article-more-link">
-            <a href="/2015/09/09/10-python-talkfreely/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cigu78ike0006hqfyulwwdrsk" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="http://qiuncheng.com/2015/09/09/10-python-talkfreely/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/09/10-python-talkfreely/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
-
-	  
-<span>
-Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">September 22 2015</time>
 </span>
 
 
@@ -840,7 +853,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swift/">Swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/转载/">转载</a><span class="category-list-count">2</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swift/">Swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/转载/">转载</a><span class="category-list-count">2</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -850,7 +863,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -860,7 +873,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">TagCloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #7f62af">Hexo</a> <a href="/tags/Life/" style="font-size: 14.75px; color: #7e92c7">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/iOS/" style="font-size: 18.25px; color: #7f3198">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 20px; color: #800080">python</a> <a href="/tags/转载/" style="font-size: 14.75px; color: #7e92c7">转载</a>
+      <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 17.67px; color: #7f419f">Hexo</a> <a href="/tags/Life/" style="font-size: 15.33px; color: #7e82bf">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 20px; color: #800080">python</a> <a href="/tags/转载/" style="font-size: 15.33px; color: #7e82bf">转载</a>
     </div>
   </div>
 
@@ -870,7 +883,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Archive</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -881,6 +894,10 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     <h3 class="widget-title">Recent</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/11/20-iOS-Stanford-iOS8/">每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频</a>
+          </li>
         
           <li>
             <a href="/2015/11/11/19-iOS-http/">如何在iOS上优雅滴使用http://</a>
@@ -896,10 +913,6 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
         
           <li>
             <a href="/2015/10/09/16-interesting-ios-nav/">“IOS上一个很有意思能解释“栈”的东西”</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/29/15-yeliangchen-Swift/">听说你叫Swift，在下叶良辰并不服！</a>
           </li>
         
       </ul>

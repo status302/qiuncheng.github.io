@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-11T02:39:52.000Z</updated>
+  <updated>2015-11-11T04:08:18.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频]]></title>
+    <link href="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/"/>
+    <id>http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/</id>
+    <published>2015-11-11T02:45:11.000Z</published>
+    <updated>2015-11-11T04:08:18.000Z</updated>
+    <content type="html"><![CDATA[<h5 id="前言">前言</h5><p>不得不承认，在Swift出现以前对于没有天赋的人自学iOS开发确实有一定的难度，但是自从Apple推出了全新的编程语言Swift，我觉得人人都是程序员的口号越来越近了。<br>我是今年9月底无意中接触了Swift，当时我还在一股脑子得学Python，想着将来靠Python发大财，可是突然有天iPad的iBooks里多了本《The Swift Programming Language》，于是在一个月高风黑的晚上我独自一人看起了Swift，第一个晚上一下子把《Language Guide》看了个大半，从此就一发不可收拾，可能是我之前写过Python的原因，她两的语法现在时太像了。简洁优雅形容不过。<br>于是我就索性搞起了iOS。。。</p>
+<h5 id="正文">正文</h5><p>我先是看的是<code>麦子学院</code>的Sundy老师的Swift入门视频，外加《The Swift Programming Language》和《Using Swift With Cocoa and Objective-C》这两本书，后来随着学习的深入，略微发现自己学的简直是太浅，不能马上运用起来，比如我想做一款“Classmates”的应用，想象着很美，甚至连原型图都画好了，结果做起来各种问题都跑出来了，说到底还是我了解的太少了，做一款应用需要的太多了，而且我的了解都是快速的碎片化的记忆，所以我就跑去网上找各种学习资源，果然黄天不负有心人，我终于找到了这个Stanford University的白胡子老师的视频，现在看到了第十集的UITableView,讲的真是好，虽然有些没有听懂，但还是很满足，至少让我对编程有了一个重新的认识，这样说吧，我举个很简单的例子，他的很多代码都值得我们去仔细好好研究下，每一个实例Demo里都充分运用Struct、Enum、Setter、Getter等等，这些小技巧能让你在今后代码重构，代码测试中省去好多事情。<br>我是那种不能光看视频的人，于是我在看视频的事后基本上把他写的东西又重新敲了一遍，有时候理解不等于会写，看什么都能够理解，但是当你去写的时候你发现自己不知怎么下手，所以看视频最好的边看边写，这样在理解的基础上能够加深认识。下面我想简单滴介绍下我之前跟着白胡子老师做的几个小Demo：  </p>
+<h6 id="Demo_#未完待续">Demo #未完待续</h6><ul>
+<li>Calculator：这个可以说是我见过比较复杂的计算器之一，我说他复杂并不是他的功能，当然它的功能很简单的，只有四则运算和一个求平方根的运算。我说是它的逻辑，在这个Demo里充分运用到了闭包，以及MVC思想，我并不知道怎么来形容这个，但是在我看来这个Demo比国内好多其他老师的Demo好多了，主要是思想。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Calculator" target="_blank" rel="external">https://github.com/qiuncheng/Calculator</a></em></li>
+<li>Psychologist: 这个嘛我学到最多的就是进一步加深了MVC以及手势识别，didSet和willSet的用法，这个在我之前真的是没有遇到过，貌似我还特地查了下didSetwillSet的用法，结果关东升老师的博客一下子点透了我，我特别喜欢这个项目的是那个笑脸，我最近还想着要给这个笑脸添加一些功能呢，比如改变颜色，自由搭配等等。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Psychologist" target="_blank" rel="external">https://github.com/qiuncheng/Psychologist</a></em></li>
+<li>AutoLayout: 这个并不想多说，我觉得想要了解AutoLayout的必看，然后再结合这个Demo反复了解下绝对没有问题的。可能以后开发中会遇到些小问题，那就到时候再依次解决吧。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Autolayout" target="_blank" rel="external">https://github.com/qiuncheng/Autolayout</a></em></li>
+<li>Cassini: 这个是我这几天看视频跟着做的Demo里面最后一个了。这个主要运用了ScrollView，但是也是有一些小问题的，在使用http的时候，这个可以结合我上篇博文看下，我觉得这个Demo里最主要是对多线程有了一个小小的认识，也算是了解吧。以后还得多加深对多线程的练习。<br>  <em>下面是该Demo的工程地址：<a href="https://github.com/qiuncheng/Casini" target="_blank" rel="external">https://github.com/qiuncheng/Casini</a></em><h6 id="结尾">结尾</h6>说了这么多，我总觉得少了些什么！原来是少了视频资源的地址，当时我是从学校资源网下载的。不过我这里还有百度云盘的下载地址：<a href="http://pan.baidu.com/s/1sjkU08X" target="_blank" rel="external">Developing iOS 8 Apps with Swift</a>,中文字幕转到<a href="https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift" target="_blank" rel="external">Github有一个翻译项目</a>  <blockquote>
+<p>或许你一定还想要源码，白胡子老师码字速度太快，😂😂。别急，在这里。<a href="https://github.com/m2mtech" target="_blank" rel="external">源码地址</a></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h5 id="前言">前言</h5><p>不得不承认，在Swift出现以前对于没有天赋的人自学iOS开发确实有一定的难度，但是自从Apple推出了全新的编程语言Swift，我觉得人人都是程序员的口号越来越近了。<br>我是今年9月底无意中接触了Swift，当时我还在一股脑子得学]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[如何在iOS上优雅滴使用http://]]></title>
