@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-10-27T14:44:40.000Z</updated>
+  <updated>2015-11-11T02:37:08.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[如何在iOS上优雅滴使用http://]]></title>
+    <link href="http://qiuncheng.com/2015/11/11/19-iOS-http/"/>
+    <id>http://qiuncheng.com/2015/11/11/19-iOS-http/</id>
+    <published>2015-11-11T02:21:12.000Z</published>
+    <updated>2015-11-11T02:37:08.000Z</updated>
+    <content type="html"><![CDATA[<p>话说当我使用<code>http://</code>请求网络上一张图片时我发现我使用的Xcode7.1竟然不响应，然后还爆出了错误，这个让我很生气，后来查看错误提示得知貌似<code>http</code>不安全。<br>错误代码提示如下：<br><code>Transport security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app&#39;s Info.plist file.</code><br>百度了一段时间无果后果断挂上<code>VPN</code>翻了一下，在<a href="http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http" target="_blank" rel="external">StackOverflow</a>上找到了解决方案，原来就是在<code>info.plist</code>里enable<code>http</code>mode就可以了。奥，我的天！原谅我开接触这个。<br>可是如何添加呢？<a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151111-0.png" alt="图中最上面蓝色框里面的添加到info.plist里">   </p>
+<blockquote>
+<p>OK，It helps， hope useful to you!</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>话说当我使用<code>http://</code>请求网络上一张图片时我发现我使用的Xcode7.1竟然不响应，然后还爆出了错误，这个让我很生气，后来查看错误提示得知貌似<code>http</code>不安全。<br>错误代码提示如下：<br><code>Transport security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app&#39;s Info.plist file.</code><br>百度了一段时间无果后果断挂上<code>VPN</code>翻了一下，在<a href="http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http">StackOverflow</a>上找到了解决方案，原来就是在<code>info.plist</code>里enable<code>http</code>mode就可以了。奥，我的天！原谅我开接触这个。<br>可是如何添加呢？]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[push 与 modal的区别]]></title>
