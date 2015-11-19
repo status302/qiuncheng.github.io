@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-19T13:02:35.000Z</updated>
+  <updated>2015-11-19T13:04:06.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,16 +19,22 @@
     <link href="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/"/>
     <id>http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/</id>
     <published>2015-11-19T12:53:34.000Z</published>
-    <updated>2015-11-19T13:02:35.000Z</updated>
+    <updated>2015-11-19T13:04:06.000Z</updated>
     <content type="html"><![CDATA[<h6 id="我去，iOS9改动太大，NSURLConnection竟然被NSURLSession替代了。">我去，iOS9改动太大，<code>NSURLConnection</code>竟然被<code>NSURLSession</code>替代了。</h6><p>然而我看了半天<code>NSURLConnection</code>，刚学会怎么用，竟然告诉我不能用了。简直不能忍了。呜呜呜呜呜<del>~</del>  </p>
 <hr>
 <p>这是不是也提醒了我一件事，那就是Swift才是王道，看来apple也正在抛弃原来Objective-C的那些臃肿繁琐的东西呀，哈哈哈哈，好事情，不过我还得再去看看<code>NSURLSession</code>了，呜呜呜呜~~~~伐开心！！</p>
 <p>不管了，先来用下NSURLConnection实现一个小Demo再说吧，虽然舍弃了，但还是可以用的吗，仅仅是Wornning而已呀！</p>
 <hr>
+<a id="more"></a>
 <p>【Demo待更新！！！！】</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h6 id="我去，iOS9改动太大，NSURLConnection竟然被NSURLSession替代了。">我去，iOS9改动太大，<code>NSURLConnection</code>竟然被<code>NSURLSession</code>替代了。</h6><p>然而我看]]>
+    <![CDATA[<h6 id="我去，iOS9改动太大，NSURLConnection竟然被NSURLSession替代了。">我去，iOS9改动太大，<code>NSURLConnection</code>竟然被<code>NSURLSession</code>替代了。</h6><p>然而我看了半天<code>NSURLConnection</code>，刚学会怎么用，竟然告诉我不能用了。简直不能忍了。呜呜呜呜呜<del>~</del>  </p>
+<hr>
+<p>这是不是也提醒了我一件事，那就是Swift才是王道，看来apple也正在抛弃原来Objective-C的那些臃肿繁琐的东西呀，哈哈哈哈，好事情，不过我还得再去看看<code>NSURLSession</code>了，呜呜呜呜~~~~伐开心！！</p>
+<p>不管了，先来用下NSURLConnection实现一个小Demo再说吧，虽然舍弃了，但还是可以用的吗，仅仅是Wornning而已呀！</p>
+<hr>]]>
+    
     </summary>
     
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
