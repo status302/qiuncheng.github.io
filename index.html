@@ -113,24 +113,20 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			
-		
-		</div>
-		
         <blockquote>
 <p>貌似昨天也遇到这样的问题，但是却没有在意，只是在<code>stackoverflow</code>上一下子找到了解决方案也没有在意，不过今天又遇到了这样的问题，确实让我很恼火，如下图所示，我要干什么就不在这里向大家说了。但是这里确实有错误，所以说这应该是一种规范吧，得找到相关东西，尽量避免以后出现这种错误，因此把它写出来应该影响会更深刻些。   </p>
 </blockquote>
-<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br>看到这里我想你肯定诧异了，明明添加了<code>self</code>并且制定了<code>gameView</code>是本对象下的view，可是为什么还是不可以呢？这里又有一个问题了。根据<code>stackoverflow</code>上的提示，此时self并没有初始化，所以系统也不知道self属性是啥!!哈哈哈哈哈~~~~<br>这下应该懂了吧，所以要对该属性添加lazy限制。来看下《<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html" target="_blank" rel="external">The Swift Programming Language: Properties</a>》对lazy stored property的定义吧。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png" alt="lazy stored property"><br>这里指明了在需要用的时候才会调用它，所以不用担心self初始化的问题了。hiahia，完美解决。。。<br>下面附上<code>stackoverflow</code>上问题链接<a href="http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene" target="_blank" rel="external">http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene</a></p>
-
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/21/22-ios-instance../#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cih914kbe00226shutmandlod" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cih918sr100227fhux00wcw92" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
       
 
       
@@ -142,7 +138,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2015-11-21T11:45:06.000Z" itemprop="dateModified">November 21 2015</time>
+Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">November 21 2015</time>
 </span>
 
 
@@ -202,7 +198,7 @@ Updated:<time datetime="2015-11-21T11:45:06.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cih914kb1001m6shu4vx9mh84" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cih918sqp001m7fhuech85l6w" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
       
 
       
@@ -271,7 +267,7 @@ Updated:<time datetime="2015-11-20T11:44:58.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cih914k9z000f6shu3zgz37hr" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cih918spw000f7fhuz098ycyo" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
       
 
       
@@ -339,7 +335,7 @@ Updated:<time datetime="2015-11-11T04:09:59.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cih914kaa000s6shuexhd9r3o" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cih918sq4000s7fhu6r9h35z8" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -409,7 +405,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cih914kb8001v6shu4tgbry6m" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cih918sqy001v7fhup9kmi5ly" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -483,7 +479,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cih914kbg00256shu1fytq4me" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cih918sr300257fhu0ltnpz7z" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -555,7 +551,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cih914kax001j6shu9lybv8th" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cih918sql001j7fhulvj0o6gk" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -627,7 +623,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cih914kac000v6shut5ixsfjc" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cih918sq6000v7fhutoem52zn" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -703,7 +699,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cih914kag00106shuoa6ukkt8" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cih918sq900107fhudyruvpza" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -775,7 +771,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cih914kbi00286shug5x9qmt8" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cih918sr500287fhuqavkmntv" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       

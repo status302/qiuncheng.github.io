@@ -14,7 +14,7 @@
 <meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png">
 <meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png">
 <meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png">
-<meta property="og:updated_time" content="2015-11-21T11:45:06.000Z">
+<meta property="og:updated_time" content="2015-11-21T11:48:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="instance member 'gameView'cannot be used on type '...'">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
         <blockquote>
 <p>貌似昨天也遇到这样的问题，但是却没有在意，只是在<code>stackoverflow</code>上一下子找到了解决方案也没有在意，不过今天又遇到了这样的问题，确实让我很恼火，如下图所示，我要干什么就不在这里向大家说了。但是这里确实有错误，所以说这应该是一种规范吧，得找到相关东西，尽量避免以后出现这种错误，因此把它写出来应该影响会更深刻些。   </p>
 </blockquote>
-<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br>看到这里我想你肯定诧异了，明明添加了<code>self</code>并且制定了<code>gameView</code>是本对象下的view，可是为什么还是不可以呢？这里又有一个问题了。根据<code>stackoverflow</code>上的提示，此时self并没有初始化，所以系统也不知道self属性是啥!!哈哈哈哈哈~~~~<br>这下应该懂了吧，所以要对该属性添加lazy限制。来看下《<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html" target="_blank" rel="external">The Swift Programming Language: Properties</a>》对lazy stored property的定义吧。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png" alt="lazy stored property"><br>这里指明了在需要用的时候才会调用它，所以不用担心self初始化的问题了。hiahia，完美解决。。。<br>下面附上<code>stackoverflow</code>上问题链接<a href="http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene" target="_blank" rel="external">http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene</a></p>
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br><a id="more"></a><br>看到这里我想你肯定诧异了，明明添加了<code>self</code>并且制定了<code>gameView</code>是本对象下的view，可是为什么还是不可以呢？这里又有一个问题了。根据<code>stackoverflow</code>上的提示，此时self并没有初始化，所以系统也不知道self属性是啥!!哈哈哈哈哈~~~~<br>这下应该懂了吧，所以要对该属性添加lazy限制。来看下《<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html" target="_blank" rel="external">The Swift Programming Language: Properties</a>》对lazy stored property的定义吧。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png" alt="lazy stored property"><br>这里指明了在需要用的时候才会调用它，所以不用担心self初始化的问题了。hiahia，完美解决。。。<br>下面附上<code>stackoverflow</code>上问题链接<a href="http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene" target="_blank" rel="external">http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene</a></p>
 
       
     </div>
@@ -141,7 +141,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2015-11-21T11:45:06.000Z" itemprop="dateModified">November 21 2015</time>
+Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">November 21 2015</time>
 </span>
 
 
