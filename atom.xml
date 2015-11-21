@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-20T11:44:58.000Z</updated>
+  <updated>2015-11-21T11:45:06.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[instance member 'gameView'cannot be used on type '...']]></title>
+    <link href="http://qiuncheng.com/2015/11/21/22-ios-instance../"/>
+    <id>http://qiuncheng.com/2015/11/21/22-ios-instance../</id>
+    <published>2015-11-21T11:05:11.000Z</published>
+    <updated>2015-11-21T11:45:06.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>貌似昨天也遇到这样的问题，但是却没有在意，只是在<code>stackoverflow</code>上一下子找到了解决方案也没有在意，不过今天又遇到了这样的问题，确实让我很恼火，如下图所示，我要干什么就不在这里向大家说了。但是这里确实有错误，所以说这应该是一种规范吧，得找到相关东西，尽量避免以后出现这种错误，因此把它写出来应该影响会更深刻些。   </p>
+</blockquote>
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br>看到这里我想你肯定诧异了，明明添加了<code>self</code>并且制定了<code>gameView</code>是本对象下的view，可是为什么还是不可以呢？这里又有一个问题了。根据<code>stackoverflow</code>上的提示，此时self并没有初始化，所以系统也不知道self属性是啥!!哈哈哈哈哈~~~~<br>这下应该懂了吧，所以要对该属性添加lazy限制。来看下《<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html" target="_blank" rel="external">The Swift Programming Language: Properties</a>》对lazy stored property的定义吧。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png" alt="lazy stored property"><br>这里指明了在需要用的时候才会调用它，所以不用担心self初始化的问题了。hiahia，完美解决。。。<br>下面附上<code>stackoverflow</code>上问题链接<a href="http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene" target="_blank" rel="external">http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>貌似昨天也遇到这样的问题，但是却没有在意，只是在<code>stackoverflow</code>上一下子找到了解决方案也没有在意，不过今天又遇到了这样的问题，确实让我很恼火，如下图所示，我要干什么就不在这里向大家说了。但是这里确实有错误，所以说]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[sendAsynchronousRequest竟然被弃用了！！！]]></title>
@@ -833,42 +855,6 @@ print sp
       <category term="Markdown" scheme="http://qiuncheng.com/tags/Markdown/"/>
     
       <category term="HTML/CSS" scheme="http://qiuncheng.com/categories/HTML-CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[域名和github绑定的问题]]></title>
-    <link href="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/"/>
-    <id>http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/</id>
-    <published>2015-08-02T03:14:07.000Z</published>
-    <updated>2015-09-21T17:07:17.000Z</updated>
-    <content type="html"><![CDATA[<p>之前没太注意，网上的教程在域名方面都推荐去<span style="font-color:'blue'"><a href="https://www.godaddy.com" target="_blank" rel="external">goDaddy</a></span>买域名，但前两天我买域名去了goDaddy上发现比国内的域名要贵些，于是果断在万网买了域名（没错，就是<a href="http://qiuncheng.com">qiuncheng.com</a>）但是万网的域名解析时候需要注意几点：</p>
-<ul>
-<li>DNS地址解析<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150802113521.png" alt="">  <a id="more"></a>
-这里需要注意的是万网域名的DNS解析一定要修改的，就像上图那样。如何修改请看下图：</li>
-</ul>
-<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150802114027.png" alt=""></p>
-<ul>
-<li><p>注册<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSpod</a>，添加域名，添加记录，如下图设置。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150802114506.png" alt=""></p>
-</li>
-<li><p>在source文件夹里创建CNAME文件，不带任何后缀，里面添加你的域名信息，如：qiuncheng.com（注意前面不添加http://）<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150802114733.png" alt=""></p>
-</li>
-</ul>
-<p></p><p style="font-size:18px;font-family:'微软雅黑'；">然后就hexo d -g试试吧。</p>
-<p>也欢迎大家关注我的微博和微信公众号，我会定期分享一些好东西，也可直接在下面评论额~~</p>
-<center><img src="http://7xk67j.com1.z0.glb.clouddn.com/微信公众号.jpg" alt="微信公众号"><img src="http://7xk67j.com1.z0.glb.clouddn.com/新浪微博.png" alt="新浪微博"></center>
-
-<center>说明：第一张是<strong>微信公众号</strong>，第二张是<strong>新浪微博</strong></center>]]></content>
-    <summary type="html">
-    <![CDATA[<p>之前没太注意，网上的教程在域名方面都推荐去<span style="font-color:'blue'"><a href="https://www.godaddy.com">goDaddy</a></span>买域名，但前两天我买域名去了goDaddy上发现比国内的域名要贵些，于是果断在万网买了域名（没错，就是<a href="http://qiuncheng.com">qiuncheng.com</a>）但是万网的域名解析时候需要注意几点：</p>
-<ul>
-<li>DNS地址解析<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150802113521.png" alt="">]]>
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://qiuncheng.com/tags/Hexo/"/>
-    
-      <category term="Hexo" scheme="http://qiuncheng.com/categories/Hexo/"/>
     
   </entry>
   
