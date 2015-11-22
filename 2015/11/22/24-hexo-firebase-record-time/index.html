@@ -4,17 +4,17 @@
   <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
   <meta charset="utf-8">
   
-  <title>python中random模块简析 | Qiuncheng&#39;s Blog</title>
+  <title>博客添加了访问次数记录 | Qiuncheng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python中random模块简析">
-<meta property="og:url" content="http://qiuncheng.com/2015/08/27/6-python-random-funs/index.html">
+<meta property="og:title" content="博客添加了访问次数记录">
+<meta property="og:url" content="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/index.html">
 <meta property="og:site_name" content="Qiuncheng's Blog">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:updated_time" content="2015-09-21T17:08:58.000Z">
+<meta property="og:updated_time" content="2015-11-22T13:21:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python中random模块简析">
+<meta name="twitter:title" content="博客添加了访问次数记录">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
   
     <link rel="alternative" href="/atom.xml" title="Qiuncheng&#39;s Blog" type="application/atom+xml">
@@ -84,17 +84,17 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-6-python-random-funs" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-24-hexo-firebase-record-time" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/08/27/6-python-random-funs/" class="article-date">
-  <time datetime="2015-08-27T02:44:20.000Z" itemprop="datePublished">August 27 2015</time>
+<a href="/2015/11/22/24-hexo-firebase-record-time/" class="article-date">
+  <time datetime="2015-11-22T13:09:44.000Z" itemprop="datePublished">November 22 2015</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
   </div>
 
   </div>
@@ -105,7 +105,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      python中random模块简析
+      博客添加了访问次数记录
     </h1>
   
 
@@ -121,80 +121,16 @@ var _hmt = _hmt || [];
 		
 		</div>
 		
-        <blockquote>
-<p>Python中的random用于生成随机数。下面简析下random中常用的几个函数。  </p>
-</blockquote>
+        <p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
 <ul>
-<li><p>random.random<br>random.random()用于生成一个0到1的随机浮点数: 0 &lt;= n &lt; 1.0</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.random()</span><br><span class="line"><span class="number">0.690448381007</span> <span class="preprocessor"># 输出<span class="number">1</span></span></span><br><span class="line"><span class="number">0.89515663051</span>  <span class="preprocessor"># 输出<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.uniform<br>random.uniform的函数原型为：random.uniform(a, b)，用于生成一个指定范围内的随机符点数，两个参数其中一个是上限，一个是下限。如果a &gt; b，则生成的随机数n: b &lt;= n &lt;= a。如果 a &lt;b， 则 a &lt;= n &lt;= b。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   print random.uniform(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">19.5205130852</span></span><br><span class="line">print random.uniform(<span class="number">30</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">22.3666600118</span></span><br><span class="line">   <span class="preprocessor"># 不同的机器可能显示的结果不相同。</span></span><br></pre></td></tr></table></figure>
-</li>
+<li><a href="http://www.pangjian.info/2015/02/27/realtime-count-firebase/#more" target="_blank" rel="external">基于Firebase的Hexo博客实时访问数统计</a></li>
+<li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/" target="_blank" rel="external">为hexo博客添加访问次数统计功能</a></li>
 </ul>
-<a id="more"></a>
-<ul>
-<li><p>random.randint<br>random.randint()的函数原型为：random.randint(a, b)，用于生成一个指定范围内的整数。其中参数a是下限，参数b是上限，生成的随机数n: a &lt;= n &lt;= b</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.randint(<span class="number">12</span>,<span class="number">20</span>)  <span class="preprocessor">#生成的随机数n: <span class="number">12</span> &lt;= n &lt;= <span class="number">20</span>  </span></span><br><span class="line">print random.randint(<span class="number">20</span>,<span class="number">20</span>)  <span class="preprocessor">#结果永远是<span class="number">20</span>  </span></span><br><span class="line"><span class="preprocessor">#print random.randint(<span class="number">20</span>, <span class="number">10</span>)   #该语句是错误的。下限必须小于上限。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.randrange<br>random.randrange的函数原型为：random.randrange([start], stop[, step])，从指定范围内，按指定基数递增的集合中 获取一个随机数。如：random.randrange(10, 100, 2)，结果相当于从[10, 12, 14, 16, … 96, 98]序列中获取一个随机数。random.randrange(10, 100, 2)在结果上与 random.choice(range(10, 100, 2) 等效。</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print random.randrange(<span class="number">10</span>,<span class="number">100</span>,<span class="number">2</span>) <span class="preprocessor">#从<span class="number">10</span>开始到<span class="number">100</span>结束，步长为<span class="number">2</span>的序列中，随机选一个</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.choice<br>random.choice从序列中获取一个随机元素。其函数原型为：random.choice(sequence)。参数sequence表示一个有序类型。这里要说明 一下：sequence在python不是一种特定的类型，而是泛指一系列的类型。list, tuple, 字符串都属于sequence。有关sequence可以查看python手册数据模型这一章，也可以参考：<a href="http://www.17xie.com/read-37422.html" target="_blank" rel="external">http://www.17xie.com/read-37422.html</a> 。下面是使用choice的一些例子：</p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">"学习Python"</span>)</span></span>         #从字符串里随机选取一个字符，但是我发现还会出现‘？’这个是怎么回事还有待解决。</span><br><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="string">"JGood"</span>,<span class="string">"is"</span>, <span class="string">"a"</span>,<span class="string">"handsome"</span>, <span class="string">"boy"</span>])</span></span>  </span><br><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">((<span class="string">"Tuple"</span>,<span class="string">"List"</span>, <span class="string">"Dict"</span>)</span></span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.shuffle<br>random.shuffle的函数原型为：random.shuffle(x[, random])，用于将一个列表中的元素打乱。如:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span> = [<span class="string">"Python"</span>,<span class="string">"is"</span>, <span class="string">"powerful"</span>,<span class="string">"simple"</span>, <span class="string">"and so on..."</span>]  </span><br><span class="line">random.<span class="function"><span class="title">shuffle</span><span class="params">(p)</span></span>  </span><br><span class="line">print <span class="tag">p</span>  </span><br><span class="line">#---- 结果（不同机器上的结果可能不一样。）  </span><br><span class="line">#[<span class="string">'powerful'</span>, <span class="string">'simple'</span>, <span class="string">'is'</span>, <span class="string">'Python'</span>, <span class="string">'and so on...'</span>]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.sample<br>random.sample的函数原型为：random.sample(sequence, k)，从指定序列中随机获取指定长度的片断。sample函数不会修改原有序列。  </p>
-<pre><code><span class="built_in">list</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]
-slice = random.sample(<span class="built_in">list</span>, <span class="number">5</span>)  <span class="preprocessor">#从list中随机获取<span class="number">5</span>个元素，作为一个片断返回</span>
-print slice
-print <span class="built_in">list</span> <span class="preprocessor">#原有序列并没有改变。</span>
-</code></pre></li>
-</ul>
+<p>万事万物都是有优缺点的，firebase也不例外，最大缺点就是显示很慢，估计是被墙的原因。有点就不说了，你懂就行！</p>
 <blockquote>
-<p>上面这些方法是random模块中最常用的，在Python手册中，还介绍其他的方法。感兴趣的朋友可以通过查询Python手册了解更详细的信息。所有代码如下：  </p>
+<p>说明：第一个链接中给的代码中后面一段firebase的javascript（从new一个Firebase对象一直到最后）代码可以直接以script的形式放在footer的底部，亲测可用，因为我就是这样做的。~~</p>
 </blockquote>
-<pre><code>import random
-print random.<span class="function"><span class="title">random</span><span class="params">()</span></span>
-<span class="number">0.72487604051</span>
-print random.<span class="function"><span class="title">uniform</span><span class="params">(<span class="number">10</span>, <span class="number">30</span>)</span></span>
-<span class="number">17.6255210608</span>
-print random.<span class="function"><span class="title">randint</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>
-<span class="number">16</span>
-＃ 注意生成的是整数
-... 
-print random.<span class="function"><span class="title">randrange</span><span class="params">(<span class="number">1</span>, <span class="number">100</span> ,<span class="number">5</span>)</span></span>
-<span class="number">11</span>
-print random.<span class="function"><span class="title">randrange</span><span class="params">(<span class="number">0</span>, <span class="number">100</span> ,<span class="number">5</span>)</span></span>
-<span class="number">10</span>
-print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-python
-print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-<span class="number">1</span>
-print randon.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-Traceback (most recent call last):
-  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;
-NameError: name <span class="string">'randon'</span> is not defined
-print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-h
-print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-o
-print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-h
-print random.<span class="function"><span class="title">shuffle</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-None
-print random.<span class="function"><span class="title">shuffle</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-None
-<span class="tag">p</span> = [<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>]
-random.<span class="function"><span class="title">shuffle</span><span class="params">(p)</span></span>
-print <span class="tag">p</span>
-[<span class="number">23</span>, <span class="string">'hello'</span>, <span class="number">1</span>, <span class="string">'python'</span>]
-sp = random.<span class="function"><span class="title">sample</span><span class="params">(p, <span class="number">2</span>)</span></span>
-print sp
-[<span class="number">1</span>, <span class="string">'hello'</span>]
-</code></pre>
+<a id="more"></a>
       
     </div>
     <footer class="article-footer">
@@ -204,11 +140,11 @@ print sp
 	  <!-- 百度分享 End -->
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">September 22 2015</time>
+Updated:<time datetime="2015-11-22T13:21:37.000Z" itemprop="dateModified">November 22 2015</time>
 </span>
 
 
@@ -218,19 +154,10 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     
 <nav id="article-nav">
   
-    <a href="/2015/08/29/7-python-oop/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          python面向对象－类和封装
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/25/5-change-to-mac/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/11/21/23-git-error-checkout/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">换Mac了，高兴的心情无法抑制！</div>
+      <div class="article-nav-title">error: Your local changes to the following files would be overwritten by checkout以及git常用命令</div>
     </a>
   
 </nav>
@@ -243,7 +170,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
 <!-- 多说评论框 start -->
 
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2015/08/27/6-python-random-funs/" data-title="python中random模块简析" data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2015/11/22/24-hexo-firebase-record-time/" data-title="博客添加了访问次数记录" data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>

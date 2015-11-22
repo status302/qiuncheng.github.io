@@ -85,6 +85,87 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-8-python-functools-partial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2015/09/06/8-python-functools-partial/" class="article-date">
+  <time datetime="2015-09-06T04:12:51.000Z" itemprop="datePublished">September 06 2015</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/06/8-python-functools-partial/">偏函数是什么－飘逸的python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  </p>
+</blockquote>
+<ul>
+<li><p>偏函数是干嘛的？<br>简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  </p>
+<pre><code>import functools
+int2 = functools.<span class="function"><span class="title">partial</span><span class="params">(int, base=<span class="number">2</span>)</span></span>
+<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1000000'</span>)</span></span>
+<span class="number">64</span>
+<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1010101'</span>)</span></span>
+<span class="number">85</span>
+</code></pre><p>  其中的int2()就是一个偏函数。  </p>
+</li>
+<li>偏函数能解决哪些问题？
+        
+          <p class="article-more-link">
+            <a href="/2015/09/06/8-python-functools-partial/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cihajx1y2001h16huzz3m8zm5" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2015/09/06/8-python-functools-partial/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/06/8-python-functools-partial/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2015-09-21T17:09:48.000Z" itemprop="dateModified">September 22 2015</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
     <article id="post-7-python-oop" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -136,7 +217,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cihaijlf1001px1hu0k5gbem0" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cihajx1yc001v16hulwbiyt23" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
       
 
       
@@ -214,7 +295,7 @@ Updated:<time datetime="2015-09-21T17:09:15.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cihaijlf4001sx1hui7xwdjr8" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cihajx1yf001y16huc3z770w4" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
       
 
       
@@ -285,7 +366,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cihaijle2000kx1hu28pf0nx5" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cihajx1xi000k16huxwg8omi5" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
       
 
       
@@ -356,7 +437,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cihaijleg0014x1hu5ech9nd2" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cihajx1xz001a16hu0hw83v6s" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
       
 
       
@@ -426,7 +507,7 @@ Updated:<time datetime="2015-09-21T17:07:42.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cihaijlfk002gx1hukfiqeryp" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cihajx1yt002m16hu2xw2yfsk" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
       
 
       
@@ -496,7 +577,7 @@ Updated:<time datetime="2015-09-21T17:14:24.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cihaijldf0001x1huyvar2pgd" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cihajx1wt000116huz8y2ft0x" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
       
 
       
@@ -569,7 +650,7 @@ Updated:<time datetime="2015-09-21T17:07:17.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cihaijle5000px1hu9f41fh6s" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
+	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cihajx1xl000p16huq5wc4ume" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
 
 
 
@@ -645,7 +726,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swift/">Swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/转载/">转载</a><span class="category-list-count">2</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swift/">Swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/转载/">转载</a><span class="category-list-count">2</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -655,7 +736,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -665,7 +746,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">TagCloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #7f62af">Hexo</a> <a href="/tags/Life/" style="font-size: 14.75px; color: #7e92c7">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/git/" style="font-size: 13px; color: #7dc3de">git</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 18.25px; color: #7f3198">python</a> <a href="/tags/转载/" style="font-size: 14.75px; color: #7e92c7">转载</a>
+      <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #7f62af">Hexo</a> <a href="/tags/Life/" style="font-size: 16.5px; color: #7f62af">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/git/" style="font-size: 13px; color: #7dc3de">git</a> <a href="/tags/hexo/" style="font-size: 13px; color: #7dc3de">hexo</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 18.25px; color: #7f3198">python</a> <a href="/tags/转载/" style="font-size: 14.75px; color: #7e92c7">转载</a>
     </div>
   </div>
 
@@ -675,7 +756,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Archive</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -686,6 +767,10 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
     <h3 class="widget-title">Recent</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/22/24-hexo-firebase-record-time/">博客添加了访问次数记录</a>
+          </li>
         
           <li>
             <a href="/2015/11/21/23-git-error-checkout/">error: Your local changes to the following files would be overwritten by checkout以及git常用命令</a>
@@ -701,10 +786,6 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
         
           <li>
             <a href="/2015/11/11/20-iOS-Stanford-iOS8/">每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/11/19-iOS-http/">如何在iOS上优雅滴使用http://</a>
           </li>
         
       </ul>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-22T05:37:27.000Z</updated>
+  <updated>2015-11-22T13:21:37.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[博客添加了访问次数记录]]></title>
+    <link href="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/"/>
+    <id>http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/</id>
+    <published>2015-11-22T13:09:44.000Z</published>
+    <updated>2015-11-22T13:21:37.000Z</updated>
+    <content type="html"><![CDATA[<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
+<ul>
+<li><a href="http://www.pangjian.info/2015/02/27/realtime-count-firebase/#more" target="_blank" rel="external">基于Firebase的Hexo博客实时访问数统计</a></li>
+<li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/" target="_blank" rel="external">为hexo博客添加访问次数统计功能</a></li>
+</ul>
+<p>万事万物都是有优缺点的，firebase也不例外，最大缺点就是显示很慢，估计是被墙的原因。有点就不说了，你懂就行！</p>
+<blockquote>
+<p>说明：第一个链接中给的代码中后面一段firebase的javascript（从new一个Firebase对象一直到最后）代码可以直接以script的形式放在footer的底部，亲测可用，因为我就是这样做的。~~</p>
+</blockquote>
+<a id="more"></a>]]></content>
+    <summary type="html">
+    <![CDATA[<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
+<ul>
+<li><a href="http://www.pangjian.info/2015/02/27/realtime-count-firebase/#more">基于Firebase的Hexo博客实时访问数统计</a></li>
+<li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/">为hexo博客添加访问次数统计功能</a></li>
+</ul>
+<p>万事万物都是有优缺点的，firebase也不例外，最大缺点就是显示很慢，估计是被墙的原因。有点就不说了，你懂就行！</p>
+<blockquote>
+<p>说明：第一个链接中给的代码中后面一段firebase的javascript（从new一个Firebase对象一直到最后）代码可以直接以script的形式放在footer的底部，亲测可用，因为我就是这样做的。~~</p>
+</blockquote>]]>
+    
+    </summary>
+    
+      <category term="Life" scheme="http://qiuncheng.com/tags/Life/"/>
+    
+      <category term="hexo" scheme="http://qiuncheng.com/tags/hexo/"/>
+    
+      <category term="hexo" scheme="http://qiuncheng.com/categories/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[error: Your local changes to the following files would be overwritten by checkout以及git常用命令]]></title>
@@ -839,65 +876,6 @@ print sp
     </summary>
     
       <category term="Mac" scheme="http://qiuncheng.com/tags/Mac/"/>
-    
-      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[升级win10的一点小小的心得]]></title>
-    <link href="http://qiuncheng.com/2015/08/05/4-win10-update/"/>
-    <id>http://qiuncheng.com/2015/08/05/4-win10-update/</id>
-    <published>2015-08-05T02:16:39.000Z</published>
-    <updated>2015-09-21T17:07:42.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p><span style="font-family:'微软雅黑'；font-style:normal">7月29日win10正式版发布了，我当时没有一点感觉，因为我觉得我的win7旗舰版用的就特别好，另外我自己也加了内存，加了固态，觉得win7旗舰版跑起来简直飞起。但是我舍友29号晚上就升级了win10，让我有些小小的激动。但仅仅只是心动而已，并没有什么欲望要升级。<br>但是8月4日晚上早上我偶然间看到win10的评测，据说支持多窗口多桌面切换，这个对我真是个吸引，于是果断一狠心升了。</span></p>
-</blockquote>
-<h2 id="哈哈，之前说了好多废话，那就开始正文吧。由于我只是用了win7升级win10，所以只能谈谈win7升级到win10咯~"><span style="font-family:'微软雅黑';font-size:16px;font-style:normal"> 哈哈，之前说了好多废话，那就开始正文吧。由于我只是用了win7升级win10，所以只能谈谈win7升级到win10咯~</span></h2><a id="more"></a>
-<ul>
-<li><p>将win7更新打开，并且要更新到最新，即win7需要更新到server pack 1（sp1），那么如何更新到最新的sp1呢，请看下图。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengsp1.png" alt=""></p>
-</li>
-<li><p>接下来就是重要的升级部分了。主要有以下三种方式（请看图）：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiuncheng方法.png" alt=""><br>PS:这里推荐大家使用微软官方推送的方式，也就是方式1，因为第二种方式强烈不建议大家使用，装完后各种毛病全都出来了，而且据说他两现在停止提供更新了，这真是一件好事，对于方式3，对于能折腾的人来说，还可以，但是平常人的话就算了吧，由于我的电脑里各种软件，各种环境变量比较多，所以我坚决的用第3种方式的。</p>
-</li>
-<li><p>按照微软官方的说法，升级win10是要提前预约的，如图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/win升级预约.png" alt=""><br>也就是说如果你已经预约的话，你的升级已经在准备当中，升级通知会在未来几天或者未来几周内发送。但是对于像我这样从来都没有收到微软预约通知的人来说，很是捉急呀！  </p>
-</li>
-<li><p>接下来我发现一种简单的升级方式，也就是即使你没有预约，只要你已经升级到sp1最新，那么你照样可以升级win10。通常情况下升级都是有一个升级助手在，所以说只要找到那个升级助手那么你就可以轻松的升级。OK，let’s go.请看win10问答第一条：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/win10问答.png" alt=""><br>最后一句话明确指出如果你是技术爱好者，您可以使用 <a href="https://www.microsoft.com/zh-cn/software-download/windows10" title="Media Creation Tool" target="_blank" rel="external">Media Creation Tool </a>在一台或多台设备上即刻安装 Windows 10。(对的，没错就是这个Media Creation Tool,你也可以把他叫做“升级助手”之类的吧)。那么你就快去下载升级助手吧。</p>
-</li>
-<li><p>其实也就是这么简单，用<a href="https://www.microsoft.com/zh-cn/software-download/windows10" title="Media Creation Tool" target="_blank" rel="external">Media Creation Tool </a>可以摆脱你预约，等待微软推送通知的苦恼，岂不是很棒。</p>
-</li>
-<li>升级的过程简单而又漫长，(不过只要你的网足够快，也是不慢的)由于我昨天校园网突然连接不上，我竟然用了CMCC完成了下载并更新成功，醉了~~下面给出几张我升级的过程图。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/升级.jpg" alt=""><blockquote>
-<center>Sorry,貌似只拍了一张图。</center>
-
-</blockquote>
-</li>
-</ul>
-<p><span style="font-size:16px;font-family:'微软雅黑'">不过还是可以欣赏几张win10的截图的</span></p>
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/任务视图.png" alt="任务视图"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">任务视图</div></div>
-
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/回归的开始菜单.png" alt="回归的开始菜单"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">回归的开始菜单</div></div>
-
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/winedge.png" alt="Windows Edge浏览器"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">Windows Edge浏览器</div></div>
-
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/全新的设置.png" alt="全新的设置"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">全新的设置</div></div>
-
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/微软小娜.png" alt="微软小娜"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic">微软小娜</div></div>
-
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/通知中心.png" alt="通知中心"><div style="font-family:'微软雅黑'；font-size:12px;font-style:italic;text-decoration:underline">通知中心</div></div>
-
-
-<blockquote>
-<p><span style="font-size:15px;font-family:'微软雅黑'"><strong>PS</strong>：很喜欢win10的样子，看上去也比win8好多了。希望大家喜欢的话就去升级吧，有什么问题及时百度谷歌，或者在下面留言评论，我会会尽力帮助大家~愿大家升级愉快~</span></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p><span style="font-family:'微软雅黑'；font-style:normal">7月29日win10正式版发布了，我当时没有一点感觉，因为我觉得我的win7旗舰版用的就特别好，另外我自己也加了内存，加了固态，觉得win7旗舰版跑起来简直飞起。但是我舍友29号晚上就升级了win10，让我有些小小的激动。但仅仅只是心动而已，并没有什么欲望要升级。<br>但是8月4日晚上早上我偶然间看到win10的评测，据说支持多窗口多桌面切换，这个对我真是个吸引，于是果断一狠心升了。</span></p>
-</blockquote>
-<h2 id="哈哈，之前说了好多废话，那就开始正文吧。由于我只是用了win7升级win10，所以只能谈谈win7升级到win10咯~"><span style="font-family:'微软雅黑';font-size:16px;font-style:normal"> 哈哈，之前说了好多废话，那就开始正文吧。由于我只是用了win7升级win10，所以只能谈谈win7升级到win10咯~</span></h2>]]>
-    
-    </summary>
-    
-      <category term="Win10升级" scheme="http://qiuncheng.com/tags/Win10%E5%8D%87%E7%BA%A7/"/>
     
       <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
     
