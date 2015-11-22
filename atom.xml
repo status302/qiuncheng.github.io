@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-22T13:21:37.000Z</updated>
+  <updated>2015-11-22T13:23:30.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,8 +19,11 @@
     <link href="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/"/>
     <id>http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/</id>
     <published>2015-11-22T13:09:44.000Z</published>
-    <updated>2015-11-22T13:21:37.000Z</updated>
-    <content type="html"><![CDATA[<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
+    <updated>2015-11-22T13:23:30.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>想看记录请滑动到最底部，HaHa~~</p>
+</blockquote>
+<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
 <ul>
 <li><a href="http://www.pangjian.info/2015/02/27/realtime-count-firebase/#more" target="_blank" rel="external">基于Firebase的Hexo博客实时访问数统计</a></li>
 <li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/" target="_blank" rel="external">为hexo博客添加访问次数统计功能</a></li>
@@ -31,7 +34,10 @@
 </blockquote>
 <a id="more"></a>]]></content>
     <summary type="html">
-    <![CDATA[<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
+    <![CDATA[<blockquote>
+<p>想看记录请滑动到最底部，HaHa~~</p>
+</blockquote>
+<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
 <ul>
 <li><a href="http://www.pangjian.info/2015/02/27/realtime-count-firebase/#more">基于Firebase的Hexo博客实时访问数统计</a></li>
 <li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/">为hexo博客添加访问次数统计功能</a></li>
