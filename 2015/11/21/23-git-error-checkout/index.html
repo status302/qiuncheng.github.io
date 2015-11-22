@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>error: Your local changes to the following files would be overwritten by checkout | Qiuncheng&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="error: Your local changes to the following files would be overwritten by checkout">
+<meta property="og:url" content="http://qiuncheng.com/2015/11/21/23-git-error-checkout/index.html">
+<meta property="og:site_name" content="Qiuncheng's Blog">
+<meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png">
+<meta property="og:updated_time" content="2015-11-22T05:33:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="error: Your local changes to the following files would be overwritten by checkout">
+<meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
+  
+    <link rel="alternative" href="/atom.xml" title="Qiuncheng&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="http://fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?true";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Qiuncheng&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">/*每一个不曾起舞的日子都是对生命的辜负!*/</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about.html">Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/qiuncheng" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qiuncheng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-23-git-error-checkout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2015/11/21/23-git-error-checkout/" class="article-date">
+  <time datetime="2015-11-21T14:55:07.000Z" itemprop="datePublished">November 21 2015</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      error: Your local changes to the following files would be overwritten by checkout
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#git_问题回忆录"><span class="toc-number">1.</span> <span class="toc-text">git 问题回忆录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git常用命令【转载】<!-more->"><span class="toc-number">2.</span> <span class="toc-text">git常用命令【转载】</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建repository"><span class="toc-number"></span> <span class="toc-text">新建repository</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#touch_README-md"><span class="toc-number"></span> <span class="toc-text">touch README.md</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_init"><span class="toc-number"></span> <span class="toc-text">git init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_add_README-md"><span class="toc-number"></span> <span class="toc-text">git add README.md</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_commit_-m_"first_commit""><span class="toc-number"></span> <span class="toc-text">git commit -m "first commit"</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#push"><span class="toc-number"></span> <span class="toc-text">push</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_remote_add_origin_https://github-com/XXX(username)/YYYY(projectname)-git"><span class="toc-number"></span> <span class="toc-text">git remote add origin  https://github.com/XXX(username)/YYYY(projectname).git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin_master"><span class="toc-number"></span> <span class="toc-text">git push -u origin master</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_branch_-set-upstream-to=origin/master"><span class="toc-number"></span> <span class="toc-text">git branch --set-upstream-to=origin/master</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_pull_-rebase"><span class="toc-number"></span> <span class="toc-text">git pull --rebase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push"><span class="toc-number"></span> <span class="toc-text">git push</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number"></span> <span class="toc-text">分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#push方法1："><span class="toc-number"></span> <span class="toc-text">push方法1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin"><span class="toc-number"></span> <span class="toc-text">git push -u origin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-set-upstream_origin_develop"><span class="toc-number"></span> <span class="toc-text">git push --set-upstream origin develop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push方法2："><span class="toc-number"></span> <span class="toc-text">push方法2：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin_dev"><span class="toc-number"></span> <span class="toc-text">git push -u origin dev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push方法3："><span class="toc-number"></span> <span class="toc-text">push方法3：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin_local:remote"><span class="toc-number"></span> <span class="toc-text">git push -u origin local:remote</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比如_git_push_-u_origin_master:master"><span class="toc-number"></span> <span class="toc-text">比如 git push -u origin master:master</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建分支的另一种方法"><span class="toc-number"></span> <span class="toc-text">创建分支的另一种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用命令git_checkout_-b_develop2_develop"><span class="toc-number"></span> <span class="toc-text">用命令git checkout -b develop2 develop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除分支"><span class="toc-number"></span> <span class="toc-text">删除分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看所有的分支_git_branch"><span class="toc-number"></span> <span class="toc-text">查看所有的分支 git branch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除develop2分支_git_branch_-d_develop2"><span class="toc-number"></span> <span class="toc-text">删除develop2分支 git branch -d develop2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone"><span class="toc-number"></span> <span class="toc-text">Clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加Tag"><span class="toc-number"></span> <span class="toc-text">加Tag</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_tag_tagname_develop"><span class="toc-number"></span> <span class="toc-text">git tag tagname develop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合并分支"><span class="toc-number"></span> <span class="toc-text">合并分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_checkout_master"><span class="toc-number"></span> <span class="toc-text">git checkout master</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_merge_-no-ff_develop"><span class="toc-number"></span> <span class="toc-text">git merge --no-ff develop</span></a>
+		
+		</div>
+		
+        <h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png" alt="解决方案"><br>大致分析下就是你的分支里有文件修改了还没有保存，其实我是保存过的，我还特地进了Xcode去保存了下，但是这里不知道这是为什么。按着这个人的回答做就是了，果然没错，成功切换到master，并合并到主分支。 哈哈，其实也蛮简单的，就是第一次用就遇到这么大的问题有点让我不甘心呐！<br>好了，既然讲到git，我就在网上找了一些git的常用命令，<strong>转发转发转发</strong>重要的事情说三遍。文章末尾我也附上原文链接。   </p>
+<hr>
+<h5 id="git常用命令【转载】<!-more->">git常用命令【转载】<a id="more"></a></h5><blockquote>
+<h3 id="新建repository">新建repository</h3></blockquote>
+<p>本地目录下，在命令行里新建一个代码仓库（repository）<br>里面只有一个README.md<br>命令如下：  </p>
+<h4 id="touch_README-md">touch README.md</h4><h4 id="git_init">git init</h4><p>初始化repository  </p>
+<h4 id="git_add_README-md"><code>git add README.md</code></h4><p>将README.md加入到缓存区   </p>
+<p><em>可以用<strong><code>git add --a</code></strong>将所有改动提交到缓存（注意是两个杠）</em></p>
+<h4 id="git_commit_-m_&quot;first_commit&quot;"><code>git commit -m &quot;first commit&quot;</code></h4><p>提交改变，并且附上提交信息”first commit”</p>
+<blockquote>
+<h3 id="push">push</h3></blockquote>
+<h4 id="git_remote_add_origin_https://github-com/XXX(username)/YYYY(projectname)-git"><code>git remote add origin  https://github.com/XXX(username)/YYYY(projectname).git</code></h4><p>加上一个remote的地址，名叫origin，地址是github上的地址（Create a new repo就会有）<br><em>因为Git是分布式的，所以可以有多个remote.</em>  </p>
+<h4 id="git_push_-u_origin_master"><code>git push -u origin master</code></h4><p>将本地内容push到github上的那个地址上去。<br><code>参数-u</code><br>用了参数-u之后，以后就可以直接用不带参数的git pull从之前push到的分支来pull。<br>此时如果origin的master分支上有一些本地没有的提交,push会失败,<br>所以解决的办法是, 首先设定本地master的上游分支:</p>
+<h4 id="git_branch_-set-upstream-to=origin/master"><code>git branch --set-upstream-to=origin/master</code></h4><p>然后pull:    </p>
+<h4 id="git_pull_-rebase"><code>git pull --rebase</code></h4><p>最后再push:  </p>
+<h4 id="git_push"><code>git push</code></h4><blockquote>
+<h3 id="分支">分支</h3></blockquote>
+<p>新建好的代码库有且仅有一个主分支（master），它是自动建立的。<br>可以新建分支用于开发：<br>git branch develop master<br>新建一个叫develop的分支，基于master分支<br>切换到这个分支：<br>git checkout develop<br>现在可以在这个develop分支上做一些改动，并且提交。<br>注意：切换分支的时候可以发现，在Windows中的repository文件夹中的文件内容也会实时相应改变，变成当前分支的内容。</p>
+<ul>
+<li><h4 id="push方法1：">push方法1：</h4></li>
+</ul>
+<p>现在如果想直接Push这个develop分支上的内容到github</p>
+<h4 id="git_push_-u_origin"><code>git push -u origin</code></h4><p>如果是新建分支第一次push，会提示：<br>fatal: The current branch develop has no upstream branch.<br>To push the current branch and set the remote as upstream, use</p>
+<h4 id="git_push_-set-upstream_origin_develop"><code>git push --set-upstream origin develop</code></h4><p>输入这行命令，然后输入用户名和密码，就push成功了。</p>
+<p>以后的push就只需要输入git push origin</p>
+<ul>
+<li><h4 id="push方法2：">push方法2：</h4></li>
+</ul>
+<p>比如新建了一个叫dev的分支，而github网站上还没有，可以直接：</p>
+<h4 id="git_push_-u_origin_dev"><code>git push -u origin dev</code></h4><p>这样一个新分支就创建好了。</p>
+<ul>
+<li><h4 id="push方法3：">push方法3：</h4></li>
+</ul>
+<p>提交到github的分支有多个，提交时可以用这样的格式：</p>
+<h4 id="git_push_-u_origin_local:remote"><code>git push -u origin local:remote</code></h4><h4 id="比如_git_push_-u_origin_master:master">比如 <code>git push -u origin master:master</code></h4><p>表明将本地的master分支（冒号前）push到github的master分支（冒号后）。<br>如果左边不写为空，将会删除远程的右边分支。</p>
+<blockquote>
+<h3 id="创建分支的另一种方法">创建分支的另一种方法</h3></blockquote>
+<h4 id="用命令git_checkout_-b_develop2_develop">用命令<code>git checkout -b develop2 develop</code></h4><p>可以新建一个分支develop2，同时切换到这个分支</p>
+<blockquote>
+<h3 id="删除分支">删除分支</h3></blockquote>
+<h4 id="查看所有的分支_git_branch">查看所有的分支 <code>git branch</code></h4><h4 id="删除develop2分支_git_branch_-d_develop2">删除develop2分支 <code>git branch -d develop2</code></h4><blockquote>
+<h3 id="Clone">Clone</h3></blockquote>
+<p>使用git clone+github地址的方法，项目默认只有master分支。git branch也只有master</p>
+<p>要看所有的分支：<code>git branch -a</code>或者是<code>git branch -r</code></p>
+<p>这时候要新建一个分支，叫做dev，基于远程的dev分支：<code>git checkout -b dev origin/dev</code></p>
+<blockquote>
+<h3 id="加Tag">加Tag</h3></blockquote>
+<h4 id="git_tag_tagname_develop"><code>git tag tagname develop</code></h4><p>git tag中的两个参数，一个是标签名称，另一个是希望打标签的点develop分支的末梢。</p>
+<blockquote>
+<h3 id="合并分支">合并分支</h3></blockquote>
+<h4 id="git_checkout_master"><code>git checkout master</code></h4><p>先转到主分支</p>
+<h4 id="git_merge_-no-ff_develop"><code>git merge --no-ff develop</code></h4><p>然后把develop分支merge过来</p>
+<p>参数意义：<br>不用参数的默认情况下，是执行快进式合并。<br>使用参数–no-ff，会执行正常合并，在master分支上生成一个新节点。<br>merge的时候如果遇到冲突，就手动解决，然后重新add，commit即可。  </p>
+<blockquote>
+<p>相关链接：<br>文章转自圣骑士Wind的博客，地址<a href="http://www.cnblogs.com/mengdd/p/3447464.html" target="_blank" rel="external">http://www.cnblogs.com/mengdd/p/3447464.html</a><br>github帮助：<a href="https://help.github.com/articles/set-up-git/" target="_blank" rel="external">https://help.github.com/articles/set-up-git/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <!-- 百度分享 Start -->
+	  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+	  <!-- 百度分享 End -->
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2015-11-22T05:33:54.000Z" itemprop="dateModified">November 22 2015</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/21/22-ios-instance../" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">instance member &#39;gameView&#39;cannot be used on type &#39;...&#39;</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<section id="comments">
+  <div class="ds-thread"  data-thread-key="/2015/11/21/23-git-error-checkout/" data-title="error: Your local changes to the following files would be overwritten by checkout" data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" id="ds_thread">
+    <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
+  </div>
+</section>
+
+<!-- 多说评论框 end -->
+<!-- more -->
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#git_问题回忆录"><span class="toc-number">1.</span> <span class="toc-text">git 问题回忆录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git常用命令【转载】<!-more->"><span class="toc-number">2.</span> <span class="toc-text">git常用命令【转载】</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建repository"><span class="toc-number"></span> <span class="toc-text">新建repository</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#touch_README-md"><span class="toc-number"></span> <span class="toc-text">touch README.md</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_init"><span class="toc-number"></span> <span class="toc-text">git init</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_add_README-md"><span class="toc-number"></span> <span class="toc-text">git add README.md</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_commit_-m_"first_commit""><span class="toc-number"></span> <span class="toc-text">git commit -m "first commit"</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#push"><span class="toc-number"></span> <span class="toc-text">push</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_remote_add_origin_https://github-com/XXX(username)/YYYY(projectname)-git"><span class="toc-number"></span> <span class="toc-text">git remote add origin  https://github.com/XXX(username)/YYYY(projectname).git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin_master"><span class="toc-number"></span> <span class="toc-text">git push -u origin master</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_branch_-set-upstream-to=origin/master"><span class="toc-number"></span> <span class="toc-text">git branch --set-upstream-to=origin/master</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_pull_-rebase"><span class="toc-number"></span> <span class="toc-text">git pull --rebase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push"><span class="toc-number"></span> <span class="toc-text">git push</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number"></span> <span class="toc-text">分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#push方法1："><span class="toc-number"></span> <span class="toc-text">push方法1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin"><span class="toc-number"></span> <span class="toc-text">git push -u origin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-set-upstream_origin_develop"><span class="toc-number"></span> <span class="toc-text">git push --set-upstream origin develop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push方法2："><span class="toc-number"></span> <span class="toc-text">push方法2：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin_dev"><span class="toc-number"></span> <span class="toc-text">git push -u origin dev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push方法3："><span class="toc-number"></span> <span class="toc-text">push方法3：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_push_-u_origin_local:remote"><span class="toc-number"></span> <span class="toc-text">git push -u origin local:remote</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比如_git_push_-u_origin_master:master"><span class="toc-number"></span> <span class="toc-text">比如 git push -u origin master:master</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建分支的另一种方法"><span class="toc-number"></span> <span class="toc-text">创建分支的另一种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用命令git_checkout_-b_develop2_develop"><span class="toc-number"></span> <span class="toc-text">用命令git checkout -b develop2 develop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除分支"><span class="toc-number"></span> <span class="toc-text">删除分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看所有的分支_git_branch"><span class="toc-number"></span> <span class="toc-text">查看所有的分支 git branch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除develop2分支_git_branch_-d_develop2"><span class="toc-number"></span> <span class="toc-text">删除develop2分支 git branch -d develop2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone"><span class="toc-number"></span> <span class="toc-text">Clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加Tag"><span class="toc-number"></span> <span class="toc-text">加Tag</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_tag_tagname_develop"><span class="toc-number"></span> <span class="toc-text">git tag tagname develop</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合并分支"><span class="toc-number"></span> <span class="toc-text">合并分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_checkout_master"><span class="toc-number"></span> <span class="toc-text">git checkout master</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_merge_-no-ff_develop"><span class="toc-number"></span> <span class="toc-text">git merge --no-ff develop</span></a>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/logogg.png" /></li>
+    
+    
+    <li>嗨，I am Qiuncheng</li>
+    
+    <li>西安南北雷无线电通讯学院本科僧一枚</li>
+    
+    <li>爱技术－爱设计－谷歌粉－苹果粉</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Weibo show</h3>
+    <div class="widget-weibo">
+      <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=2&isTitle=1&noborder=0&isWeibo=1&isFans=1&uid=3557569824&verifier=3f6f850a&colors=ddd,ddd,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swift/">Swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/转载/">转载</a><span class="category-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">TagCloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #7f62af">Hexo</a> <a href="/tags/Life/" style="font-size: 14.75px; color: #7e92c7">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/git/" style="font-size: 13px; color: #7dc3de">git</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 18.25px; color: #7f3198">python</a> <a href="/tags/转载/" style="font-size: 14.75px; color: #7e92c7">转载</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/11/21/23-git-error-checkout/">error: Your local changes to the following files would be overwritten by checkout</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/21/22-ios-instance../">instance member &#39;gameView&#39;cannot be used on type &#39;...&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/">sendAsynchronousRequest竟然被弃用了！！！</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/11/20-iOS-Stanford-iOS8/">每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/11/19-iOS-http/">如何在iOS上优雅滴使用http://</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">Recent_comments</h3>
+  <ul class="widget ds-recent-comments" data-num-items="5" data-show-avatars="0" data-show-title="1" data-show-time="1"></ul>
+</div>
+<!-- 需要多说的公用代码 -->
+
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://yangqingfeng.com" target="_BLANK">青峰学长的主页</a></li>
+    
+    <li><a href="http://xferris.me:8080/" target="_BLANK">航航</a></li>
+    
+    <li><a href="http://simapps.cn" target="_BLANK">分形画板主页</a></li>
+    
+  </ul>
+</div>
+
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Qiuncheng<br>
+      Powered by <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about.html" class="mobile-nav-link">Me</a>
+  
+</nav>
+    
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"qiuncheng"};
+  (function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+<!-- 多说公共JS代码 end -->
+
+<!-- 百度分享 start -->
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","douban","bdysc","sqq","qq","hi","baidu","huaban","youdao","sdo","mail","xg","diandian","fx","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+-->
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js" type="text/javascript"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

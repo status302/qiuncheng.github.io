@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-21T11:48:50.000Z</updated>
+  <updated>2015-11-22T05:33:54.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,82 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[error: Your local changes to the following files would be overwritten by checkout]]></title>
+    <link href="http://qiuncheng.com/2015/11/21/23-git-error-checkout/"/>
+    <id>http://qiuncheng.com/2015/11/21/23-git-error-checkout/</id>
+    <published>2015-11-21T14:55:07.000Z</published>
+    <updated>2015-11-22T05:33:54.000Z</updated>
+    <content type="html"><![CDATA[<h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png" alt="解决方案"><br>大致分析下就是你的分支里有文件修改了还没有保存，其实我是保存过的，我还特地进了Xcode去保存了下，但是这里不知道这是为什么。按着这个人的回答做就是了，果然没错，成功切换到master，并合并到主分支。 哈哈，其实也蛮简单的，就是第一次用就遇到这么大的问题有点让我不甘心呐！<br>好了，既然讲到git，我就在网上找了一些git的常用命令，<strong>转发转发转发</strong>重要的事情说三遍。文章末尾我也附上原文链接。   </p>
+<hr>
+<h5 id="git常用命令【转载】<!-more->">git常用命令【转载】<a id="more"></a></h5><blockquote>
+<h3 id="新建repository">新建repository</h3></blockquote>
+<p>本地目录下，在命令行里新建一个代码仓库（repository）<br>里面只有一个README.md<br>命令如下：  </p>
+<h4 id="touch_README-md">touch README.md</h4><h4 id="git_init">git init</h4><p>初始化repository  </p>
+<h4 id="git_add_README-md"><code>git add README.md</code></h4><p>将README.md加入到缓存区   </p>
+<p><em>可以用<strong><code>git add --a</code></strong>将所有改动提交到缓存（注意是两个杠）</em></p>
+<h4 id="git_commit_-m_&quot;first_commit&quot;"><code>git commit -m &quot;first commit&quot;</code></h4><p>提交改变，并且附上提交信息”first commit”</p>
+<blockquote>
+<h3 id="push">push</h3></blockquote>
+<h4 id="git_remote_add_origin_https://github-com/XXX(username)/YYYY(projectname)-git"><code>git remote add origin  https://github.com/XXX(username)/YYYY(projectname).git</code></h4><p>加上一个remote的地址，名叫origin，地址是github上的地址（Create a new repo就会有）<br><em>因为Git是分布式的，所以可以有多个remote.</em>  </p>
+<h4 id="git_push_-u_origin_master"><code>git push -u origin master</code></h4><p>将本地内容push到github上的那个地址上去。<br><code>参数-u</code><br>用了参数-u之后，以后就可以直接用不带参数的git pull从之前push到的分支来pull。<br>此时如果origin的master分支上有一些本地没有的提交,push会失败,<br>所以解决的办法是, 首先设定本地master的上游分支:</p>
+<h4 id="git_branch_-set-upstream-to=origin/master"><code>git branch --set-upstream-to=origin/master</code></h4><p>然后pull:    </p>
+<h4 id="git_pull_-rebase"><code>git pull --rebase</code></h4><p>最后再push:  </p>
+<h4 id="git_push"><code>git push</code></h4><blockquote>
+<h3 id="分支">分支</h3></blockquote>
+<p>新建好的代码库有且仅有一个主分支（master），它是自动建立的。<br>可以新建分支用于开发：<br>git branch develop master<br>新建一个叫develop的分支，基于master分支<br>切换到这个分支：<br>git checkout develop<br>现在可以在这个develop分支上做一些改动，并且提交。<br>注意：切换分支的时候可以发现，在Windows中的repository文件夹中的文件内容也会实时相应改变，变成当前分支的内容。</p>
+<ul>
+<li><h4 id="push方法1：">push方法1：</h4></li>
+</ul>
+<p>现在如果想直接Push这个develop分支上的内容到github</p>
+<h4 id="git_push_-u_origin"><code>git push -u origin</code></h4><p>如果是新建分支第一次push，会提示：<br>fatal: The current branch develop has no upstream branch.<br>To push the current branch and set the remote as upstream, use</p>
+<h4 id="git_push_-set-upstream_origin_develop"><code>git push --set-upstream origin develop</code></h4><p>输入这行命令，然后输入用户名和密码，就push成功了。</p>
+<p>以后的push就只需要输入git push origin</p>
+<ul>
+<li><h4 id="push方法2：">push方法2：</h4></li>
+</ul>
+<p>比如新建了一个叫dev的分支，而github网站上还没有，可以直接：</p>
+<h4 id="git_push_-u_origin_dev"><code>git push -u origin dev</code></h4><p>这样一个新分支就创建好了。</p>
+<ul>
+<li><h4 id="push方法3：">push方法3：</h4></li>
+</ul>
+<p>提交到github的分支有多个，提交时可以用这样的格式：</p>
+<h4 id="git_push_-u_origin_local:remote"><code>git push -u origin local:remote</code></h4><h4 id="比如_git_push_-u_origin_master:master">比如 <code>git push -u origin master:master</code></h4><p>表明将本地的master分支（冒号前）push到github的master分支（冒号后）。<br>如果左边不写为空，将会删除远程的右边分支。</p>
+<blockquote>
+<h3 id="创建分支的另一种方法">创建分支的另一种方法</h3></blockquote>
+<h4 id="用命令git_checkout_-b_develop2_develop">用命令<code>git checkout -b develop2 develop</code></h4><p>可以新建一个分支develop2，同时切换到这个分支</p>
+<blockquote>
+<h3 id="删除分支">删除分支</h3></blockquote>
+<h4 id="查看所有的分支_git_branch">查看所有的分支 <code>git branch</code></h4><h4 id="删除develop2分支_git_branch_-d_develop2">删除develop2分支 <code>git branch -d develop2</code></h4><blockquote>
+<h3 id="Clone">Clone</h3></blockquote>
+<p>使用git clone+github地址的方法，项目默认只有master分支。git branch也只有master</p>
+<p>要看所有的分支：<code>git branch -a</code>或者是<code>git branch -r</code></p>
+<p>这时候要新建一个分支，叫做dev，基于远程的dev分支：<code>git checkout -b dev origin/dev</code></p>
+<blockquote>
+<h3 id="加Tag">加Tag</h3></blockquote>
+<h4 id="git_tag_tagname_develop"><code>git tag tagname develop</code></h4><p>git tag中的两个参数，一个是标签名称，另一个是希望打标签的点develop分支的末梢。</p>
+<blockquote>
+<h3 id="合并分支">合并分支</h3></blockquote>
+<h4 id="git_checkout_master"><code>git checkout master</code></h4><p>先转到主分支</p>
+<h4 id="git_merge_-no-ff_develop"><code>git merge --no-ff develop</code></h4><p>然后把develop分支merge过来</p>
+<p>参数意义：<br>不用参数的默认情况下，是执行快进式合并。<br>使用参数–no-ff，会执行正常合并，在master分支上生成一个新节点。<br>merge的时候如果遇到冲突，就手动解决，然后重新add，commit即可。  </p>
+<blockquote>
+<p>相关链接：<br>文章转自圣骑士Wind的博客，地址<a href="http://www.cnblogs.com/mengdd/p/3447464.html" target="_blank" rel="external">http://www.cnblogs.com/mengdd/p/3447464.html</a><br>github帮助：<a href="https://help.github.com/articles/set-up-git/" target="_blank" rel="external">https://help.github.com/articles/set-up-git/</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png" alt="解决方案"><br>大致分析下就是你的分支里有文件修改了还没有保存，其实我是保存过的，我还特地进了Xcode去保存了下，但是这里不知道这是为什么。按着这个人的回答做就是了，果然没错，成功切换到master，并合并到主分支。 哈哈，其实也蛮简单的，就是第一次用就遇到这么大的问题有点让我不甘心呐！<br>好了，既然讲到git，我就在网上找了一些git的常用命令，<strong>转发转发转发</strong>重要的事情说三遍。文章末尾我也附上原文链接。   </p>
+<hr>
+<h5 id="git常用命令【转载】<!-more->">git常用命令【转载】]]>
+    
+    </summary>
+    
+      <category term="git" scheme="http://qiuncheng.com/tags/git/"/>
+    
+      <category term="git" scheme="http://qiuncheng.com/categories/git/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[instance member 'gameView'cannot be used on type '...']]></title>
@@ -822,42 +898,6 @@ print sp
       <category term="Win10升级" scheme="http://qiuncheng.com/tags/Win10%E5%8D%87%E7%BA%A7/"/>
     
       <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[MarkDown改进-图片说明实现]]></title>
-    <link href="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/"/>
-    <id>http://qiuncheng.com/2015/08/03/3-img-markdown-desc/</id>
-    <published>2015-08-03T02:03:40.000Z</published>
-    <updated>2015-09-21T17:14:24.000Z</updated>
-    <content type="html"><![CDATA[<p><span style="font-family:'微软雅黑';font-size:14px;">一直有个困惑，就是我无法在添加图片的时候在图片的下方添加图片说明，之前在简书上写文章时一直会有个提示，让你添加说明。但是如何在Markdown上添加呢？</span>  </p>
-<ul>
-<li><span style="font-family:'微软雅黑';font-size:14px;">这是我之前在Markdown添加的，很尴尬的是我把图片说明写在下面了</span><br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150803101246.png" alt="Markdown图片添加结果"></center><a id="more"></a>  </li>
-<li><span style="font-family:'微软雅黑';font-size:14px;">这是我在简书上添加的,下面的说明好看多了。</span>  <center><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150803101334.png" alt="简书图片添加结果"><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150803101355.png" alt=""></center>
-
-</li>
-</ul>
-<p><span style="font-family:'微软雅黑'">这个让我想起了Markdown语法是兼容HTML的，是不是可以用HTML来实现呢？我就尝试了一下，没错，居然可行！</span></p>
-<p><span style="font-family:'微软雅黑'">具体的代码如下：</span></p>
-<pre><code>&lt;<span class="tag">div</span> align=<span class="string">"center"</span>&gt;&lt;<span class="tag">img</span> src=<span class="string">"http://7xk67j.com1.z0.glb.clouddn.com/微信公众号.jpg"</span>  alt=<span class="string">"微信公众号"</span> /&gt;&lt;<span class="tag">div</span> style=<span class="string">"font-size:12px;font-family:'微软雅黑';text-decoration:underline；font-style:italic"</span>&gt;微信公众号&lt;/div&gt;&lt;/div&gt;
-</code></pre><p><span style="font-family:'微软雅黑'">实现效果如下：</span> </p>
-<div align="center"><img src="http://7xk67j.com1.z0.glb.clouddn.com/微信公众号.jpg" alt="微信公众号"><div style="font-size:12px;font-family:'微软雅黑';text-decoration:underline;font-style:italic">微信公众号</div></div>
-
-<p><span style="font-family:'微软雅黑';font-size:16px"><strong>PS:</strong>下划线的实现并没有简书的好，这个还需要改进下吧！希望大家有更好的实现方式在下方评论留言</span></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><span style="font-family:'微软雅黑';font-size:14px;">一直有个困惑，就是我无法在添加图片的时候在图片的下方添加图片说明，之前在简书上写文章时一直会有个提示，让你添加说明。但是如何在Markdown上添加呢？</span>  </p>
-<ul>
-<li><span style="font-family:'微软雅黑';font-size:14px;">这是我之前在Markdown添加的，很尴尬的是我把图片说明写在下面了</span><br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/qiunchengQQ截图20150803101246.png" alt="Markdown图片添加结果"></center>]]>
-    
-    </summary>
-    
-      <category term="HTML/CSS" scheme="http://qiuncheng.com/tags/HTML-CSS/"/>
-    
-      <category term="Markdown" scheme="http://qiuncheng.com/tags/Markdown/"/>
-    
-      <category term="HTML/CSS" scheme="http://qiuncheng.com/categories/HTML-CSS/"/>
     
   </entry>
   
