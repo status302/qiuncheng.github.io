@@ -377,20 +377,6 @@ body {
   -webkit-box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
   box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
 }
-#header:before,
-#header:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 40px;
-}
-#header:before {
-  top: 0;
-}
-#header:after {
-  bottom: 0;
-}
 #header-outer {
   height: 100%;
   position: relative;
@@ -411,7 +397,11 @@ body {
   z-index: -1;
 }
 #banner {
-  background: url("http://7xk67j.com1.z0.glb.clouddn.com/bgQQ20151124-4.png") center;
+  background: #2ca6cb;
+  background-image: -webkit-linear-gradient(330deg, #155799, #159957);
+  background-image: -moz-linear-gradient(330deg, #155799, #159957);
+  background-image: -ms-linear-gradient(330deg, #155799, #159957);
+  background-image: linear-gradient(120deg, #155799, #159957);
 }
 #header-title {
   text-align: center;
