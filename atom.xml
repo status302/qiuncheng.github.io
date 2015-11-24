@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-22T13:24:05.000Z</updated>
+  <updated>2015-11-24T13:25:09.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[一张图帮你集齐所有git命令]]></title>
+    <link href="http://qiuncheng.com/2015/11/24/25-git-command-all/"/>
+    <id>http://qiuncheng.com/2015/11/24/25-git-command-all/</id>
+    <published>2015-11-24T13:17:07.000Z</published>
+    <updated>2015-11-24T13:25:09.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>请别小看我哈，我可是大自然的搬运工吆~  </p>
+</blockquote>
+<p>继上篇博文展示了git的部分常用命令的使用，这回在网上突然看到一张神奇的图片，真的是神器图片，这张图包含了所有的git命令，非常全面。所以就直接搬运过来了。</p>
+<p>原图来自极分享，网址<a href="http://www.finalshares.com/read-178" target="_blank" rel="external">http://www.finalshares.com/read-178</a>    </p>
+<ul>
+<li>图片很大，请先擦亮眼睛看好了~~<a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitgit命令大全.jpg" alt="这是一张神奇的图片"></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>请别小看我哈，我可是大自然的搬运工吆~  </p>
+</blockquote>
+<p>继上篇博文展示了git的部分常用命令的使用，这回在网上突然看到一张神奇的图片，真的是神器图片，这张图包含了所有的git命令，非常全面。所以就直接搬运过来了。</p>
+<p>原图来自极分享，网址<a href="http://www.finalshares.com/read-178">http://www.finalshares.com/read-178</a>    </p>
+<ul>
+<li>图片很大，请先擦亮眼睛看好了~~]]>
+    
+    </summary>
+    
+      <category term="git" scheme="http://qiuncheng.com/tags/git/"/>
+    
+      <category term="git" scheme="http://qiuncheng.com/categories/git/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[博客添加了访问次数记录]]></title>
@@ -843,47 +875,6 @@ print sp
       <category term="python" scheme="http://qiuncheng.com/tags/python/"/>
     
       <category term="python" scheme="http://qiuncheng.com/categories/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[换Mac了，高兴的心情无法抑制！]]></title>
-    <link href="http://qiuncheng.com/2015/08/25/5-change-to-mac/"/>
-    <id>http://qiuncheng.com/2015/08/25/5-change-to-mac/</id>
-    <published>2015-08-25T12:03:59.000Z</published>
-    <updated>2015-09-21T17:08:37.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>之前把我联想U410的超级本升级了win10，本来用着还不错，可是依然无法是性能不足，不能满足我的某些需求。我承认，U410是我用过的比较好的PC之一（我总共就用过两台PC　）。但当我前天收到了早前下单的Mac之后，我再也不认为U410是一个好的笔记本了。没错，现在真的是认为MacBook是最好的笔记本。  </p>
-</blockquote>
-<p>怎么说呢，买这个MacBook Pro（Retina）真的是历程艰险，记得当时我身上只能拿出一千块钱，然后就把我想买电脑的事情跟我母亲说了，她当时只说，没事，到时候我给你2K，可是2K呀。当时说真的，我一下子觉得多了点希望，于是我就想着各种办法弄钱呀，<a id="more"></a>其中把我原来的U410卖掉了1500，找表哥借了1500，找同学借了1200，可是还差1K多，黄天不负有心人，最好的人就在你身边，他们就是你身边的父母，于是当我父亲听到我想换电脑还差点钱时果断给了我一千。哈哈，齐了。<br>于是在8月19号的下午，我在Apple官网下单了，原因很简单，因为Apple在开学季买Mac送beats solo2耳机。哈哈，瞬间觉得Apple公司真的是太有爱了。<br>不多说了，直接上图：</p>
-<ul>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/1.pic.jpg" alt="image description"></li>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/3.pic.jpg" alt=""></li>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/2.pic.jpg" alt=""></li>
-</ul>
-<p>其实Mac上的操作真的让人无话说，太流畅了，太省电了，电池太顶用了。软件也很丰富，虽然游戏很少，大多都收费，但是我真的是太喜欢这台电脑了。屏幕就和我的iPad屏幕一样清晰。<br>先说这么多吧，更多体验等我以后用多了我想自然就有了吧。</p>
-<p>额，其实也还是有几条不足的：  </p>
-<ul>
-<li>Markdown编辑器我还是觉得markdownPad好用，虽然Mac上有很多md编辑器，但始终没有mdpad的感觉，也许这就是相思吧。</li>
-<li>hexo博客的环境从win上换到Mac上有很多地方需要注意，ssh、node.js、brew等等。</li>
-<li>Mac的硬盘内存比较小，只有128G</li>
-<li>还有其他的等等，</li>
-</ul>
-<blockquote>
-<p>顺便说一下，那个beats solo2耳机我真的觉得没啥用处呀，所以我想便宜点卖掉呀，有谁想要的请直接在下方评论处说明。　</p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>之前把我联想U410的超级本升级了win10，本来用着还不错，可是依然无法是性能不足，不能满足我的某些需求。我承认，U410是我用过的比较好的PC之一（我总共就用过两台PC　）。但当我前天收到了早前下单的Mac之后，我再也不认为U410是一个好的笔记本了。没错，现在真的是认为MacBook是最好的笔记本。  </p>
-</blockquote>
-<p>怎么说呢，买这个MacBook Pro（Retina）真的是历程艰险，记得当时我身上只能拿出一千块钱，然后就把我想买电脑的事情跟我母亲说了，她当时只说，没事，到时候我给你2K，可是2K呀。当时说真的，我一下子觉得多了点希望，于是我就想着各种办法弄钱呀，]]>
-    
-    </summary>
-    
-      <category term="Mac" scheme="http://qiuncheng.com/tags/Mac/"/>
-    
-      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
     
   </entry>
   
