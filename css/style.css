@@ -501,6 +501,12 @@ body {
 #nav-github-link:before {
   content: "\f09b";
 }
+#nav-weibo-link:before {
+  content: "\f18a";
+}
+#nav-weibo-link:before {
+  content: "\f16c";
+}
 #nav-twitter-link:before {
   content: "\f099";
 }
