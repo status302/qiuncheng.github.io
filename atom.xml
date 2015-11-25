@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[Qiuncheng's Blog]]></title>
-  <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负!*/]]></subtitle>
+  <title><![CDATA[Hi, I'm Qiuncheng.]]></title>
+  <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
   <updated>2015-11-24T13:25:09.000Z</updated>
