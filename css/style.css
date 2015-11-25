@@ -501,8 +501,8 @@ body {
 #nav-github-link:before {
   content: "\f09b";
 }
-#nav-github-link:before {
-  content: "\f09c";
+#nav-twitter-link:before {
+  content: "\f099";
 }
 #nav-search-btn:before {
   content: "\f002";
