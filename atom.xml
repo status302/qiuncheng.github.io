@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-11-24T13:25:09.000Z</updated>
+  <updated>2015-12-08T12:41:04.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[你的4寸iPhone出现上下黑框了吗？]]></title>
+    <link href="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/"/>
+    <id>http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/</id>
+    <published>2015-12-08T11:29:00.000Z</published>
+    <updated>2015-12-08T12:41:04.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>对于iOS新手来说，其中最困难也是最麻烦的就包括AutoLayout，但是之前我从来都没有注意到这个，以为自己看了点AutoLayout的东西就可以随意想象，不多用它，所以导致的结果就是我以前写的程序在iPhone4和4s上运行的很好，但是当遇到iPhone5之后，却发现出现了上下黑框，这让我这个新手很是气愤，然后我拿iPhone6测试也一样黑框，但是我在preview里好好的，什么都能够正常显示，这是为什么，于是我就各种百度，bing，Google，果然功夫不负有心啊，我在Google上找到了答案。  <a id="more"></a></p>
+</blockquote>
+<center><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151208-0.png" alt="可爱的黑框框"></center><br>问题已经描述的很清楚了吧，接下来我们就来看看解决方案吧。<br><br><strong>1.</strong> 确定你的<code>Use Auto Layout</code>和<code>Size Size Classes</code>是勾选上的<br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151208-1.png" alt=""></center><br><strong>2.</strong> 确定你的<code>ViewController</code>的<code>Layout</code>是<code>wAny</code>、<code>hAny</code>类型的。<br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151208-2.png" alt=""></center><br><strong>3.</strong> 确定你的相关的<code>Contraints</code>是适配<code>AutoLayout</code>。（这个没人能够帮你了，只能靠你自己去理解AutoLayout相关的约束了，并设定了)<br><strong>4.</strong> 为了适配所有不同屏幕大小的iPhone，你必须提供相关的背景图片（如：@2x, @3x，这个应该都知道吧，你在放图片到文件夹里的时候Xcode里会有三个相关提示吧！）<br><strong>5.</strong> 你必须提供<code>LaunchScreen</code>,其实我昨天的问题就出现在这里，没有提供<code>LaunchScreen</code>，就像这样，在<code>show the file inspector</code>里勾选<code>Use Auto Layout</code>、<code>Size Size Classes</code>和<code>Use as Launch Screen</code>。<br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151208-4.png" alt=""><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151208-3.png" alt=""></center>
+
+<p><em>Ok, 如果这样的话你的应用还是会出现上下黑框的话，我觉得你应该重新在检查下以上步骤。有一条不满足，很可能就是导致出现黑框的原因，另外提示下，注意善于利用<code>Preview</code>。</em><br><em>请记住，它这不仅仅是一个摆设。</em></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>对于iOS新手来说，其中最困难也是最麻烦的就包括AutoLayout，但是之前我从来都没有注意到这个，以为自己看了点AutoLayout的东西就可以随意想象，不多用它，所以导致的结果就是我以前写的程序在iPhone4和4s上运行的很好，但是当遇到iPhone5之后，却发现出现了上下黑框，这让我这个新手很是气愤，然后我拿iPhone6测试也一样黑框，但是我在preview里好好的，什么都能够正常显示，这是为什么，于是我就各种百度，bing，Google，果然功夫不负有心啊，我在Google上找到了答案。]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[这就是生活！]]></title>
+    <link href="http://qiuncheng.com/2015/12/01/25-life-12-1-/"/>
+    <id>http://qiuncheng.com/2015/12/01/25-life-12-1-/</id>
+    <published>2015-12-01T02:34:31.000Z</published>
+    <updated>2015-12-01T02:55:04.000Z</updated>
+    <content type="html"><![CDATA[<p>时间过得真快，今天都12月份了。马上又要到新的一年了。但是在这本该高兴地时候我却怎么也提不起神来，心情突然就像这西安的雾霾一样严重。。。<br>十分钟之前我还在刷<a href="https://twitter.com/qiuncheng" target="_blank" rel="external">Twitter</a>,还在<a href="http://stackoverflow.com/users/5353887/qiuncheng" target="_blank" rel="external">stackoverflow</a>上提问题，但是此刻当我看向窗外，看向外面白茫茫的一片，我突然有种失落感。我们现在的生活基本都是出门不靠走路，都是这样的天气让人怎么出门，这样的天气让人怎么不靠走路？我忽然想到有天要是我有了儿子，他出生的时候或许雾霾比现在还要严重些吧。（<em>虽然现在还没女票，让我小小的YY下’:)</em>）  <a id="more"></a><br>但是当我深思些的时候却发现我的心情和雾霾并没有太大关系，只是雾霾引起了我的深思。我主要还在想期末快结束了，而我计划的12月开始复习也已经开始了，虽然我并没有开始复习，但是却反映出时间不等你的问题。最近的两个月可能是我最充实的两个月，大学的前两年真的知道怎么就这么过来了唉，但是从10月份自己接触iOS以来我觉得自己的每一天都是那么充实，每一天都有忙不完的事情，每一天都在按计划进行着一系列的安排。大学四年转眼间匆匆而逝，不发现点自己真正喜欢的东西真的有点对不起自己。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>时间过得真快，今天都12月份了。马上又要到新的一年了。但是在这本该高兴地时候我却怎么也提不起神来，心情突然就像这西安的雾霾一样严重。。。<br>十分钟之前我还在刷<a href="https://twitter.com/qiuncheng">Twitter</a>,还在<a href="http://stackoverflow.com/users/5353887/qiuncheng">stackoverflow</a>上提问题，但是此刻当我看向窗外，看向外面白茫茫的一片，我突然有种失落感。我们现在的生活基本都是出门不靠走路，都是这样的天气让人怎么出门，这样的天气让人怎么不靠走路？我忽然想到有天要是我有了儿子，他出生的时候或许雾霾比现在还要严重些吧。（<em>虽然现在还没女票，让我小小的YY下’:)</em>）]]>
+    
+    </summary>
+    
+      <category term="Life" scheme="http://qiuncheng.com/tags/Life/"/>
+    
+      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[一张图帮你集齐所有git命令]]></title>
@@ -699,176 +743,6 @@ int2 = functools.<span class="function"><span class="title">partial</span><span 
 </code></pre><p>  其中的int2()就是一个偏函数。  </p>
 </li>
 <li>偏函数能解决哪些问题？]]>
-    
-    </summary>
-    
-      <category term="python" scheme="http://qiuncheng.com/tags/python/"/>
-    
-      <category term="python" scheme="http://qiuncheng.com/categories/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[python面向对象－类和封装]]></title>
-    <link href="http://qiuncheng.com/2015/08/29/7-python-oop/"/>
-    <id>http://qiuncheng.com/2015/08/29/7-python-oop/</id>
-    <published>2015-08-29T01:50:47.000Z</published>
-    <updated>2015-09-21T17:09:15.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>之前学过java，也了解过面向对象。类与对象：类的封装、多态与继承也就是面向对象的三大特性。也可以理解说一切集合都是类，自然界中的一切都是对象。但是python中的面向对象很明显给我的感觉就是“好写”。  </p>
-</blockquote>
-<ul>
-<li>类和实例：  </li>
-</ul>
-<ol>
-<li>定义类：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><code>class</code>后面是类名，即<code>Student</code>与java中相同，类名通常首字母大写。紧接着是<code>(object)</code>，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用<code>object</code>类，这是所有类最终都会继承的类。</p>
-<ol>
-<li>实例化：<a id="more"></a><br>定义好了<code>Student</code>类，就可以根据<code>Student</code>类创建出<code>Student</code>的实例，创建实例是通过<code>类名+()</code>实现的：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bart = <span class="function"><span class="title">Student</span><span class="params">()</span></span></span><br><span class="line">bart</span><br><span class="line">&lt;__main__<span class="class">.Student</span> <span class="tag">object</span> at <span class="number">0</span>x10a67a590&gt;</span><br><span class="line">Student</span><br><span class="line">&lt;class <span class="string">'__main__.Student'</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>可以看到，变量bart指向的就是一个<code>Student</code>的<code>object</code>，后面的0x10a67a590是内存地址，每个<code>object</code>的地址都不一样，而<code>Student</code>本身则是一个类。  </p>
-<blockquote>
-<p>深层解析:  </p>
-</blockquote>
-<p> 由于类可以起到模板的作用，因此，可以在创建实例的时候，把一些我们认为必须绑定的属性强制填写进去。通过定义一个特殊的<strong>init</strong>方法，在创建实例的时候，就把name，score等属性绑上去(其实这个可以理解为java中的构造器)：  </p>
-<pre><code><span class="comment"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure></span>
-
-注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。  
-
-有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去：  
-<span class="comment"><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart Simpson'</span>, <span class="number">59</span>)</span><br><span class="line">bart.name</span><br><span class="line"><span class="preprocessor"># 'Bart Simpson'</span></span><br><span class="line">bart.score</span><br><span class="line"><span class="preprocessor"># 59</span></span><br></pre></td></tr></table></figure></span>
-</code></pre><ul>
-<li>数据封装：</li>
-</ul>
-<ol>
-<li><p>面向对象编程的一个重要特点就是数据封装。在上面的<code>Student</code>类中，每个实例就拥有各自的<code>name</code>和<code>score</code>这些数据。我们可以通过函数来访问这些数据，比如打印一个学生的成绩：<br>可以直接在<code>Student</code>类的内部定义访问数据的函数  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_info</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s: %s'</span> % (self.name, self.score)</span><br></pre></td></tr></table></figure>
-<p> 这样可以直接调用就可以了</p>
- <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart.<span class="function"><span class="title">print_score</span><span class="params">()</span></span></span><br><span class="line">Bart Simpson: <span class="number">59</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>具体这样的实现方式还有很多，比如你可以用像java中的set和get方法来实现数据的封装。等等，我在这里就不一一详细解析了。</p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>之前学过java，也了解过面向对象。类与对象：类的封装、多态与继承也就是面向对象的三大特性。也可以理解说一切集合都是类，自然界中的一切都是对象。但是python中的面向对象很明显给我的感觉就是“好写”。  </p>
-</blockquote>
-<ul>
-<li>类和实例：  </li>
-</ul>
-<ol>
-<li>定义类：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><code>class</code>后面是类名，即<code>Student</code>与java中相同，类名通常首字母大写。紧接着是<code>(object)</code>，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用<code>object</code>类，这是所有类最终都会继承的类。</p>
-<ol>
-<li>实例化：]]>
-    
-    </summary>
-    
-      <category term="python" scheme="http://qiuncheng.com/tags/python/"/>
-    
-      <category term="python" scheme="http://qiuncheng.com/categories/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[python中random模块简析]]></title>
-    <link href="http://qiuncheng.com/2015/08/27/6-python-random-funs/"/>
-    <id>http://qiuncheng.com/2015/08/27/6-python-random-funs/</id>
-    <published>2015-08-27T02:44:20.000Z</published>
-    <updated>2015-09-21T17:08:58.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>Python中的random用于生成随机数。下面简析下random中常用的几个函数。  </p>
-</blockquote>
-<ul>
-<li><p>random.random<br>random.random()用于生成一个0到1的随机浮点数: 0 &lt;= n &lt; 1.0</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.random()</span><br><span class="line"><span class="number">0.690448381007</span> <span class="preprocessor"># 输出<span class="number">1</span></span></span><br><span class="line"><span class="number">0.89515663051</span>  <span class="preprocessor"># 输出<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.uniform<br>random.uniform的函数原型为：random.uniform(a, b)，用于生成一个指定范围内的随机符点数，两个参数其中一个是上限，一个是下限。如果a &gt; b，则生成的随机数n: b &lt;= n &lt;= a。如果 a &lt;b， 则 a &lt;= n &lt;= b。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   print random.uniform(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">19.5205130852</span></span><br><span class="line">print random.uniform(<span class="number">30</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">22.3666600118</span></span><br><span class="line">   <span class="preprocessor"># 不同的机器可能显示的结果不相同。</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>random.randint<br>random.randint()的函数原型为：random.randint(a, b)，用于生成一个指定范围内的整数。其中参数a是下限，参数b是上限，生成的随机数n: a &lt;= n &lt;= b</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.randint(<span class="number">12</span>,<span class="number">20</span>)  <span class="preprocessor">#生成的随机数n: <span class="number">12</span> &lt;= n &lt;= <span class="number">20</span>  </span></span><br><span class="line">print random.randint(<span class="number">20</span>,<span class="number">20</span>)  <span class="preprocessor">#结果永远是<span class="number">20</span>  </span></span><br><span class="line"><span class="preprocessor">#print random.randint(<span class="number">20</span>, <span class="number">10</span>)   #该语句是错误的。下限必须小于上限。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.randrange<br>random.randrange的函数原型为：random.randrange([start], stop[, step])，从指定范围内，按指定基数递增的集合中 获取一个随机数。如：random.randrange(10, 100, 2)，结果相当于从[10, 12, 14, 16, … 96, 98]序列中获取一个随机数。random.randrange(10, 100, 2)在结果上与 random.choice(range(10, 100, 2) 等效。</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print random.randrange(<span class="number">10</span>,<span class="number">100</span>,<span class="number">2</span>) <span class="preprocessor">#从<span class="number">10</span>开始到<span class="number">100</span>结束，步长为<span class="number">2</span>的序列中，随机选一个</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.choice<br>random.choice从序列中获取一个随机元素。其函数原型为：random.choice(sequence)。参数sequence表示一个有序类型。这里要说明 一下：sequence在python不是一种特定的类型，而是泛指一系列的类型。list, tuple, 字符串都属于sequence。有关sequence可以查看python手册数据模型这一章，也可以参考：<a href="http://www.17xie.com/read-37422.html" target="_blank" rel="external">http://www.17xie.com/read-37422.html</a> 。下面是使用choice的一些例子：</p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">"学习Python"</span>)</span></span>         #从字符串里随机选取一个字符，但是我发现还会出现‘？’这个是怎么回事还有待解决。</span><br><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="string">"JGood"</span>,<span class="string">"is"</span>, <span class="string">"a"</span>,<span class="string">"handsome"</span>, <span class="string">"boy"</span>])</span></span>  </span><br><span class="line">print random.<span class="function"><span class="title">choice</span><span class="params">((<span class="string">"Tuple"</span>,<span class="string">"List"</span>, <span class="string">"Dict"</span>)</span></span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.shuffle<br>random.shuffle的函数原型为：random.shuffle(x[, random])，用于将一个列表中的元素打乱。如:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">p</span> = [<span class="string">"Python"</span>,<span class="string">"is"</span>, <span class="string">"powerful"</span>,<span class="string">"simple"</span>, <span class="string">"and so on..."</span>]  </span><br><span class="line">random.<span class="function"><span class="title">shuffle</span><span class="params">(p)</span></span>  </span><br><span class="line">print <span class="tag">p</span>  </span><br><span class="line">#---- 结果（不同机器上的结果可能不一样。）  </span><br><span class="line">#[<span class="string">'powerful'</span>, <span class="string">'simple'</span>, <span class="string">'is'</span>, <span class="string">'Python'</span>, <span class="string">'and so on...'</span>]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.sample<br>random.sample的函数原型为：random.sample(sequence, k)，从指定序列中随机获取指定长度的片断。sample函数不会修改原有序列。  </p>
-<pre><code><span class="built_in">list</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]
-slice = random.sample(<span class="built_in">list</span>, <span class="number">5</span>)  <span class="preprocessor">#从list中随机获取<span class="number">5</span>个元素，作为一个片断返回</span>
-print slice
-print <span class="built_in">list</span> <span class="preprocessor">#原有序列并没有改变。</span>
-</code></pre></li>
-</ul>
-<blockquote>
-<p>上面这些方法是random模块中最常用的，在Python手册中，还介绍其他的方法。感兴趣的朋友可以通过查询Python手册了解更详细的信息。所有代码如下：  </p>
-</blockquote>
-<pre><code>import random
-print random.<span class="function"><span class="title">random</span><span class="params">()</span></span>
-<span class="number">0.72487604051</span>
-print random.<span class="function"><span class="title">uniform</span><span class="params">(<span class="number">10</span>, <span class="number">30</span>)</span></span>
-<span class="number">17.6255210608</span>
-print random.<span class="function"><span class="title">randint</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></span>
-<span class="number">16</span>
-＃ 注意生成的是整数
-... 
-print random.<span class="function"><span class="title">randrange</span><span class="params">(<span class="number">1</span>, <span class="number">100</span> ,<span class="number">5</span>)</span></span>
-<span class="number">11</span>
-print random.<span class="function"><span class="title">randrange</span><span class="params">(<span class="number">0</span>, <span class="number">100</span> ,<span class="number">5</span>)</span></span>
-<span class="number">10</span>
-print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-python
-print random.<span class="function"><span class="title">choice</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-<span class="number">1</span>
-print randon.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-Traceback (most recent call last):
-  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;
-NameError: name <span class="string">'randon'</span> is not defined
-print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-h
-print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-o
-print random.<span class="function"><span class="title">choice</span><span class="params">(<span class="string">'hellopython'</span>)</span></span>
-h
-print random.<span class="function"><span class="title">shuffle</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-None
-print random.<span class="function"><span class="title">shuffle</span><span class="params">([<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>])</span></span>
-None
-<span class="tag">p</span> = [<span class="number">1</span>, <span class="string">'hello'</span>, <span class="string">'python'</span>, <span class="number">23</span>]
-random.<span class="function"><span class="title">shuffle</span><span class="params">(p)</span></span>
-print <span class="tag">p</span>
-[<span class="number">23</span>, <span class="string">'hello'</span>, <span class="number">1</span>, <span class="string">'python'</span>]
-sp = random.<span class="function"><span class="title">sample</span><span class="params">(p, <span class="number">2</span>)</span></span>
-print sp
-[<span class="number">1</span>, <span class="string">'hello'</span>]
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>Python中的random用于生成随机数。下面简析下random中常用的几个函数。  </p>
-</blockquote>
-<ul>
-<li><p>random.random<br>random.random()用于生成一个0到1的随机浮点数: 0 &lt;= n &lt; 1.0</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print random.random()</span><br><span class="line"><span class="number">0.690448381007</span> <span class="preprocessor"># 输出<span class="number">1</span></span></span><br><span class="line"><span class="number">0.89515663051</span>  <span class="preprocessor"># 输出<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>random.uniform<br>random.uniform的函数原型为：random.uniform(a, b)，用于生成一个指定范围内的随机符点数，两个参数其中一个是上限，一个是下限。如果a &gt; b，则生成的随机数n: b &lt;= n &lt;= a。如果 a &lt;b， 则 a &lt;= n &lt;= b。  </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   print random.uniform(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">19.5205130852</span></span><br><span class="line">print random.uniform(<span class="number">30</span>, <span class="number">20</span>)</span><br><span class="line">   <span class="number">22.3666600118</span></span><br><span class="line">   <span class="preprocessor"># 不同的机器可能显示的结果不相同。</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>]]>
     
     </summary>
     
