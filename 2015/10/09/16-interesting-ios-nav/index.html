@@ -346,7 +346,7 @@ qiunchengblogFirebase.child("sum").on("value", function(data) {
   var current_counter = data.val();
   if( $("#sum_counter").length > 0  && current_counter >1 ){
       $("#sum_counter").html(
-        "&nbsp;|&nbsp;总访问量&nbsp;<font style='color:#EA8'>"+ current_counter +"</font>&nbsp;次"
+        "&nbsp;&nbsp;总访问量&nbsp;<font style='color:#EA8'>"+ current_counter +"</font>&nbsp;次"
        );
   };
 });
@@ -355,7 +355,7 @@ qiunchengblogFirebase.child("detail/"+current_url).on("value", function(data){
   var detail_counter = data.val();
   if($("#detail_counter").length > 0 && detail_counter > 1){
     $("#detail_counter").html(
-      "&nbsp;本页访问量&nbsp;<font style='color:#EA8'>"+ detail_counter +"</font>&nbsp;次"
+      "本页访问量&nbsp;<font style='color:#EA8'>"+ detail_counter +"</font>&nbsp;次&nbsp;"
     );
   }
 });
