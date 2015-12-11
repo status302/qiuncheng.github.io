@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-12-08T12:41:04.000Z</updated>
+  <updated>2015-12-11T06:47:39.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,101 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[关于我是用过的iOS数据存储的一些总结[未完待续]]]></title>
+    <link href="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/"/>
+    <id>http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/</id>
+    <published>2015-12-11T06:47:39.000Z</published>
+    <updated>2015-12-11T06:47:39.000Z</updated>
+    <content type="html"><![CDATA[<h4 id="前言">前言</h4><blockquote>
+<p>关于自己目前学习遇到过的数据存储相关的一些总结，同时也是味了方便自己在将来开发过程中回顾。  </p>
+</blockquote>
+<hr>
+<h4 id="正文">正文</h4><h5 id="1-_Use_the_NSCoding_protocol_to_read_and_write_data-">1. Use the NSCoding protocol to read and write data.</h5><p>这个是我在完成了Apple官方推出的<a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1" target="_blank" rel="external">Start Developing iOS Apps (Swift)</a>这个小小的Demo之后认识的一个<code>Persist Data</code>方式。也是我遇到的第一个数据存储方式，它就像我的初恋一般，每回我想存储数据我就第一个会想起它来，虽然大多数情况下用不上。<br>下面我简单总结下这种<code>Persist Data</code>:</p>
+<ul>
+<li>需要使用到的协议：<code>NSCoding</code></li>
+<li><p>需要使用到协议<code>NSCoding</code>中的方法：</p>
+<ol>
+<li><figure class="highlight"><figcaption><span>encodeWithCoder(aCoder: NSCoder)  ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. ```init(coder aDecoder: NSCoder)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>使用方式：  </p>
+<ol>
+<li><p>将你要保存的数据进行归档</p>
+<ul>
+<li>使用<code>encodeWithCoder</code>方法：</li>
+<li>例如：<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func encodeWithCoder(aCoder: <span class="built_in">NSCoder</span>) &#123;</span><br><span class="line">    aCoder<span class="variable">.encodeObject</span>(name, forKey: PropertyKey<span class="variable">.nameKey</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>在这里需要注意的是你必须为<code>name</code>属性提供key，这个key将来在解码的时候会用到。</strong></p>
+</li>
+<li><p>将数据进行解档（姑且先这么说吧，就是unarchive）</p>
+<ul>
+<li>使用<code>init(coder aDecoder: NSCoder)</code></li>
+<li><p>例如：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">required convenience init?(coder aDecoder: <span class="built_in">NSCoder</span>) &#123;</span><br><span class="line">    let name = aDecoder<span class="variable">.decodeObjectForKey</span>(PropertyKey<span class="variable">.nameKey</span>) as! String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>需要注意的是这里用到了上面的key，这里还用到了convenience，那就需要调用<code>designated init</code>方法了，不过这个Xcode会有提示的。</strong></p>
+</li>
+</ul>
+</li>
+<li><p>为你的data创建一个路径。</p>
+<ul>
+<li><p>具体操作如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> let DocumentsDirectory = <span class="built_in">NSFileManager</span>()<span class="variable">.URLsForDirectory</span>(<span class="variable">.DocumentDirectory</span>, inDomains: <span class="variable">.UserDomainMask</span>)<span class="variable">.first</span>!</span><br><span class="line"><span class="keyword">static</span> let ArchiveURL = DocumentsDirectory<span class="variable">.URLByAppendingPathComponent</span>(<span class="string">"meals"</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>注意下在这里你使用了static方法将来在调用的时候直接使用类名即可。</strong></p>
+</li>
+</ul>
+</li>
+<li>接下来比较主要的就是保存和使用数据了。<ul>
+<li>这里比较主要就是两句  <figure class="highlight"><figcaption><span>toFile: Meal.ArchiveURL.path!)```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```NSKeyedUnarchiver.unarchiveObjectWithFile(Meal.ArchiveURL.path!) as? [Meal]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h5 id="2-_使用NSUserDefault保存数据（虽然我知道这种方式，但是仔细翻了下自己的Demo，发现竟然没有相关的Demo。让我哭会~）">2. 使用<code>NSUserDefault</code>保存数据（<del>虽然我知道这种方式，但是仔细翻了下自己的Demo，发现竟然没有相关的Demo。让我哭会</del>~）</h5><p>但是我又看了下官方文档，感觉这个真的没啥好说的，一般用来设置啥的，以后遇到了再看吧，不过我简单用一个例子介绍下吧。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> userDefault = <span class="type">NSUserDefaults</span>()</span><br><span class="line">userDefault.setBool(<span class="literal">true</span>, forKey: <span class="string">"marry"</span>)</span><br><span class="line">userDefault.setObject(<span class="string">"zhangsan"</span>, forKey:<span class="string">"name"</span>)</span><br><span class="line">userDefault.setInteger(<span class="number">19</span>, forKey: <span class="string">"age"</span>)</span><br><span class="line"><span class="keyword">var</span> name = userDefault.valueForKey(<span class="string">"name"</span>)</span><br><span class="line"><span class="built_in">print</span>(name!)</span><br></pre></td></tr></table></figure></p>
+<p><strong>这里的打印结果是<code>zhangsan</code></strong><br><em>我猜测一般应用的启动界面应该就是用的这个NSUserDefault保存的。大致就是当用户在第一次启动的之后就将那个Flag设置为false，并且今后不更新应用不改变那个值。</em></p>
+<hr>
+<h5 id="3-_使用Plist保存数据">3. 使用<code>Plist</code>保存数据</h5><p>这个我只是在书上看到过，不过幸亏自己也做了小Demo。<br>    比如：在我的Demo里我新建了一个<code>data.plist</code>,如下面图片所示：<br>    <img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151210-0.png" alt=""><br>    然后我在ViewController里调用读取这个plist里的文件。代码如下：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let dict = <span class="built_in">NSDictionary</span>(contentsOfURL: <span class="built_in">NSURL</span>(fileURLWithPath: <span class="built_in">NSBundle</span><span class="variable">.mainBundle</span>()<span class="variable">.pathForResource</span>(<span class="string">"data"</span>, ofType: <span class="string">"plist"</span>)!))</span><br><span class="line">        </span><br><span class="line">print(dict!) <span class="comment">//打印出这个dict</span></span><br><span class="line">let name:[String] = dict![<span class="string">"name"</span>] as! [String]</span><br><span class="line">print(<span class="string">"names为：\(name)"</span>) <span class="comment">//打印出所有的名字</span></span><br><span class="line">        </span><br><span class="line">let ages:[String] = dict![<span class="string">"age"</span>] as! [String]</span><br><span class="line">let age:[String] = dict?<span class="variable">.valueForKey</span>(<span class="string">"age"</span>) as! [String]</span><br><span class="line"><span class="comment">//上面两种方式调用dict里面的东西相同</span></span><br><span class="line">print(<span class="string">"ages 为：\(ages)"</span>)</span><br><span class="line">print(age)</span><br></pre></td></tr></table></figure></p>
+<p>在这里打印的结果为：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    age =     (</span><br><span class="line">        <span class="number">18</span>,</span><br><span class="line">        <span class="number">19</span>,</span><br><span class="line">        <span class="number">20</span></span><br><span class="line">    );</span><br><span class="line">    name =     (</span><br><span class="line">        Zhangsan,</span><br><span class="line">        lisi,</span><br><span class="line">        wangwu</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">names为：[<span class="string">"Zhangsan"</span>, <span class="string">"lisi"</span>, <span class="string">"wangwu"</span>]</span><br><span class="line">ages 为：[<span class="string">"18"</span>, <span class="string">"19"</span>, <span class="string">"20"</span>]</span><br><span class="line">[<span class="string">"18"</span>, <span class="string">"19"</span>, <span class="string">"20"</span>]</span><br></pre></td></tr></table></figure></p>
+<p><strong>成功的读取了Plist里的数据。写入plist也类似，需要用到方法<code>writeToPath</code></strong></p>
+<hr>
+<h5 id="4-_使用CoreData">4. 使用<code>CoreData</code></h5><p>有很多人说<code>CoreData</code>不好用，还一直在推荐<code>Realm</code>,不过对于我这种新手来说，真的无所谓，我先学会是用如何使用<code>CoreData</code>在说吧，毕竟<code>CoreData</code>是apple自己推出的，也算是最基本的吧，<code>Realm</code>是第三方的，你连这最基本的都不会用还怎么用第三方呢？所以我目前还是处于学会如何使用方面，好多原理不太懂，不过我相信随着我学习的加深，我会在后来对他们有一个清晰的认识的，先对自己说声加油哈！  </p>
+<ul>
+<li>在新建工程的时候勾选CoreData选项<br>  这样在你的项目AppDelegate.swift就会生成<code>// MARK: - Core Data stack</code>与<code>// MARK: - Core Data Saving support</code>的文件。这两个标记中含有的代码就与你使用CoreData有关系的。<br>  同时在你的文件夹结构里会自动建立<code>xxx.xcdatamodel</code>，其中的<code>xxx</code>表示的是你的<code>AppDelegate.swift</code>里的<code>NSBundle.mainBundle().URLForResource(&quot;htiList&quot;, withExtension: &quot;momd&quot;)!</code>对应的名字。</li>
+<li>接下来在<code>xxx.xcdatamodel</code>创建数据实体。比如我们在这里创建了一个车<code>Person</code>的实体。<br>  注意：<u>在CoreData里一个实体<code>Entity</code>就相当于一个类。</u><br>如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151211-0.png" alt="创建实体后结果"></li>
+<li><p>接下来就可以保存数据到Core Data了。</p>
+<ol>
+<li>首先<code>import CoreData</code></li>
+<li>更换模型<code>var people = [NSManagedObject]()</code></li>
+<li><p>实现保存</p>
+ <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    func saveName(name: String) &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1. 获取delegate的一个引用</span></span><br><span class="line">let appDelegate =</span><br><span class="line"><span class="built_in">UIApplication</span><span class="variable">.sharedApplication</span>()<span class="variable">.delegate</span> as! AppDelegate</span><br><span class="line"><span class="comment">// 获取NSManagedObjectContext</span></span><br><span class="line">let managedContext = appDelegate<span class="variable">.managedObjectContext</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2插入一个对象到managed object context中</span></span><br><span class="line">let entity =  <span class="built_in">NSEntityDescription</span><span class="variable">.entityForName</span>(<span class="string">"Person"</span>,</span><br><span class="line">    inManagedObjectContext:managedContext)</span><br><span class="line"></span><br><span class="line">let person = <span class="built_in">NSManagedObject</span>(entity: entity!,</span><br><span class="line">    insertIntoManagedObjectContext: managedContext)</span><br><span class="line"></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line">person<span class="variable">.setValue</span>(name, forKey: <span class="string">"name"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    try managedContext<span class="variable">.save</span>()</span><br><span class="line">    <span class="comment">//5</span></span><br><span class="line">    people<span class="variable">.append</span>(person)</span><br><span class="line">&#125; catch let error as <span class="built_in">NSError</span>  &#123;</span><br><span class="line">    print(<span class="string">"Could not save \(error), \(error.userInfo)"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取数据</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">fetchData</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 获取Core data 中的数据</span></span><br><span class="line">    <span class="comment">//1</span></span><br><span class="line">    <span class="keyword">let</span> appDelegate =</span><br><span class="line">    <span class="type">UIApplication</span>.sharedApplication().delegate <span class="keyword">as</span>! <span class="type">AppDelegate</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> managedContext = appDelegate.managedObjectContext</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2</span></span><br><span class="line">    <span class="keyword">let</span> fetchRequest = <span class="type">NSFetchRequest</span>(entityName: <span class="string">"Person"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3</span></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> results =</span><br><span class="line">        try managedContext.executeFetchRequest(fetchRequest)</span><br><span class="line">        people = results <span class="keyword">as</span>! [<span class="type">NSManagedObject</span>]</span><br><span class="line">    &#125; catch <span class="keyword">let</span> error <span class="keyword">as</span> <span class="type">NSError</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Could not fetch <span class="subst">\(error)</span>, <span class="subst">\(error.userInfo)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<p><span style="color:orange">好了，应该总结的够多了吧，不过未完待续…</span></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="前言">前言</h4><blockquote>
+<p>关于自己目前学习遇到过的数据存储相关的一些总结，同时也是味了方便自己在将来开发过程中回顾。  </p>
+</blockquote>
+<hr>
+<h4 id="正文">正文</h4><h5 id="1-_Use_]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[你的4寸iPhone出现上下黑框了吗？]]></title>
@@ -700,55 +795,6 @@
       <category term="python" scheme="http://qiuncheng.com/categories/python/"/>
     
       <category term="转载" scheme="http://qiuncheng.com/categories/python/%E8%BD%AC%E8%BD%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[偏函数是什么－飘逸的python]]></title>
-    <link href="http://qiuncheng.com/2015/09/06/8-python-functools-partial/"/>
-    <id>http://qiuncheng.com/2015/09/06/8-python-functools-partial/</id>
-    <published>2015-09-06T04:12:51.000Z</published>
-    <updated>2015-09-21T17:09:48.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  </p>
-</blockquote>
-<ul>
-<li><p>偏函数是干嘛的？<br>简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  </p>
-<pre><code>import functools
-int2 = functools.<span class="function"><span class="title">partial</span><span class="params">(int, base=<span class="number">2</span>)</span></span>
-<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1000000'</span>)</span></span>
-<span class="number">64</span>
-<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1010101'</span>)</span></span>
-<span class="number">85</span>
-</code></pre><p>  其中的int2()就是一个偏函数。  </p>
-</li>
-<li>偏函数能解决哪些问题？<a id="more"></a><br>当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。</li>
-</ul>
-<blockquote>
-<p>具体想了解更多关于偏函数的情况请移步到<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386819893624a7edc0e3e3df4d5d852a352b037c93ec000" target="_blank" rel="external">廖雪峰的python教程官网</a>。或者移步到官网，考虑到官网是英语，就不放链接上来了。</p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>偏函数是什么？这真是一个好深的问题呢！因为之前都没有听说过偏函数，之前的C、Java哪里会有这么古怪的名词呢！那么就让我们来一探究竟吧！  </p>
-</blockquote>
-<ul>
-<li><p>偏函数是干嘛的？<br>简单来讲，偏函数的作用就是把函数的某些参数值固定住（也就是设置成默认值）返回一个新的函数，调用这个心函数会更简单。如：  </p>
-<pre><code>import functools
-int2 = functools.<span class="function"><span class="title">partial</span><span class="params">(int, base=<span class="number">2</span>)</span></span>
-<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1000000'</span>)</span></span>
-<span class="number">64</span>
-<span class="function"><span class="title">int2</span><span class="params">(<span class="string">'1010101'</span>)</span></span>
-<span class="number">85</span>
-</code></pre><p>  其中的int2()就是一个偏函数。  </p>
-</li>
-<li>偏函数能解决哪些问题？]]>
-    
-    </summary>
-    
-      <category term="python" scheme="http://qiuncheng.com/tags/python/"/>
-    
-      <category term="python" scheme="http://qiuncheng.com/categories/python/"/>
     
   </entry>
   
