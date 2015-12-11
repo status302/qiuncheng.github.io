@@ -237,10 +237,10 @@
     <link href="http://qiuncheng.com/2015/11/21/23-git-error-checkout/"/>
     <id>http://qiuncheng.com/2015/11/21/23-git-error-checkout/</id>
     <published>2015-11-21T14:55:07.000Z</published>
-    <updated>2015-11-22T05:37:27.000Z</updated>
-    <content type="html"><![CDATA[<h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png" alt="解决方案"><br>大致分析下就是你的分支里有文件修改了还没有保存，其实我是保存过的，我还特地进了Xcode去保存了下，但是这里不知道这是为什么。按着这个人的回答做就是了，果然没错，成功切换到master，并合并到主分支。 哈哈，其实也蛮简单的，就是第一次用就遇到这么大的问题有点让我不甘心呐！<br>好了，既然讲到git，我就在网上找了一些git的常用命令，<strong>转发转发转发</strong>重要的事情说三遍。文章末尾我也附上原文链接。   </p>
+    <updated>2015-12-11T06:54:02.000Z</updated>
+    <content type="html"><![CDATA[<h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，<a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png" alt="解决方案"><br>大致分析下就是你的分支里有文件修改了还没有保存，其实我是保存过的，我还特地进了Xcode去保存了下，但是这里不知道这是为什么。按着这个人的回答做就是了，果然没错，成功切换到master，并合并到主分支。 哈哈，其实也蛮简单的，就是第一次用就遇到这么大的问题有点让我不甘心呐！<br>好了，既然讲到git，我就在网上找了一些git的常用命令，<strong>转发转发转发</strong>重要的事情说三遍。文章末尾我也附上原文链接。   </p>
 <hr>
-<h5 id="git常用命令【转载】<!-more->">git常用命令【转载】<a id="more"></a></h5><blockquote>
+<h5 id="git常用命令【转载】">git常用命令【转载】</h5><blockquote>
 <h3 id="新建repository">新建repository</h3></blockquote>
 <p>本地目录下，在命令行里新建一个代码仓库（repository）<br>里面只有一个README.md<br>命令如下：  </p>
 <h4 id="touch_README-md">touch README.md</h4><h4 id="git_init">git init</h4><p>初始化repository  </p>
@@ -298,9 +298,7 @@
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/gitQQ20151121-0.png" alt="解决方案"><br>大致分析下就是你的分支里有文件修改了还没有保存，其实我是保存过的，我还特地进了Xcode去保存了下，但是这里不知道这是为什么。按着这个人的回答做就是了，果然没错，成功切换到master，并合并到主分支。 哈哈，其实也蛮简单的，就是第一次用就遇到这么大的问题有点让我不甘心呐！<br>好了，既然讲到git，我就在网上找了一些git的常用命令，<strong>转发转发转发</strong>重要的事情说三遍。文章末尾我也附上原文链接。   </p>
-<hr>
-<h5 id="git常用命令【转载】<!-more->">git常用命令【转载】]]>
+    <![CDATA[<h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，]]>
     
     </summary>
     
