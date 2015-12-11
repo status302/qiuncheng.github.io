@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-12-11T06:47:39.000Z</updated>
+  <updated>2015-12-11T06:48:57.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -18,8 +18,8 @@
     <title><![CDATA[关于我是用过的iOS数据存储的一些总结[未完待续]]]></title>
     <link href="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/"/>
     <id>http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/</id>
-    <published>2015-12-11T06:47:39.000Z</published>
-    <updated>2015-12-11T06:47:39.000Z</updated>
+    <published>2015-12-11T06:48:57.000Z</published>
+    <updated>2015-12-11T06:48:57.000Z</updated>
     <content type="html"><![CDATA[<h4 id="前言">前言</h4><blockquote>
 <p>关于自己目前学习遇到过的数据存储相关的一些总结，同时也是味了方便自己在将来开发过程中回顾。  </p>
 </blockquote>
@@ -27,7 +27,7 @@
 <h4 id="正文">正文</h4><h5 id="1-_Use_the_NSCoding_protocol_to_read_and_write_data-">1. Use the NSCoding protocol to read and write data.</h5><p>这个是我在完成了Apple官方推出的<a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1" target="_blank" rel="external">Start Developing iOS Apps (Swift)</a>这个小小的Demo之后认识的一个<code>Persist Data</code>方式。也是我遇到的第一个数据存储方式，它就像我的初恋一般，每回我想存储数据我就第一个会想起它来，虽然大多数情况下用不上。<br>下面我简单总结下这种<code>Persist Data</code>:</p>
 <ul>
 <li>需要使用到的协议：<code>NSCoding</code></li>
-<li><p>需要使用到协议<code>NSCoding</code>中的方法：</p>
+<li><p>需要使用到协议<code>NSCoding</code>中的方法：<a id="more"></a></p>
 <ol>
 <li><figure class="highlight"><figcaption><span>encodeWithCoder(aCoder: NSCoder)  ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. ```init(coder aDecoder: NSCoder)</span><br></pre></td></tr></table></figure>
 </li>
@@ -100,7 +100,11 @@
 <p>关于自己目前学习遇到过的数据存储相关的一些总结，同时也是味了方便自己在将来开发过程中回顾。  </p>
 </blockquote>
 <hr>
-<h4 id="正文">正文</h4><h5 id="1-_Use_]]>
+<h4 id="正文">正文</h4><h5 id="1-_Use_the_NSCoding_protocol_to_read_and_write_data-">1. Use the NSCoding protocol to read and write data.</h5><p>这个是我在完成了Apple官方推出的<a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1">Start Developing iOS Apps (Swift)</a>这个小小的Demo之后认识的一个<code>Persist Data</code>方式。也是我遇到的第一个数据存储方式，它就像我的初恋一般，每回我想存储数据我就第一个会想起它来，虽然大多数情况下用不上。<br>下面我简单总结下这种<code>Persist Data</code>:</p>
+<ul>
+<li>需要使用到的协议：<code>NSCoding</code></li>
+<li><p>需要使用到协议<code>NSCoding</code>中的方法：]]>
+    
     </summary>
     
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
