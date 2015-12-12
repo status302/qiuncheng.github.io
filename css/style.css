@@ -414,7 +414,7 @@ body {
 #logo,
 #subtitle {
   text-decoration: none;
-  color: #ccc;
+  color: #fff;
   font-weight: 300;
   text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
@@ -422,7 +422,7 @@ body {
   font-size: 40px;
   line-height: 40px;
   letter-spacing: 2px;
-  background: #e32d40;
+  background: #59b390;
   padding: 5px 10px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
