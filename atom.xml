@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-12-11T06:48:57.000Z</updated>
+  <updated>2015-12-20T12:21:53.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[马上就要考试了,坚持一月不上网(:~~~]]></title>
+    <link href="http://qiuncheng.com/2015/12/20/30-blog-pause-update/"/>
+    <id>http://qiuncheng.com/2015/12/20/30-blog-pause-update/</id>
+    <published>2015-12-20T12:03:57.000Z</published>
+    <updated>2015-12-20T12:21:53.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>2015年马上就要结束了，想想今年过的还挺快的。下周起也要大三上期期末考试了。~~~~这真是一个悲伤的故事。为了备考，我决定从明天起一直到放假都不再碰电脑了，不过书还是要看的(:-:)。。。  </p>
+</blockquote>
+<p>复(yu)习(xi)路很长，加油！<br>所以<del>找不到我</del>（见了下图）一定不要惊讶。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/bg_404_197cad791f518e37b47f7264221bab94.png" alt="404 Not Found."><br><br></p>
+<blockquote>
+<p><u>因为我一定在远方默默复习！呼吸学习气息！</u>  </p>
+</blockquote>
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/mv1.jpg" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>2015年马上就要结束了，想想今年过的还挺快的。下周起也要大三上期期末考试了。~~~~这真是一个悲伤的故事。为了备考，我决定从明天起一直到放假都不再碰电脑了，不过书还是要看的(:-:)。。。  </p>
+</blockquote>
+<p>复(yu)]]>
+    </summary>
+    
+      <category term="Life" scheme="http://qiuncheng.com/tags/Life/"/>
+    
+      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[关于我是用过的iOS数据存储的一些总结[未完待续]]]></title>
@@ -739,54 +767,6 @@
     <summary type="html">
     <![CDATA[<h3 id="每个程序员都应该学习使用Python或Ruby">每个程序员都应该学习使用Python或Ruby</h3><p>如果你是个学生,你应该会C，C++和Java。还会一些VB，或C#/.NET。多少你还可能开发过一些Web网页，你知道一些HTML，CSS和JavaScript知识。总体上说，我们很难发现会有学生显露出掌握超出这几种语言范围外的语言的才能。这真让人遗憾，因为还有很多种编程语言，它们能让你成为一个更好的程序员。</p>
 <p>在这篇文章里，我将会告诉你，为什么你一定要学习Python或Ruby语言。]]>
-    
-    </summary>
-    
-      <category term="python" scheme="http://qiuncheng.com/tags/python/"/>
-    
-      <category term="转载" scheme="http://qiuncheng.com/tags/%E8%BD%AC%E8%BD%BD/"/>
-    
-      <category term="python" scheme="http://qiuncheng.com/categories/python/"/>
-    
-      <category term="转载" scheme="http://qiuncheng.com/categories/python/%E8%BD%AC%E8%BD%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[【python】python编码规范]]></title>
-    <link href="http://qiuncheng.com/2015/09/06/9-python-coding-regular/"/>
-    <id>http://qiuncheng.com/2015/09/06/9-python-coding-regular/</id>
-    <published>2015-09-06T09:09:35.000Z</published>
-    <updated>2015-09-21T16:46:33.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="PEP介绍">PEP介绍</h3><p>PEP是 Python Enhancement Proposal 的缩写，是Python增强建议书的意思。<br>Python的代码风格由<a href="https://www.python.org/dev/peps/pep-0008/#id37" target="_blank" rel="external">PEP 8</a>描述。这个文档描述了Python编程风格的方方面面。在遵守这个文档的条件下，不同程序员编写的Python代码可以保持最大程度的相似风格。这样就易于阅读，易于在程序员之间交流。<br><a id="more"></a></p>
-<h3 id="命名规则">命名规则</h3><h3 id="不同的命名风格">不同的命名风格</h3><p>有许多不同的命名风格。以下的有助于辨认正在使用的命名风格，这独立于它们的作用。</p>
-<blockquote>
-<p>•    小写串 (lowercase)<br>•    带下划线的小写串 (lower_case_with_underscores)<br>•    大写串 (UPPERCASE)<br>•    带下划线的大写串 (UPPER_CASE_WITH_UNDERSCORES)<br>•    首字母大写单词串 (CapitalizedWords) (或 CapWords、CamelCase,因其字母看起来错落有致，故得此名)<br>•    注意: 在CapWords中使用缩写，需要把缩写的所有字母大写。故HTTPServerError比HttpServerError更好。<br>•    混合大小写串 (mixedCase) (与首字母大写串不同之处在于第一个字符是小写的！)<br>•    带下划线的首字母大写串 (Capitalized_Words_With_Underscores) (丑陋！)  </p>
-</blockquote>
-<h3 id="避免采用的名字">避免采用的名字</h3><p>决不能使用字母’l’(L的小写字母)、’O’(o的大写字母)、’I’(i的大写字母)) 作为单个字符的变量名。<br>在一些字体中，这些字符不能与数字1和0区别开。当想要使用’l’时，用’L’代替它。</p>
-<h3 id="包和模块名(Package_and_Module_Names)">包和模块名(Package and Module Names)</h3><p>模块名应该是简短的、全部小写的名字。可以在模块名中使用下划线以提高可读性。Python包名也应该是简短的、全部小写的名字，尽管不推荐使用下划线。<br>因为模块名被映射到文件名，有些文件系统大小写不敏感并且截短长名字，所以把 模块名选择为相当短就很重要了——这在Unix上不是问题，但当把代码迁移到Mac、Windows或DOS上时，就可能是个问题了。<br>当一个用C或C++写的扩展模块，有一个伴随的Python模块来提供一个更高层(例如，更面向对象)的接口时，C/C++ 模块名有一个前导下划线 (如：_socket)。</p>
-<h3 id="类名(Class_Names)">类名(Class Names)</h3><p>几乎没有例外，类名使用首字母大写单词串(CapWords)的约定。内部使用的类使用一个额外的前导下划线。</p>
-<h3 id="异常名_(Exception_Names)">异常名 (Exception Names)</h3><p>因为异常应该是类，故类命名约定也适用于异常。然而，你应该对异常名添加后缀”Error”(如果该异常的确是一个错误)。</p>
-<h3 id="全局变量名(Global_Variable_Names)">全局变量名(Global Variable Names)</h3><p>(我们希望这些变量只打算用于一个模块内部)。<br>对设计为通过”from M import “来使用的模块，应采用all机制来防止导出全局变量；或者使用旧的约定，为该类全局变量加一个前导下划线(可能你想表明这些全局变量是只限制在该模块内部使用，”module non-public”)。<br>补充：<br>在python的module中，可以使用 all 函数来定义这个module像其他引用自己的module导入的变量：<br><strong>all</strong> = <a href="">‘bar’, ‘baz’</a><br>waz = 5<br>bar = 10<br>当另一个模块中使用import *声明，waz和bar变量不会被导入，all可以隐藏不想被import的默认值。</p>
-<h3 id="函数名(Function_Names)">函数名(Function Names)</h3><p>函数名应该为小写，必要时可用下划线分隔单词以增加可读性。<br>混合大小写 (mixedCase) 仅被允许用于这种风格已经占优势的上下文 (如: threading.py)，以便保持向后兼容。</p>
-<h3 id="函数和方法的参数(Function_and_method_arguments)">函数和方法的参数(Function and method arguments)</h3><p>对实例的方法，总是用’self’做第一个参数。<br>对类的方法，总是用’cls’做第一个参数。<br>（如果函数的参数名与保留关键字冲突，在参数名后加一个下划线，比用缩写、错误的拼写要好。因此”print_”比 “prnt”好。也许使用同义词来避免冲突更好）<br>补充：<br>python的类中，普通方法的第一个参数需要是self，它表示一个具体的实例本身；如果用了staticmethod，那么就可以无视这个self，而将这个方法当成一个普通的函数使用；而对于classmethod，它的第一个参数不是self，是cls，它表示这个类本身。<br>    <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class <span class="function"><span class="title">A</span><span class="params">(object)</span></span>:</span><br><span class="line">def <span class="function"><span class="title">foo1</span><span class="params">(self)</span></span>:</span><br><span class="line">   print <span class="string">"Hello"</span>,self</span><br><span class="line">@staticmethod</span><br><span class="line">def <span class="function"><span class="title">foo2</span><span class="params">()</span></span>:</span><br><span class="line">print <span class="string">"hello"</span></span><br><span class="line">@classmethod</span><br><span class="line">def <span class="function"><span class="title">foo3</span><span class="params">(cls)</span></span>:</span><br><span class="line">print <span class="string">"hello"</span>,cls</span><br><span class="line"></span><br><span class="line"><span class="tag">a</span> = <span class="function"><span class="title">A</span><span class="params">()</span></span></span><br><span class="line"><span class="tag">a</span>.<span class="function"><span class="title">foo1</span><span class="params">()</span></span>          #最常见的调用方式，但与下面的方式相同</span><br><span class="line">Hello \&lt;__main__<span class="class">.A</span> <span class="tag">object</span> at <span class="number">0</span>x9f6abec\&gt;</span><br><span class="line">A.<span class="function"><span class="title">foo1</span><span class="params">(a)</span></span>         #这里传入实例a，相当于普通方法的self</span><br><span class="line">Hello \&lt;__main__<span class="class">.A</span> <span class="tag">object</span> at <span class="number">0</span>x9f6abec\&gt;</span><br><span class="line">A.<span class="function"><span class="title">foo2</span><span class="params">()</span></span>          #这里，由于静态方法没有参数，故可以不传东西</span><br><span class="line">hello</span><br><span class="line">A.<span class="function"><span class="title">foo3</span><span class="params">()</span></span>          #这里，由于是类方法，因此，它的第一个参数为类本身。</span><br><span class="line">hello \&lt;class <span class="string">'__main__.A'</span>\&gt;</span><br><span class="line">A                 #可以看到，直接输入A，与上面那种调用返回同样的信息。</span><br><span class="line">\&lt;class <span class="string">'__main__.A'</span>\&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法名和实例变量(Method_Names_and_Instance_Variables)">方法名和实例变量(Method Names and Instance Variables)</h3><p>采用函数命名规则：小写单词，必要时可用下划线分隔单词以增加可读性。<br>仅对 non-public 方法和实例变量采用一个前导下划线。<br>为避免与子类命名冲突，采用两个前导下划线来触发 Python 的命名重整规则。<br>Python用类名重整这些名字：如果类Foo有一个属性名为a，它不能以Foo.a访问(执著的用户还是可以通过Foo._Foo__a得到访问权)。通常，双 前导下划线仅被用来避免与基类的属性发生名字冲突。</p>
-<h3 id="谨记python特色的命名惯例">谨记python特色的命名惯例</h3><p>•    公开属性应该没有前导下划线<br>•    如果公开属性名和保留关键字冲突，在你的属性名后添加一个后置下划线<br>•    对简单的公开数据属性 (data attribute)，最好只暴露属性名，没有复杂的访问/修改方法<br>•    谨记Python为将来增强提供了一条容易的途径，你应该发现简单数据属性需要增加功能行为。在那种情况，用特性(properties)把功能实现隐藏在简单数据属性访问语法后面。<br>•    以单一下划线的变量名(_X)不会被from module import *语句导入。一个前导下划线的函数是私有函数。<br>•    Python 中不存在私有变量一说，若是遇到需要保护的变量，使用小写和一个前导下划线。但这只是程序员之间的一个约定，用于警告说明这是一个私有变量，外部类不要去访问它。但实际上，外部类还是可以访问到这个变量。<br>•    前后有两个下划线的变量名(X)是系统定义的变量名，对解释器有特殊意义。包括两个前导下划线，两个后置下划线的函数名，这种风格只应用于特殊函数，比如操作符重载等。<br>•    以两个下划线开头，但结尾没有两个下划线的变量名(__X)是类的本地变量</p>
-<h3 id="代码布局">代码布局</h3><h3 id="缩进(Indentation)">缩进(Indentation)</h3><p>每级缩进用 4 个空格。<br>绝不要混合使用 tab 和空格。<br>最流行的 Python 缩进方式是仅使用空格，其次是仅使用制表符。混合着制表符和空 格缩进的代码将被转换成仅使用空格。调用 Python 命令行解释器时使用 -t 选项， 可对代码中不合法的混用制表符和空格发出警告 (warnings)。使用 -tt 时警告将变 成错误。这些选项是被高度推荐的。<br>对新项目，强烈推荐只用空格，而不是用tabs。大多数编辑器拥有使之易于实现的功能。</p>
-<h3 id="最大行宽(Maximum_Line_Length)">最大行宽(Maximum Line Length)</h3><p>限制所有行的最大行宽为79字符。<br>折叠长行的首选方法是使用Python支持的圆括号、方括号(brackets)和花括号(braces)内的行延续。如果需要，你可以在表达式周围增加一对额外的圆括号，但是有时使用反斜杠看起来更好。确认恰当地缩进了延续的行。<br>class Rectangle(Blob):<br>def <strong>init</strong>(self, width, height,<br>color=’black’, emphasis=None, highlight=0):<br>if width == 0 and height == 0 and \<br>color == ‘red’ and emphasis == ‘strong’ or \ highlight > 100:<br>raise ValueError(“sorry, you lose”)<br>if width == 0 and height == 0 and (color == ‘red’ or<br>emphasis is None):<br>raise ValueError(“I don’t think so”)<br>Blob.<strong>init</strong>(self, width, height,<br>color, emphasis, highlight)</p>
-<h3 id="空行(Blank_Lines)">空行(Blank Lines)</h3><p>用两行空行分割顶层函数和类的定义。<br>类内方法的定义用单个空行分割。<br>在函数中使用空行时，请谨慎的用于表示一个逻辑段落。</p>
-<h3 id="导入_(Imports)">导入 (Imports)</h3><p>•    通常应该在单独的行中导入：<br>•    Yes: import os<br>•    import sys<br>No: import sys, os<br>但是这样也是可以的：<br>from subprocess import Popen, PIPE<br>•    Imports通常被放置在文件的顶部，仅在模块注释和文档字符串之后，在模块的全局变量和常量之前。<br>•    Imports应该按照如下顺序成组安放：<br>•    标准库的导入<br>•    相关的第三方包的导入<br>•    本地应用/库的特定导入<br>•    对于内部包的导入是非常不推荐使用相对导入的。对所有导入总是使用包的绝对路径<br>•    从一个包含类的模块中导入类时，通常可以写成这样：<br>from myclass import MyClass<br>from foo.bar.yourclass import YourClass<br>如果这样写导致了本地名字冲突，那么就这样写：<br>import myclass<br>import foo.bar.yourclass<br>并使用”myclass.MyClass” and “foo.bar.yourclass.YourClass” </p>
-<h3 id="在表达式和语句中的空格(Whitespace_in_Expressions_and_Statements)">在表达式和语句中的空格(Whitespace in Expressions and Statements)</h3><p>•    紧挨着圆括号、方括号和花括号：<br>•    Yes: spam(ham<a href="">1</a>, {eggs: 2})<br>•    No: spam( ham<a href=""> 1 </a>, { eggs: 2 } )<br>•    紧贴在逗号、分号或冒号前：<br>•    Yes: if x == 4: print x, y; x, y = y, x<br>•    No: if x == 4 : print x , y ; x , y = y , x<br>•    紧贴着函数调用的参数列表前的开式括号：<br>•    Yes: spam(1)<br>•    No: spam (1)<br>•    紧贴在索引或切片 (indexing or slicing) 开始的开式括号前：<br>•    Yes: dct<a href="">‘key’</a> = lst<a href="">index</a><br>•    No: dct <a href="">‘key’</a> = lst <a href="">index</a><br>•    在赋值 (或其他) 运算符周围的用于和其他语句对齐的一个以上的空格：<br>•    Yes:<br>•    x = 1<br>•    y = 2<br>•    long_variable = 3<br>•    No:<br>•    x = 1<br>•    y = 2<br>•    long_variable = 3</p>
-<h3 id="注释(Comments)">注释(Comments)</h3><p>同代码不一致的注释比没注释更差。当代码修改时，始终优先更新注释！<br>注释应该是完整的句子。如果注释是一个短语或句子，首字母应该大写，除非它是一个以小写字母开头的标识符(永远不要修改标识符的大小写)。<br>如果注释很短，可以省略末尾的句号。注释块通常由一个或多个段落组成，段落是由完整的句子构成的，每个句子应该以句号结尾。<br>你应该在结束语句的句点(a sentence-ending period)后使用两个空格。<br>非英语国家的Python程序员：请用英语书写你的注释，除非你120%的确信代码永远不会被不懂你的语言的人阅读。</p>
-<h3 id="注释块(Block_Comments)">注释块(Block Comments)</h3><p>注释块通常应用于跟随其后的一些 (或者全部) 代码，并和这些代码有着相同的缩进 层次。注释块中每行以 ‘#’ 和一个空格开始 (除非它是注释内的缩进文本)。<br>注释块内的段落以仅含单个 ‘#’ 的行分割。</p>
-<h3 id="行内注释(Inline_Comments)">行内注释(Inline Comments)</h3><p>节俭使用行内注释。<br>一个行内注释是和语句在同一行的注释。行内注释应该至少用两个空格和语句分开。 它们应该以一个 ‘#’ 和单个空格开始。<br>行内注释不是必需的，事实上，如果说的是显而易见事，还会使人分心。不要这样做 ：<br>x = x + 1 # Increment x<br>但是有时，这样是有益的:<br>x = x + 1 # Compensate for border</p>
-<h3 id="参考资料">参考资料</h3><p><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-pylint/" target="_blank" rel="external">如何使用Pylint来规范Python代码风格</a><br><a href="https://www.python.org/dev/peps/pep-0008" target="_blank" rel="external">PEP 8 - Style Guide for Python Code</a></p>
-<blockquote>
-<p>文章转载自简书，作者JasonDing,原文网址：<a href="http://www.jianshu.com/p/8f3c80ca096e?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note" target="_blank" rel="external">http://www.jianshu.com/p/8f3c80ca096e?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h3 id="PEP介绍">PEP介绍</h3><p>PEP是 Python Enhancement Proposal 的缩写，是Python增强建议书的意思。<br>Python的代码风格由<a href="https://www.python.org/dev/peps/pep-0008/#id37">PEP 8</a>描述。这个文档描述了Python编程风格的方方面面。在遵守这个文档的条件下，不同程序员编写的Python代码可以保持最大程度的相似风格。这样就易于阅读，易于在程序员之间交流。<br>]]>
     
     </summary>
     
