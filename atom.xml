@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-12-31T13:30:45.000Z</updated>
+  <updated>2015-12-31T13:37:49.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/"/>
     <id>http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/</id>
     <published>2015-12-31T08:20:03.000Z</published>
-    <updated>2015-12-31T13:30:45.000Z</updated>
+    <updated>2015-12-31T13:37:49.000Z</updated>
     <content type="html"><![CDATA[<p>人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是这样。其实2015年应该是我进入大学里来最丰富、最充实的一年。在这一年里我明白了放弃也是一种美，明白了技术的神奇力量，明白了同学之间的情感原来可以这样，明白了原来美剧这么动人心弦，明白了原来<em>喜欢</em>的感觉是这样的……我明白了很多，也经历了很多，正是这些经历，让我成长，让我健壮。总结一下，<em>2015年上半年我是无知无畏的，2015年下半年我是已知的。</em><a id="more"></a></p>
 <h3 id="Bye、2015">Bye、2015</h3><h4 id="2015上半年的无知无畏">2015上半年的无知无畏</h4><h6 id="生活上明白了放弃的力量的伟大">生活上明白了放弃的力量的伟大</h6><ul>
 <li>放弃了<del>很好的可以当“领导”机会</del>，<br>或许如果我当时不那么固执，不那么倔强我还是有可能在“XX俱乐部”混下去的，这是为什么，真的不想回忆啊，这些算作是烦心事吧。算了，还是不要再讲了，当时自己真的不适合来管理俱乐部，包括心态和能力。根本不是党领导的料，你还拽什么拽！~~  </li>
@@ -60,7 +60,10 @@
 <h6 id="技术上自己正在自己喜欢的iOS-Swift上奋斗ing">技术上自己正在自己喜欢的iOS-Swift上奋斗ing</h6><ul>
 <li>我是在9月底接触的Swift，当时莫名其妙自己的iPad上多了本《The Swift Programming Language》，那段日子自己正在Python进阶，发现Swift和Python的语法实在太像了，于是果断读了起来，真的是毫无压力。于是就尝试着搞起iOS，发现比起Android来好搞多了，于是就一直在搞这个，而且自己也越来越喜欢做这个，发现很轻松就能写个小东西真的很具有成就感。</li>
 <li>11月份自己开始学Objc，因为明年要找工作的原因，大部分公司用的还是Objc，所以目前做iOS开发还是要精通Objc的。</li>
-<li>做了几个iOS的小Demo</li>
+<li>做了几个iOS的小Demo<ul>
+<li>其中个人觉得最好的就是那个可以定制的<a href="https://github.com/qiuncheng/SegmentControllerCustom" target="_blank" rel="external">Segment</a></li>
+</ul>
+</li>
 </ul>
 <h4 id="2015_我看过的那些书">2015 我看过的那些书</h4><ul>
 <li>《The Swift Programming Language》 - 我的Swift入门书</li>
