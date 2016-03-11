@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2015-12-31T13:39:39.000Z</updated>
+  <updated>2016-03-11T04:41:26.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[关于self和下划线_的区别]]></title>
+    <link href="http://qiuncheng.com/2016/03/11/33-self-_-differ/"/>
+    <id>http://qiuncheng.com/2016/03/11/33-self-_-differ/</id>
+    <published>2016-03-11T03:36:20.000Z</published>
+    <updated>2016-03-11T04:41:26.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>今天在做一个网络请求，在我自己的模型里包含三个变量；分别为：<code>name: CGFloat</code>、<code>id: NSInteger</code>、<code>count: NSInteger</code>； 在相关的<code>View</code>里有个数组,里面放的是模型数组。代码如下：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)setCategory:(QCRecommendCategory *)category &#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.category</span> = category;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = category<span class="variable">.name</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行之，发现报错了，错误信息如下：<br><code>warning: could not load any Objective-C class information. This will significantly reduce the quality of type information available.</code></p>
+<p>于是就这种尝试解决这个错误，突然发现把上面代码中的<code>self.category</code>改为<code>_category</code>就好使了,当时不明白为什么，于是果断<code>Google</code>之,得到答案如下：</p>
+<p>其实<code>self.xxx</code>是访问属性,实际上是去访问<code>setXXX</code>或者<code>getXXX</code>方法。所以我在<code>set</code>方法里用self是没用的, 但是对于你使用了<code>@property</code>来说,编译器已经帮你实现了这两方法，并且还自动创建了一个关联的实例变量，也就是<code>_xxx</code>,所以你会感觉不到。</p>
+<p>举个例子：<br>比如你定义了一个变量<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位于`.h`文件里</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">XXXX</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *x;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>那这里就有一堆隐藏的数据了,那就是：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *_x;</span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    <span class="keyword">return</span> _x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setX:(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    _x = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>今天在做一个网络请求，在我自己的模型里包含三个变量；分别为：<code>name: CGFloat</code>、<code>id: NSInteger</code>、<code>count: NSInteger</code>； 在相关的<code]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[自定义TabBarButton Frame时VC title设置问题]]></title>
+    <link href="http://qiuncheng.com/2016/03/11/32-tabbar-frame/"/>
+    <id>http://qiuncheng.com/2016/03/11/32-tabbar-frame/</id>
+    <published>2016-03-11T02:52:54.000Z</published>
+    <updated>2016-03-11T12:05:23.000Z</updated>
+    <content type="html"><![CDATA[<h5 id="问题描述：(我觉得这个问题用gif图片来表示更好。)">问题描述：(我觉得这个问题用gif图片来表示更好。)</h5><p><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/mvtabbar.gif" alt=""></center><br>不知道你们有木有看的清楚，在这里解释一下，就是<code>tabbarController</code>里有五个<code>tabbarItem</code>,其中我把”我的关注”放在了第四个位置,”我”放在了第五个位置,但是当我点击第四个位置的”我的关注”之后呢,<a id="more"></a> 它突然跑到第五个位置.而原本在第五个位置的”我”呢跑到了第四个位置.</p>
+<h5 id="问题描述与简易分析:">问题描述与简易分析:</h5><p>######与该问题有关的代码有：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.title</span> = <span class="string">@"我的关注"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>应该主要是这一段吧，其他的我描述一下就可以了。<br>首先重写了UITabBar，将其自带的UITabBarButton的frame重写，使其能够在中间添加一个按钮“+”<br>然后我在与“我的关注”有关的<code>Controller</code>里的<code>viewDidLoad</code>方法里写了<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.title</span> = <span class="string">@"我的关注"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>然后问题就这样地产生了。  </p>
+<p>但是为什么会这样的，我检查了添加这四个<code>Controller</code>的顺序,没有错呐,我又检查了与<code>TabBar</code>相关的代码,也没有什么问题呐..那就奇怪了.<br>奇就奇怪在<code>self.title = @&quot;我的关注&quot;;</code></p>
+<p>让我们来分析一下，<code>self.title = @&quot;我的关注&quot;;</code>这段代码既设置了<code>NavigationController</code>的<code>title</code>,不用设置了<code>TabBarController</code>的<code>title</code>。 但是这里真的有一个问题，我在设置<code>tabBarItem</code> <code>frame</code>的时候是根据其子<code>View</code>的<code>index</code>来设置的. 当程序加载“我的关注”这个<code>view</code>的时候又重新加载了与”我的关注”这个TabBarItem的view，从而导致了tabbar里的字view的顺序发生了变化，本来应该是<strong>第三</strong>的，但是却变成了<strong>第四</strong>，所以这个<code>tabBarItem</code>的<code>frame</code>会发生变化..<br>在这里我附上设置这几个<code>tabBarItem``fram</code>的代码:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">UIView</span> *view <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (![view isKindOfClass:[<span class="built_in">UIControl</span> class]] || view == <span class="keyword">self</span><span class="variable">.addButton</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">CGFloat</span> buttonX = w *((i &gt; <span class="number">1</span>)? (i + <span class="number">1</span>): i);</span><br><span class="line">    view<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(buttonX, y, w, h);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 其中的addButton表示中间的那个添加按钮</span></span><br></pre></td></tr></table></figure>
+<h5 id="问题解决:">问题解决:</h5><p>那么问题最终是怎么解决的呢、？<br>既然<code>self.title = @&quot;我的关注&quot;</code>有问题,那就改改他吧,要想设置<code>navigationController</code>的<code>title</code>然而又不想影响<code>tabBarController</code>的<code>title</code>,那就去<code>navigationController</code>里去找吧,果然,有一个<code>navigationItem.title</code>属性,那就去设置吧…最终改变的结果是:<br><code>self.navigationItem.title = @&quot;我的关注&quot;;</code></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h5 id="问题描述：(我觉得这个问题用gif图片来表示更好。)">问题描述：(我觉得这个问题用gif图片来表示更好。)</h5><p><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/mvtabbar.gif" alt=""></center><br>不知道你们有木有看的清楚，在这里解释一下，就是<code>tabbarController</code>里有五个<code>tabbarItem</code>,其中我把”我的关注”放在了第四个位置,”我”放在了第五个位置,但是当我点击第四个位置的”我的关注”之后呢,]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[你好2016，再见2015！]]></title>
@@ -785,71 +839,6 @@
       <category term="Hexo" scheme="http://qiuncheng.com/tags/Hexo/"/>
     
       <category term="Hexo" scheme="http://qiuncheng.com/categories/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mac主机名变成了bogon]]></title>
-    <link href="http://qiuncheng.com/2015/09/21/12-mac-hostname/"/>
-    <id>http://qiuncheng.com/2015/09/21/12-mac-hostname/</id>
-    <published>2015-09-21T01:18:45.000Z</published>
-    <updated>2015-09-21T17:11:19.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>如下图，今天打开Mac terminal终端，发现主机名突然变成了bogon，google了一下，发现大致可能是与dns有关，修改一下dns就好了，于是我修改的是DNS8.8.8.8<br><a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-2@2x.png" alt=""></p>
-</blockquote>
-<p>修改正常后为：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-1@2x.png" alt=""><br><strong>OK，完美！</strong></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>如下图，今天打开Mac terminal终端，发现主机名突然变成了bogon，google了一下，发现大致可能是与dns有关，修改一下dns就好了，于是我修改的是DNS8.8.8.8<br>]]>
-    
-    </summary>
-    
-      <category term="mac" scheme="http://qiuncheng.com/tags/mac/"/>
-    
-      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[其实英语文章并没有那么难看懂]]></title>
-    <link href="http://qiuncheng.com/2015/09/20/11-English-artical/"/>
-    <id>http://qiuncheng.com/2015/09/20/11-English-artical/</id>
-    <published>2015-09-20T12:47:15.000Z</published>
-    <updated>2015-09-21T17:11:01.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语水平都不应该低的，初中三年＋高中三年＋大学两年，为什么你还是不敢看英文文章或者说出英文呢？况且我们大多人都是过了英语四级的。可是英文文章你敢看吗？  </p>
-</blockquote>
-<p>哈哈，说的有些重，其实英文文章并没有那么难看懂，真的，根据我这么多天的学习，我发现要是让我说英语的话可能有很大的难度，但是让我来看英语文章的话，那简直真的是真的是<em>SO EASY</em>！并没有想象中的难。<br>当我这样说的时候肯定有些童鞋会说我得瑟，可能还会<em>“呵呵”</em>我！哈哈，下面我就向各位介绍下几点看英文文章的技巧。重在体验哈，大家看完技巧后可一定要去实验哈，不然看了也是白看! <a id="more"></a><br>奥，对了，先给大家看一篇英文文章，真的没有几个特别难的词汇，请看下面图片哈。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/thumb_IMG_0057_1024.jpg" alt="the Swift Programming Language"><br>这里面又特别难懂的词汇嘛？<br>或许这些吧。</p>
-<ul>
-<li>closure</li>
-<li>delegate </li>
-<li>omit</li>
-<li>iimplicitly<br>貌似只有这些呀。可是这些影响你阅读嘛，基本上不影响，在你了解了这段主要讲的是<strong>闭包</strong>之后，我想你能更好地理解这段文字了。</li>
-</ul>
-<p>下面是诚恳的给大家今后看英文文章的建议：</p>
-<ol>
-<li>要理解各类英文文章的写作思路以及英语人说话方式</li>
-<li>手机或者电脑里常备有<strong>英文词典</strong></li>
-<li>开始的时候要提取段落的关键词，大致了解整段落的意思（必要的时候勾画出来），不要遇到不会的单词就要查词典</li>
-<li>不要总是精读，有些不重要的可以一笔带过</li>
-<li>注意小标题</li>
-<li>注意总结部分</li>
-<li>最后再将不会的单词查询意思，并做好记录 </li>
-</ol>
-<p><strong>还有最主要的是要多看英文东西，比如杂志、新闻学术论文等，往往你看一篇文章的收获要大约你看100篇阅读技巧。。</strong></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语水平都不应该低的，初中三年＋高中三年＋大学两年，为什么你还是不敢看英文文章或者说出英文呢？况且我们大多人都是过了英语四级的。可是英文文章你敢看吗？  </p>
-</blockquote>
-<p>哈哈，说的有些重，其实英文文章并没有那么难看懂，真的，根据我这么多天的学习，我发现要是让我说英语的话可能有很大的难度，但是让我来看英语文章的话，那简直真的是真的是<em>SO EASY</em>！并没有想象中的难。<br>当我这样说的时候肯定有些童鞋会说我得瑟，可能还会<em>“呵呵”</em>我！哈哈，下面我就向各位介绍下几点看英文文章的技巧。重在体验哈，大家看完技巧后可一定要去实验哈，不然看了也是白看!]]>
-    
-    </summary>
-    
-      <category term="Life" scheme="http://qiuncheng.com/tags/Life/"/>
-    
-      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
     
   </entry>
   

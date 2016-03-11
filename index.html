@@ -95,6 +95,155 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-33-self-_-differ" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/03/11/33-self-_-differ/" class="article-date">
+  <time datetime="2016-03-11T03:36:20.000Z" itemprop="datePublished">March 11 2016</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/11/33-self-_-differ/">关于self和下划线_的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			
+		
+		</div>
+		
+        <blockquote>
+<p>今天在做一个网络请求，在我自己的模型里包含三个变量；分别为：<code>name: CGFloat</code>、<code>id: NSInteger</code>、<code>count: NSInteger</code>； 在相关的<code>View</code>里有个数组,里面放的是模型数组。代码如下：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)setCategory:(QCRecommendCategory *)category &#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.category</span> = category;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = category<span class="variable">.name</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行之，发现报错了，错误信息如下：<br><code>warning: could not load any Objective-C class information. This will significantly reduce the quality of type information available.</code></p>
+<p>于是就这种尝试解决这个错误，突然发现把上面代码中的<code>self.category</code>改为<code>_category</code>就好使了,当时不明白为什么，于是果断<code>Google</code>之,得到答案如下：</p>
+<p>其实<code>self.xxx</code>是访问属性,实际上是去访问<code>setXXX</code>或者<code>getXXX</code>方法。所以我在<code>set</code>方法里用self是没用的, 但是对于你使用了<code>@property</code>来说,编译器已经帮你实现了这两方法，并且还自动创建了一个关联的实例变量，也就是<code>_xxx</code>,所以你会感觉不到。</p>
+<p>举个例子：<br>比如你定义了一个变量<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位于`.h`文件里</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">XXXX</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *x;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>那这里就有一堆隐藏的数据了,那就是：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *_x;</span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    <span class="keyword">return</span> _x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setX:(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    _x = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cilnnprgb001okjhuliy2ijcl" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2016/03/11/33-self-_-differ/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/03/11/33-self-_-differ/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 11 2016</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
+    <article id="post-32-tabbar-frame" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/03/11/32-tabbar-frame/" class="article-date">
+  <time datetime="2016-03-11T02:52:54.000Z" itemprop="datePublished">March 11 2016</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/11/32-tabbar-frame/">自定义TabBarButton Frame时VC title设置问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="问题描述：(我觉得这个问题用gif图片来表示更好。)">问题描述：(我觉得这个问题用gif图片来表示更好。)</h5><p><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/mvtabbar.gif" alt=""></center><br>不知道你们有木有看的清楚，在这里解释一下，就是<code>tabbarController</code>里有五个<code>tabbarItem</code>,其中我把”我的关注”放在了第四个位置,”我”放在了第五个位置,但是当我点击第四个位置的”我的关注”之后呢,
+        
+          <p class="article-more-link">
+            <a href="/2016/03/11/32-tabbar-frame/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cilnnprfe000ekjhujzv5v6ku" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2016/03/11/32-tabbar-frame/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/03/11/32-tabbar-frame/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 11 2016</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
     <article id="post-31-bye_2015-hello_2016" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -134,7 +283,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="ciive63r8001r6qhu0eot4flb" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cilnnprgk001xkjhuds33sypk" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
       
 
       
@@ -205,7 +354,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="ciive63pt00016qhubhlddxuq" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cilnnpres0001kjhufagqbfo3" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
       
 
       
@@ -280,7 +429,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="ciive63rx002s6qhu94oj6901" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
+	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cilnnprhb002ykjhu5lngbiu6" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
 关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
       
 
@@ -350,7 +499,7 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="ciive63r6001o6qhuuqxcy4j3" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cilnnprgi001ukjhue3ybz4oi" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
       
 
       
@@ -418,7 +567,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="ciive63q100066qhucf1x7yjt" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cilnnprf70006kjhuhc5lfqem" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
       
 
       
@@ -492,7 +641,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="ciive63rb001w6qhu0xwxd4k1" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
+	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cilnnprgn0022kjhuz5dq5iq3" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
 
 继上篇博..." class="article-share-link">Share</a>
       
@@ -507,155 +656,6 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
 	  
 <span>
 Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">November 24 2015</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-<!-- 多说评论框 start -->
-
-<!-- 多说评论框 end -->
-<!-- more -->
-
-  
-    <article id="post-24-hexo-firebase-record-time" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2015/11/22/24-hexo-firebase-record-time/" class="article-date">
-  <time datetime="2015-11-22T13:09:44.000Z" itemprop="datePublished">November 22 2015</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/22/24-hexo-firebase-record-time/">博客添加了访问次数记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>想看记录请滑动到最底部，HaHa~~</p>
-</blockquote>
-<p>意外的时刻发现了别人的博客底部还有访问次数统计，于是果断给自己的博客也弄了一个呐，用的是<a href="www.firebase.com">firebase</a>,不多说，下面我给大家几个资源，让你的hexo博客系统也具有访问次数统计吧。<br>都是别人写好的比较好的文章：  </p>
-<ul>
-<li><a href="http://www.pangjian.info/2015/02/27/realtime-count-firebase/#more">基于Firebase的Hexo博客实时访问数统计</a></li>
-<li><a href="http://ibruce.info/2013/12/22/count-views-of-hexo/">为hexo博客添加访问次数统计功能</a></li>
-</ul>
-<p>万事万物都是有优缺点的，firebase也不例外，最大缺点就是显示很慢，估计是被墙的原因。有点就不说了，你懂就行！</p>
-<blockquote>
-<p>说明：第一个链接中给的代码中后面一段firebase的javascript（从new一个Firebase对象一直到最后）代码可以直接以script的形式放在footer的底部，亲测可用，因为我就是这样做的。~~</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2015/11/22/24-hexo-firebase-record-time/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="ciive63qu001a6qhu41btx4b0" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
-
-意外的时刻发现..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/11/22/24-hexo-firebase-record-time/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li></ul>
-
-	  
-<span>
-Updated:<time datetime="2015-11-22T13:24:05.000Z" itemprop="dateModified">November 22 2015</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-<!-- 多说评论框 start -->
-
-<!-- 多说评论框 end -->
-<!-- more -->
-
-  
-    <article id="post-23-git-error-checkout" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2015/11/21/23-git-error-checkout/" class="article-date">
-  <time datetime="2015-11-21T14:55:07.000Z" itemprop="datePublished">November 21 2015</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/21/23-git-error-checkout/">error: Your local changes to the following files would be overwritten by checkout以及git常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="git_问题回忆录">git 问题回忆录</h5><p>最近使用git一直遇到问题，前段时间还把自己的工程项目全部删除了，真的是苦恼，这次决心要把git吃个遍，可是刚学会了如何新建Branch，却发现自己缺了点东西，不知道怎么把分支同步到master，真的是郁闷，总不能一直让我在github官网上删除同步吧。<br>可是多谢万能的<strong>Google</strong> #此处略去三千字#，让我迅速找到了相关命令，没错，就是它<br><code>git checkout master</code> 先切换到主分支。<br><code>git merge &#39;branch name&#39;</code>  将分支合并到主分支。<br>可是依然有问题，<code>error: Your local changes to the following files would be overwritten by checkout</code>,就是在题目中给出的问题。<br>感谢万能的<code>stackoverflow</code>，不仅帮我解决了iOS上的问题，更是帮我解决了git的大问题。鉴于<code>stackoverflow</code>国内被墙，我还是截张图片来吧，
-        
-          <p class="article-more-link">
-            <a href="/2015/11/21/23-git-error-checkout/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="ciive63s400316qhu5sjncaqr" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="http://qiuncheng.com/2015/11/21/23-git-error-checkout/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/11/21/23-git-error-checkout/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-	  
-<span>
-Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">December 11 2015</time>
 </span>
 
 
@@ -715,7 +715,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
   <div class="widget-wrap">
     <h3 class="widget-title">Archive</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -725,7 +725,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -748,6 +748,14 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
       <ul>
         
           <li>
+            <a href="/2016/03/11/33-self-_-differ/">关于self和下划线_的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/11/32-tabbar-frame/">自定义TabBarButton Frame时VC title设置问题</a>
+          </li>
+        
+          <li>
             <a href="/2015/12/31/31-bye_2015-hello_2016/">你好2016，再见2015！</a>
           </li>
         
@@ -757,14 +765,6 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
         
           <li>
             <a href="/2015/12/11/29-ios-persist-data-not-over/">关于我是用过的iOS数据存储的一些总结[未完待续]</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/08/28-iOS-black-autolayout/">你的4寸iPhone出现上下黑框了吗？</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/01/25-life-12-1-/">这就是生活！</a>
           </li>
         
       </ul>

@@ -4,16 +4,17 @@
   <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
   <meta charset="utf-8">
   
-  <title>Tag: Swift | Hi,I&#39;m Qiuncheng</title>
+  <title>关于self和下划线_的区别 | Hi,I&#39;m Qiuncheng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hi,I'm Qiuncheng">
-<meta property="og:url" content="http://qiuncheng.com/tags/Swift/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于self和下划线_的区别">
+<meta property="og:url" content="http://qiuncheng.com/2016/03/11/33-self-_-differ/index.html">
 <meta property="og:site_name" content="Hi,I'm Qiuncheng">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta property="og:updated_time" content="2016-03-11T04:41:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hi,I'm Qiuncheng">
+<meta name="twitter:title" content="关于self和下划线_的区别">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta name="twitter:creator" content="@https://twitter.com/qiuncheng">
   
@@ -93,46 +94,110 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
+        <section id="main"><article id="post-33-self-_-differ" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-<a href="/2015/09/29/15-yeliangchen-Swift/" class="archive-article-date">
-  <time datetime="2015-09-29T08:45:17.000Z" itemprop="datePublished">Sep 29</time>
+<a href="/2016/03/11/33-self-_-differ/" class="article-date">
+  <time datetime="2016-03-11T03:36:20.000Z" itemprop="datePublished">March 11 2016</time>
 </a>
 
 
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/29/15-yeliangchen-Swift/">听说你叫Swift，在下叶良辰并不服！</a>
+    <h1 class="article-title" itemprop="name">
+      关于self和下划线_的区别
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			
+		
+		</div>
+		
+        <blockquote>
+<p>今天在做一个网络请求，在我自己的模型里包含三个变量；分别为：<code>name: CGFloat</code>、<code>id: NSInteger</code>、<code>count: NSInteger</code>； 在相关的<code>View</code>里有个数组,里面放的是模型数组。代码如下：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)setCategory:(QCRecommendCategory *)category &#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.category</span> = category;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = category<span class="variable">.name</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行之，发现报错了，错误信息如下：<br><code>warning: could not load any Objective-C class information. This will significantly reduce the quality of type information available.</code></p>
+<p>于是就这种尝试解决这个错误，突然发现把上面代码中的<code>self.category</code>改为<code>_category</code>就好使了,当时不明白为什么，于是果断<code>Google</code>之,得到答案如下：</p>
+<p>其实<code>self.xxx</code>是访问属性,实际上是去访问<code>setXXX</code>或者<code>getXXX</code>方法。所以我在<code>set</code>方法里用self是没用的, 但是对于你使用了<code>@property</code>来说,编译器已经帮你实现了这两方法，并且还自动创建了一个关联的实例变量，也就是<code>_xxx</code>,所以你会感觉不到。</p>
+<p>举个例子：<br>比如你定义了一个变量<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位于`.h`文件里</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">XXXX</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *x;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>那这里就有一堆隐藏的数据了,那就是：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *_x;</span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    <span class="keyword">return</span> _x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setX:(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    _x = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <!-- 百度分享 Start -->
+	  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+	  <!-- 百度分享 End -->
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 11 2016</time>
+</span>
+
+
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/11/32-tabbar-frame/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">自定义TabBarButton Frame时VC title设置问题</div>
+    </a>
+  
+</nav>
 
   
-  
-    </div></section>
-  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<section id="comments">
+  <div class="ds-thread"  data-thread-key="/2016/03/11/33-self-_-differ/" data-title="关于self和下划线_的区别" data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" id="ds_thread">
+    <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
+  </div>
+</section>
+
+<!-- 多说评论框 end -->
+<!-- more -->
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -329,6 +394,8 @@ qiunchengblogFirebase.child("detail/"+current_url).transaction(function (current
 
 <!-- 百度分享 start -->
 
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","douban","bdysc","sqq","qq","hi","baidu","huaban","youdao","sdo","mail","xg","diandian","fx","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
 <!-- 百度分享 end -->
 
 <!--
@@ -350,6 +417,11 @@ qiunchengblogFirebase.child("detail/"+current_url).transaction(function (current
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js" type="text/javascript"></script>
