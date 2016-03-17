@@ -9,7 +9,7 @@
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hi,I'm Qiuncheng">
-<meta property="og:url" content="http://qiuncheng.com/index.html">
+<meta property="og:url" content="http://qiuncheng.com/page/3/index.html">
 <meta property="og:site_name" content="Hi,I'm Qiuncheng">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta name="twitter:card" content="summary">
@@ -95,11 +95,11 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
-    <article id="post-33-self-_-differ" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-16-interesting-ios-nav" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/03/11/33-self-_-differ/" class="article-date">
-  <time datetime="2016-03-11T03:36:20.000Z" itemprop="datePublished">March 11 2016</time>
+<a href="/2015/10/09/16-interesting-ios-nav/" class="article-date">
+  <time datetime="2015-10-09T11:14:31.000Z" itemprop="datePublished">October 09 2015</time>
 </a>
 
 
@@ -116,7 +116,7 @@ var _hmt = _hmt || [];
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/11/33-self-_-differ/">关于self和下划线_的区别</a>
+      <a class="article-title" href="/2015/10/09/16-interesting-ios-nav/">“IOS上一个很有意思能解释“栈”的东西”</a>
     </h1>
   
 
@@ -124,34 +124,25 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			
-		
-		</div>
-		
         <blockquote>
-<p>今天在做一个网络请求，在我自己的模型里包含三个变量；分别为：<code>name: CGFloat</code>、<code>id: NSInteger</code>、<code>count: NSInteger</code>； 在相关的<code>View</code>里有个数组,里面放的是模型数组。代码如下：</p>
+<p>【未完待续…】突然发现iOS上有一个很好滴能够解释“栈”是什么的东西。</p>
 </blockquote>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)setCategory:(QCRecommendCategory *)category &#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.category</span> = category;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.textLabel</span><span class="variable">.text</span> = category<span class="variable">.name</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行之，发现报错了，错误信息如下：<br><code>warning: could not load any Objective-C class information. This will significantly reduce the quality of type information available.</code></p>
-<p>于是就这种尝试解决这个错误，突然发现把上面代码中的<code>self.category</code>改为<code>_category</code>就好使了,当时不明白为什么，于是果断<code>Google</code>之,得到答案如下：</p>
-<p>其实<code>self.xxx</code>是访问属性,实际上是去访问<code>setXXX</code>或者<code>getXXX</code>方法。所以我在<code>set</code>方法里用self是没用的, 但是对于你使用了<code>@property</code>来说,编译器已经帮你实现了这两方法，并且还自动创建了一个关联的实例变量，也就是<code>_xxx</code>,所以你会感觉不到。</p>
-<p>举个例子：<br>比如你定义了一个变量<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位于`.h`文件里</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">XXXX</span> : <span class="title">NSObject</span></span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *x;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
-<p>那这里就有一堆隐藏的数据了,那就是：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *_x;</span><br><span class="line"></span><br><span class="line">-(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    <span class="keyword">return</span> _x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setX:(<span class="built_in">NSString</span> *)x &#123;</span><br><span class="line">    _x = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/intersting.gif" alt="1到5push栈，5到1pop栈"></p>
+<p><strong>我想应该在这里解释一下，其中1到5是一直点击“+”，5到1是一直点击“返回”。</strong><br>哈哈，懂的人一看就懂，不懂再看也没办法。
+        
+          <p class="article-more-link">
+            <a href="/2015/10/09/16-interesting-ios-nav/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cilwap7uo001ot5hug7byipe7" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cilwap7v2002ct5hu2aopyzsg" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
-        <a href="http://qiuncheng.com/2016/03/11/33-self-_-differ/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/03/11/33-self-_-differ/">暂无评论</a>
+        <a href="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/10/09/16-interesting-ios-nav/">暂无评论</a>
       
 	  
       
@@ -159,7 +150,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 11 2016</time>
+Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">October 09 2015</time>
 </span>
 
 
@@ -176,17 +167,17 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
 <!-- more -->
 
   
-    <article id="post-32-tabbar-frame" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-15-yeliangchen-Swift" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/03/11/32-tabbar-frame/" class="article-date">
-  <time datetime="2016-03-11T02:52:54.000Z" itemprop="datePublished">March 11 2016</time>
+<a href="/2015/09/29/15-yeliangchen-Swift/" class="article-date">
+  <time datetime="2015-09-29T08:45:17.000Z" itemprop="datePublished">September 29 2015</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/Swift/">Swift</a>
   </div>
 
   </div>
@@ -197,7 +188,7 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/11/32-tabbar-frame/">自定义TabBarButton Frame时VC title设置问题</a>
+      <a class="article-title" href="/2015/09/29/15-yeliangchen-Swift/">听说你叫Swift，在下叶良辰并不服！</a>
     </h1>
   
 
@@ -205,29 +196,34 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="问题描述：(我觉得这个问题用gif图片来表示更好。)">问题描述：(我觉得这个问题用gif图片来表示更好。)</h5><p><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/mvtabbar.gif" alt=""></center><br>不知道你们有木有看的清楚，在这里解释一下，就是<code>tabbarController</code>里有五个<code>tabbarItem</code>,其中我把”我的关注”放在了第四个位置,”我”放在了第五个位置,但是当我点击第四个位置的”我的关注”之后呢,
+        <blockquote>
+<p>我叫叶良辰，我有一千种方式让你无法在这里呆下去。  </p>
+</blockquote>
+<p>这句话我拿来借鉴，特别借此想对Swift说，毕竟原来想做一个android开发工程师，但是现在转了Swift，所以这句话可以让你对学习Swift充满信心。</p>
+<p>我好像最近发现了Xcode7.0的一个小问题，不知道是小小的bug呢？还是我的代码写的不规范导致，反正就是在运行的时候没有预期的反应。大致就是我在代码里添加<code>button</code>的时候是没有问题的，但是当我在给这个<code>button</code>添加<code>action</code>的时候就出了问题。<code>action</code>总是添加不上去。
         
           <p class="article-more-link">
-            <a href="/2016/03/11/32-tabbar-frame/#more">Read More</a>
+            <a href="/2015/09/29/15-yeliangchen-Swift/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cilwap7ts000et5huw39smr2w" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cilwap7uc0015t5hubylzlyps" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+..." class="article-share-link">Share</a>
       
 
       
-        <a href="http://qiuncheng.com/2016/03/11/32-tabbar-frame/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/03/11/32-tabbar-frame/">暂无评论</a>
+        <a href="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/29/15-yeliangchen-Swift/">暂无评论</a>
       
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 11 2016</time>
+Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">October 01 2015</time>
 </span>
 
 
@@ -244,11 +240,11 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
 <!-- more -->
 
   
-    <article id="post-31-bye_2015-hello_2016" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-14-laoluo-GreatFeeling" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/12/31/31-bye_2015-hello_2016/" class="article-date">
-  <time datetime="2015-12-31T08:20:03.000Z" itemprop="datePublished">December 31 2015</time>
+<a href="/2015/09/26/14-laoluo-GreatFeeling/" class="article-date">
+  <time datetime="2015-09-26T01:50:56.000Z" itemprop="datePublished">September 26 2015</time>
 </a>
 
 
@@ -265,75 +261,7 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/31/31-bye_2015-hello_2016/">你好2016，再见2015！</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是这样。其实2015年应该是我进入大学里来最丰富、最充实的一年。在这一年里我明白了放弃也是一种美，明白了技术的神奇力量，明白了同学之间的情感原来可以这样，明白了原来美剧这么动人心弦，明白了原来<em>喜欢</em>的感觉是这样的……我明白了很多，也经历了很多，正是这些经历，让我成长，让我健壮。总结一下，<em>2015年上半年我是无知无畏的，2015年下半年我是已知的。</em>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/31/31-bye_2015-hello_2016/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cilwap7uv001xt5hu29kb0a70" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/12/31/31-bye_2015-hello_2016/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li></ul>
-
-	  
-<span>
-Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">December 31 2015</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-<!-- 多说评论框 start -->
-
-<!-- 多说评论框 end -->
-<!-- more -->
-
-  
-    <article id="post-30-blog-pause-update" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2015/12/20/30-blog-pause-update/" class="article-date">
-  <time datetime="2015-12-20T12:03:57.000Z" itemprop="datePublished">December 20 2015</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Life/">Life</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/20/30-blog-pause-update/">马上就要考试了,我要坚持一月不上网(:~~~</a>
+      <a class="article-title" href="/2015/09/26/14-laoluo-GreatFeeling/">不忘初心，方得始终</a>
     </h1>
   
 
@@ -342,23 +270,29 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>2015年马上就要结束了，想想今年过的还挺快的。下周起也要大三上期期末考试了。~~~~这真是一个悲伤的故事。为了备考，我决定从明天起一直到放假都不再碰电脑了，不过书还是要看的(:-:)。。。  </p>
+<p><strong>不要因为走的太远就忘记了当初为什么出发！  </strong></p>
 </blockquote>
-<p>复(yu)习(xi)路很长，加油！<br>所以<del>找不到我</del>（见了下图）一定不要惊讶。
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/8EC7E45D-E261-499D-8A2C-0B5D81078C83.JPG" alt="宣传海报"><br>没有记错的话这是一本书的名字，作者徐泓。</p>
+<blockquote>
+<p>这是一本从纪录片出发的哲学书，他纪录着小人物构成的历史；是一本用影像去抵达的启示录，他思考的是如何用影像认识世界。从民生出发，以影像抵达。在最官方的平台，讲述老百姓的故事。<br>以上内容来自<a href="http://baike.baidu.com/link?url=AJ101ckPeknYd1wIoFHBEk_Pf7GdJWl39wKJ8sMPyrTl2KiLg99wu8LcF9kaYMkimYMmPmJbXDUqleaDkMeXIa">百度百科</a>。</p>
+</blockquote>
+<p>如今自一次看到这句话，倍感亲切，总结之：<em>不忘初心，方得始终！</em>
         
           <p class="article-more-link">
-            <a href="/2015/12/20/30-blog-pause-update/#more">Read More</a>
+            <a href="/2015/09/26/14-laoluo-GreatFeeling/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cilwap7te0001t5hu19n7rqsg" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cilwap7ue001at5hu5jsl7g2f" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+
+没有记..." class="article-share-link">Share</a>
       
 
       
-        <a href="http://qiuncheng.com/2015/12/20/30-blog-pause-update/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/12/20/30-blog-pause-update/">暂无评论</a>
+        <a href="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/26/14-laoluo-GreatFeeling/">暂无评论</a>
       
 	  
       
@@ -366,7 +300,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
 
 	  
 <span>
-Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">December 20 2015</time>
+Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">September 26 2015</time>
 </span>
 
 
@@ -383,17 +317,17 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
 <!-- more -->
 
   
-    <article id="post-29-ios-persist-data-not-over" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-13-hexo-git-problem" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/12/11/29-ios-persist-data-not-over/" class="article-date">
-  <time datetime="2015-12-11T06:48:57.000Z" itemprop="datePublished">December 11 2015</time>
+<a href="/2015/09/21/13-hexo-git-problem/" class="article-date">
+  <time datetime="2015-09-21T10:20:25.000Z" itemprop="datePublished">September 21 2015</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
   </div>
 
   </div>
@@ -404,7 +338,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/11/29-ios-persist-data-not-over/">关于我是用过的iOS数据存储的一些总结[未完待续]</a>
+      <a class="article-title" href="/2015/09/21/13-hexo-git-problem/">git: fatal unable to auto-detect email address</a>
     </h1>
   
 
@@ -412,37 +346,31 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="前言">前言</h4><blockquote>
-<p>关于自己目前学习遇到过的数据存储相关的一些总结，同时也是味了方便自己在将来开发过程中回顾。  </p>
-</blockquote>
+        <p>如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。<strong>git: fatal unable to auto-detect email address</strong> </p>
 <hr>
-<h4 id="正文">正文</h4><h5 id="1-_Use_the_NSCoding_protocol_to_read_and_write_data-">1. Use the NSCoding protocol to read and write data.</h5><p>这个是我在完成了Apple官方推出的<a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/DevelopiOSAppsSwift/index.html#//apple_ref/doc/uid/TP40015214-CH2-SW1">Start Developing iOS Apps (Swift)</a>这个小小的Demo之后认识的一个<code>Persist Data</code>方式。也是我遇到的第一个数据存储方式，它就像我的初恋一般，每回我想存储数据我就第一个会想起它来，虽然大多数情况下用不上。<br>下面我简单总结下这种<code>Persist Data</code>:</p>
-<ul>
-<li>需要使用到的协议：<code>NSCoding</code></li>
-<li><p>需要使用到协议<code>NSCoding</code>中的方法：
+<p>解决方法如下：<br>在终端里进入hexo所在目录，执行如下两段代码。<br><code>$git config --global user.email &quot;you@example.com&quot;</code><br><code>$git config --global user.name &quot;user.name&quot;</code><br>
         
           <p class="article-more-link">
-            <a href="/2015/12/11/29-ios-persist-data-not-over/#more">Read More</a>
+            <a href="/2015/09/21/13-hexo-git-problem/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cilwap7vm002yt5huym50x6t8" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
-关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cilwap7vp0034t5hute59j9ha" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
-        <a href="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/12/11/29-ios-persist-data-not-over/">暂无评论</a>
+        <a href="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/21/13-hexo-git-problem/">暂无评论</a>
       
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">December 11 2015</time>
+Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">September 22 2015</time>
 </span>
 
 
@@ -459,80 +387,11 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
 <!-- more -->
 
   
-    <article id="post-28-iOS-black-autolayout" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-12-mac-hostname" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/12/08/28-iOS-black-autolayout/" class="article-date">
-  <time datetime="2015-12-08T11:29:00.000Z" itemprop="datePublished">December 08 2015</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/08/28-iOS-black-autolayout/">你的4寸iPhone出现上下黑框了吗？</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>对于iOS新手来说，其中最困难也是最麻烦的就包括AutoLayout，但是之前我从来都没有注意到这个，以为自己看了点AutoLayout的东西就可以随意想象，不多用它，所以导致的结果就是我以前写的程序在iPhone4和4s上运行的很好，但是当遇到iPhone5之后，却发现出现了上下黑框，这让我这个新手很是气愤，然后我拿iPhone6测试也一样黑框，但是我在preview里好好的，什么都能够正常显示，这是为什么，于是我就各种百度，bing，Google，果然功夫不负有心啊，我在Google上找到了答案。
-        
-          <p class="article-more-link">
-            <a href="/2015/12/08/28-iOS-black-autolayout/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cilwap7ut001ut5hu47fxdrt0" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/12/08/28-iOS-black-autolayout/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-
-	  
-<span>
-Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">December 08 2015</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-<!-- 多说评论框 start -->
-
-<!-- 多说评论框 end -->
-<!-- more -->
-
-  
-    <article id="post-25-life-12-1-" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2015/12/01/25-life-12-1-/" class="article-date">
-  <time datetime="2015-12-01T02:34:31.000Z" itemprop="datePublished">December 01 2015</time>
+<a href="/2015/09/21/12-mac-hostname/" class="article-date">
+  <time datetime="2015-09-21T01:18:45.000Z" itemprop="datePublished">September 21 2015</time>
 </a>
 
 
@@ -549,7 +408,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/01/25-life-12-1-/">这就是生活！</a>
+      <a class="article-title" href="/2015/09/21/12-mac-hostname/">mac主机名变成了bogon</a>
     </h1>
   
 
@@ -557,29 +416,30 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>时间过得真快，今天都12月份了。马上又要到新的一年了。但是在这本该高兴地时候我却怎么也提不起神来，心情突然就像这西安的雾霾一样严重。。。<br>十分钟之前我还在刷<a href="https://twitter.com/qiuncheng">Twitter</a>,还在<a href="http://stackoverflow.com/users/5353887/qiuncheng">stackoverflow</a>上提问题，但是此刻当我看向窗外，看向外面白茫茫的一片，我突然有种失落感。我们现在的生活基本都是出门不靠走路，都是这样的天气让人怎么出门，这样的天气让人怎么不靠走路？我忽然想到有天要是我有了儿子，他出生的时候或许雾霾比现在还要严重些吧。（<em>虽然现在还没女票，让我小小的YY下’:)</em>）
+        <blockquote>
+<p>如下图，今天打开Mac terminal终端，发现主机名突然变成了bogon，google了一下，发现大致可能是与dns有关，修改一下dns就好了，于是我修改的是DNS8.8.8.8<br>
         
           <p class="article-more-link">
-            <a href="/2015/12/01/25-life-12-1-/#more">Read More</a>
+            <a href="/2015/09/21/12-mac-hostname/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cilwap7tm0006t5huonpqebya" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cilwap7vf002rt5hukzegt8oe" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
-        <a href="http://qiuncheng.com/2015/12/01/25-life-12-1-/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/12/01/25-life-12-1-/">暂无评论</a>
+        <a href="http://qiuncheng.com/2015/09/21/12-mac-hostname/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/21/12-mac-hostname/">暂无评论</a>
       
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">December 01 2015</time>
+Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">September 22 2015</time>
 </span>
 
 
@@ -596,17 +456,17 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
 <!-- more -->
 
   
-    <article id="post-25-git-command-all" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-11-English-artical" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/11/24/25-git-command-all/" class="article-date">
-  <time datetime="2015-11-24T13:17:07.000Z" itemprop="datePublished">November 24 2015</time>
+<a href="/2015/09/20/11-English-artical/" class="article-date">
+  <time datetime="2015-09-20T12:47:15.000Z" itemprop="datePublished">September 20 2015</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
+    <a class="article-category-link" href="/categories/Life/">Life</a>
   </div>
 
   </div>
@@ -617,7 +477,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/24/25-git-command-all/">一张图帮你集齐所有git命令</a>
+      <a class="article-title" href="/2015/09/20/11-English-artical/">其实英语文章并没有那么难看懂</a>
     </h1>
   
 
@@ -626,36 +486,168 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>请别小看我哈，我可是大自然的搬运工吆~  </p>
+<p>为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语水平都不应该低的，初中三年＋高中三年＋大学两年，为什么你还是不敢看英文文章或者说出英文呢？况且我们大多人都是过了英语四级的。可是英文文章你敢看吗？  </p>
 </blockquote>
-<p>继上篇博文展示了git的部分常用命令的使用，这回在网上突然看到一张神奇的图片，真的是神器图片，这张图包含了所有的git命令，非常全面。所以就直接搬运过来了。</p>
-<p>原图来自极分享，网址<a href="http://www.finalshares.com/read-178">http://www.finalshares.com/read-178</a>    </p>
-<ul>
-<li>图片很大，请先擦亮眼睛看好了~~
+<p>哈哈，说的有些重，其实英文文章并没有那么难看懂，真的，根据我这么多天的学习，我发现要是让我说英语的话可能有很大的难度，但是让我来看英语文章的话，那简直真的是真的是<em>SO EASY</em>！并没有想象中的难。<br>当我这样说的时候肯定有些童鞋会说我得瑟，可能还会<em>“呵呵”</em>我！哈哈，下面我就向各位介绍下几点看英文文章的技巧。重在体验哈，大家看完技巧后可一定要去实验哈，不然看了也是白看!
         
           <p class="article-more-link">
-            <a href="/2015/11/24/25-git-command-all/#more">Read More</a>
+            <a href="/2015/09/20/11-English-artical/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cilwap7ux0022t5hulxvswqvp" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
-
-继上篇博..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cilwap7um001lt5husd6l9jx7" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
-        <a href="http://qiuncheng.com/2015/11/24/25-git-command-all/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/11/24/25-git-command-all/">暂无评论</a>
+        <a href="http://qiuncheng.com/2015/09/20/11-English-artical/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/20/11-English-artical/">暂无评论</a>
       
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">November 24 2015</time>
+Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">September 22 2015</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
+    <article id="post-10-python-talkfreely" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2015/09/09/10-python-talkfreely/" class="article-date">
+  <time datetime="2015-09-09T01:00:08.000Z" itemprop="datePublished">September 09 2015</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>►<a class="article-category-link" href="/categories/python/转载/">转载</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/09/10-python-talkfreely/">每个程序员都应该学习使用Python</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="每个程序员都应该学习使用Python或Ruby">每个程序员都应该学习使用Python或Ruby</h3><p>如果你是个学生,你应该会C，C++和Java。还会一些VB，或C#/.NET。多少你还可能开发过一些Web网页，你知道一些HTML，CSS和JavaScript知识。总体上说，我们很难发现会有学生显露出掌握超出这几种语言范围外的语言的才能。这真让人遗憾，因为还有很多种编程语言，它们能让你成为一个更好的程序员。</p>
+<p>在这篇文章里，我将会告诉你，为什么你一定要学习Python或Ruby语言。
+        
+          <p class="article-more-link">
+            <a href="/2015/09/09/10-python-talkfreely/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cilwap7tv000jt5hu8xt3hxni" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2015/09/09/10-python-talkfreely/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/09/10-python-talkfreely/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">September 22 2015</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
+    <article id="post-9-python-coding-regular" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2015/09/06/9-python-coding-regular/" class="article-date">
+  <time datetime="2015-09-06T09:09:35.000Z" itemprop="datePublished">September 06 2015</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>►<a class="article-category-link" href="/categories/python/转载/">转载</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/06/9-python-coding-regular/">【python】python编码规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="PEP介绍">PEP介绍</h3><p>PEP是 Python Enhancement Proposal 的缩写，是Python增强建议书的意思。<br>Python的代码风格由<a href="https://www.python.org/dev/peps/pep-0008/#id37">PEP 8</a>描述。这个文档描述了Python编程风格的方方面面。在遵守这个文档的条件下，不同程序员编写的Python代码可以保持最大程度的相似风格。这样就易于阅读，易于在程序员之间交流。<br>
+        
+          <p class="article-more-link">
+            <a href="/2015/09/06/9-python-coding-regular/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cilwap7uz0027t5huwm0o6xm2" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2015/09/06/9-python-coding-regular/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2015/09/06/9-python-coding-regular/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2015-09-21T16:46:33.000Z" itemprop="dateModified">September 22 2015</time>
 </span>
 
 
@@ -674,7 +666,7 @@ Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">Novemb
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </section>
