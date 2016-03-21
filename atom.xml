@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-03-11T04:41:26.000Z</updated>
+  <updated>2016-03-21T10:19:19.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Xcode7 真机测试出现 "The account]]></title>
+    <link href="http://qiuncheng.com/2016/03/21/account/"/>
+    <id>http://qiuncheng.com/2016/03/21/account/</id>
+    <published>2016-03-21T10:05:52.000Z</published>
+    <updated>2016-03-21T10:19:19.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>一直以来我的Xcode7都不能真机调试，而且一直报一个问题。那就是:”The account #Apple ID# has no team with ID #team ID#</p>
+</blockquote>
+<p>我昨晚在网上找了好多方案，Google、Baidu、甚至连Bing都用过了，就是没找到解决方案，可是意外的时候发现了一篇博客，地址在<a href="http://www.jianshu.com/p/fc31a4a9d2f5" target="_blank" rel="external">这里</a>，从这个博客里可以看出，这确实Apple那边的原因。</p>
+<p>Apple的效率果然高，一个工作日绝对给你回复。下面贴出我的回复内容，其他的具体步骤请移步那篇博客。</p>
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOS%E9%82%AE%E4%BB%B6%E5%9B%9E%E5%A4%8D.jpg" alt="今天回复的邮件"></p>
+<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20160321-0.png" alt="昨天回复的邮件"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>一直以来我的Xcode7都不能真机调试，而且一直报一个问题。那就是:”The account #Apple ID# has no team with ID #team ID#</p>
+</blockquote>
+<p>我昨晚在网上找了好多方案，Go]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[关于self和下划线_的区别]]></title>
@@ -816,29 +843,6 @@
       <category term="Life" scheme="http://qiuncheng.com/tags/Life/"/>
     
       <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[git: fatal unable to auto-detect email address]]></title>
-    <link href="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/"/>
-    <id>http://qiuncheng.com/2015/09/21/13-hexo-git-problem/</id>
-    <published>2015-09-21T10:20:25.000Z</published>
-    <updated>2015-09-21T17:11:32.000Z</updated>
-    <content type="html"><![CDATA[<p>如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。<strong>git: fatal unable to auto-detect email address</strong> </p>
-<hr>
-<p>解决方法如下：<br>在终端里进入hexo所在目录，执行如下两段代码。<br><code>$git config --global user.email &quot;you@example.com&quot;</code><br><code>$git config --global user.name &quot;user.name&quot;</code><br><a id="more"></a><br><em>PS：其中you@example.com为你Github邮箱，user.name为你的名字。OK，完美解决！</em><br>当你解决后你会发现执行<code>hexo deploy</code>之后会提示你create了什么！就像下图所示。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150921-4@2x.png" alt=""></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>如题目所示，这两周一直无法更新Blog，原因就在此，之前没有太注意，早上打开Blog一看还是很早之前的文章。于是我就仔细审查了一下hexo deploy后的东西，结果出现后面的一行fatal error。于是Google之，发现git是git里的email address和user name没有设置的原因。<strong>git: fatal unable to auto-detect email address</strong> </p>
-<hr>
-<p>解决方法如下：<br>在终端里进入hexo所在目录，执行如下两段代码。<br><code>$git config --global user.email &quot;you@example.com&quot;</code><br><code>$git config --global user.name &quot;user.name&quot;</code><br>]]>
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://qiuncheng.com/tags/Hexo/"/>
-    
-      <category term="Hexo" scheme="http://qiuncheng.com/categories/Hexo/"/>
     
   </entry>
   
