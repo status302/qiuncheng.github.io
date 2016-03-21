@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-03-21T10:22:53.000Z</updated>
+  <updated>2016-03-21T10:24:41.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Xcode7 真机测试出现 "The account]]></title>
+    <title><![CDATA[Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办]]></title>
     <link href="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/"/>
     <id>http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/</id>
     <published>2016-03-21T10:05:52.000Z</published>
-    <updated>2016-03-21T10:22:53.000Z</updated>
+    <updated>2016-03-21T10:24:41.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>一直以来我的Xcode7都不能真机调试，而且一直报一个问题。那就是:”The account #Apple ID# has no team with ID #team ID#</p>
 </blockquote>
