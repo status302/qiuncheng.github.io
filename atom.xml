@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一个不曾起舞的日子都是对生命的辜负*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-03-21T10:22:07.000Z</updated>
+  <updated>2016-03-21T10:22:53.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,12 +19,12 @@
     <link href="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/"/>
     <id>http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/</id>
     <published>2016-03-21T10:05:52.000Z</published>
-    <updated>2016-03-21T10:22:07.000Z</updated>
+    <updated>2016-03-21T10:22:53.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>一直以来我的Xcode7都不能真机调试，而且一直报一个问题。那就是:”The account #Apple ID# has no team with ID #team ID#</p>
 </blockquote>
 <p>我昨晚在网上找了好多方案，Google、Baidu、甚至连Bing都用过了，就是没找到解决方案，可是意外的时候发现了一篇博客，地址在<a href="http://www.jianshu.com/p/fc31a4a9d2f5" target="_blank" rel="external">这里</a>，从这个博客里可以看出，这确实Apple那边的原因。</p>
-<p>Apple的效率果然高，一个工作日绝对给你回复。下面贴出我的回复内容，其他的具体步骤请移步那篇博客。</p>
+<p>Apple的效率果然高，一个工作日绝对给你回复。下面贴出我的回复内容，其他的具体步骤请移步那篇博客。<a id="more"></a></p>
 <p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOS%E9%82%AE%E4%BB%B6%E5%9B%9E%E5%A4%8D.jpg" alt="今天回复的邮件"></p>
 <p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20160321-0.png" alt="昨天回复的邮件"></p>
 ]]></content>
@@ -32,7 +32,9 @@
     <![CDATA[<blockquote>
 <p>一直以来我的Xcode7都不能真机调试，而且一直报一个问题。那就是:”The account #Apple ID# has no team with ID #team ID#</p>
 </blockquote>
-<p>我昨晚在网上找了好多方案，Go]]>
+<p>我昨晚在网上找了好多方案，Google、Baidu、甚至连Bing都用过了，就是没找到解决方案，可是意外的时候发现了一篇博客，地址在<a href="http://www.jianshu.com/p/fc31a4a9d2f5">这里</a>，从这个博客里可以看出，这确实Apple那边的原因。</p>
+<p>Apple的效率果然高，一个工作日绝对给你回复。下面贴出我的回复内容，其他的具体步骤请移步那篇博客。]]>
+    
     </summary>
     
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
