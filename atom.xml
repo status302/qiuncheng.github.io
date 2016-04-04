@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-03-21T10:24:41.000Z</updated>
+  <updated>2016-04-04T06:39:22.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[《Programing iOS9》翻译（一）-Autolayout名词含义]]></title>
+    <link href="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/"/>
+    <id>http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/</id>
+    <published>2016-04-04T06:36:35.000Z</published>
+    <updated>2016-04-04T06:39:22.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="翻译《Programing_iOS9》-_Autolayout篇（一）">翻译《Programing iOS9》- Autolayout篇（一）</h2><blockquote>
+<p>Autolayout各个名词的解释 <br><br>来自：《Programing.iOS.9.2015.11》59-61页</p>
+</blockquote>
+<h3 id="Autolayout">Autolayout</h3><p>AutoLayout对于每一个单独的view层次上是一个可选的技术。一个view可以在以下三种方式下选择Autolayout。</p>
+<ul>
+<li>你在代码中给一个view添加Autolayout约束。在这个约束下的view使用Autolayout。</li>
+<li>你的app加载一个“Use Auto Layout”勾选的nib，每一个通过nib实例的view都使用了autolayout。</li>
+<li><p>一个在interface下的view，而且它是你自定义的UIView的子类，在这个类方法<code>requiresConstraintBasedLayout</code>返回true，这个view也使用了Autolayout。<a id="more"></a></p>
+<p>你通过第三种方式选择Autolayout的原因可能是你想要将Autolayout转换，来在代码中使用Autolayout constraints，一个通常的在代码中创建contraints的方式是在一个view的updateContraints的实现里面。但是如果Autolayout没有Switched，updateContraints不会被调用。所以说<code>requiresConstraintBasedLayout</code>提供了一种Switching on的方式。</p>
+</li>
+</ul>
+<p>一个同胞view可以使用autolayout，但是另一个同胞view可以不使用，一个superview可以使用Autolayout，但是一些或者他所有的子view可以不使用。<br>但是Autolayout被应用到整个superview链，所以说如果一个view使用了Autolayout，<br>然后就自动应用到他的整个superviews，同时如果其中的view之一是控制器的main view的话，控制器<br>会收到自动布局相关的事件，否则的话就不会收到。</p>
+<blockquote>
+<p>你不可以对一个view的一部分关闭Autolayout。或者所有的来自nib实例化的view<br>使用了Autolayout，或者他们都使用了autoresizing。为了生成不同部分的interface来自<br>不同的nibs，其中一部分使用了autoresizing，另一部分使用了Autolayout，并且把这些不同的<br>部分分开到不同的nib（或者不同的Storyboard），然后在runtime里加载，编译。</p>
+</blockquote>
+<h4 id="Contraints">Contraints</h4><p>Autolayout contraint， 或者说简单的contraint，是一个NSLayoutContraint实例，<br>它描述了一个view的绝对width和height，或者是一个view的属性和另一个view的属性关系。<br>在后一种情况下，这种属性并不一定是相同的属性，同时这两个view也不一定是同胞关系或者父和子的关系。<br>唯一的要求就是他们来自同一个祖先view。</p>
+<p>这里有一些NSLayoutContraint主要的属性：</p>
+<ul>
+<li><p><code>firstItem</code>, <code>firstAttribute</code>, <code>secondItem</code>, <code>secondAfttribute</code><br>这两个view和他们各自的属性（NSLaoyoutContraint）都和这个contraint有联系。<br>如果这个contraint描述了一个view的height或者width，另一个view可能是nil，另一个属性可能是<br><code>.NotAnAttribute</code>。其他的NSLayoutContraint有：</p>
+<ul>
+<li><code>.Top</code>, <code>.Bottom</code></li>
+<li><code>.Left</code>, <code>.Right</code>, <code>.Leading</code>, <code>.Trailing</code></li>
+<li><code>.Width</code>, <code>.Height</code></li>
+<li><code>.CenterX</code>, <code>.CenterY</code></li>
+<li><p><code>.FirstBaseline</code>, <code>LastBaseline</code></p>
+<p><code>.FirstBaseline</code>主要应用于多个label之间，而且底部距离label的顶部有一定的距离。<br><code>.LastBaseline</code>指的是顶部距离底部有一定的距离。</p>
+<p>其他的属性的含义是显而易见的，除了有可能想知道“leading”和“trailing”的含义，<br>他们就相当于“left”“right”，而且他们会自动反向他们的含义是“right-to-left”。<br>在新的iOS9上，全部的interface已经在系统上自动地反向了–但是这仅仅是当你使用了“leading”和“trailing”约束的时候。</p>
+</li>
+</ul>
+</li>
+<li><p><code>multiplier</code>, <code>constant</code></p>
+<p>这两个属性会被应用到第二个属性值，然后他来决定第一个属性值。<code>multiplier</code>用来乘上第二个属性值，<code>constant</code>被添加到这个积数中。<br>第一属性被用来设置结果<em>The first attribute is set to the result.（这句话我也不懂是啥意思）</em>，（constant是一个非常有限的选择范围，因为这个值并不是一个常数。）<br>从根本上来讲，你写了一个等式：a1=m*a2+c,其中a1和a2就是两个属性值，m和c是multiplier和constant。最坏的情况是<br>当第一属性值等于第二属性值，其中multiplier等于1， constant等于0。如果你想要绝对的描述一个view的width和height，multiplier等于1，同时constant等于width或者height的值。</p>
+</li>
+<li><p><code>relation</code></p>
+<p>一个NSLayoutContraint说明了这两个属性值和另外一个属性值之间的关系，就像被<br>multiplier和constant所修改的那样。这就是在前一段中我在等号左右的操作。（<code>.Equal</code>）<br>但是不平等（iindequality）也是允许的。（<code>.LessThanOrEqual</code>, <code>.GreaterThanOrEqual</code>）</p>
+</li>
+<li><p><code>priority</code></p>
+<p>优先级值的范围是从1000到1，同时确定标准的行为有标准的优先级。约束可以有不同的优先级，来确定他们使用的顺序。</p>
+</li>
+</ul>
+<p>一个约束属于一个view，同时一个view也可以有很多的约束。一个UIView添加一个约束属性可以有一下几种实例方法：<br><br>  <code>.addConstraint:</code>, <code>addConstraints:</code>  <br><br>  <code>.removeConstraint:</code>, <code>removeConstraints:</code> <br><br>存在的问题是约束属于哪一个view。答案是：最接近参与约束的两个视图层次结构的视图。<br>如果可能的话，那应该是这些view其中之一。举个例子来说，如果一个view讲述了一个view的width，<br>那它就属于这个view，如果它设置了这个view顶部的距离到他的父view顶部的距离的话，它就属于父view，<br>如果他校准了两个同胞view，那这个约束就属于他们共同的父view。<br></p>
+<p>从iOS8开始，除了给一个特定的view添加明确的约束，你可以触发约束使用<code>NSLayoutContraint</code>类方法<code>activateContraints:</code><br>这个方法会取得所有约束的数组。被触发的约束也会被自动地添加到正确的view上。还有一个方法<code>deactivateContraints:</code>，他会移除该view所有的<br>约束。约束有一个活跃的属性，你可以设置它来触发或者是关闭一个单独的约束，同时再加上它可以告诉你<br>一个给定的约束是否为一个interface的一部分。<br></p>
+<blockquote>
+<p>说明：一旦你对一个view的position和size使用了明确的约束，随后不要设置他的frame（或者bounds和center）<br>只需要使用contraints就OK。否则的话，当<code>layoutSubviews</code>这个方法被调用的时候，这个视图会跳回到原来他约束规定位置。<br>（除非你在<code>layoutSubviews</code>里设置一个view的frame，我会在以后介绍。）</p>
+</blockquote>
+<h4 id="Autoresizing_contraints">Autoresizing contraints</h4><p>这个机制让其中选择了Autolayout的view可以在Autolayout层次上突然影响其他view，即使其他的view之前没有使用Autolayout。<br>所以说存在一种方式，当一个view在Autolayout上被影响的同时来通过constraints来保证它的position和layout在之前通过frame和autoresizingMask确定那样。<br>这种方式就是runtime，它将view的frame和autoresizingMask转换成约束。结果就是一些内在的来自<code>NSAutoresizingMasklayoutConstraint</code>的约束，影响这个view（当然他还可能和其他的view有联系）。<br>多亏了这个隐含的约束，被这个view的autoresizingMask描述的布局才可以继续工作。<br></p>
+<p>比如:加入我有一个UILabel，它的frame为(20.0, 20.0, 42.0, 22.0), 然后它的autoresingMask为.None。如果这个label突然<em>使用</em>了Autolayout，<br>然后它的superview可能需要四个隐含的约束也就是设置它的width为42， height为22，它的centerX为41，它的centerY为31。<br></p>
+<p>这个结果仅仅在这个view的<code>translatesAutoresizingMaskIntoConstraints</code>属性设置为true的时候。<br>如果这个view已经用代码实现了或者是一个nib的实例化当然nib的“Use Auto Layout”没有被勾选的话，上面就是默认的。<br>上面的假设的条件是一个view使用其他的方式创建，如果他被涉及到Autolayout你想要它的frame和autoresizingMask像constraints一样。</p>
+<p>这是个合理的规则，但是也意味着如果你打算给你的view应用明确的约束，你可能需要记住通过设置view的translatesAutoresizingMaskIntoConstraints为false来关闭自动的行为。<br>如果你没有这样做，结果就是你的view中将包含隐含的约束和明确的约束，这不可能是你想要的。<br>按照传统来讲，这种情况往往会导致约束之间的冲突，（我会在下面解释的）。实际上，我们经常会发生不记得去设置view的translatesAutoresizingMaskIntoConstraints属性为false，<br>通常也是在我们得到一个约束之间冲突的时候被提醒到的。</p>
+<blockquote>
+<p>下一篇：Create contraints in code</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="翻译《Programing_iOS9》-_Autolayout篇（一）">翻译《Programing iOS9》- Autolayout篇（一）</h2><blockquote>
+<p>Autolayout各个名词的解释 <br ><br>来自：《Programing.iOS.9.2015.11》59-61页</p>
+</blockquote>
+<h3 id="Autolayout">Autolayout</h3><p>AutoLayout对于每一个单独的view层次上是一个可选的技术。一个view可以在以下三种方式下选择Autolayout。</p>
+<ul>
+<li>你在代码中给一个view添加Autolayout约束。在这个约束下的view使用Autolayout。</li>
+<li>你的app加载一个“Use Auto Layout”勾选的nib，每一个通过nib实例的view都使用了autolayout。</li>
+<li><p>一个在interface下的view，而且它是你自定义的UIView的子类，在这个类方法<code>requiresConstraintBasedLayout</code>返回true，这个view也使用了Autolayout。]]>
+    
+    </summary>
+    
+      <category term="Autolayout" scheme="http://qiuncheng.com/tags/Autolayout/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="翻译" scheme="http://qiuncheng.com/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办]]></title>
@@ -807,44 +888,6 @@
       <category term="Swift" scheme="http://qiuncheng.com/tags/Swift/"/>
     
       <category term="Swift" scheme="http://qiuncheng.com/categories/Swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[不忘初心，方得始终]]></title>
-    <link href="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/"/>
-    <id>http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/</id>
-    <published>2015-09-26T01:50:56.000Z</published>
-    <updated>2015-09-26T08:21:02.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p><strong>不要因为走的太远就忘记了当初为什么出发！  </strong></p>
-</blockquote>
-<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/8EC7E45D-E261-499D-8A2C-0B5D81078C83.JPG" alt="宣传海报"><br>没有记错的话这是一本书的名字，作者徐泓。</p>
-<blockquote>
-<p>这是一本从纪录片出发的哲学书，他纪录着小人物构成的历史；是一本用影像去抵达的启示录，他思考的是如何用影像认识世界。从民生出发，以影像抵达。在最官方的平台，讲述老百姓的故事。<br>以上内容来自<a href="http://baike.baidu.com/link?url=AJ101ckPeknYd1wIoFHBEk_Pf7GdJWl39wKJ8sMPyrTl2KiLg99wu8LcF9kaYMkimYMmPmJbXDUqleaDkMeXIa" target="_blank" rel="external">百度百科</a>。</p>
-</blockquote>
-<p>如今自一次看到这句话，倍感亲切，总结之：<em>不忘初心，方得始终！</em> <a id="more"></a><br>昨晚参加了老罗的演讲，觉得备受鼓动。鼓动并不是被他搞笑的演技和讲话，而是他身上具有的创业精神。我不是典型的罗粉或者锤粉，但是你只要是一个奋力向上的人我觉得你都会有此感受，他身上所具有的不屈不挠的精神值得我们每一个人去学习，去继承。这个时代就属于这样的人，敢想敢做敢梦！<em>楞头青年</em>，姑且这么称呼老罗吧。虽然他早己不是青年。  </p>
-<h5 id="其实我还是挺不认同老罗说他自己是个“楞头”的。">其实我还是挺不认同老罗说他自己是个“楞头”的。</h5><p>他提到自己当年谈那几个楞头工程师，两个楞头一碰到一起，就碰出了火花，但我依然不赞同，为什么呢？因为老罗很流氓呀！（不过貌似最近在往好的方面转变）他手下的工程师确实很楞头，这个可以理解，毕竟是<strong>程序员</strong>呀。（老罗可不许大家这么叫他们呀。）但是从昨天听老罗的讲话过程中我确实感受到老罗确实不是一个楞头，他虽然是高二就肄业，大学没上过，但是他很有才，真的，很具有说服人的能力。或者与他的一份执着分不开吧！  </p>
-<h5 id="老罗说他自己是一个企业家。">老罗说他自己是一个<strong>企业家</strong>。</h5><p>对，没错，至少从昨天看来老罗确实是一个企业家了。（之前我一直看他像个流氓）。衡量一个企业家的标准是什么？决策、组织、抗压、责任、坚强、等等。这些都可以用来作为一个企业家的标准。这些或者在两年前的老罗的身上确实不具备，但是现在看来老罗真的具备这些了，他真的在smartisan T1中成长了。少了一些流氓草根气息，多了一些企业家的风度和气度。  </p>
-<h5 id="我为什么说老罗是一个流氓呢。（或许我以前对他有些偏见吧）">我为什么说老罗是一个流氓呢。（或许我以前对他有些偏见吧）</h5><p>老罗的《锤子便签》在iOS上做的确实很不错，很优秀，但是也确实有很流氓的地方，下面这个图可以很清楚地解释为什么流氓了。我玩过很多iOS应用，但是确实没有见过一款应用直接将自己的应用放在设置里面供用户来选择获取。还有“关注我们”，我本来觉得很好用的东西，但是有两个东西确实让我很讨厌了。也不知道为什么就是很讨厌。以前我看到这个的感觉就认为老罗是流氓。现在看来，确实是我误会他了。我因为不喜欢这种设计风格，而不太喜欢老罗本身，还说他是个流氓，确实很搞笑呐！<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/IMG_0097.PNG" alt="锤子便签"></p>
-<h5 id="“乔布斯重新定义了手机，罗永浩重新定义了傻逼！”">“乔布斯重新定义了手机，罗永浩重新定义了傻逼！”</h5><p>我为什么把这句话放在这里呢？我现在觉得说这句话的人很傻逼！如果说单纯来看待老罗－一个英语老师，一个说相声演员来做手机，大家一定会说他是个<em>傻逼</em>，你说你一个好好相声不说，偏偏跑来手机圈瞎凑什么热闹。况且手机圈现在这么成熟，大家都在Apple的带领下，把 android做的越来越不像android了。可是现在的罗永浩不一样了。有了smarttisan T1之后的罗永浩现在看来真的是绅士，并不像傻逼了。反而我最近总是觉得雷布斯很傻逼了。没事干嘛发条微博说“小米4c比iphone6s还轻11克！”你说你，小米4c是塑料的，iPhone6s金属的哪里有可比性嘛！而且哎，人家6s貌似android中的旗舰机都没法和人家比吧，你说你干嘛发条那个微博，这不是找国人骂嘛！<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20150926-1@2x.png" alt="雷布斯的微博">  </p>
-<h5 id="“Future_belongs_to_the_flew_of_us_still_willing_to_get_our_hands_dirty!_未来属于我们当中那些仍然愿意弄脏双手的少数分子！”">“Future belongs to the flew of us still willing to get our hands dirty! 未来属于我们当中那些仍然愿意弄脏双手的少数分子！”</h5><p>我特别喜欢老罗最后送给大家的这句话，我的理解就是，只要你敢于尝试，敢于坚持，你就一定可以走出一条你自己的路。而未来就把握在你自己的手中。Stay hungry, stay foolish. 保持<em>愣</em>的精神，保持一份渴望，保持学习的欲望，保持一份童心。这样你就离自己的梦想不远了。愿老罗的锤子大卖，愿锤子科技早日收购Apple。  <img src="http://7xk67j.com1.z0.glb.clouddn.com/IMG_0094.JPG" alt="未来属于我们当中那些仍然愿意弄脏双手的少数分子"><br><em>PS：最后欣赏几张我那渣手机像素拍出的不成样的图片吧。</em><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/IMG_0099.JPG" alt="最喜欢的一张图"><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/IMG_0098.JPG" alt="哈哈，这个真实罗粉"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p><strong>不要因为走的太远就忘记了当初为什么出发！  </strong></p>
-</blockquote>
-<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/8EC7E45D-E261-499D-8A2C-0B5D81078C83.JPG" alt="宣传海报"><br>没有记错的话这是一本书的名字，作者徐泓。</p>
-<blockquote>
-<p>这是一本从纪录片出发的哲学书，他纪录着小人物构成的历史；是一本用影像去抵达的启示录，他思考的是如何用影像认识世界。从民生出发，以影像抵达。在最官方的平台，讲述老百姓的故事。<br>以上内容来自<a href="http://baike.baidu.com/link?url=AJ101ckPeknYd1wIoFHBEk_Pf7GdJWl39wKJ8sMPyrTl2KiLg99wu8LcF9kaYMkimYMmPmJbXDUqleaDkMeXIa">百度百科</a>。</p>
-</blockquote>
-<p>如今自一次看到这句话，倍感亲切，总结之：<em>不忘初心，方得始终！</em>]]>
-    
-    </summary>
-    
-      <category term="Life" scheme="http://qiuncheng.com/tags/Life/"/>
-    
-      <category term="Life" scheme="http://qiuncheng.com/categories/Life/"/>
     
   </entry>
   
