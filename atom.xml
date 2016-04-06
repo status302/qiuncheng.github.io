@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-04-06T14:23:20.000Z</updated>
+  <updated>2016-04-06T14:24:23.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/"/>
     <id>http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/</id>
     <published>2016-04-06T14:20:02.000Z</published>
-    <updated>2016-04-06T14:23:20.000Z</updated>
+    <updated>2016-04-06T14:24:23.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>前言：继上篇–翻译<a href="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/">《Programing iOS9》- Autolayout篇（一）</a><br>上篇中只翻译了与Autolayout有关的词的含义。<br>这篇翻译“Create constraints in code”</p>
 </blockquote>
@@ -46,7 +46,11 @@
 <p>前言：继上篇–翻译<a href="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/">《Programing iOS9》- Autolayout篇（一）</a><br>上篇中只]]>
     </summary>
     
+      <category term="Autolayout" scheme="http://qiuncheng.com/tags/Autolayout/"/>
+    
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="翻译" scheme="http://qiuncheng.com/tags/%E7%BF%BB%E8%AF%91/"/>
     
       <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
     
