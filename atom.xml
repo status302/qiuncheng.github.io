@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-04-06T14:26:07.000Z</updated>
+  <updated>2016-04-06T14:26:32.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/"/>
     <id>http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/</id>
     <published>2016-04-06T14:20:02.000Z</published>
-    <updated>2016-04-06T14:26:07.000Z</updated>
+    <updated>2016-04-06T14:26:32.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>前言：继上篇–翻译<a href="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/">《Programing iOS9》- Autolayout篇（一）</a><br>上篇中只翻译了与Autolayout有关的词的含义。<br>这篇翻译“Create constraints in code”</p>
 </blockquote>
@@ -38,7 +38,7 @@
 <p>这样做比较麻烦的是需要用superview的width和height减去该view的width和height才可以得到该view的position，这样做也是容易困惑和出错的。用了contraints之后，我们可以直接地说，constraints是清晰简单明了的，“v3宽为20points，高为20points，而且与v1的右下部齐平。”</p>
 <p>初次之外，contraints可以做很多autoresizing不能做的事情。举个例子，除了给v2一个绝对的高度，我们还可以要求其高度为v1高度10分之一，而不管v1的size怎么变化。如果我们想做到那样而不用constraints的话，我们不得不继承layoutSubviews，在代码里手动完成。</p>
 <blockquote>
-<p>OVER<br>下一篇：Anchor notation<br><br>上一篇：<a href="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/">Autolayout各个名词的解释</a></p>
+<p>OVER<br><br>下一篇：Anchor notation<br><br>上一篇：<a href="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/">Autolayout各个名词的解释</a></p>
 </blockquote>
 ]]></content>
     <summary type="html">
