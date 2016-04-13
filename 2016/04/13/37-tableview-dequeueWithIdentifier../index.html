@@ -4,20 +4,17 @@
   <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
   <meta charset="utf-8">
   
-  <title>instance member &#39;gameView&#39;cannot be used on type &#39;...&#39; | Hi,I&#39;m Qiuncheng</title>
+  <title>关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别 | Hi,I&#39;m Qiuncheng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="instance member 'gameView'cannot be used on type '...'">
-<meta property="og:url" content="http://qiuncheng.com/2015/11/21/22-ios-instance../index.html">
+<meta property="og:title" content="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别">
+<meta property="og:url" content="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../index.html">
 <meta property="og:site_name" content="Hi,I'm Qiuncheng">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png">
-<meta property="og:updated_time" content="2015-11-21T11:48:50.000Z">
+<meta property="og:updated_time" content="2016-04-13T14:55:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="instance member 'gameView'cannot be used on type '...'">
+<meta name="twitter:title" content="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta name="twitter:creator" content="@https://twitter.com/qiuncheng">
   
@@ -97,11 +94,11 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-22-ios-instance.." class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-37-tableview-dequeueWithIdentifier.." class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/11/21/22-ios-instance../" class="article-date">
-  <time datetime="2015-11-21T11:05:11.000Z" itemprop="datePublished">November 21 2015</time>
+<a href="/2016/04/13/37-tableview-dequeueWithIdentifier../" class="article-date">
+  <time datetime="2016-04-13T14:52:31.000Z" itemprop="datePublished">April 13 2016</time>
 </a>
 
 
@@ -118,7 +115,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      instance member &#39;gameView&#39;cannot be used on type &#39;...&#39;
+      关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别
     </h1>
   
 
@@ -130,14 +127,19 @@ var _hmt = _hmt || [];
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>Contents</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier:_forIndexPath的区别"><span class="toc-number">1.</span> <span class="toc-text">关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别</span></a></li></ol>
 		
 		</div>
 		
-        <blockquote>
-<p>貌似昨天也遇到这样的问题，但是却没有在意，只是在<code>stackoverflow</code>上一下子找到了解决方案也没有在意，不过今天又遇到了这样的问题，确实让我很恼火，如下图所示，我要干什么就不在这里向大家说了。但是这里确实有错误，所以说这应该是一种规范吧，得找到相关东西，尽量避免以后出现这种错误，因此把它写出来应该影响会更深刻些。   </p>
-</blockquote>
-<p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br><a id="more"></a><br>看到这里我想你肯定诧异了，明明添加了<code>self</code>并且制定了<code>gameView</code>是本对象下的view，可是为什么还是不可以呢？这里又有一个问题了。根据<code>stackoverflow</code>上的提示，此时self并没有初始化，所以系统也不知道self属性是啥!!哈哈哈哈哈~~~~<br>这下应该懂了吧，所以要对该属性添加lazy限制。来看下《<a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html" target="_blank" rel="external">The Swift Programming Language: Properties</a>》对lazy stored property的定义吧。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-2.png" alt="lazy stored property"><br>这里指明了在需要用的时候才会调用它，所以不用担心self初始化的问题了。hiahia，完美解决。。。<br>下面附上<code>stackoverflow</code>上问题链接<a href="http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene" target="_blank" rel="external">http://stackoverflow.com/questions/32544935/instance-member-view-cannot-be-used-on-type-gamescene</a></p>
+        <h4 id="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier:_forIndexPath的区别">关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别</h4><ul>
+<li>苹果官方对forIndexPath方法的描述是这个方法使用index path来添加基于tableView cell位置的附加配置</li>
+</ul>
+<p>更好的观点：</p>
+<ul>
+<li>最重要的区别是如果你没有register一个class或者一个nib的identifier的话，forIndexPath: 版本会崩溃。在这种情况下，旧版本(没有forIndexPath：)会返回nil。<br>其中你通过tableView的registerClass:forCellReuseIdentifier: register一个class的identifier。你通过tableView的registerNib:forCellReuseIdentifier: register 一个nib的identifier。</li>
+<li>如果你在Storyboard里创建你的tableView 和 cell的样本的话，Storyboard加载器会注意你在Storyboard中定义的cell原型。</li>
+<li>Session 200 - What’s New in Cocoa Touch from WWDC 2012 中提到“forIndexPath：”方法。它告诉我们：你总是可以获取一个初始化过的cell。(并没有提到如果你没有注册class或者nib的话会崩溃)<br><br>这个session还告诉我们：这将是该indexPath合适的尺寸。大概这也意味着这会在设置cell<br>的width和height之前设置cell的size。这也是为什么需要index path。</li>
+</ul>
 
       
     </div>
@@ -148,11 +150,11 @@ var _hmt = _hmt || [];
 	  <!-- 百度分享 End -->
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UITableView/">UITableView</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">November 21 2015</time>
+Updated:<time datetime="2016-04-13T14:55:33.000Z" itemprop="dateModified">April 13 2016</time>
 </span>
 
 
@@ -162,19 +164,10 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
     
 <nav id="article-nav">
   
-    <a href="/2015/11/21/23-git-error-checkout/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          error: Your local changes to the following files would be overwritten by checkout以及git常用命令
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/06/36-Autolayout-translate-02/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">sendAsynchronousRequest竟然被弃用了！！！</div>
+      <div class="article-nav-title">AutoLayout翻译二--在代码中使用Autolayout</div>
     </a>
   
 </nav>
@@ -187,7 +180,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
 <!-- 多说评论框 start -->
 
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2015/11/21/22-ios-instance../" data-title="instance member &#39;gameView&#39;cannot be used on type &#39;...&#39;" data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2016/04/13/37-tableview-dequeueWithIdentifier../" data-title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -200,7 +193,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">Contents</h2>
     
-        
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier:_forIndexPath的区别"><span class="toc-number">1.</span> <span class="toc-text">关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别</span></a></li></ol>
     
   </div>
 
