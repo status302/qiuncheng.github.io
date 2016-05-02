@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-04-13T14:55:33.000Z</updated>
+  <updated>2016-05-02T08:46:00.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[翻译Autolayout（3）]]></title>
+    <link href="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/"/>
+    <id>http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/</id>
+    <published>2016-05-02T08:43:48.000Z</published>
+    <updated>2016-05-02T08:46:00.000Z</updated>
+    <content type="html"><![CDATA[<h4 id="Anchor_notation（瞄点符号）">Anchor notation（瞄点符号）</h4><blockquote>
+<p>继上篇《在代码中使用Autolayout》 <br><br>这篇主要讲“Anchor notation”</p>
+</blockquote>
+<p>在iOS9中，用<code>Anchor nonation</code>做我之前做过的任何事情都是有可能的，创建同样的八个约束，然后把它们添加到同样的view上，使用一种更加紧凑的标记。之前的nonation有一些奇特的特点，那就是一个<code>NSLayoutConstraint</code>初始化方法可以创建任何约束。新的<code>Anchor
+notation</code>采用了一种相反的方式，它聚焦在简洁上，但是却牺牲了突出点。为了做到这一点，除了聚焦于约束上，它也聚焦在约束关联的属性上。这些属性被描述为<code>UIView</code>的<code>anchor</code>属性。</p>
+<ul>
+<li><code>topAnchor</code>, <code>bottomAnchor</code></li>
+<li><code>leftAnchor</code>, <code>rightAnchor</code>,<code>leadingAnchor</code>, <code>trailingAnchor</code></li>
+<li><code>centerXAnchor</code>, <code>centerYAnchor</code></li>
+<li><code>firstBaselineAnchor</code>, <code>lastBaselineAnchor</code> <br></li>
+</ul>
+<p>所有的瞄点值都是NSLayoutAnchor的实例（其中一些也是NSLayoutAnchor子类的实例）。建立约束的方法都是NSLayoutAnchor的实例化方法，而且有很多这样的方法，选择哪一个取决于你的约束需要具体描述的另一个anchor（当然constant保持默认0，multiplier默认保持1），constant或者multiplier或者他们两个，都取决于你对以下关系的选择：</p>
+<ul>
+<li><code>constraintEqualToConstant:</code></li>
+<li><code>constraintGreaterThanOrEqualToConstraint:</code></li>
+<li><code>constraintLessThanOrEqualConstant:</code></li>
+<li><code>constraintEqualToAnchor:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:</code></li>
+<li><code>constraintEqualToAnchor:constant:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:constant:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:constant:</code></li>
+<li><code>constraintEqualToAnchor:multiplier:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:multiplier:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:multiplier:</code></li>
+<li><code>constraintEqualToAnchor:multiplier:constant:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor: multiplier: constant:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor: multiplier: constant:</code></li>
+</ul>
+<p>所有的这些当我描述的时候你可能挺起来非常细心，但是当你在实例中看他们的时候，你会很欣赏这些紧凑的注解所带来的好处。他们是如此地好写，（尤其多亏了Xcode的代码自动补全）如此地好读，如此地好维护。这些新的notation在和<code>activateContraints:</code>方法相连接的时候是非常方便的，因为我们不用去关心每一条约束被明确地添加到那个view上：（就像下面那样：）</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSLayoutAnchor</span>.activateContraints([</span><br><span class="line">  v2.leadingAnchor.constraintEqualToAnchor(v1.leadingAnchor),</span><br><span class="line">  v2.trailingAnchor.constraintEqualToAnchor(v1.trailingAnchor),</span><br><span class="line">  v2.topAnchor.constraintEqualToAnchor(v1.topAnchor),</span><br><span class="line">  v2.heightAnchor.constraintEqualToConstant(<span class="number">10</span>),</span><br><span class="line">  v3.widthAnchor.constraintEqualToConstant(<span class="number">20</span>),</span><br><span class="line">  v3.heightAnchor.constraintEqualToConstant(<span class="number">20</span>),</span><br><span class="line">  v3.trailingAnchor.constraintLessThanOrEqualToAnchor(v1.trailingAnchor),</span><br><span class="line">  v3.bottomAnchor.constraintEqualToAnchor(v1.bottomAnchor)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p>这八行代码中的八个约束，加上包围的<code>acitvateConstraints</code>方法调用来把这些约束落实到我们的interface上。这儿并没有严格需要将所有的约束一下子activate，但是最好这样做。</p>
+<h4 id="Visual_format_notation(视觉符号格式)">Visual format notation(视觉符号格式)</h4><p>另一种来缩写创建约束的方式是使用某种基于文本的速记，叫做视觉符号格式。这个可以让你同步的描述多种约束。它也是特别具体的当你安排一系列竖直方向或者水平方向的view的时候。我会以一个很简单的例子开头:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#22312;&#19978;&#36848;&#34920;&#36798;&#20013;&#65292;`V:`&#20195;&#34920;&#35770;&#36848;&#19979;&#30340;`vertical deimension`&#65292;&#21478;&#19968;&#21322;&#36873;&#25321;&#26159;`H:`&#65292;&#23427;&#20063;&#26159;&#40664;&#35748;&#30340;&#65288;&#22240;&#27492;&#20934;&#35768;&#19981;&#25351;&#26126;&#23610;&#23544;&#65289;&#12290;&#19968;&#20010;view&#30340;&#21517;&#23383;&#20986;&#29616;&#22312;&#25324;&#21495;&#37324;&#65292;&#21516;&#26102;&#19968;&#20010;&#31446;&#30452;&#31526;&#21495;&#34920;&#31034;`superview`&#65292;&#25152;&#20197;&#36825;&#37324;&#25105;&#20204;&#27491;&#22312;&#25551;&#32472;v2&#30340;top edge&#39030;&#20303;&#23427;superview&#30340;top edge&#12290;&#25968;&#23383;&#30340;&#31526;&#21495;&#34920;&#31034;&#21442;&#25968;&#65292;&#21516;&#26102;&#25968;&#23383;&#31526;&#21495;&#20276;&#21516;view&#30340;&#21517;&#23383;&#35774;&#32622;view&#30340;&#23610;&#23544;&#65292;&#25152;&#20197;&#22312;&#36825;&#37324;&#25105;&#20204;&#35774;&#32622;v2&#30340;height&#20026;10&#12290;&#10;&#20351;&#29992;visual format&#65292;&#20320;&#19981;&#24471;&#19981;&#25552;&#20379;&#19968;&#20010;&#23383;&#20856;&#26469;&#35013;&#19978;&#38754;&#25552;&#21040;&#30340;view&#30340;&#21517;&#23383;&#23383;&#31526;&#12290;&#20363;&#22914;&#65306;&#20351;&#29992;&#20043;&#21069;&#34920;&#36798;&#30340;&#23383;&#20856;&#21487;&#20197;&#20026;[&#34;v2&#34;:v2]&#12290;&#25152;&#20197;&#36825;&#37324;&#36824;&#26377;&#20043;&#21069;&#34920;&#36798;&#30340;&#21478;&#19968;&#31181;&#26041;&#24335;&#65292;&#20351;&#29992;visual format&#30340;&#31616;&#31216;&#12290;&#10;```Swift&#10;  let d = [&#34;v2&#34;:v2, &#34;v3&#34;:v3]&#10;  NSLayoutConstraint.activateContraints([&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;H:|[v2]|&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;V:|[v2(10)]&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;H:[v3(20)]|&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;V:[v3(20)]|&#34;, options: [], merics: nil, views: d)&#10;    ].flatten().map&#123;$0&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这个例子创建了和之前例子相同的约束，但是却使用了五行命令却不是八行。（constraintWithVisualFormat: 方法产生了一个constraints的数组，所以字面上的数组是一个装着约束数组的数组，但是activateContraintsiule 期望只有一个数组约束，所以我筛选出我想要的数组）<br>visual format语法将其自身展示到极致当多种的view沿着同一纬度布置彼此。在那种情况下,你可以减小很多压力。（一些约束由同一个visual format生成）这种语法，在一中程度上也被限制在乐意表达的语法中。同时他也隐藏了约束的数量和产生的约束的特征。同时就我而言，我发现当使用visual format语法的时候比完整地表达出每一个约束更容易犯错。但是，你还是希望能够熟悉visual format，不仅仅是为了隐藏具体描述某个约束的细节。<br>当你使用visual format语法的时候这里有一些需要深入的事情：  </p>
+<ul>
+<li><code>metrics</code>: 参数是一个有用数字的字典。这可以让你使用一个visual format string的名字。</li>
+<li><code>options</code>: 参数是一个bitmask(NSLayoutFormatOptions), 主要让你做一些事情，例如添加alignments。alignments被应用在所有在visual format中提到的views。</li>
+<li>为了具体地别是两个连续的view之间的距离，使用连字符<code>-</code>环绕在数字符号周围，像：“[v1]-[20]-[v2]”。数字可以选择性的使用括号<code>[]</code>包围。</li>
+<li>一个在括号中的数字可能会地位高于一个同等的或者不同等的操作符。同时也可以跟随一个<code>@</code>符号表示priority。被逗号<code>,</code>分割的多种数字，也可以出现在参数中。例如<code>[v1(&gt;=20@400, &lt;=30)]</code><br></li>
+</ul>
+<p>想要了解更多关于visual format语法,请查看”Apple’s Auto Layout Guide”一章中的”Visual Format Syntax”</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="Anchor_notation（瞄点符号）">Anchor notation（瞄点符号）</h4><blockquote>
+<p>继上篇《在代码中使用Autolayout》 <br><br>这篇主要讲“Anchor notation”</p>
+</blockquo]]>
+    </summary>
+    
+      <category term="Autolayout" scheme="http://qiuncheng.com/tags/Autolayout/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别]]></title>
@@ -836,61 +898,6 @@
     <![CDATA[<p><em>切换试图的两种方式，虽然经常用到，但还不是很了解，也是就去上网查询了一下，发现他两却有很大区别。</em>  </p>
 <ul>
 <li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iOS上简易图片浏览器的实现]]></title>
-    <link href="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/"/>
-    <id>http://qiuncheng.com/2015/10/16/17-iOS-image-browser/</id>
-    <published>2015-10-16T14:26:28.000Z</published>
-    <updated>2015-10-18T01:28:51.000Z</updated>
-    <content type="html"><![CDATA[<blockquote>
-<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。目前还不支持从手机相册中调用图片来实现浏览，只是单纯的将图片添加到应用包中。好了，不多说了，let’s get it！  </p>
-</blockquote>
-<ul>
-<li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/storyboard.tiff" alt="工程大略"></p>
-</li>
-<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：<a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/control拖拽.tiff" alt="将试图和代码建立联系"></p>
-</li>
-<li><p>使用辅助窗口control拖拽法将视图和代码之间建立联系。<br>结果如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">UIKit</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView1: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicBusttonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加图片资源到<code>Assets.xcassets</code>中，我在这里添加9张图片。</p>
-</li>
-<li><p>接下来的任务就是要编辑代码来实现图片的切换了。</p>
-<ol>
-<li>添加9张图片的<code>name</code>为:<br><code>var imagesNameString = [&quot;17&quot;,&quot;18&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot;,&quot;24&quot;,&quot;25&quot;,&quot;26&quot;]</code></li>
-<li>设置标记数<code>flagNum</code>:<br><code>var flagNum:Int = 0</code></li>
-<li><p>实现上一张和下一张方法，通过点击两个按钮来进行图片切换。具体代码实现如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">nextPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> flagNum == (imagesNameString.<span class="built_in">count</span>-<span class="number">1</span>)&#123;</span><br><span class="line">        flagNum = <span class="number">0</span></span><br><span class="line">        flagNum++</span><br><span class="line">        imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        flagNum++</span><br><span class="line">        imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">lastPicButtonClicked</span><span class="params">(sender: UIButton)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> flagNum == <span class="number">0</span>&#123;</span><br><span class="line">        flagNum = (imagesNameString.<span class="built_in">count</span>-<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    flagNum--</span><br><span class="line">    imageView1.image = <span class="type">UIImage</span>(named: imagesNameString[flagNum])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>重点的时刻来了，通常我们的图片浏览器的话都是通过滑动实现切换图片的，下面我们将添加左右滑动切换图片资源。在此之前我们必须要对上面的两个方法体中的内容实现封装。所以我们在这里新建两个方法，分别为：nextPic()和lastPic()。  </p>
-</li>
-<li><p>先让我们来大致看下效果图吧。GIF走起！<br><center><img src="http://7xk67j.com1.z0.glb.clouddn.com/imageViewGif.gif" alt=""></center></p>
-<blockquote>
-<p>刚学会ui怎么可能会gesture呢，233333，本周继续更新《使用gesture实现图片切换》。</p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<blockquote>
-<p>学习完了iOS的UI部分后还没有做过什么东西呢？于是就想着借<code>UIImageView</code>做出一个简易的图片浏览器来。<br>其中需要用到的手势（gesture），来使<code>UIImageView</code>具有滑动事件。目前还不支持从手机相册中调用图片来实现浏览，只是单纯的将图片添加到应用包中。好了，不多说了，let’s get it！  </p>
-</blockquote>
-<ul>
-<li><p>首先选择<code>Single View Application</code>新建工程，取名为<code>ImageViewBrowser</code>，在这里不勾选<code>core data</code>目前用不上那个。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/storyboard.tiff" alt="工程大略"></p>
-</li>
-<li><p>打开storyboard，如下图所示，添加一个<code>ImageView</code>和两个<code>Button</code>到该<code>ViewController</code>，具体如下图所示：]]>
     
     </summary>
     

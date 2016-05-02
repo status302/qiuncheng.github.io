@@ -95,6 +95,119 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-38-Autolayout-3-anchor-visual" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/05/02/38-Autolayout-3-anchor-visual/" class="article-date">
+  <time datetime="2016-05-02T08:43:48.000Z" itemprop="datePublished">May 02 2016</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/02/38-Autolayout-3-anchor-visual/">翻译Autolayout（3）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Anchor_notation（瞄点符号）"><span class="toc-number">1.</span> <span class="toc-text">Anchor notation（瞄点符号）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Visual_format_notation(视觉符号格式)"><span class="toc-number">2.</span> <span class="toc-text">Visual format notation(视觉符号格式)</span></a></li></ol>
+		
+		</div>
+		
+        <h4 id="Anchor_notation（瞄点符号）">Anchor notation（瞄点符号）</h4><blockquote>
+<p>继上篇《在代码中使用Autolayout》 <br><br>这篇主要讲“Anchor notation”</p>
+</blockquote>
+<p>在iOS9中，用<code>Anchor nonation</code>做我之前做过的任何事情都是有可能的，创建同样的八个约束，然后把它们添加到同样的view上，使用一种更加紧凑的标记。之前的nonation有一些奇特的特点，那就是一个<code>NSLayoutConstraint</code>初始化方法可以创建任何约束。新的<code>Anchor
+notation</code>采用了一种相反的方式，它聚焦在简洁上，但是却牺牲了突出点。为了做到这一点，除了聚焦于约束上，它也聚焦在约束关联的属性上。这些属性被描述为<code>UIView</code>的<code>anchor</code>属性。</p>
+<ul>
+<li><code>topAnchor</code>, <code>bottomAnchor</code></li>
+<li><code>leftAnchor</code>, <code>rightAnchor</code>,<code>leadingAnchor</code>, <code>trailingAnchor</code></li>
+<li><code>centerXAnchor</code>, <code>centerYAnchor</code></li>
+<li><code>firstBaselineAnchor</code>, <code>lastBaselineAnchor</code> <br></li>
+</ul>
+<p>所有的瞄点值都是NSLayoutAnchor的实例（其中一些也是NSLayoutAnchor子类的实例）。建立约束的方法都是NSLayoutAnchor的实例化方法，而且有很多这样的方法，选择哪一个取决于你的约束需要具体描述的另一个anchor（当然constant保持默认0，multiplier默认保持1），constant或者multiplier或者他们两个，都取决于你对以下关系的选择：</p>
+<ul>
+<li><code>constraintEqualToConstant:</code></li>
+<li><code>constraintGreaterThanOrEqualToConstraint:</code></li>
+<li><code>constraintLessThanOrEqualConstant:</code></li>
+<li><code>constraintEqualToAnchor:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:</code></li>
+<li><code>constraintEqualToAnchor:constant:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:constant:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:constant:</code></li>
+<li><code>constraintEqualToAnchor:multiplier:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:multiplier:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:multiplier:</code></li>
+<li><code>constraintEqualToAnchor:multiplier:constant:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor: multiplier: constant:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor: multiplier: constant:</code></li>
+</ul>
+<p>所有的这些当我描述的时候你可能挺起来非常细心，但是当你在实例中看他们的时候，你会很欣赏这些紧凑的注解所带来的好处。他们是如此地好写，（尤其多亏了Xcode的代码自动补全）如此地好读，如此地好维护。这些新的notation在和<code>activateContraints:</code>方法相连接的时候是非常方便的，因为我们不用去关心每一条约束被明确地添加到那个view上：（就像下面那样：）</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSLayoutAnchor</span>.activateContraints([</span><br><span class="line">  v2.leadingAnchor.constraintEqualToAnchor(v1.leadingAnchor),</span><br><span class="line">  v2.trailingAnchor.constraintEqualToAnchor(v1.trailingAnchor),</span><br><span class="line">  v2.topAnchor.constraintEqualToAnchor(v1.topAnchor),</span><br><span class="line">  v2.heightAnchor.constraintEqualToConstant(<span class="number">10</span>),</span><br><span class="line">  v3.widthAnchor.constraintEqualToConstant(<span class="number">20</span>),</span><br><span class="line">  v3.heightAnchor.constraintEqualToConstant(<span class="number">20</span>),</span><br><span class="line">  v3.trailingAnchor.constraintLessThanOrEqualToAnchor(v1.trailingAnchor),</span><br><span class="line">  v3.bottomAnchor.constraintEqualToAnchor(v1.bottomAnchor)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p>这八行代码中的八个约束，加上包围的<code>acitvateConstraints</code>方法调用来把这些约束落实到我们的interface上。这儿并没有严格需要将所有的约束一下子activate，但是最好这样做。</p>
+<h4 id="Visual_format_notation(视觉符号格式)">Visual format notation(视觉符号格式)</h4><p>另一种来缩写创建约束的方式是使用某种基于文本的速记，叫做视觉符号格式。这个可以让你同步的描述多种约束。它也是特别具体的当你安排一系列竖直方向或者水平方向的view的时候。我会以一个很简单的例子开头:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#22312;&#19978;&#36848;&#34920;&#36798;&#20013;&#65292;`V:`&#20195;&#34920;&#35770;&#36848;&#19979;&#30340;`vertical deimension`&#65292;&#21478;&#19968;&#21322;&#36873;&#25321;&#26159;`H:`&#65292;&#23427;&#20063;&#26159;&#40664;&#35748;&#30340;&#65288;&#22240;&#27492;&#20934;&#35768;&#19981;&#25351;&#26126;&#23610;&#23544;&#65289;&#12290;&#19968;&#20010;view&#30340;&#21517;&#23383;&#20986;&#29616;&#22312;&#25324;&#21495;&#37324;&#65292;&#21516;&#26102;&#19968;&#20010;&#31446;&#30452;&#31526;&#21495;&#34920;&#31034;`superview`&#65292;&#25152;&#20197;&#36825;&#37324;&#25105;&#20204;&#27491;&#22312;&#25551;&#32472;v2&#30340;top edge&#39030;&#20303;&#23427;superview&#30340;top edge&#12290;&#25968;&#23383;&#30340;&#31526;&#21495;&#34920;&#31034;&#21442;&#25968;&#65292;&#21516;&#26102;&#25968;&#23383;&#31526;&#21495;&#20276;&#21516;view&#30340;&#21517;&#23383;&#35774;&#32622;view&#30340;&#23610;&#23544;&#65292;&#25152;&#20197;&#22312;&#36825;&#37324;&#25105;&#20204;&#35774;&#32622;v2&#30340;height&#20026;10&#12290;&#10;&#20351;&#29992;visual format&#65292;&#20320;&#19981;&#24471;&#19981;&#25552;&#20379;&#19968;&#20010;&#23383;&#20856;&#26469;&#35013;&#19978;&#38754;&#25552;&#21040;&#30340;view&#30340;&#21517;&#23383;&#23383;&#31526;&#12290;&#20363;&#22914;&#65306;&#20351;&#29992;&#20043;&#21069;&#34920;&#36798;&#30340;&#23383;&#20856;&#21487;&#20197;&#20026;[&#34;v2&#34;:v2]&#12290;&#25152;&#20197;&#36825;&#37324;&#36824;&#26377;&#20043;&#21069;&#34920;&#36798;&#30340;&#21478;&#19968;&#31181;&#26041;&#24335;&#65292;&#20351;&#29992;visual format&#30340;&#31616;&#31216;&#12290;&#10;```Swift&#10;  let d = [&#34;v2&#34;:v2, &#34;v3&#34;:v3]&#10;  NSLayoutConstraint.activateContraints([&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;H:|[v2]|&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;V:|[v2(10)]&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;H:[v3(20)]|&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;V:[v3(20)]|&#34;, options: [], merics: nil, views: d)&#10;    ].flatten().map&#123;$0&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这个例子创建了和之前例子相同的约束，但是却使用了五行命令却不是八行。（constraintWithVisualFormat: 方法产生了一个constraints的数组，所以字面上的数组是一个装着约束数组的数组，但是activateContraintsiule 期望只有一个数组约束，所以我筛选出我想要的数组）<br>visual format语法将其自身展示到极致当多种的view沿着同一纬度布置彼此。在那种情况下,你可以减小很多压力。（一些约束由同一个visual format生成）这种语法，在一中程度上也被限制在乐意表达的语法中。同时他也隐藏了约束的数量和产生的约束的特征。同时就我而言，我发现当使用visual format语法的时候比完整地表达出每一个约束更容易犯错。但是，你还是希望能够熟悉visual format，不仅仅是为了隐藏具体描述某个约束的细节。<br>当你使用visual format语法的时候这里有一些需要深入的事情：  </p>
+<ul>
+<li><code>metrics</code>: 参数是一个有用数字的字典。这可以让你使用一个visual format string的名字。</li>
+<li><code>options</code>: 参数是一个bitmask(NSLayoutFormatOptions), 主要让你做一些事情，例如添加alignments。alignments被应用在所有在visual format中提到的views。</li>
+<li>为了具体地别是两个连续的view之间的距离，使用连字符<code>-</code>环绕在数字符号周围，像：“[v1]-[20]-[v2]”。数字可以选择性的使用括号<code>[]</code>包围。</li>
+<li>一个在括号中的数字可能会地位高于一个同等的或者不同等的操作符。同时也可以跟随一个<code>@</code>符号表示priority。被逗号<code>,</code>分割的多种数字，也可以出现在参数中。例如<code>[v1(&gt;=20@400, &lt;=30)]</code><br></li>
+</ul>
+<p>想要了解更多关于visual format语法,请查看”Apple’s Auto Layout Guide”一章中的”Visual Format Syntax”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="cinprhkaq000j9bhuajspxw2z" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
+继上篇《在..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/05/02/38-Autolayout-3-anchor-visual/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Autolayout/">Autolayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2016-05-02T08:46:00.000Z" itemprop="dateModified">May 02 2016</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
     <article id="post-37-tableview-dequeueWithIdentifier.." class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -146,7 +259,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cimyzbk8c001r8ahufl49kb02" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cinprhkbq001w9bhuuoamtjja" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
       
 
       
@@ -217,7 +330,7 @@ Updated:<time datetime="2016-04-13T14:55:33.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cimyzbk9r003w8ahuaun2r1yd" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cinprhkd200409bhuj6y9zxnu" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
       
 
       
@@ -292,7 +405,7 @@ Updated:<time datetime="2016-04-06T14:26:32.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cimyzbk8t002h8ahu3k0z4gag" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cinprhkc6002m9bhu6tkcaers" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
       
 
       
@@ -364,7 +477,7 @@ Updated:<time datetime="2016-04-04T06:39:22.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cimyzbk9m003m8ahutgw2b8h4" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cinprhkcy003q9bhum0dh5v9q" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
       
 
       
@@ -445,7 +558,7 @@ Updated:<time datetime="2016-03-21T10:24:41.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cimyzbk8b001o8ahuroxzevz1" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cinprhkbo001t9bhud29zk71f" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
       
 
       
@@ -513,7 +626,7 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cimyzbk7c000e8ahubbmedjtr" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cinprhkao000e9bhupk05mtfa" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
       
 
       
@@ -581,7 +694,7 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cimyzbk8l00228ahutrly78we" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cinprhkbx00279bhujatqqcvj" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
       
 
       
@@ -652,7 +765,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cimyzbk6s00018ahuwk2io6y0" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cinprhka400019bhuswdmwnmn" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
       
 
       
@@ -727,7 +840,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cimyzbk9e003a8ahu26oqp3rd" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
+	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cinprhkcn003e9bhuf74n8pf9" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
 关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
       
 
@@ -797,7 +910,7 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cimyzbk8i001z8ahuym8ifkr4" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cinprhkbv00249bhuczoj699e" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
       
 
       
@@ -865,7 +978,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cimyzbk7500068ahul0gx1ucn" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cinprhkai00069bhu7816iuob" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
       
 
       
@@ -939,7 +1052,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cimyzbk8o00278ahuhfy2npd6" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
+	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cinprhkby002c9bhuzr5yibr9" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
 
 继上篇博..." class="article-share-link">Share</a>
       
@@ -1020,7 +1133,7 @@ Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cimyzbk82001d8ahuz1coh8g3" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
+	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cinprhkbc001i9bhucsthbofk" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
 
 意外的时刻发现..." class="article-share-link">Share</a>
       
@@ -1090,7 +1203,7 @@ Updated:<time datetime="2015-11-22T13:24:05.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cimyzbk9l003j8ahumxiq9phn" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cinprhkcv003n9bhue814kmgn" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
       
 
       
@@ -1161,7 +1274,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cimyzbk9c00378ahu2njl3mr9" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cinprhkcl003b9bhu36tvw4t7" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
       
 
       
@@ -1233,7 +1346,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cimyzbk8z002r8ahu6v7khlto" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cinprhkcc002v9bhufii5oc47" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
       
 
       
@@ -1302,7 +1415,7 @@ Updated:<time datetime="2015-11-20T11:44:58.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cimyzbk7h000s8ahupdai0nbh" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cinprhkax000x9bhueqj48l89" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
       
 
       
@@ -1370,7 +1483,7 @@ Updated:<time datetime="2015-11-11T04:09:59.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cimyzbk7o00128ahu2cx7i37h" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cinprhkb600179bhujwnznmdd" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -1440,7 +1553,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cimyzbk9800308ahu42wc4jk6" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cinprhkch00349bhu9d6rymkc" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -1514,7 +1627,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cimyzbk9g003d8ahu9k6co59t" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cinprhkcp003h9bhua2xxfgqn" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -1586,7 +1699,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cimyzbk8x002o8ahuf84i6if4" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cinprhkc9002s9bhu3igp3nje" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -1658,7 +1771,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cimyzbk7t00158ahuwy06yz1v" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cinprhkb8001a9bhu7wumgfce" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -1734,7 +1847,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cimyzbk80001a8ahuwkz4alpp" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cinprhkba001f9bhugg0me1vc" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -1806,7 +1919,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cimyzbk9i003g8ahumgctfm23" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cinprhkct003k9bhu4pn5y3cd" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -1875,7 +1988,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cimyzbk9a00338ahulc8ix4ye" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cinprhkcj00379bhulg0o8v2z" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -1946,7 +2059,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cimyzbk88001l8ahu5ypgc9ib" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cinprhkbm001q9bhu5pcucn11" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -2015,7 +2128,7 @@ Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cimyzbk7e000j8ahup9hxkncf" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cinprhkas000o9bhu593la20i" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
       
 
       
@@ -2083,7 +2196,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cimyzbk8q002c8ahuropi06pm" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cinprhkc2002h9bhuqjqbi37l" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
       
 
       
@@ -2164,7 +2277,7 @@ int2 = functools.<span class="function"><span class="title">partial</span><span 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cimyzbk8g001w8ahuiaf0cx4t" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cinprhkbt00219bhub48exls3" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
       
 
       
@@ -2244,7 +2357,7 @@ Updated:<time datetime="2015-09-21T17:09:48.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cimyzbk93002u8ahubgw9nsk6" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cinprhkcd002y9bhumabff3ng" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
       
 
       
@@ -2322,7 +2435,7 @@ Updated:<time datetime="2015-09-21T17:09:15.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cimyzbk95002x8ahud0g3u7bk" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cinprhkcf00319bhuv2scezjy" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
       
 
       
@@ -2393,7 +2506,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cimyzbk7j000v8ahu544w5pyt" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cinprhkaz00109bhunw3n0d2k" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
       
 
       
@@ -2464,7 +2577,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cimyzbk84001h8ahujk2u0hy7" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cinprhkbk001m9bhur5m80i5t" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
       
 
       
@@ -2534,7 +2647,7 @@ Updated:<time datetime="2015-09-21T17:07:42.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cimyzbk9o003p8ahuyqt9v4s2" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cinprhkd0003t9bhuygcm4l12" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
       
 
       
@@ -2604,7 +2717,7 @@ Updated:<time datetime="2015-09-21T17:14:24.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cimyzbk7900098ahuzxg1y742" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cinprhkal00099bhu29z8w2le" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
       
 
       
@@ -2677,7 +2790,7 @@ Updated:<time datetime="2015-09-21T17:07:17.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cimyzbk7l000z8ahu5t2covmr" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
+	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cinprhkb200149bhurim4a7bu" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
 
 
 
@@ -2749,7 +2862,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Archive</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -2759,7 +2872,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autolayout/">Autolayout</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autolayout/">Autolayout</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -2769,7 +2882,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">TagCloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Autolayout/" style="font-size: 14.4px; color: #7e9ccb">Autolayout</a> <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 15.8px; color: #7e75b8">Hexo</a> <a href="/tags/Life/" style="font-size: 18.6px; color: #7f2793">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/UITableView/" style="font-size: 13px; color: #7dc3de">UITableView</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/git/" style="font-size: 14.4px; color: #7e9ccb">git</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 17.2px; color: #7f4ea6">python</a> <a href="/tags/回顾/" style="font-size: 13px; color: #7dc3de">回顾</a> <a href="/tags/翻译/" style="font-size: 14.4px; color: #7e9ccb">翻译</a> <a href="/tags/转载/" style="font-size: 14.4px; color: #7e9ccb">转载</a>
+      <a href="/tags/Autolayout/" style="font-size: 15.33px; color: #7e82bf">Autolayout</a> <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #7f62af">Hexo</a> <a href="/tags/Life/" style="font-size: 18.83px; color: #802190">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/UITableView/" style="font-size: 13px; color: #7dc3de">UITableView</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/git/" style="font-size: 14.17px; color: #7ea3ce">git</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 17.67px; color: #7f419f">python</a> <a href="/tags/回顾/" style="font-size: 13px; color: #7dc3de">回顾</a> <a href="/tags/翻译/" style="font-size: 14.17px; color: #7ea3ce">翻译</a> <a href="/tags/转载/" style="font-size: 14.17px; color: #7ea3ce">转载</a>
     </div>
   </div>
 
@@ -2780,6 +2893,10 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
     <h3 class="widget-title">Recent</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/02/38-Autolayout-3-anchor-visual/">翻译Autolayout（3）</a>
+          </li>
         
           <li>
             <a href="/2016/04/13/37-tableview-dequeueWithIdentifier../">关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别</a>
@@ -2795,10 +2912,6 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
         
           <li>
             <a href="/2016/03/21/34-xcode7-zhenjitiaoshi/">Xcode7 真机测试出现 &quot;The account ... has no team with ID ... 怎么办</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/11/33-self-_-differ/">关于self和下划线_的区别</a>
           </li>
         
       </ul>

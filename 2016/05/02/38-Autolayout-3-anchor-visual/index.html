@@ -4,20 +4,17 @@
   <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
   <meta charset="utf-8">
   
-  <title>换Mac了，高兴的心情无法抑制！ | Hi,I&#39;m Qiuncheng</title>
+  <title>翻译Autolayout（3） | Hi,I&#39;m Qiuncheng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="换Mac了，高兴的心情无法抑制！">
-<meta property="og:url" content="http://qiuncheng.com/2015/08/25/5-change-to-mac/index.html">
+<meta property="og:title" content="翻译Autolayout（3）">
+<meta property="og:url" content="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/index.html">
 <meta property="og:site_name" content="Hi,I'm Qiuncheng">
 <meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/1.pic.jpg">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/3.pic.jpg">
-<meta property="og:image" content="http://7xk67j.com1.z0.glb.clouddn.com/2.pic.jpg">
-<meta property="og:updated_time" content="2015-09-21T17:08:37.000Z">
+<meta property="og:updated_time" content="2016-05-02T08:46:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="换Mac了，高兴的心情无法抑制！">
+<meta name="twitter:title" content="翻译Autolayout（3）">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
 <meta name="twitter:creator" content="@https://twitter.com/qiuncheng">
   
@@ -97,17 +94,17 @@ var _hmt = _hmt || [];
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-5-change-to-mac" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-38-Autolayout-3-anchor-visual" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2015/08/25/5-change-to-mac/" class="article-date">
-  <time datetime="2015-08-25T12:03:59.000Z" itemprop="datePublished">August 25 2015</time>
+<a href="/2016/05/02/38-Autolayout-3-anchor-visual/" class="article-date">
+  <time datetime="2016-05-02T08:43:48.000Z" itemprop="datePublished">May 02 2016</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Life/">Life</a>
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
   </div>
 
   </div>
@@ -118,7 +115,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      换Mac了，高兴的心情无法抑制！
+      翻译Autolayout（3）
     </h1>
   
 
@@ -130,30 +127,51 @@ var _hmt = _hmt || [];
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>Contents</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Anchor_notation（瞄点符号）"><span class="toc-number">1.</span> <span class="toc-text">Anchor notation（瞄点符号）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Visual_format_notation(视觉符号格式)"><span class="toc-number">2.</span> <span class="toc-text">Visual format notation(视觉符号格式)</span></a></li></ol>
 		
 		</div>
 		
-        <blockquote>
-<p>之前把我联想U410的超级本升级了win10，本来用着还不错，可是依然无法是性能不足，不能满足我的某些需求。我承认，U410是我用过的比较好的PC之一（我总共就用过两台PC　）。但当我前天收到了早前下单的Mac之后，我再也不认为U410是一个好的笔记本了。没错，现在真的是认为MacBook是最好的笔记本。  </p>
+        <h4 id="Anchor_notation（瞄点符号）">Anchor notation（瞄点符号）</h4><blockquote>
+<p>继上篇《在代码中使用Autolayout》 <br><br>这篇主要讲“Anchor notation”</p>
 </blockquote>
-<p>怎么说呢，买这个MacBook Pro（Retina）真的是历程艰险，记得当时我身上只能拿出一千块钱，然后就把我想买电脑的事情跟我母亲说了，她当时只说，没事，到时候我给你2K，可是2K呀。当时说真的，我一下子觉得多了点希望，于是我就想着各种办法弄钱呀，<a id="more"></a>其中把我原来的U410卖掉了1500，找表哥借了1500，找同学借了1200，可是还差1K多，黄天不负有心人，最好的人就在你身边，他们就是你身边的父母，于是当我父亲听到我想换电脑还差点钱时果断给了我一千。哈哈，齐了。<br>于是在8月19号的下午，我在Apple官网下单了，原因很简单，因为Apple在开学季买Mac送beats solo2耳机。哈哈，瞬间觉得Apple公司真的是太有爱了。<br>不多说了，直接上图：</p>
+<p>在iOS9中，用<code>Anchor nonation</code>做我之前做过的任何事情都是有可能的，创建同样的八个约束，然后把它们添加到同样的view上，使用一种更加紧凑的标记。之前的nonation有一些奇特的特点，那就是一个<code>NSLayoutConstraint</code>初始化方法可以创建任何约束。新的<code>Anchor
+notation</code>采用了一种相反的方式，它聚焦在简洁上，但是却牺牲了突出点。为了做到这一点，除了聚焦于约束上，它也聚焦在约束关联的属性上。这些属性被描述为<code>UIView</code>的<code>anchor</code>属性。</p>
 <ul>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/1.pic.jpg" alt="image description"></li>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/3.pic.jpg" alt=""></li>
-<li><img src="http://7xk67j.com1.z0.glb.clouddn.com/2.pic.jpg" alt=""></li>
+<li><code>topAnchor</code>, <code>bottomAnchor</code></li>
+<li><code>leftAnchor</code>, <code>rightAnchor</code>,<code>leadingAnchor</code>, <code>trailingAnchor</code></li>
+<li><code>centerXAnchor</code>, <code>centerYAnchor</code></li>
+<li><code>firstBaselineAnchor</code>, <code>lastBaselineAnchor</code> <br></li>
 </ul>
-<p>其实Mac上的操作真的让人无话说，太流畅了，太省电了，电池太顶用了。软件也很丰富，虽然游戏很少，大多都收费，但是我真的是太喜欢这台电脑了。屏幕就和我的iPad屏幕一样清晰。<br>先说这么多吧，更多体验等我以后用多了我想自然就有了吧。</p>
-<p>额，其实也还是有几条不足的：  </p>
+<p>所有的瞄点值都是NSLayoutAnchor的实例（其中一些也是NSLayoutAnchor子类的实例）。建立约束的方法都是NSLayoutAnchor的实例化方法，而且有很多这样的方法，选择哪一个取决于你的约束需要具体描述的另一个anchor（当然constant保持默认0，multiplier默认保持1），constant或者multiplier或者他们两个，都取决于你对以下关系的选择：</p>
 <ul>
-<li>Markdown编辑器我还是觉得markdownPad好用，虽然Mac上有很多md编辑器，但始终没有mdpad的感觉，也许这就是相思吧。</li>
-<li>hexo博客的环境从win上换到Mac上有很多地方需要注意，ssh、node.js、brew等等。</li>
-<li>Mac的硬盘内存比较小，只有128G</li>
-<li>还有其他的等等，</li>
+<li><code>constraintEqualToConstant:</code></li>
+<li><code>constraintGreaterThanOrEqualToConstraint:</code></li>
+<li><code>constraintLessThanOrEqualConstant:</code></li>
+<li><code>constraintEqualToAnchor:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:</code></li>
+<li><code>constraintEqualToAnchor:constant:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:constant:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:constant:</code></li>
+<li><code>constraintEqualToAnchor:multiplier:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor:multiplier:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor:multiplier:</code></li>
+<li><code>constraintEqualToAnchor:multiplier:constant:</code></li>
+<li><code>constraintGreaterThanOrEqualToAnchor: multiplier: constant:</code></li>
+<li><code>constraintLessThanOrEqualToAnchor: multiplier: constant:</code></li>
 </ul>
-<blockquote>
-<p>顺便说一下，那个beats solo2耳机我真的觉得没啥用处呀，所以我想便宜点卖掉呀，有谁想要的请直接在下方评论处说明。　</p>
-</blockquote>
+<p>所有的这些当我描述的时候你可能挺起来非常细心，但是当你在实例中看他们的时候，你会很欣赏这些紧凑的注解所带来的好处。他们是如此地好写，（尤其多亏了Xcode的代码自动补全）如此地好读，如此地好维护。这些新的notation在和<code>activateContraints:</code>方法相连接的时候是非常方便的，因为我们不用去关心每一条约束被明确地添加到那个view上：（就像下面那样：）</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSLayoutAnchor</span>.activateContraints([</span><br><span class="line">  v2.leadingAnchor.constraintEqualToAnchor(v1.leadingAnchor),</span><br><span class="line">  v2.trailingAnchor.constraintEqualToAnchor(v1.trailingAnchor),</span><br><span class="line">  v2.topAnchor.constraintEqualToAnchor(v1.topAnchor),</span><br><span class="line">  v2.heightAnchor.constraintEqualToConstant(<span class="number">10</span>),</span><br><span class="line">  v3.widthAnchor.constraintEqualToConstant(<span class="number">20</span>),</span><br><span class="line">  v3.heightAnchor.constraintEqualToConstant(<span class="number">20</span>),</span><br><span class="line">  v3.trailingAnchor.constraintLessThanOrEqualToAnchor(v1.trailingAnchor),</span><br><span class="line">  v3.bottomAnchor.constraintEqualToAnchor(v1.bottomAnchor)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p>这八行代码中的八个约束，加上包围的<code>acitvateConstraints</code>方法调用来把这些约束落实到我们的interface上。这儿并没有严格需要将所有的约束一下子activate，但是最好这样做。</p>
+<h4 id="Visual_format_notation(视觉符号格式)">Visual format notation(视觉符号格式)</h4><p>另一种来缩写创建约束的方式是使用某种基于文本的速记，叫做视觉符号格式。这个可以让你同步的描述多种约束。它也是特别具体的当你安排一系列竖直方向或者水平方向的view的时候。我会以一个很简单的例子开头:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#22312;&#19978;&#36848;&#34920;&#36798;&#20013;&#65292;`V:`&#20195;&#34920;&#35770;&#36848;&#19979;&#30340;`vertical deimension`&#65292;&#21478;&#19968;&#21322;&#36873;&#25321;&#26159;`H:`&#65292;&#23427;&#20063;&#26159;&#40664;&#35748;&#30340;&#65288;&#22240;&#27492;&#20934;&#35768;&#19981;&#25351;&#26126;&#23610;&#23544;&#65289;&#12290;&#19968;&#20010;view&#30340;&#21517;&#23383;&#20986;&#29616;&#22312;&#25324;&#21495;&#37324;&#65292;&#21516;&#26102;&#19968;&#20010;&#31446;&#30452;&#31526;&#21495;&#34920;&#31034;`superview`&#65292;&#25152;&#20197;&#36825;&#37324;&#25105;&#20204;&#27491;&#22312;&#25551;&#32472;v2&#30340;top edge&#39030;&#20303;&#23427;superview&#30340;top edge&#12290;&#25968;&#23383;&#30340;&#31526;&#21495;&#34920;&#31034;&#21442;&#25968;&#65292;&#21516;&#26102;&#25968;&#23383;&#31526;&#21495;&#20276;&#21516;view&#30340;&#21517;&#23383;&#35774;&#32622;view&#30340;&#23610;&#23544;&#65292;&#25152;&#20197;&#22312;&#36825;&#37324;&#25105;&#20204;&#35774;&#32622;v2&#30340;height&#20026;10&#12290;&#10;&#20351;&#29992;visual format&#65292;&#20320;&#19981;&#24471;&#19981;&#25552;&#20379;&#19968;&#20010;&#23383;&#20856;&#26469;&#35013;&#19978;&#38754;&#25552;&#21040;&#30340;view&#30340;&#21517;&#23383;&#23383;&#31526;&#12290;&#20363;&#22914;&#65306;&#20351;&#29992;&#20043;&#21069;&#34920;&#36798;&#30340;&#23383;&#20856;&#21487;&#20197;&#20026;[&#34;v2&#34;:v2]&#12290;&#25152;&#20197;&#36825;&#37324;&#36824;&#26377;&#20043;&#21069;&#34920;&#36798;&#30340;&#21478;&#19968;&#31181;&#26041;&#24335;&#65292;&#20351;&#29992;visual format&#30340;&#31616;&#31216;&#12290;&#10;```Swift&#10;  let d = [&#34;v2&#34;:v2, &#34;v3&#34;:v3]&#10;  NSLayoutConstraint.activateContraints([&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;H:|[v2]|&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;V:|[v2(10)]&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;H:[v3(20)]|&#34;, options: [], merics: nil, views: d),&#10;    NSLayoutConstraint.constraintWithVisualFormat(&#34;V:[v3(20)]|&#34;, options: [], merics: nil, views: d)&#10;    ].flatten().map&#123;$0&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这个例子创建了和之前例子相同的约束，但是却使用了五行命令却不是八行。（constraintWithVisualFormat: 方法产生了一个constraints的数组，所以字面上的数组是一个装着约束数组的数组，但是activateContraintsiule 期望只有一个数组约束，所以我筛选出我想要的数组）<br>visual format语法将其自身展示到极致当多种的view沿着同一纬度布置彼此。在那种情况下,你可以减小很多压力。（一些约束由同一个visual format生成）这种语法，在一中程度上也被限制在乐意表达的语法中。同时他也隐藏了约束的数量和产生的约束的特征。同时就我而言，我发现当使用visual format语法的时候比完整地表达出每一个约束更容易犯错。但是，你还是希望能够熟悉visual format，不仅仅是为了隐藏具体描述某个约束的细节。<br>当你使用visual format语法的时候这里有一些需要深入的事情：  </p>
+<ul>
+<li><code>metrics</code>: 参数是一个有用数字的字典。这可以让你使用一个visual format string的名字。</li>
+<li><code>options</code>: 参数是一个bitmask(NSLayoutFormatOptions), 主要让你做一些事情，例如添加alignments。alignments被应用在所有在visual format中提到的views。</li>
+<li>为了具体地别是两个连续的view之间的距离，使用连字符<code>-</code>环绕在数字符号周围，像：“[v1]-[20]-[v2]”。数字可以选择性的使用括号<code>[]</code>包围。</li>
+<li>一个在括号中的数字可能会地位高于一个同等的或者不同等的操作符。同时也可以跟随一个<code>@</code>符号表示priority。被逗号<code>,</code>分割的多种数字，也可以出现在参数中。例如<code>[v1(&gt;=20@400, &lt;=30)]</code><br></li>
+</ul>
+<p>想要了解更多关于visual format语法,请查看”Apple’s Auto Layout Guide”一章中的”Visual Format Syntax”</p>
 
       
     </div>
@@ -164,11 +182,11 @@ var _hmt = _hmt || [];
 	  <!-- 百度分享 End -->
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Autolayout/">Autolayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 
 	  
 <span>
-Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">September 22 2015</time>
+Updated:<time datetime="2016-05-02T08:46:00.000Z" itemprop="dateModified">May 02 2016</time>
 </span>
 
 
@@ -178,19 +196,10 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     
 <nav id="article-nav">
   
-    <a href="/2015/08/27/6-python-random-funs/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          python中random模块简析
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/05/4-win10-update/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/13/37-tableview-dequeueWithIdentifier../" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">升级win10的一点小小的心得</div>
+      <div class="article-nav-title">关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别</div>
     </a>
   
 </nav>
@@ -203,7 +212,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
 <!-- 多说评论框 start -->
 
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2015/08/25/5-change-to-mac/" data-title="换Mac了，高兴的心情无法抑制！" data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2016/05/02/38-Autolayout-3-anchor-visual/" data-title="翻译Autolayout（3）" data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -216,7 +225,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">Contents</h2>
     
-        
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Anchor_notation（瞄点符号）"><span class="toc-number">1.</span> <span class="toc-text">Anchor notation（瞄点符号）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Visual_format_notation(视觉符号格式)"><span class="toc-number">2.</span> <span class="toc-text">Visual format notation(视觉符号格式)</span></a></li></ol>
     
   </div>
 
