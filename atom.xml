@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-05-02T08:46:00.000Z</updated>
+  <updated>2016-05-28T14:21:43.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK]]></title>
+    <link href="http://qiuncheng.com/2016/05/28/39-animating-text-layers/"/>
+    <id>http://qiuncheng.com/2016/05/28/39-animating-text-layers/</id>
+    <published>2016-05-28T14:20:03.000Z</published>
+    <updated>2016-05-28T14:21:43.000Z</updated>
+    <content type="html"><![CDATA[<p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""></p>
+<h3 id="4月13号_使用iOS_SDK中的CoreAnimation和CoreText实现文本层动画"><span style="color: #118800">4月13号</span> 使用iOS SDK中的CoreAnimation和CoreText实现文本层动画</h3><p><code>CoreAnimation</code>是一个非常强大的框架。通过使用<code>CABasicAnimation</code>，<code>CAKeyFrameAnimation</code>或者<code>CAAnimationGroup</code>，我们可以创建惊艳的用户体验来，同时基本上是没有什么限制的。仅仅取决于我们想要在屏幕上展示什么和它是怎么交互的。事实证明，<code>CoreAnimation</code>也可以和一些其他的框架（如<code>CoreGraphics</code>或者<code>CoreText</code>）组合使用，这也给了开发者创造更加惊艳的动画的能力。使用<code>CoreText</code>和<code>CoreAnimation</code>我们可以给任何指定字体类型和字体大小的文本添加动画。在这篇文章中我会展示一种方式如何做到这样。</p>
+<h4 id="CoreText基础"><code>CoreText</code>基础</h4><p>首先，让我向大家展示一下<code>CoreText</code>的基础。为了给文本添加动画，我们必须知道线条（<code>line</code>）和象形符号（<code>glyph</code>）是什么，这会帮助我们理解从一个文本生成一条路径（path）的整个过程。苹果已经为我们奠定了<code>CoreText</code>的基础知识。所有的这些都可以在下面看到。下面是我收集的最重要的信息。</p>
+<p><img src="http://vormlab.com/wp-content/uploads/2016/04/Fig-1.1-CoreText-basics-2.png" alt="图1-CoreText结构，来源：[]( http://developer.apple.com http://developer.apple.com)"></p>
+<p>在此层次结构的顶部是<code>frame setter</code>对象。带有属性的字符串和图形路径作为输入。一个<code>frame setter</code>生成文本的一个或者多个<code>frame</code>。每一个frame对象都代表一个段落。要生成<code>frame</code>，<code>frame setter</code>调用一个<code>typesetter</code>对象。当一个<code>frame setter</code>奠定一个特定的<code>frame</code>的时候，它适用于段落样式，包括对齐方式，制表位，或者行距等属性。typesetter将这些带有属性的字符串中的字符转换成象形字符（glyphs），同时也适合那些象形字符（<code>glyphs</code>）形成填充文字框的线条。</p>
+<p>每一个<code>frame</code>对象包含段落的线对象，它代表一个段落中文本的一行。一个frame对象可能只包含一个单一的长line对象，也可能包含一系列的line。line对象在frame设置时期被typesetter创建。每一个line对象包含一组象形字符运行（<code>glyph run</code>）对象。一个象形字符运行（<code>glyph run</code>）是一组共享相同属性和方向的连续象形字符（<code>glyph</code>）。<code>typesetter</code>创建象形字符运行（<code>glyph run</code>）就像它从字符串、属性和字体对象生产line一样。这意味着，一个line构成一个或者多个象形字符运行（<code>glyph run</code>）。在层次结构的尾部是通常代表单个文本字符的象形字符（<code>glyph</code>）对象。经过我们对<code>CoreText</code>的基本熟悉，我们现在可以文本层动画了。</p>
+<h4 id="Animating_text_layer"><code>Animating text layer</code></h4><p>为了给文本层添加动画，我们需要将其转换成<code>CGPath</code>对象。首先我们必须创建我们想要添加动画的带属性的字符，然后我们为了得到象形字符运行（<code>glyph run</code>）不得不从这个字符串中创建一个<code>line</code>对象。下面的代码展示了我们如何实现这些目的：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> attrString  = <span class="type">NSAttributedString</span>(string: text, attributes: [kCTFontAttributeName <span class="keyword">as</span> <span class="type">String</span> : font])</span><br><span class="line"><span class="keyword">let</span> line        = <span class="type">CTLineCreateWithAttributedString</span>(attrString)</span><br><span class="line"><span class="keyword">let</span> runArray    = <span class="type">CTLineGetGlyphRuns</span>(line)</span><br></pre></td></tr></table></figure></p>
+<p>这里我们将所有的象形字符运行（<code>glyph run</code>）保存在<code>runArray</code>中。我们通过这个数组循环，并且从每一个象形字符运行（<code>glyph run</code>）来看，我们可以得到这些字体，以及所有相应的象形字符（<code>glyph</code>）。现在我们可以通过遍历所有的象形字符（<code>glyph</code>）来选出特定的象形字符（<code>glyph</code>）对象。当我们有了这个对象，我们可以计算它的位置，并使用<code>CTFontCreatePathForGlyph</code>函数将其转换成<code>path</code>对象。通过拥有一个路径就知道它的位置，我们就可以创建一个有象形字符（<code>glyph</code>）路径组合而成的总体路径。下面的伪代码显示了整体算法。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">%<span class="type">For</span> each glyph run</span><br><span class="line"><span class="keyword">for</span> runIndex <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="type">CFArrayGetCount</span>(runArray) &#123;</span><br><span class="line">     <span class="keyword">let</span> runFont = %<span class="type">Get</span> a font from a single glyph</span><br><span class="line"></span><br><span class="line">     %<span class="type">For</span> each glyph <span class="keyword">in</span> a single glyph run</span><br><span class="line">     <span class="keyword">for</span> runGlyphIndex <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="type">CTRunGetGlyphCount</span>(run) &#123;</span><br><span class="line">                <span class="keyword">var</span> glyph    = %<span class="type">Get</span> a glyph</span><br><span class="line">                <span class="keyword">var</span> position = %<span class="type">Get</span> glyph’s position</span><br><span class="line"></span><br><span class="line">                %<span class="type">Get</span> a letter path from a single glyph</span><br><span class="line">                <span class="keyword">let</span> letter = <span class="type">CTFontCreatePathForGlyph</span>(runFont, glyph, <span class="literal">nil</span>)</span><br><span class="line">                 %<span class="type">Make</span> a translation to a desired position</span><br><span class="line">                <span class="keyword">var</span> t = <span class="type">CGAffineTransformMakeTranslation</span>(position.x, position.y)</span><br><span class="line">                 %<span class="type">Add</span> a single letter path to the whole path  </span><br><span class="line">                <span class="type">CGPathAddPath</span>(letters, &amp;t, letter)</span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>之后我们已经将我们的文本转换成<code>path</code>对象，并将其添加到路径层，我们就可以使用下面代码简单添加动画了：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pathAnimation       = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"strokeEnd"</span>)</span><br><span class="line">pathAnimation.duration  = duration</span><br><span class="line">pathAnimation.fromValue = <span class="number">0.0</span></span><br><span class="line">pathAnimation.toValue   = <span class="number">1.0</span></span><br><span class="line">pathAnimation.delegate  = <span class="keyword">self</span></span><br><span class="line">pathLayer?.addAnimation(pathAnimation, forKey: <span class="string">"strokeEnd"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>为了达到给文本层添加动画的目的，一个<code>VRMTextAnimator</code>类被创建了。这个类和示范文本层动画的示例工程在<a href="https://github.com/VormLab/VRMTextAnimator" target="_blank" rel="external">这里</a>可以找到。</p>
+<p>为了使用这个类，你不得不使用带有一个<code>reference view</code>的初始化方式<code>init(referenceView:)``初始化。</code>reference view<code>是一种类型的视图，其中我们执行文本动画。</code>VRMTextAnimator<code>有两个关键属性，</code>animationLayer<code>和</code>pathLayer<code>。第一个是我们要执行动画的CALayer对象，第二个是CAShapeLayer对象，它存储从我们之前设定的文字创造了一个</code>CGPath<code>对象。这个类也有三个可设置的属性：字体名称/</code>fontName<code>，字体尺寸/</code>fontSize<code>，</code>textToAnimate<code>。如果我们想要动画一个特定的文本与他的字体和字体大小，我们需要设置这些属性，</code>VRMTextAnimator`也有一个代理对象，可以通知我们动画的起点和终点。</p>
+<p><img src="http://vormlab.com/wp-content/uploads/2016/04/textAnimator_colored.gif" alt=""></p>
+<p>在这个项目中，有两种类型的文本层动画。第一种动画是简单的开始按钮触发的，第二种是通过滑块控制的。事实证明，我们可以设置它的<code>speed</code>，<code>fromValue</code>，<code>toValue</code>，<code>duration</code>和<code>timeOffset</code>属性。如果我们设置<code>fromValue</code>为0，<code>toValue</code>为1，<code>duration</code>为1，同时我们正在动画pathLayer对象的<code>strokeEnd</code>属性，我们就可以通过设置<code>pathLayer</code>的<code>timeOffset</code>属性来绘制文本轮廓的相应部分。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> ]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="翻译" scheme="http://qiuncheng.com/tags/%E7%BF%BB%E8%AF%91/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[翻译Autolayout（3）]]></title>
@@ -849,55 +882,6 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
 ]]></content>
     <summary type="html">
     <![CDATA[<p>话说当我使用<code>http://</code>请求网络上一张图片时我发现我使用的Xcode7.1竟然不响应，然后还爆出了错误，这个让我很生气，后来查看错误提示得知貌似<code>http</code>不安全。<br>错误代码提示如下：<br><code>Transport security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app&#39;s Info.plist file.</code><br>百度了一段时间无果后果断挂上<code>VPN</code>翻了一下，在<a href="http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http">StackOverflow</a>上找到了解决方案，原来就是在<code>info.plist</code>里enable<code>http</code>mode就可以了。奥，我的天！原谅我开接触这个。<br>可是如何添加呢？请看下图：]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[push 与 modal的区别]]></title>
-    <link href="http://qiuncheng.com/2015/10/27/19-ios-push-modal/"/>
-    <id>http://qiuncheng.com/2015/10/27/19-ios-push-modal/</id>
-    <published>2015-10-27T11:25:26.000Z</published>
-    <updated>2015-10-27T14:44:40.000Z</updated>
-    <content type="html"><![CDATA[<p><em>切换试图的两种方式，虽然经常用到，但还不是很了解，也是就去上网查询了一下，发现他两却有很大区别。</em>  </p>
-<ul>
-<li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>
-<a id="more"></a>
-<p>  这里给出OC的<code>push</code>源码:  </p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	- (<span class="keyword">void</span>)pushViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Uses a horizontal slide transition. Has no effect if the view controller is already in the stack.</span></span><br><span class="line">- (<span class="built_in">UIViewController</span> *)popViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Returns the popped controller.</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)popToViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Pops view controllers until the one specified is on top. Returns the popped controllers.</span></span><br><span class="line">- (<span class="built_in">NSArray</span> *)popToRootViewControllerAnimated:(<span class="built_in">BOOL</span>)animated; </span><br><span class="line"><span class="comment">// Pops until there's only a single view controller left on the stack. Returns the popped controllers.</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>modal方法跳转控制器只是把目标控制器的View加到了现有控制器上，添加后的View依旧需要目标来管理，而且源控制也不会随新Modal来得View而移除销毁。Modal一般适用于两个不相关的控制器切换（Modal的效果是从屏幕底部向上覆盖源控制器的View)。<br>  这里给出OC的<code>modal</code>的源码：  </p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">  The next two methods are replacements for presentModalViewController:animated and dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented</span><br><span class="line">  controllers viewDidAppear: callback is invoked.</span><br><span class="line">*/</span></span><br><span class="line">- (<span class="keyword">void</span>)presentViewController:(<span class="built_in">UIViewController</span> *)viewControllerToPresent animated: (<span class="built_in">BOOL</span>)flag completion:(<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line"><span class="comment">// 关闭当初Modal出来的控制器</span></span><br><span class="line">- (<span class="keyword">void</span>)dismissViewControllerAnimated: (<span class="built_in">BOOL</span>)flag completion: (<span class="keyword">void</span> (^)(<span class="keyword">void</span>))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>这里通过源码也可以很容易的看出他俩之间的不同还是很大的，那么既然如此，在我看来modal主要用在最后的界面上，也就是说到了这个界面后你只能够返回去，不能再跳转到其他界面了，比如about界面，分享界面等等，而push照理说还是用的比较多的，这里就不在举例说明了。</strong>  </p>
-<ul>
-<li><p>下面说说storyboard中通过segue跳转的几种类型：  </p>
-<ul>
-<li>自动型：点击某个控件（比如按钮）的时候自动跳转到下一个控制器（按住Control键，直接从控件拖线到目标控制器，适用于不需要做任何判断的跳转）  </li>
-<li><p>手动型：需要通过写代码手动执行Segue(必须由来源控制器执行Segue)，才能完成界面跳转（按住Control键，从来源控制器拖线到目标控制器，适用于需要做一些判断后再跳转的情况，比如登录的时候判断账号密码）</p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跳转前做的一些准备工作</span></span><br><span class="line">- (<span class="keyword">void</span>)prepareForSegue:(<span class="built_in">UIStoryboardSegue</span> *)segue sender:(<span class="keyword">id</span>)sender <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br><span class="line"><span class="comment">// 用来源控制器手动执行此方法</span></span><br><span class="line">- (<span class="keyword">void</span>)performSegueWithIdentifier:(<span class="built_in">NSString</span> *)identifier sender:(<span class="keyword">id</span>)sender <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">5</span>_0);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果segue的style是push<br>取得sourceViewController所在的UINavigationController<br>调用UINavigationController的push方法将destinationViewController压入栈中，完成跳转</p>
-</li>
-<li>如果segue的style是modal<br>调用sourceViewController的presentViewController方法将destinationViewController展示出来</li>
-<li>Storyboard上每一根用来界面跳转的线，都是一个UIStoryboardSegue对象（简称Segue）<blockquote>
-<p>文章参考一篇博客,原文<a href="https://www.zybuluo.com/SanMao/note/139495" target="_blank" rel="external">地址.</a>觉得不错，所以分享到我的空间。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><em>切换试图的两种方式，虽然经常用到，但还不是很了解，也是就去上网查询了一下，发现他两却有很大区别。</em>  </p>
-<ul>
-<li><p>push方式是通过导航控制器来实现试图切换，导航控制器的作用在这里相当于视图切换器的管理者，跳转后原来的控制器相当于被移出导航控制器栈，但是不会被立即销毁，移除栈的控制器会被放入自动释放池，等事件循环结束后如果没有强指针指向它，这时就会被销毁。   </p>]]>
     
     </summary>
     
