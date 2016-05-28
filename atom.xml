@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-05-28T14:21:43.000Z</updated>
+  <updated>2016-05-28T14:25:05.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://qiuncheng.com/2016/05/28/39-animating-text-layers/"/>
     <id>http://qiuncheng.com/2016/05/28/39-animating-text-layers/</id>
     <published>2016-05-28T14:20:03.000Z</published>
-    <updated>2016-05-28T14:21:43.000Z</updated>
-    <content type="html"><![CDATA[<p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""></p>
+    <updated>2016-05-28T14:25:05.000Z</updated>
+    <content type="html"><![CDATA[<p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""><br><a id="more"></a></p>
 <h3 id="4月13号_使用iOS_SDK中的CoreAnimation和CoreText实现文本层动画"><span style="color: #118800">4月13号</span> 使用iOS SDK中的CoreAnimation和CoreText实现文本层动画</h3><p><code>CoreAnimation</code>是一个非常强大的框架。通过使用<code>CABasicAnimation</code>，<code>CAKeyFrameAnimation</code>或者<code>CAAnimationGroup</code>，我们可以创建惊艳的用户体验来，同时基本上是没有什么限制的。仅仅取决于我们想要在屏幕上展示什么和它是怎么交互的。事实证明，<code>CoreAnimation</code>也可以和一些其他的框架（如<code>CoreGraphics</code>或者<code>CoreText</code>）组合使用，这也给了开发者创造更加惊艳的动画的能力。使用<code>CoreText</code>和<code>CoreAnimation</code>我们可以给任何指定字体类型和字体大小的文本添加动画。在这篇文章中我会展示一种方式如何做到这样。</p>
 <h4 id="CoreText基础"><code>CoreText</code>基础</h4><p>首先，让我向大家展示一下<code>CoreText</code>的基础。为了给文本添加动画，我们必须知道线条（<code>line</code>）和象形符号（<code>glyph</code>）是什么，这会帮助我们理解从一个文本生成一条路径（path）的整个过程。苹果已经为我们奠定了<code>CoreText</code>的基础知识。所有的这些都可以在下面看到。下面是我收集的最重要的信息。</p>
 <p><img src="http://vormlab.com/wp-content/uploads/2016/04/Fig-1.1-CoreText-basics-2.png" alt="图1-CoreText结构，来源：[]( http://developer.apple.com http://developer.apple.com)"></p>
@@ -36,7 +36,8 @@
 <p>在这个项目中，有两种类型的文本层动画。第一种动画是简单的开始按钮触发的，第二种是通过滑块控制的。事实证明，我们可以设置它的<code>speed</code>，<code>fromValue</code>，<code>toValue</code>，<code>duration</code>和<code>timeOffset</code>属性。如果我们设置<code>fromValue</code>为0，<code>toValue</code>为1，<code>duration</code>为1，同时我们正在动画pathLayer对象的<code>strokeEnd</code>属性，我们就可以通过设置<code>pathLayer</code>的<code>timeOffset</code>属性来绘制文本轮廓的相应部分。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> ]]>
+    <![CDATA[<p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""><br>]]>
+    
     </summary>
     
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>

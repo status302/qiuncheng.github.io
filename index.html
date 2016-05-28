@@ -124,34 +124,17 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#4月13号_使用iOS_SDK中的CoreAnimation和CoreText实现文本层动画"><span class="toc-number">1.</span> <span class="toc-text">4月13号 使用iOS SDK中的CoreAnimation和CoreText实现文本层动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CoreText基础"><span class="toc-number">1.1.</span> <span class="toc-text">CoreText基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Animating_text_layer"><span class="toc-number">1.2.</span> <span class="toc-text">Animating text layer</span></a></li></ol></li></ol>
-		
-		</div>
-		
-        <p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""></p>
-<h3 id="4月13号_使用iOS_SDK中的CoreAnimation和CoreText实现文本层动画"><span style="color: #118800">4月13号</span> 使用iOS SDK中的CoreAnimation和CoreText实现文本层动画</h3><p><code>CoreAnimation</code>是一个非常强大的框架。通过使用<code>CABasicAnimation</code>，<code>CAKeyFrameAnimation</code>或者<code>CAAnimationGroup</code>，我们可以创建惊艳的用户体验来，同时基本上是没有什么限制的。仅仅取决于我们想要在屏幕上展示什么和它是怎么交互的。事实证明，<code>CoreAnimation</code>也可以和一些其他的框架（如<code>CoreGraphics</code>或者<code>CoreText</code>）组合使用，这也给了开发者创造更加惊艳的动画的能力。使用<code>CoreText</code>和<code>CoreAnimation</code>我们可以给任何指定字体类型和字体大小的文本添加动画。在这篇文章中我会展示一种方式如何做到这样。</p>
-<h4 id="CoreText基础"><code>CoreText</code>基础</h4><p>首先，让我向大家展示一下<code>CoreText</code>的基础。为了给文本添加动画，我们必须知道线条（<code>line</code>）和象形符号（<code>glyph</code>）是什么，这会帮助我们理解从一个文本生成一条路径（path）的整个过程。苹果已经为我们奠定了<code>CoreText</code>的基础知识。所有的这些都可以在下面看到。下面是我收集的最重要的信息。</p>
-<p><img src="http://vormlab.com/wp-content/uploads/2016/04/Fig-1.1-CoreText-basics-2.png" alt="图1-CoreText结构，来源：[]( http://developer.apple.com http://developer.apple.com)"></p>
-<p>在此层次结构的顶部是<code>frame setter</code>对象。带有属性的字符串和图形路径作为输入。一个<code>frame setter</code>生成文本的一个或者多个<code>frame</code>。每一个frame对象都代表一个段落。要生成<code>frame</code>，<code>frame setter</code>调用一个<code>typesetter</code>对象。当一个<code>frame setter</code>奠定一个特定的<code>frame</code>的时候，它适用于段落样式，包括对齐方式，制表位，或者行距等属性。typesetter将这些带有属性的字符串中的字符转换成象形字符（glyphs），同时也适合那些象形字符（<code>glyphs</code>）形成填充文字框的线条。</p>
-<p>每一个<code>frame</code>对象包含段落的线对象，它代表一个段落中文本的一行。一个frame对象可能只包含一个单一的长line对象，也可能包含一系列的line。line对象在frame设置时期被typesetter创建。每一个line对象包含一组象形字符运行（<code>glyph run</code>）对象。一个象形字符运行（<code>glyph run</code>）是一组共享相同属性和方向的连续象形字符（<code>glyph</code>）。<code>typesetter</code>创建象形字符运行（<code>glyph run</code>）就像它从字符串、属性和字体对象生产line一样。这意味着，一个line构成一个或者多个象形字符运行（<code>glyph run</code>）。在层次结构的尾部是通常代表单个文本字符的象形字符（<code>glyph</code>）对象。经过我们对<code>CoreText</code>的基本熟悉，我们现在可以文本层动画了。</p>
-<h4 id="Animating_text_layer"><code>Animating text layer</code></h4><p>为了给文本层添加动画，我们需要将其转换成<code>CGPath</code>对象。首先我们必须创建我们想要添加动画的带属性的字符，然后我们为了得到象形字符运行（<code>glyph run</code>）不得不从这个字符串中创建一个<code>line</code>对象。下面的代码展示了我们如何实现这些目的：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> attrString  = <span class="type">NSAttributedString</span>(string: text, attributes: [kCTFontAttributeName <span class="keyword">as</span> <span class="type">String</span> : font])</span><br><span class="line"><span class="keyword">let</span> line        = <span class="type">CTLineCreateWithAttributedString</span>(attrString)</span><br><span class="line"><span class="keyword">let</span> runArray    = <span class="type">CTLineGetGlyphRuns</span>(line)</span><br></pre></td></tr></table></figure></p>
-<p>这里我们将所有的象形字符运行（<code>glyph run</code>）保存在<code>runArray</code>中。我们通过这个数组循环，并且从每一个象形字符运行（<code>glyph run</code>）来看，我们可以得到这些字体，以及所有相应的象形字符（<code>glyph</code>）。现在我们可以通过遍历所有的象形字符（<code>glyph</code>）来选出特定的象形字符（<code>glyph</code>）对象。当我们有了这个对象，我们可以计算它的位置，并使用<code>CTFontCreatePathForGlyph</code>函数将其转换成<code>path</code>对象。通过拥有一个路径就知道它的位置，我们就可以创建一个有象形字符（<code>glyph</code>）路径组合而成的总体路径。下面的伪代码显示了整体算法。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">%<span class="type">For</span> each glyph run</span><br><span class="line"><span class="keyword">for</span> runIndex <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="type">CFArrayGetCount</span>(runArray) &#123;</span><br><span class="line">     <span class="keyword">let</span> runFont = %<span class="type">Get</span> a font from a single glyph</span><br><span class="line"></span><br><span class="line">     %<span class="type">For</span> each glyph <span class="keyword">in</span> a single glyph run</span><br><span class="line">     <span class="keyword">for</span> runGlyphIndex <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="type">CTRunGetGlyphCount</span>(run) &#123;</span><br><span class="line">                <span class="keyword">var</span> glyph    = %<span class="type">Get</span> a glyph</span><br><span class="line">                <span class="keyword">var</span> position = %<span class="type">Get</span> glyph’s position</span><br><span class="line"></span><br><span class="line">                %<span class="type">Get</span> a letter path from a single glyph</span><br><span class="line">                <span class="keyword">let</span> letter = <span class="type">CTFontCreatePathForGlyph</span>(runFont, glyph, <span class="literal">nil</span>)</span><br><span class="line">                 %<span class="type">Make</span> a translation to a desired position</span><br><span class="line">                <span class="keyword">var</span> t = <span class="type">CGAffineTransformMakeTranslation</span>(position.x, position.y)</span><br><span class="line">                 %<span class="type">Add</span> a single letter path to the whole path  </span><br><span class="line">                <span class="type">CGPathAddPath</span>(letters, &amp;t, letter)</span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-<p>之后我们已经将我们的文本转换成<code>path</code>对象，并将其添加到路径层，我们就可以使用下面代码简单添加动画了：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pathAnimation       = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"strokeEnd"</span>)</span><br><span class="line">pathAnimation.duration  = duration</span><br><span class="line">pathAnimation.fromValue = <span class="number">0.0</span></span><br><span class="line">pathAnimation.toValue   = <span class="number">1.0</span></span><br><span class="line">pathAnimation.delegate  = <span class="keyword">self</span></span><br><span class="line">pathLayer?.addAnimation(pathAnimation, forKey: <span class="string">"strokeEnd"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>为了达到给文本层添加动画的目的，一个<code>VRMTextAnimator</code>类被创建了。这个类和示范文本层动画的示例工程在<a href="https://github.com/VormLab/VRMTextAnimator" target="_blank" rel="external">这里</a>可以找到。</p>
-<p>为了使用这个类，你不得不使用带有一个<code>reference view</code>的初始化方式<code>init(referenceView:)``初始化。</code>reference view<code>是一种类型的视图，其中我们执行文本动画。</code>VRMTextAnimator<code>有两个关键属性，</code>animationLayer<code>和</code>pathLayer<code>。第一个是我们要执行动画的CALayer对象，第二个是CAShapeLayer对象，它存储从我们之前设定的文字创造了一个</code>CGPath<code>对象。这个类也有三个可设置的属性：字体名称/</code>fontName<code>，字体尺寸/</code>fontSize<code>，</code>textToAnimate<code>。如果我们想要动画一个特定的文本与他的字体和字体大小，我们需要设置这些属性，</code>VRMTextAnimator`也有一个代理对象，可以通知我们动画的起点和终点。</p>
-<p><img src="http://vormlab.com/wp-content/uploads/2016/04/textAnimator_colored.gif" alt=""></p>
-<p>在这个项目中，有两种类型的文本层动画。第一种动画是简单的开始按钮触发的，第二种是通过滑块控制的。事实证明，我们可以设置它的<code>speed</code>，<code>fromValue</code>，<code>toValue</code>，<code>duration</code>和<code>timeOffset</code>属性。如果我们设置<code>fromValue</code>为0，<code>toValue</code>为1，<code>duration</code>为1，同时我们正在动画pathLayer对象的<code>strokeEnd</code>属性，我们就可以通过设置<code>pathLayer</code>的<code>timeOffset</code>属性来绘制文本轮廓的相应部分。</p>
-
+        <p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/28/39-animating-text-layers/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="cior8xmio0009fthu1v6z93fq" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="cior91qht0009gfhujukauusu" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
       
 
       
@@ -163,7 +146,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2016-05-28T14:21:43.000Z" itemprop="dateModified">May 28 2016</time>
+Updated:<time datetime="2016-05-28T14:25:05.000Z" itemprop="dateModified">May 28 2016</time>
 </span>
 
 
@@ -263,7 +246,7 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="cior8xmiw000ofthupleteqz2" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
+	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="cior91qi1000ogfhusm0yw7bm" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
 继上篇《在..." class="article-share-link">Share</a>
       
 
@@ -344,7 +327,7 @@ Updated:<time datetime="2016-05-02T08:46:00.000Z" itemprop="dateModified">May 02
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cior8xmk00021fthulaj2n6vt" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cior91qj80021gfhunexi31xh" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
       
 
       
@@ -415,7 +398,7 @@ Updated:<time datetime="2016-04-13T14:55:33.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cior8xmle0044fthufx2y8pmv" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cior91qkt0044gfhu2vejrf4s" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
       
 
       
@@ -490,7 +473,7 @@ Updated:<time datetime="2016-04-06T14:26:32.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cior8xmkg002rfthuupidc26t" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cior91qjq002rgfhudav8ttf3" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
       
 
       
@@ -562,7 +545,7 @@ Updated:<time datetime="2016-04-04T06:39:22.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cior8xml7003ufthup0khj2si" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cior91qkl003ugfhub2yzfp5r" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
       
 
       
@@ -643,7 +626,7 @@ Updated:<time datetime="2016-03-21T10:24:41.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cior8xmjy001yfthuczaaby9r" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cior91qj6001ygfhu53wb1e5h" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
       
 
       
@@ -711,7 +694,7 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cior8xmiu000lfthuh3c70qy7" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cior91qhz000lgfhunov1v496" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
       
 
       
@@ -779,7 +762,7 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cior8xmk6002cfthucw9s49n6" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cior91qjf002cgfhubx9gcvvo" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
       
 
       
@@ -850,7 +833,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cior8xmi80001fthu65glci6d" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cior91qhh0001gfhuh4qsuu4z" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
       
 
       
@@ -925,7 +908,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cior8xmky003ifthubiwlqos3" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
+	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cior91qkb003igfhup1rbhyse" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
 关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
       
 
@@ -995,7 +978,7 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cior8xmk40029fthuoj6gemtu" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cior91qjc0029gfhudpbsmnjq" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
       
 
       
@@ -1063,7 +1046,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cior8xmik0006fthungwdpxe3" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cior91qhp0006gfhu1fb3g9x5" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
       
 
       
@@ -1137,7 +1120,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cior8xmka002hfthu1f97igjo" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
+	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cior91qji002hgfhuv94ox38j" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
 
 继上篇博..." class="article-share-link">Share</a>
       
@@ -1218,7 +1201,7 @@ Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cior8xmjp001nfthu43hjii12" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
+	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cior91qiv001ngfhuo5rq9g00" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
 
 意外的时刻发现..." class="article-share-link">Share</a>
       
@@ -1288,7 +1271,7 @@ Updated:<time datetime="2015-11-22T13:24:05.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cior8xml5003rfthufio6yq67" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cior91qkk003rgfhuq2gkou0i" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
       
 
       
@@ -1359,7 +1342,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cior8xmkv003ffthu88gm31g4" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cior91qk8003fgfhuc2xl7qhz" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
       
 
       
@@ -1431,7 +1414,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cior8xmkm002zfthul2chiboh" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cior91qjx002zgfhuvmijnhip" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
       
 
       
@@ -1500,7 +1483,7 @@ Updated:<time datetime="2015-11-20T11:44:58.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cior8xmj10012fthuydybgss9" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cior91qi80012gfhupc9gjjpr" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
       
 
       
@@ -1568,7 +1551,7 @@ Updated:<time datetime="2015-11-11T04:09:59.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cior8xmjb001cfthulsl42wex" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cior91qio001cgfhuaptyz65h" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -1638,7 +1621,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cior8xmks0038fthun1tk2ktw" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cior91qk40038gfhux7af3axm" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -1712,7 +1695,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cior8xml0003lfthue13mhvoq" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cior91qke003lgfhuqklwlt8n" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -1784,7 +1767,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cior8xmkk002wfthulo1e36p2" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cior91qju002wgfhu3hc5awwl" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -1856,7 +1839,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cior8xmje001ffthulusvb4fk" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cior91qiq001fgfhup3qc3tzy" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -1932,7 +1915,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cior8xmjk001kfthuem41yr57" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cior91qis001kgfhuvhdn2cm7" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -2004,7 +1987,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cior8xml3003ofthunadaiky1" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cior91qkg003ogfhucxwy3b0u" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -2073,7 +2056,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cior8xmkt003bfthuz6elq7i1" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cior91qk6003bgfhu9ui09065" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -2144,7 +2127,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cior8xmjv001vfthu3ans2i67" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cior91qj2001vgfhudbibpucg" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -2213,7 +2196,7 @@ Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cior8xmiy000tfthudurmf5bq" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cior91qi4000tgfhuec7aa4sn" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
       
 
       
@@ -2281,7 +2264,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cior8xmkd002mfthurp83d657" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cior91qjo002mgfhu86279h18" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
       
 
       
@@ -2362,7 +2345,7 @@ int2 = functools.<span class="function"><span class="title">partial</span><span 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cior8xmk20026fthu0vgdluds" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cior91qja0026gfhu082amir8" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
       
 
       
@@ -2442,7 +2425,7 @@ Updated:<time datetime="2015-09-21T17:09:48.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cior8xmkn0032fthuqyji5yjf" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cior91qjz0032gfhuge9232xn" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
       
 
       
@@ -2520,7 +2503,7 @@ Updated:<time datetime="2015-09-21T17:09:15.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cior8xmkq0035fthu2c61wnww" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cior91qk20035gfhu8byzbglr" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
       
 
       
@@ -2591,7 +2574,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cior8xmj40015fthu6qrhyzi0" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cior91qib0015gfhuc30ztzli" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
       
 
       
@@ -2662,7 +2645,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cior8xmjs001rfthuo93l57j9" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cior91qiz001rgfhuxmkqpitf" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
       
 
       
@@ -2732,7 +2715,7 @@ Updated:<time datetime="2015-09-21T17:07:42.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cior8xml9003xfthuhvsgajnx" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cior91qkp003xgfhuikitspth" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
       
 
       
@@ -2802,7 +2785,7 @@ Updated:<time datetime="2015-09-21T17:14:24.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cior8xmir000gfthutat78lam" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cior91qhx000ggfhu38kdk2od" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
       
 
       
@@ -2875,7 +2858,7 @@ Updated:<time datetime="2015-09-21T17:07:17.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cior8xmj90019fthucbhr0kau" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
+	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cior91qil0019gfhu8gbfq2q7" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
 
 
 

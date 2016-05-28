@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif">
 <meta property="og:image" content="http://vormlab.com/wp-content/uploads/2016/04/Fig-1.1-CoreText-basics-2.png">
 <meta property="og:image" content="http://vormlab.com/wp-content/uploads/2016/04/textAnimator_colored.gif">
-<meta property="og:updated_time" content="2016-05-28T14:21:43.000Z">
+<meta property="og:updated_time" content="2016-05-28T14:25:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK">
 <meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
@@ -134,7 +134,7 @@ var _hmt = _hmt || [];
 		
 		</div>
 		
-        <p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""></p>
+        <p>原文地址：<a href="http://vormlab.com/animating-text-layers-using-coreanimation-coretext-frameworks-ios-sdk/" target="_blank" rel="external"> Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a><br><img src="http://vormlab.com/wp-content/uploads/2016/04/CoreAnim_cover-13Apr2016.gif" alt=""><br><a id="more"></a></p>
 <h3 id="4月13号_使用iOS_SDK中的CoreAnimation和CoreText实现文本层动画"><span style="color: #118800">4月13号</span> 使用iOS SDK中的CoreAnimation和CoreText实现文本层动画</h3><p><code>CoreAnimation</code>是一个非常强大的框架。通过使用<code>CABasicAnimation</code>，<code>CAKeyFrameAnimation</code>或者<code>CAAnimationGroup</code>，我们可以创建惊艳的用户体验来，同时基本上是没有什么限制的。仅仅取决于我们想要在屏幕上展示什么和它是怎么交互的。事实证明，<code>CoreAnimation</code>也可以和一些其他的框架（如<code>CoreGraphics</code>或者<code>CoreText</code>）组合使用，这也给了开发者创造更加惊艳的动画的能力。使用<code>CoreText</code>和<code>CoreAnimation</code>我们可以给任何指定字体类型和字体大小的文本添加动画。在这篇文章中我会展示一种方式如何做到这样。</p>
 <h4 id="CoreText基础"><code>CoreText</code>基础</h4><p>首先，让我向大家展示一下<code>CoreText</code>的基础。为了给文本添加动画，我们必须知道线条（<code>line</code>）和象形符号（<code>glyph</code>）是什么，这会帮助我们理解从一个文本生成一条路径（path）的整个过程。苹果已经为我们奠定了<code>CoreText</code>的基础知识。所有的这些都可以在下面看到。下面是我收集的最重要的信息。</p>
 <p><img src="http://vormlab.com/wp-content/uploads/2016/04/Fig-1.1-CoreText-basics-2.png" alt="图1-CoreText结构，来源：[]( http://developer.apple.com http://developer.apple.com)"></p>
@@ -162,7 +162,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2016-05-28T14:21:43.000Z" itemprop="dateModified">May 28 2016</time>
+Updated:<time datetime="2016-05-28T14:25:05.000Z" itemprop="dateModified">May 28 2016</time>
 </span>
 
 
