@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-07-07T15:26:05.000Z</updated>
+  <updated>2016-07-07T15:28:26.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,13 +19,13 @@
     <link href="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/"/>
     <id>http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/</id>
     <published>2016-07-07T15:24:34.000Z</published>
-    <updated>2016-07-07T15:26:05.000Z</updated>
+    <updated>2016-07-07T15:28:26.000Z</updated>
     <content type="html"><![CDATA[<h3 id="检测Swift中的低功耗模式">检测Swift中的低功耗模式</h3><blockquote>
 <p>翻译：原文地址：<a href="http://www.ios-blog.co.uk/tutorials/swift/detecting-low-power-mode/" target="_blank" rel="external">Detecting low Power Mode in Swift</a></p>
 </blockquote>
 <p>在这篇Swift教程里我将要向你展示如何检测当用户设备进入了低功耗模式同时在这个模式下来保持更新。我会向你展示如何使用一个来自<code>NSProcessInfo</code>的属性<code>LowPowerModeEnabled</code>完成这个，同时使用<code>NSProcessInfoPowerStateDidChangeNotification</code>来监听状态的改变。<br><img src="http://iosblogimagestorage.s3-us-west-2.amazonaws.com/wp-content/uploads/2016/02/12055744/Swift-Tutorial-Detect-Low-Power-Mode.png" alt=""></p>
 <blockquote>
-<p>截止到目前，Xcode模拟器下没有开启/关闭低功耗模式的选项，为了测试这个项目，你需要把它跑在你的真机上。</p>
+<p>截止到目前，Xcode模拟器下没有开启/关闭低功耗模式的选项，为了测试这个项目，你需要把它跑在你的真机上。<br><a id="more"></a></p>
 </blockquote>
 <h4 id="低功耗模式是什么？">低功耗模式是什么？</h4><p>低功耗模式是一种Apple应对电池电量不断减少的新方式。在这个模式下会关闭所有的后台活动，降低屏幕亮度，使用不同的资源来节省电量。它是相当整洁公正的，我之前经历过1%的电量使用了一个半小时的场景。我知道，这听起来是个谎言，但是相信我，它不是的。</p>
 <h4 id="为什么要检测低功耗模式">为什么要检测低功耗模式</h4><p>剧本如下：</p>
@@ -47,10 +47,17 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<h3 id="检测Swift中的低功耗模式">检测Swift中的低功耗模式</h3><blockquote>
-<p>翻译：原文地址：<a href="http://www.ios-blog.co.uk/tutorials/swift/detecting-low-power-mo]]>
+<p>翻译：原文地址：<a href="http://www.ios-blog.co.uk/tutorials/swift/detecting-low-power-mode/">Detecting low Power Mode in Swift</a></p>
+</blockquote>
+<p>在这篇Swift教程里我将要向你展示如何检测当用户设备进入了低功耗模式同时在这个模式下来保持更新。我会向你展示如何使用一个来自<code>NSProcessInfo</code>的属性<code>LowPowerModeEnabled</code>完成这个，同时使用<code>NSProcessInfoPowerStateDidChangeNotification</code>来监听状态的改变。<br><img src="http://iosblogimagestorage.s3-us-west-2.amazonaws.com/wp-content/uploads/2016/02/12055744/Swift-Tutorial-Detect-Low-Power-Mode.png" alt=""></p>
+<blockquote>
+<p>截止到目前，Xcode模拟器下没有开启/关闭低功耗模式的选项，为了测试这个项目，你需要把它跑在你的真机上。<br>]]>
+    
     </summary>
     
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="翻译" scheme="http://qiuncheng.com/tags/%E7%BF%BB%E8%AF%91/"/>
     
       <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
     
