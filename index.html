@@ -95,6 +95,102 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-40-detecting-low-power-mode-in-swift" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/07/07/40-detecting-low-power-mode-in-swift/" class="article-date">
+  <time datetime="2016-07-07T15:24:34.000Z" itemprop="datePublished">July 07 2016</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/07/40-detecting-low-power-mode-in-swift/">Detecting low Power Mode in Swift</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检测Swift中的低功耗模式"><span class="toc-number">1.</span> <span class="toc-text">检测Swift中的低功耗模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#低功耗模式是什么？"><span class="toc-number">1.1.</span> <span class="toc-text">低功耗模式是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要检测低功耗模式"><span class="toc-number">1.2.</span> <span class="toc-text">为什么要检测低功耗模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建低功耗模式工程"><span class="toc-number">1.3.</span> <span class="toc-text">创建低功耗模式工程</span></a></li></ol></li></ol>
+		
+		</div>
+		
+        <h3 id="检测Swift中的低功耗模式">检测Swift中的低功耗模式</h3><blockquote>
+<p>翻译：原文地址：<a href="http://www.ios-blog.co.uk/tutorials/swift/detecting-low-power-mode/" target="_blank" rel="external">Detecting low Power Mode in Swift</a></p>
+</blockquote>
+<p>在这篇Swift教程里我将要向你展示如何检测当用户设备进入了低功耗模式同时在这个模式下来保持更新。我会向你展示如何使用一个来自<code>NSProcessInfo</code>的属性<code>LowPowerModeEnabled</code>完成这个，同时使用<code>NSProcessInfoPowerStateDidChangeNotification</code>来监听状态的改变。<br><img src="http://iosblogimagestorage.s3-us-west-2.amazonaws.com/wp-content/uploads/2016/02/12055744/Swift-Tutorial-Detect-Low-Power-Mode.png" alt=""></p>
+<blockquote>
+<p>截止到目前，Xcode模拟器下没有开启/关闭低功耗模式的选项，为了测试这个项目，你需要把它跑在你的真机上。</p>
+</blockquote>
+<h4 id="低功耗模式是什么？">低功耗模式是什么？</h4><p>低功耗模式是一种Apple应对电池电量不断减少的新方式。在这个模式下会关闭所有的后台活动，降低屏幕亮度，使用不同的资源来节省电量。它是相当整洁公正的，我之前经历过1%的电量使用了一个半小时的场景。我知道，这听起来是个谎言，但是相信我，它不是的。</p>
+<h4 id="为什么要检测低功耗模式">为什么要检测低功耗模式</h4><p>剧本如下：</p>
+<p>让我们假设你的APP每15分钟连接一次web服务器。就像iOS的mail APP一样（依赖你的设置）。然后它更新数据，这个重要的数据也是用户（我们暂时叫他…Linda）希望显示出来的，Linda使用通知来生活在一个快节奏的世界里，她的世界，她的业务也主要依赖于这些通知。但是当进图低功耗模式后它关闭了所有的后台活动。现在没关系，她知道在一个小时后她将要给手机充电同时低功耗模式也关闭。所以一个小时以后，她将设备充电，叹了口解脱的气，继续去过她的一天。然后晚上她遇到一个朋友（Sarah），她知道最近所有的最新八卦，商业新闻和即将离开的周末，因为她发现了一个惊人交易。Linda是困惑的，因为她没有得到任何关于这个的信息，她错过了一个重要的销售，一个几乎几乎结束的eBay商品，和周末去Groupon玩的优惠券$29。<br>Linda是窘迫的，她意识到经历了低功耗模式后，她的APP还没有回来，没有开启它通常的后台活动，同时整体上使她经历了一个低级的，冷漠的和具有伤害的一天。</p>
+<p>同时也别伤害像Linda那样的人。</p>
+<p>现在你可以检测低功耗模式状态，然后自动地设置你的APP活动。</p>
+<p>Linda喜欢这个。</p>
+<p>这篇教程假设你已经熟悉了<a href="http://www.ios-blog.co.uk/tutorials/swift/programming-introduction/" target="_blank" rel="external">Swift2</a></p>
+<h4 id="创建低功耗模式工程">创建低功耗模式工程</h4><p>在这个教程下，我们将要创建一个基本的APP，同时它会从YouTube上下载一个视频。没有实际提取，下载到设备。我们会使用Swift检测低功耗模式同时推迟下载直到低功耗模式被关闭。</p>
+<p>创建Single View Application工程，叫什么放在那里都可以。</p>
+<p>我们需要做的第一件事就是声明一些需要的变量。所以在你的ViewControlle.swift中写下如下声明：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">var</span> StartVideoDownload = true</span><br><span class="line">let processInfo = NSProcessInfo.<span class="function"><span class="title">processInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>NSProcessInfo</code>对象在这个方法第一次被调用的，同时该对象在每一个后续调用是返回。</p>
+</blockquote>
+<p>现在我们创建一个方法，它会启动下载：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">downloadStart</span><span class="params">()</span></span>&#123;</span><br><span class="line">    guard <span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"https://www.youtube.com/embed/YQHsXMglC9A"</span>) <span class="keyword">where</span></span><br><span class="line">       !processInfo.lowPowerModeEnabled <span class="keyword">else</span>&#123;</span><br><span class="line">       <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="type">StartVideoDownload</span> = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在我们来实现<code>powerModeChanged(_:)</code>方法。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">powerModeChanged</span><span class="params">(notif: NSNotification)</span></span>&#123;</span><br><span class="line">     guard mustDownloadVideo <span class="keyword">else</span>&#123;</span><br><span class="line">         <span class="keyword">return</span></span><br><span class="line">     &#125;</span><br><span class="line">downloadStart()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就这样，一个非常简单的解决方案，在您的应用程序检测到低功耗模式，并下载到用户提供的替代品。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/" data-id="ciqcgu8160044zwhu26u5kw4q" data_title="Detecting low Power Mode in Swift" data_summary="检测Swift中的低功耗模式
+翻译：原文地址：Dete..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/07/07/40-detecting-low-power-mode-in-swift/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2016-07-07T15:26:05.000Z" itemprop="dateModified">July 07 2016</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<!-- 多说评论框 end -->
+<!-- more -->
+
+  
     <article id="post-39-animating-text-layers" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -134,7 +230,7 @@ var _hmt = _hmt || [];
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="cior91qht0009gfhujukauusu" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="ciqcgu7yk0009zwhuhcu9wvin" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
       
 
       
@@ -246,7 +342,7 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="cior91qi1000ogfhusm0yw7bm" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
+	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="ciqcgu7yr000ozwhu3vypgkag" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
 继上篇《在..." class="article-share-link">Share</a>
       
 
@@ -327,7 +423,7 @@ Updated:<time datetime="2016-05-02T08:46:00.000Z" itemprop="dateModified">May 02
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cior91qj80021gfhunexi31xh" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="ciqcgu7zu0021zwhuo72acx1c" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
       
 
       
@@ -398,7 +494,7 @@ Updated:<time datetime="2016-04-13T14:55:33.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cior91qkt0044gfhu2vejrf4s" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="ciqcgu8180047zwhun2tvff3a" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
       
 
       
@@ -473,7 +569,7 @@ Updated:<time datetime="2016-04-06T14:26:32.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cior91qjq002rgfhudav8ttf3" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="ciqcgu809002rzwhujq6h94vr" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
       
 
       
@@ -545,7 +641,7 @@ Updated:<time datetime="2016-04-04T06:39:22.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cior91qkl003ugfhub2yzfp5r" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="ciqcgu811003uzwhuadrw7de4" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
       
 
       
@@ -626,7 +722,7 @@ Updated:<time datetime="2016-03-21T10:24:41.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cior91qj6001ygfhu53wb1e5h" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="ciqcgu7zr001yzwhu88zzla06" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
       
 
       
@@ -694,7 +790,7 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cior91qhz000lgfhunov1v496" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="ciqcgu7yp000lzwhue2tlsb97" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
       
 
       
@@ -762,7 +858,7 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cior91qjf002cgfhubx9gcvvo" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="ciqcgu800002czwhundnkshar" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
       
 
       
@@ -833,7 +929,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cior91qhh0001gfhuh4qsuu4z" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="ciqcgu7y50001zwhupll4tia8" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
       
 
       
@@ -908,7 +1004,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cior91qkb003igfhup1rbhyse" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
+	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="ciqcgu80p003izwhu1zr4n2zp" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
 关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
       
 
@@ -978,7 +1074,7 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cior91qjc0029gfhudpbsmnjq" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="ciqcgu7zx0029zwhuu51dnx26" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
       
 
       
@@ -1046,7 +1142,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cior91qhp0006gfhu1fb3g9x5" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="ciqcgu7yi0006zwhup9rqd5t1" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
       
 
       
@@ -1120,7 +1216,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cior91qji002hgfhuv94ox38j" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
+	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="ciqcgu803002hzwhu5chguthw" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
 
 继上篇博..." class="article-share-link">Share</a>
       
@@ -1201,7 +1297,7 @@ Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cior91qiv001ngfhuo5rq9g00" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
+	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="ciqcgu7zk001nzwhu02l4f29k" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
 
 意外的时刻发现..." class="article-share-link">Share</a>
       
@@ -1271,7 +1367,7 @@ Updated:<time datetime="2015-11-22T13:24:05.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cior91qkk003rgfhuq2gkou0i" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="ciqcgu80y003rzwhu043ntsap" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
       
 
       
@@ -1342,7 +1438,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cior91qk8003fgfhuc2xl7qhz" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="ciqcgu80n003fzwhugswz69r2" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
       
 
       
@@ -1414,7 +1510,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cior91qjx002zgfhuvmijnhip" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="ciqcgu80d002zzwhuoa2r6vqv" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
       
 
       
@@ -1483,7 +1579,7 @@ Updated:<time datetime="2015-11-20T11:44:58.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cior91qi80012gfhupc9gjjpr" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="ciqcgu7yz0012zwhudwujp432" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
       
 
       
@@ -1551,7 +1647,7 @@ Updated:<time datetime="2015-11-11T04:09:59.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cior91qio001cgfhuaptyz65h" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="ciqcgu7zc001czwhujh2kn4r1" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -1621,7 +1717,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cior91qk40038gfhux7af3axm" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="ciqcgu80j0038zwhueuynnkjj" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -1695,7 +1791,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cior91qke003lgfhuqklwlt8n" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="ciqcgu80t003lzwhuru6ehiwa" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -1767,7 +1863,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cior91qju002wgfhu3hc5awwl" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="ciqcgu80b002wzwhuv42nkysa" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -1839,7 +1935,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cior91qiq001fgfhup3qc3tzy" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="ciqcgu7ze001fzwhu4tha0r99" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -1915,7 +2011,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cior91qis001kgfhuvhdn2cm7" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="ciqcgu7zg001kzwhug2zhhpvp" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -1987,7 +2083,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cior91qkg003ogfhucxwy3b0u" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="ciqcgu80w003ozwhuvnjl0eie" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -2056,7 +2152,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cior91qk6003bgfhu9ui09065" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="ciqcgu80l003bzwhuh1vvg7yo" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -2127,7 +2223,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cior91qj2001vgfhudbibpucg" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="ciqcgu7zp001vzwhuwtkeq2uw" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -2196,7 +2292,7 @@ Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cior91qi4000tgfhuec7aa4sn" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="ciqcgu7yv000tzwhuyz8bn81r" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
       
 
       
@@ -2264,7 +2360,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cior91qjo002mgfhu86279h18" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="ciqcgu806002mzwhuwho8nbfr" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
       
 
       
@@ -2345,7 +2441,7 @@ int2 = functools.<span class="function"><span class="title">partial</span><span 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cior91qja0026gfhu082amir8" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="ciqcgu7zw0026zwhuoweexdn5" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
       
 
       
@@ -2425,7 +2521,7 @@ Updated:<time datetime="2015-09-21T17:09:48.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cior91qjz0032gfhuge9232xn" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="ciqcgu80f0032zwhuig20ptyq" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
       
 
       
@@ -2503,7 +2599,7 @@ Updated:<time datetime="2015-09-21T17:09:15.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cior91qk20035gfhu8byzbglr" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="ciqcgu80i0035zwhuf3xxke4h" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
       
 
       
@@ -2574,7 +2670,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cior91qib0015gfhuc30ztzli" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="ciqcgu7z10015zwhugui1a8uu" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
       
 
       
@@ -2645,7 +2741,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cior91qiz001rgfhuxmkqpitf" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="ciqcgu7zn001rzwhuwzal9xfr" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
       
 
       
@@ -2715,7 +2811,7 @@ Updated:<time datetime="2015-09-21T17:07:42.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cior91qkp003xgfhuikitspth" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="ciqcgu814003xzwhuo8eoisc7" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
       
 
       
@@ -2785,7 +2881,7 @@ Updated:<time datetime="2015-09-21T17:14:24.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cior91qhx000ggfhu38kdk2od" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="ciqcgu7yn000gzwhueh5i0ze2" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
       
 
       
@@ -2858,7 +2954,7 @@ Updated:<time datetime="2015-09-21T17:07:17.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cior91qil0019gfhu8gbfq2q7" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
+	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="ciqcgu7z60019zwhuoa0obbck" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
 
 
 
@@ -2930,7 +3026,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Archive</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -2940,7 +3036,7 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autolayout/">Autolayout</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autolayout/">Autolayout</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -2963,6 +3059,10 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
       <ul>
         
           <li>
+            <a href="/2016/07/07/40-detecting-low-power-mode-in-swift/">Detecting low Power Mode in Swift</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/28/39-animating-text-layers/">[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a>
           </li>
         
@@ -2976,10 +3076,6 @@ Updated:<time datetime="2015-09-21T17:08:05.000Z" itemprop="dateModified">Septem
         
           <li>
             <a href="/2016/04/06/36-Autolayout-translate-02/">AutoLayout翻译二--在代码中使用Autolayout</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/04/35-Autolayout-translate-01/">《Programing iOS9》翻译（一）-Autolayout名词含义</a>
           </li>
         
       </ul>

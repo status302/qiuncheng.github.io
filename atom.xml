@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-05-28T14:25:05.000Z</updated>
+  <updated>2016-07-07T15:26:05.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Detecting low Power Mode in Swift]]></title>
+    <link href="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/"/>
+    <id>http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/</id>
+    <published>2016-07-07T15:24:34.000Z</published>
+    <updated>2016-07-07T15:26:05.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="检测Swift中的低功耗模式">检测Swift中的低功耗模式</h3><blockquote>
+<p>翻译：原文地址：<a href="http://www.ios-blog.co.uk/tutorials/swift/detecting-low-power-mode/" target="_blank" rel="external">Detecting low Power Mode in Swift</a></p>
+</blockquote>
+<p>在这篇Swift教程里我将要向你展示如何检测当用户设备进入了低功耗模式同时在这个模式下来保持更新。我会向你展示如何使用一个来自<code>NSProcessInfo</code>的属性<code>LowPowerModeEnabled</code>完成这个，同时使用<code>NSProcessInfoPowerStateDidChangeNotification</code>来监听状态的改变。<br><img src="http://iosblogimagestorage.s3-us-west-2.amazonaws.com/wp-content/uploads/2016/02/12055744/Swift-Tutorial-Detect-Low-Power-Mode.png" alt=""></p>
+<blockquote>
+<p>截止到目前，Xcode模拟器下没有开启/关闭低功耗模式的选项，为了测试这个项目，你需要把它跑在你的真机上。</p>
+</blockquote>
+<h4 id="低功耗模式是什么？">低功耗模式是什么？</h4><p>低功耗模式是一种Apple应对电池电量不断减少的新方式。在这个模式下会关闭所有的后台活动，降低屏幕亮度，使用不同的资源来节省电量。它是相当整洁公正的，我之前经历过1%的电量使用了一个半小时的场景。我知道，这听起来是个谎言，但是相信我，它不是的。</p>
+<h4 id="为什么要检测低功耗模式">为什么要检测低功耗模式</h4><p>剧本如下：</p>
+<p>让我们假设你的APP每15分钟连接一次web服务器。就像iOS的mail APP一样（依赖你的设置）。然后它更新数据，这个重要的数据也是用户（我们暂时叫他…Linda）希望显示出来的，Linda使用通知来生活在一个快节奏的世界里，她的世界，她的业务也主要依赖于这些通知。但是当进图低功耗模式后它关闭了所有的后台活动。现在没关系，她知道在一个小时后她将要给手机充电同时低功耗模式也关闭。所以一个小时以后，她将设备充电，叹了口解脱的气，继续去过她的一天。然后晚上她遇到一个朋友（Sarah），她知道最近所有的最新八卦，商业新闻和即将离开的周末，因为她发现了一个惊人交易。Linda是困惑的，因为她没有得到任何关于这个的信息，她错过了一个重要的销售，一个几乎几乎结束的eBay商品，和周末去Groupon玩的优惠券$29。<br>Linda是窘迫的，她意识到经历了低功耗模式后，她的APP还没有回来，没有开启它通常的后台活动，同时整体上使她经历了一个低级的，冷漠的和具有伤害的一天。</p>
+<p>同时也别伤害像Linda那样的人。</p>
+<p>现在你可以检测低功耗模式状态，然后自动地设置你的APP活动。</p>
+<p>Linda喜欢这个。</p>
+<p>这篇教程假设你已经熟悉了<a href="http://www.ios-blog.co.uk/tutorials/swift/programming-introduction/" target="_blank" rel="external">Swift2</a></p>
+<h4 id="创建低功耗模式工程">创建低功耗模式工程</h4><p>在这个教程下，我们将要创建一个基本的APP，同时它会从YouTube上下载一个视频。没有实际提取，下载到设备。我们会使用Swift检测低功耗模式同时推迟下载直到低功耗模式被关闭。</p>
+<p>创建Single View Application工程，叫什么放在那里都可以。</p>
+<p>我们需要做的第一件事就是声明一些需要的变量。所以在你的ViewControlle.swift中写下如下声明：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">var</span> StartVideoDownload = true</span><br><span class="line">let processInfo = NSProcessInfo.<span class="function"><span class="title">processInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>NSProcessInfo</code>对象在这个方法第一次被调用的，同时该对象在每一个后续调用是返回。</p>
+</blockquote>
+<p>现在我们创建一个方法，它会启动下载：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">downloadStart</span><span class="params">()</span></span>&#123;</span><br><span class="line">    guard <span class="keyword">let</span> url = <span class="type">NSURL</span>(string: <span class="string">"https://www.youtube.com/embed/YQHsXMglC9A"</span>) <span class="keyword">where</span></span><br><span class="line">       !processInfo.lowPowerModeEnabled <span class="keyword">else</span>&#123;</span><br><span class="line">       <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="type">StartVideoDownload</span> = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在我们来实现<code>powerModeChanged(_:)</code>方法。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">powerModeChanged</span><span class="params">(notif: NSNotification)</span></span>&#123;</span><br><span class="line">     guard mustDownloadVideo <span class="keyword">else</span>&#123;</span><br><span class="line">         <span class="keyword">return</span></span><br><span class="line">     &#125;</span><br><span class="line">downloadStart()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就这样，一个非常简单的解决方案，在您的应用程序检测到低功耗模式，并下载到用户提供的替代品。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="检测Swift中的低功耗模式">检测Swift中的低功耗模式</h3><blockquote>
+<p>翻译：原文地址：<a href="http://www.ios-blog.co.uk/tutorials/swift/detecting-low-power-mo]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK]]></title>
@@ -861,28 +903,6 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
     <summary type="html">
     <![CDATA[<h5 id="前言">前言</h5><p>不得不承认，在Swift出现以前对于没有天赋的人自学iOS开发确实有一定的难度，但是自从Apple推出了全新的编程语言Swift，我觉得人人都是程序员的口号越来越近了。<br>我是今年9月底无意中接触了Swift，当时我还在一股脑子得学Python，想着将来靠Python发大财，可是突然有天iPad的iBooks里多了本《The Swift Programming Language》，于是在一个月高风黑的晚上我独自一人看起了Swift，第一个晚上一下子把《Language Guide》看了个大半，从此就一发不可收拾，可能是我之前写过Python的原因，她两的语法现在时太像了。简洁优雅形容不过。<br>于是我就索性搞起了iOS。。。</p>
 <h5 id="正文">正文</h5><p>我先是看的是<code>麦子学院</code>的Sundy老师的Swift入门视频，外加《The Swift Programming Language》和《Using Swift With Cocoa and Objective-C》这两本书，后来随着学习的深入，略微发现自己学的简直是太浅，不能马上运用起来，比如我想做一款“Classmates”的应用，想象着很美，甚至连原型图都画好了，结果做起来各种问题都跑出来了，说到底还是我了解的太少了，做一款应用需要的太多了，而且我的了解都是快速的碎片化的记忆，所以我就跑去网上找各种学习资源，果然黄天不负有心人，我终于找到了这个Stanford University的白胡子老师的视频，现在看到了第十集的UITableView,讲的真是好，虽然有些没有听懂，但还是很满足，至少让我对编程有了一个重新的认识，这样说吧，我举个很简单的例子，他的很多代码都值得我们去仔细好好研究下，每一个实例Demo里都充分运用Struct、Enum、Setter、Getter等等，这些小技巧能让你在今后代码重构，代码测试中省去好多事情。<br>我是那种不能光看视频的人，于是我在看视频的事后基本上把他写的东西又重新敲了一遍，有时候理解不等于会写，看什么都能够理解，但是当你去写的时候你发现自己不知怎么下手，所以看视频最好的边看边写，这样在理解的基础上能够加深认识。下面我想简单滴介绍下我之前跟着白胡子老师做的几个小Demo：]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何在iOS上优雅滴使用http://]]></title>
-    <link href="http://qiuncheng.com/2015/11/11/19-iOS-http/"/>
-    <id>http://qiuncheng.com/2015/11/11/19-iOS-http/</id>
-    <published>2015-11-11T02:21:12.000Z</published>
-    <updated>2015-11-11T02:39:52.000Z</updated>
-    <content type="html"><![CDATA[<p>话说当我使用<code>http://</code>请求网络上一张图片时我发现我使用的Xcode7.1竟然不响应，然后还爆出了错误，这个让我很生气，后来查看错误提示得知貌似<code>http</code>不安全。<br>错误代码提示如下：<br><code>Transport security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app&#39;s Info.plist file.</code><br>百度了一段时间无果后果断挂上<code>VPN</code>翻了一下，在<a href="http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http" target="_blank" rel="external">StackOverflow</a>上找到了解决方案，原来就是在<code>info.plist</code>里enable<code>http</code>mode就可以了。奥，我的天！原谅我开接触这个。<br>可是如何添加呢？请看下图：<a id="more"></a><br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151111-0.png" alt="图中最上面蓝色框里面的添加到info.plist里">   </p>
-<blockquote>
-<p>OK，It helps， hope useful to you!</p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>话说当我使用<code>http://</code>请求网络上一张图片时我发现我使用的Xcode7.1竟然不响应，然后还爆出了错误，这个让我很生气，后来查看错误提示得知貌似<code>http</code>不安全。<br>错误代码提示如下：<br><code>Transport security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app&#39;s Info.plist file.</code><br>百度了一段时间无果后果断挂上<code>VPN</code>翻了一下，在<a href="http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http">StackOverflow</a>上找到了解决方案，原来就是在<code>info.plist</code>里enable<code>http</code>mode就可以了。奥，我的天！原谅我开接触这个。<br>可是如何添加呢？请看下图：]]>
     
     </summary>
     
