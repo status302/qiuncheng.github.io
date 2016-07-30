@@ -124,32 +124,18 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-number">2.</span> <span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原理一：利用UIScrollView实现轮播图。"><span class="toc-number">2.1.</span> <span class="toc-text">原理一：利用UIScrollView实现轮播图。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原理二：利用UICollectionView实现轮播图。"><span class="toc-number">2.2.</span> <span class="toc-text">原理二：利用UICollectionView实现轮播图。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现"><span class="toc-number">3.</span> <span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结尾"><span class="toc-number">4.</span> <span class="toc-text">结尾</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作者"><span class="toc-number">4.1.</span> <span class="toc-text">作者</span></a></li></ol></li></ol>
-		
-		</div>
-		
         <h3 id="前言">前言</h3><p>见过很多的iOS应用，都有无限轮播图，之前也看到过很多相关实现的文章，可是仅仅就是一看而过罢了。当自己在项目中用到这个，真正去写的时候才发现不是很容易，遇到了一些问题，这篇文章就记录下自己最后成功实现轮播图的历程。</p>
-<h3 id="原理">原理</h3><p>原理其实就是一种假象。不过在我这里，目前有过两种原理的实现。一种利用<code>UICollectionView</code>实现轮播，另一种利用<code>UIScrollView</code>实现轮播。<br>今天我们要来打造一款这样的轮播图（图画的不好，请勿见怪）。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20160730-0.png" alt="三张图可以无限轮播"></p>
-<h4 id="原理一：利用UIScrollView实现轮播图。">原理一：利用<code>UIScrollView</code>实现轮播图。</h4><p>要想实现这样的效果，我们使用<code>UIScrollView</code>包含image0，image1，image2的三个<code>UIImageView</code>都是放在<code>UIScrollView</code>里面的，但是这样的话是不可以实现轮播的。要想实现轮播就要再在该<code>UIScrollView</code>的左右两侧各加一张<code>UIImageView</code>。在最后一张放image0， 第一张放image2。这样的话当我们滚动到最后或者最前面的的时候，我们就把列表切换到相应的位置。<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20160730-1.png" alt="实际UISrollView图"></p>
-<h4 id="原理二：利用UICollectionView实现轮播图。">原理二：利用<code>UICollectionView</code>实现轮播图。</h4><p>你当然可以利用<strong>原理一</strong>再用<code>UICollectionView</code>实现一次。但是我这里采用一种偷懒的方式，利用<code>UICollectionView</code>的cell重用机制。创建个无数个cell，比如3<em>20000。当用户第一次进来的我们就将UICollectionView滑到3</em>20000*0.5的位置。然后利用<code>cell.indexPath.item % 3</code>来对cell上的UIImageView进行image显示。这种方式比较偷懒，在后来添加NSTimer自动轮播和点击事件的时候也比较简单，不过有点大炮打小鸟的感觉。所以我在这里也只是介绍下原理，如果你有兴趣，可以自己尝试去实现下。而且UICollectionView自带一个方法<code>- scrollToItemAtIndexPath:atScrollPosition:animated:</code>还比较厉害。</p>
-<h3 id="具体实现">具体实现</h3><p>针对原理一，我就来简单实现下。(我这里使用代码创建,你也可以使用Storyboard创建,原理一样)</p>
-<p>创建工程，创建<code>BannerView.Swift</code>,添加初始化代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 初始化scrollView</span></span><br><span class="line">lazy <span class="keyword">var</span> scrollView: <span class="type">UIScrollView</span> = &#123;</span><br><span class="line">       <span class="keyword">let</span> scrollView = <span class="type">UIScrollView</span>()</span><br><span class="line">       scrollView.delegate = <span class="keyword">self</span></span><br><span class="line">       scrollView.alwaysBounceVertical = <span class="literal">false</span></span><br><span class="line">       scrollView.bounces = <span class="literal">true</span></span><br><span class="line">       scrollView.pagingEnabled = <span class="literal">true</span></span><br><span class="line">       scrollView.scrollEnabled = <span class="literal">true</span></span><br><span class="line">       scrollView.showsVerticalScrollIndicator = <span class="literal">false</span></span><br><span class="line">       scrollView.showsHorizontalScrollIndicator = <span class="literal">false</span></span><br><span class="line">       <span class="keyword">return</span> scrollView</span><br><span class="line">   &#125;()</span><br><span class="line"><span class="comment">/// 初始化pageControl</span></span><br><span class="line">   lazy <span class="keyword">var</span> pageControl: <span class="type">UIPageControl</span> = &#123;</span><br><span class="line">       <span class="keyword">let</span> pageControl = <span class="type">UIPageControl</span>()</span><br><span class="line">       pageControl.currentPageIndicatorTintColor = <span class="type">UIColor</span>.redColor()</span><br><span class="line">       pageControl.pageIndicatorTintColor = <span class="type">UIColor</span>.whiteColor()</span><br><span class="line">       <span class="keyword">return</span> pageControl</span><br><span class="line">   &#125;()</span><br><span class="line"></span><br><span class="line">   <span class="comment">/// 在init里调用setupSubviews即可</span></span><br><span class="line">   <span class="func"><span class="keyword">func</span> <span class="title">setupSubviews</span><span class="params">()</span></span> &#123;  </span><br><span class="line">       <span class="keyword">self</span>.addSubview(scrollView)</span><br><span class="line">       <span class="keyword">self</span>.addSubview(pageControl)</span><br><span class="line"></span><br><span class="line">       scrollView.translatesAutoresizingMaskIntoConstraints = <span class="literal">false</span></span><br><span class="line">       pageControl.translatesAutoresizingMaskIntoConstraints = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">       <span class="keyword">self</span>.addConstraints(<span class="type">NSLayoutConstraint</span>.constraintsWithVisualFormat(<span class="string">"V:|[v]|"</span>, options: [], metrics: <span class="literal">nil</span>, views: [<span class="string">"v"</span>: scrollView]))</span><br><span class="line">       <span class="keyword">self</span>.addConstraints(<span class="type">NSLayoutConstraint</span>.constraintsWithVisualFormat(<span class="string">"H:|[v]|"</span>, options: [], metrics: <span class="literal">nil</span>, views: [<span class="string">"v"</span>: scrollView]))</span><br><span class="line"></span><br><span class="line">       <span class="keyword">self</span>.addConstraints(<span class="type">NSLayoutConstraint</span>.constraintsWithVisualFormat(<span class="string">"V:[p(==20)]-10-|"</span>, options: [], metrics: <span class="literal">nil</span>, views: [<span class="string">"p"</span>: pageControl]))</span><br><span class="line">       <span class="keyword">self</span>.addConstraints(<span class="type">NSLayoutConstraint</span>.constraintsWithVisualFormat(<span class="string">"H:[p(==100)]-10-|"</span>, options: [], metrics: <span class="literal">nil</span>, views: [<span class="string">"p"</span>: pageControl]))</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>初始化UIScrollView：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">setupScrollView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">/// 创建 （imageNames.count + 2）个UIImageView</span></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> <span class="number">0</span> ... (imageNmaes.<span class="built_in">count</span> + <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> imageView = <span class="type">UIImageView</span>(frame: <span class="type">CGRect</span>(x: <span class="keyword">self</span>.width*<span class="type">CGFloat</span>(index), y: <span class="number">0</span>, width: <span class="keyword">self</span>.width, height: <span class="keyword">self</span>.height))</span><br><span class="line">            <span class="keyword">var</span> picName = <span class="type">String</span>()</span><br><span class="line">            <span class="keyword">switch</span> index &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                picName = imageNames[imageNames.<span class="built_in">count</span>-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">case</span> imageNames.<span class="built_in">count</span> + <span class="number">1</span>:</span><br><span class="line">                picName = imageNames[<span class="number">0</span>]</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                picName = imageNames[index-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//          imageView.af_setImageWithURL(NSURL(string: picName)!)</span></span><br><span class="line">            imageView.image = <span class="type">UIImage</span>(named: picName)</span><br><span class="line">            imageView.contentMode = .<span class="type">ScaleToFill</span></span><br><span class="line">            imageView.clipsToBounds = <span class="literal">true</span></span><br><span class="line">            imageView.userInteractionEnabled = <span class="literal">true</span></span><br><span class="line">            scrollView.addSubview(imageView)</span><br><span class="line">        &#125;</span><br><span class="line">        scrollView.contentSize = <span class="type">CGSize</span>(width: <span class="keyword">self</span>.width * <span class="type">CGFloat</span>(imageNames.<span class="built_in">count</span> + <span class="number">2</span>), height: <span class="keyword">self</span>.height)</span><br><span class="line">        scrollView.contentOffset = <span class="type">CGPoint</span>(x: <span class="keyword">self</span>.width, y: <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>无限轮番的实现。（重点）使用UIScrollViewDelegate协议。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">scrollViewDidScroll</span><span class="params">(scrollView: UIScrollView)</span></span> &#123;</span><br><span class="line">       <span class="keyword">if</span> scrollView == <span class="keyword">self</span>.scrollView &#123;</span><br><span class="line">           <span class="keyword">let</span> contentOffsetX = scrollView.contentOffset.x</span><br><span class="line">          <span class="comment">///向前滑动到第0张图的时候，滚到第三张图</span></span><br><span class="line">           <span class="keyword">if</span> contentOffsetX == <span class="number">0</span> &#123;</span><br><span class="line">               scrollView.contentOffset = <span class="type">CGPoint</span>(x: <span class="keyword">self</span>.width * <span class="type">CGFloat</span>(<span class="keyword">self</span>.imageNames.<span class="built_in">count</span>), y: <span class="number">0</span>)</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">/// 跑到第三张图的时候，滚到第0张图</span></span><br><span class="line">           <span class="keyword">if</span> contentOffsetX == <span class="type">CGFloat</span>(<span class="keyword">self</span>.imageNames.<span class="built_in">count</span> + <span class="number">1</span>)*<span class="keyword">self</span>.width &#123;</span><br><span class="line">               scrollView.contentOffset = <span class="type">CGPoint</span>(x: <span class="keyword">self</span>.width, y: <span class="number">0</span>)</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">/// 改变pageControl，这里要注意，一定要一定要一定要 - 0.5， 因为最前面的第0张图一直不显示。</span></span><br><span class="line">           <span class="keyword">let</span> index = scrollView.contentOffset.x / <span class="keyword">self</span>.width - <span class="number">0.5</span></span><br><span class="line">           <span class="keyword">self</span>.pageControl.currentPage = <span class="type">Int</span>(index)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>好了，做到这里，你已经成功实现了轮播图，可是这个轮播图是手动的，下面添加自动滚动。也很简单，设置一个NSTimer计时器即可。代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MARK: - Timer</span></span><br><span class="line">   <span class="keyword">var</span> timer: <span class="type">NSTimer</span>?</span><br><span class="line">   <span class="keyword">var</span> i = <span class="number">1</span></span><br><span class="line">   <span class="comment">/// 在scrollView上的图片成功设置后调用startTimer即可</span></span><br><span class="line">   private <span class="func"><span class="keyword">func</span> <span class="title">startTimer</span><span class="params">()</span></span> &#123;</span><br><span class="line">       <span class="keyword">if</span> timer != <span class="literal">nil</span> &#123;</span><br><span class="line">           <span class="keyword">self</span>.stopTimer()</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">/// 这里设置的滚动间隔为2秒</span></span><br><span class="line">       timer = <span class="type">NSTimer</span>.scheduledTimerWithTimeInterval(<span class="number">2</span>, target: <span class="keyword">self</span>, selector: #selector(autoScroll), userInfo: <span class="literal">nil</span>, repeats: <span class="literal">true</span>)</span><br><span class="line">       <span class="type">NSRunLoop</span>.currentRunLoop().addTimer(timer!, forMode: <span class="type">NSDefaultRunLoopMode</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   private <span class="func"><span class="keyword">func</span> <span class="title">stopTimer</span><span class="params">()</span></span> &#123;</span><br><span class="line">       timer?.invalidate()</span><br><span class="line">       timer = <span class="literal">nil</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="func"><span class="keyword">func</span> <span class="title">autoScroll</span><span class="params">()</span></span> &#123;</span><br><span class="line">       <span class="keyword">if</span> i == imageNames.<span class="built_in">count</span> + <span class="number">1</span> &#123;</span><br><span class="line">           i = <span class="number">1</span></span><br><span class="line">       &#125;</span><br><span class="line">       i += <span class="number">1</span></span><br><span class="line">       <span class="comment">/// 在处理无限轮番的时候设置contentOffset没有添加animated，这里要添加上来，不然有种很突兀的感觉。</span></span><br><span class="line">       scrollView.setContentOffset(<span class="type">CGPoint</span>(x: <span class="keyword">self</span>.width * <span class="type">CGFloat</span>(i), y: <span class="number">0</span>), animated: <span class="literal">true</span>)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>具体到点击事件的话，我是放在初始化imageView那里处理的，给imageVIew添加一个UITapGestureRecognizer，在这里最好再写一个代理方法，将imageView的点击事件传递出去。然后根据当前<code>contentOffet.x / self.width</code>来将具体哪张图片的事件传递出去。我就不用代码展示了。</p>
-<h3 id="结尾">结尾</h3><p>还是比较简单的。但是我这个复用性比较差，封装的也不好，可是具体要看思路😂。代码实现放在了Github Wiki上了<a href="https://github.com/qiuncheng/qiuncheng.github.io/wiki/BannerView.Swift" target="_blank" rel="external">BannerView.Swift</a>，由于工程量太小，就没将工程文件上传了。</p>
-<h4 id="作者">作者</h4><p><a href="http://qiuncheng.com">Qiuncheng</a>，一位正在iOS路上前行的初学者，正在努力成为一名合格的iOS开发者。</p>
-
+<h3 id="原理">原理</h3><p>原理其实就是一种假象。不过在我这里，目前有过两种原理的实现。一种利用<code>UICollectionView</code>实现轮播，另一种利用<code>UIScrollView</code>实现轮播。<br>今天我们要来打造一款这样的轮播图（图画的不好，请勿见怪）。
+        
+          <p class="article-more-link">
+            <a href="/2016/07/30/41-countless-imageView/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/07/30/41-countless-imageView/" data-id="cir93g4x9003iebhukav8xxdn" data_title="iOS简易轮播图的实现" data_summary="前言见过很多的iOS应用，都有无限轮播图，之前也看到过..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/07/30/41-countless-imageView/" data-id="cir93j0dc003if1hukonk70pn" data_title="iOS简易轮播图的实现" data_summary="前言见过很多的iOS应用，都有无限轮播图，之前也看到过..." class="article-share-link">Share</a>
       
 
       
@@ -161,7 +147,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2016-07-30T11:27:30.000Z" itemprop="dateModified">July 30 2016</time>
+Updated:<time datetime="2016-07-30T11:33:42.000Z" itemprop="dateModified">July 30 2016</time>
 </span>
 
 
@@ -222,7 +208,7 @@ Updated:<time datetime="2016-07-30T11:27:30.000Z" itemprop="dateModified">July 3
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/" data-id="cir93g4xp0047ebhuv2tz6tep" data_title="Detecting low Power Mode in Swift" data_summary="检测Swift中的低功耗模式
+	  <a data-url="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/" data-id="cir93j0ea0047f1hurtfuo2rm" data_title="Detecting low Power Mode in Swift" data_summary="检测Swift中的低功耗模式
 翻译：原文地址：Dete..." class="article-share-link">Share</a>
       
 
@@ -291,7 +277,7 @@ Updated:<time datetime="2016-07-07T15:28:26.000Z" itemprop="dateModified">July 0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="cir93g4v40009ebhu37djqcp9" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="cir93j09i0009f1hu7rjhc62z" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
       
 
       
@@ -403,7 +389,7 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="cir93g4vb000oebhur0s6oand" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
+	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="cir93j09q000of1hutjib2wjt" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
 继上篇《在..." class="article-share-link">Share</a>
       
 
@@ -484,7 +470,7 @@ Updated:<time datetime="2016-05-02T08:46:00.000Z" itemprop="dateModified">May 02
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cir93g4wc0021ebhuzpkt9999" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="cir93j0bf0021f1hu31ocls3j" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
       
 
       
@@ -555,7 +541,7 @@ Updated:<time datetime="2016-04-13T14:55:33.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cir93g4xt004bebhu8bkgmh89" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="cir93j0ef004bf1hu8yhz3b97" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
       
 
       
@@ -630,7 +616,7 @@ Updated:<time datetime="2016-04-06T14:26:32.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cir93g4wu002rebhuso7rpou8" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="cir93j0cj002rf1hu6jxqi075" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
       
 
       
@@ -702,7 +688,7 @@ Updated:<time datetime="2016-04-04T06:39:22.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cir93g4xj003xebhupyc4sxpr" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="cir93j0dv003xf1hu9fx6r4m7" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
       
 
       
@@ -783,7 +769,7 @@ Updated:<time datetime="2016-03-21T10:24:41.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cir93g4wa001yebhu4ddj105m" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="cir93j0bc001yf1hu5902wqdg" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
       
 
       
@@ -851,7 +837,7 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cir93g4v9000lebhubj32fyv9" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="cir93j09o000lf1hug9l7t2iq" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
       
 
       
@@ -919,7 +905,7 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cir93g4wk002cebhuyg1nybb1" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="cir93j0bu002cf1hu50osvv79" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
       
 
       
@@ -990,7 +976,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cir93g4uu0001ebhuuluhpxah" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="cir93j0970001f1hutj4jmrv6" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
       
 
       
@@ -1065,7 +1051,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cir93g4xb003lebhu4tdbd5jc" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
+	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="cir93j0dh003lf1hui4docu5k" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
 关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
       
 
@@ -1135,7 +1121,7 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cir93g4wh0029ebhunml4u71y" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="cir93j0bq0029f1huzniese01" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
       
 
       
@@ -1203,7 +1189,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cir93g4v10006ebhu5pcvij4a" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="cir93j09g0006f1hugzp5s1do" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
       
 
       
@@ -1277,7 +1263,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cir93g4wo002hebhu0zc22dvq" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
+	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="cir93j0bz002hf1hu27rvz16q" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
 
 继上篇博..." class="article-share-link">Share</a>
       
@@ -1358,7 +1344,7 @@ Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cir93g4vy001nebhunttwwtrq" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
+	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="cir93j0ar001nf1hu05xzpb55" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
 
 意外的时刻发现..." class="article-share-link">Share</a>
       
@@ -1428,7 +1414,7 @@ Updated:<time datetime="2015-11-22T13:24:05.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cir93g4xh003uebhulti3f6me" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="cir93j0dq003uf1huk1e484sf" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
       
 
       
@@ -1499,7 +1485,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cir93g4x6003febhulq2rpovb" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="cir93j0d8003ff1huiubz48oa" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
       
 
       
@@ -1571,7 +1557,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cir93g4wy002zebhuudxdx2v3" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="cir93j0ct002zf1huffzc4ne7" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
       
 
       
@@ -1640,7 +1626,7 @@ Updated:<time datetime="2015-11-20T11:44:58.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cir93g4vh0012ebhuqokbgma6" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="cir93j09x0012f1huwi4f7q8u" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
       
 
       
@@ -1708,7 +1694,7 @@ Updated:<time datetime="2015-11-11T04:09:59.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cir93g4vo001cebhu3xd020xi" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="cir93j0a9001cf1hu3gbay8zj" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -1778,7 +1764,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cir93g4x30038ebhucftg8hsa" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="cir93j0d10038f1hu4330p6ew" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -1852,7 +1838,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cir93g4xe003oebhujsl6e8hd" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="cir93j0dl003of1hubrpi4wtu" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -1924,7 +1910,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cir93g4ww002webhun48q95ge" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="cir93j0cr002wf1hu4rpr9ov0" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -1996,7 +1982,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cir93g4vs001febhupaou5e5p" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="cir93j0ab001ff1huhqverpvn" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -2072,7 +2058,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cir93g4vu001kebhux7jfggrm" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="cir93j0ag001kf1hu68rf1to5" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -2144,7 +2130,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cir93g4xg003rebhuq12f659l" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="cir93j0do003rf1hulpv24kun" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -2213,7 +2199,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cir93g4x5003bebhu06snwsar" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="cir93j0d6003bf1huly444rrx" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -2284,7 +2270,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cir93g4w8001vebhunw12tgof" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="cir93j0b7001vf1huyjdf1mmz" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -2353,7 +2339,7 @@ Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cir93g4ve000tebhut9na02o9" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="cir93j09s000tf1huwzv7ad8v" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
       
 
       
@@ -2421,7 +2407,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cir93g4wr002mebhu7rtqju91" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="cir93j0c8002mf1hurausqbw5" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
       
 
       
@@ -2502,7 +2488,7 @@ int2 = functools.<span class="function"><span class="title">partial</span><span 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cir93g4we0026ebhusz66aqy1" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="cir93j0bl0026f1hulokmhsgt" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
       
 
       
@@ -2582,7 +2568,7 @@ Updated:<time datetime="2015-09-21T17:09:48.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cir93g4wz0032ebhuuzq523ii" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="cir93j0cw0032f1hubhyyneuw" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
       
 
       
@@ -2660,7 +2646,7 @@ Updated:<time datetime="2015-09-21T17:09:15.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cir93g4x20035ebhuedivvppx" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="cir93j0cz0035f1huzowmtvra" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
       
 
       
@@ -2731,7 +2717,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cir93g4vj0015ebhu12bqfhiz" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="cir93j0a10015f1huwl87102s" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
       
 
       
@@ -2802,7 +2788,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cir93g4w1001rebhu1oyqd7p0" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="cir93j0b3001rf1huftjt57nu" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
       
 
       
@@ -2872,7 +2858,7 @@ Updated:<time datetime="2015-09-21T17:07:42.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cir93g4xm0040ebhuh37d52yu" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="cir93j0e30040f1hutf6nxqx8" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
       
 
       
@@ -2942,7 +2928,7 @@ Updated:<time datetime="2015-09-21T17:14:24.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cir93g4v6000gebhutqkzpb5e" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="cir93j09l000gf1huh3efunf2" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
       
 
       
@@ -3015,7 +3001,7 @@ Updated:<time datetime="2015-09-21T17:07:17.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cir93g4vm0019ebhu2ewkdxg6" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
+	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="cir93j0a60019f1huyj5x5p5l" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
 
 
 
