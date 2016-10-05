@@ -126,14 +126,6 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>Contents</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#队列类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">队列类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#执行类型"><span class="toc-number">1.0.2.</span> <span class="toc-text">执行类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#首先：什么是线程？什么是进程？"><span class="toc-number">1.1.</span> <span class="toc-text">首先：什么是线程？什么是进程？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线程：用于指代独立执行的代码路径"><span class="toc-number">1.1.1.</span> <span class="toc-text">线程：用于指代独立执行的代码路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#进程：用于指代可执行的运行程序，一个进程可以包含多个线程"><span class="toc-number">1.1.2.</span> <span class="toc-text">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其次：iOS上的多线程有哪些："><span class="toc-number">1.2.</span> <span class="toc-text">其次：iOS上的多线程有哪些：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#NSThread：封装性最差，偏底层，主要基于pthread"><span class="toc-number">1.2.1.</span> <span class="toc-text">NSThread：封装性最差，偏底层，主要基于pthread</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CGD：基于C的实现API，直接使用比较方便，主要基于block实现"><span class="toc-number">1.2.2.</span> <span class="toc-text">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现"><span class="toc-number">1.2.3.</span> <span class="toc-text">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NSThread"><span class="toc-number">2.1.</span> <span class="toc-text">NSThread</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#有何优点："><span class="toc-number">2.1.0.1.</span> <span class="toc-text">有何优点：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#有何缺点："><span class="toc-number">2.1.0.2.</span> <span class="toc-text">有何缺点：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线程如何使用？"><span class="toc-number">2.1.1.</span> <span class="toc-text">线程如何使用？</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#关于线程启动"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">关于线程启动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#关于线程的管理"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">关于线程的管理</span></a></li></ol></li></ol></li></ol></li></ol>
-		
-		</div>
-		
         <blockquote>
 <p>最近在笔试的过程中，总是会遇到多线程的话题，很显然这是一个iOS上的通用话题。你懂了更好；不懂，那就说明你有问题了。</p>
 </blockquote>
@@ -166,23 +158,16 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<h4 id="首先：什么是线程？什么是进程？">首先：什么是线程？什么是进程？</h4><h5 id="线程：用于指代独立执行的代码路径">线程：用于指代独立执行的代码路径</h5><h5 id="进程：用于指代可执行的运行程序，一个进程可以包含多个线程">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</h5><h4 id="其次：iOS上的多线程有哪些：">其次：iOS上的多线程有哪些：</h4><h5 id="NSThread：封装性最差，偏底层，主要基于pthread">NSThread：封装性最差，偏底层，主要基于pthread</h5><h5 id="CGD：基于C的实现API，直接使用比较方便，主要基于block实现">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</h5><h5 id="NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</h5><h3 id="正文">正文</h3><h4 id="NSThread">NSThread</h4><h6 id="有何优点：">有何优点：</h6><ul>
-<li>轻量级较低，使用起来相对简单</li>
-</ul>
-<h6 id="有何缺点：">有何缺点：</h6><ul>
-<li>需要手动管理所有的线程活动，比如声明周期、线程的同步、睡眠、取消等</li>
-</ul>
-<h5 id="线程如何使用？">线程如何使用？</h5><h6 id="关于线程启动">关于线程启动</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. + (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;&#10;    //&#36825;&#37324;&#35201;&#20027;&#24847;&#19968;&#19979;&#65292;&#20351;&#29992;&#35813;&#26041;&#27861;&#20250;&#30452;&#25509;&#21019;&#24314;&#19968;&#20010;&#32447;&#31243;&#12290;&#32780;&#19988;&#35843;&#29992;&#35813;&#26041;&#27861;&#26159;&#27809;&#26377;&#36820;&#22238;&#20540;&#30340;&#65292;&#23601;&#26159;&#35828;&#26080;&#27861;&#20026;&#35813;&#32447;&#31243;&#20570;&#21518;&#32493;&#30340;&#25805;&#20316;&#12290;  &#10;    // selector: &#34920;&#31034;&#22312;&#35813;&#32447;&#31243;&#19979;&#35843;&#29992;&#30340;&#26041;&#27861;&#65307;  &#10;    // target: &#34920;&#31034;&#35841;&#21435;&#35843;&#29992;&#35813;&#26041;&#27861;&#65307;  &#10;    // argument: &#20256;&#20837;&#30340;&#21442;&#25968;&#12290;&#10;    &#10;2. + (void)detachNewThreadWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));&#10;    // &#36825;&#20010;&#26041;&#27861;&#21516;&#19978;&#65292;&#19981;&#36807;&#26159;&#20197;Block&#30340;&#26041;&#24335;&#22312;&#26032;&#32447;&#31243;&#37324;&#25191;&#34892;&#25805;&#20316;&#12290;&#10;    // &#27880;&#24847;&#65306;&#30446;&#21069;&#36825;&#20010;&#26159;iOS10&#19978;&#26032;&#20986;&#30340;&#12290;&#25152;&#20197;&#22312;iOS10&#19968;&#19979;&#26159;&#26080;&#27861;&#20351;&#29992;&#30340;&#12290;&#10;    &#10;3. - (instancetype)initWithTarget:(id)target selector:(SEL)selector object:(nullable id)argument NS_AVAILABLE(10_5, 2_0);&#10;    // init &#26041;&#27861;&#21021;&#22987;&#21270;&#32447;&#31243;&#24182;&#36820;&#22238;&#35813;NSThread&#23545;&#35937;&#65292;&#32447;&#31243;&#30340;&#20837;&#21475;&#20989;&#25968;&#20026;selector&#12290;&#21508;&#31181;&#21442;&#25968;&#21547;&#20041;&#21516;&#31532;&#19968;&#31181;&#26041;&#27861;&#12290;&#10;    // &#27880;&#24847;&#65306;&#20197;&#36825;&#31181;&#26041;&#24335;&#21021;&#22987;&#21270;&#30340;&#32447;&#31243;&#38656;&#35201;&#25163;&#21160;&#35843;&#29992;-(void)start;&#26041;&#27861;&#21551;&#21160;&#32447;&#31243;&#12290;&#10;    [yourThread start]; // &#21551;&#21160;&#32447;&#31243;&#10;    &#10;4. - (instancetype)initWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));&#10;    // &#36825;&#20010;&#36890;&#31532;&#19977;&#31181;&#26041;&#24335;&#65292;&#20182;&#20204;&#30340;&#20851;&#31995;&#21644;&#31532;&#19968;&#31181;&#31532;&#20108;&#31181;&#31867;&#20284;&#12290;&#10;    [yourThread start]; // &#21551;&#21160;&#32447;&#31243;</span><br></pre></td></tr></table></figure>
-<h6 id="关于线程的管理">关于线程的管理</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. &#32447;&#31243;&#30340;&#30561;&#30496;&#10;    + (void)sleepUntilDate:(NSDate *)date;&#10;    + (void)sleepForTimeInterval:(NSTimeInterval)ti;&#10;    // &#30456;&#24403;&#20110;&#25191;&#34892;&#20102;&#19968;&#20010;&#31561;&#24453;&#25805;&#20316;&#65292;&#22312;&#25191;&#34892;&#30340;&#25805;&#20316;&#20013;&#21363;&#20351;&#26377;&#20854;&#20182;&#20219;&#21153;&#20256;&#20837;runloop&#65292;runloop&#20063;&#19981;&#20250;&#30456;&#24212;&#65292;&#24517;&#39035;&#25226;&#20219;&#21153;&#23436;&#25104;&#21518;&#25165;&#25191;&#34892;&#20854;&#20182;&#20219;&#21153;&#12290;&#10;    // runUntilDate: &#34429;&#28982;&#20063;&#20250;&#38459;&#22622;&#32447;&#31243;&#65292;&#20294;&#26159;&#38459;&#22622;&#36807;&#31243;&#24182;&#19981;&#20250;&#22952;&#30861;&#26032;&#20219;&#21153;&#30340;&#25191;&#34892;&#65292;&#24403;&#26377;&#26032;&#20219;&#21153;&#30340;&#26102;&#20505;&#20250;&#20808;&#25191;&#34892;&#20449;&#25910;&#21040;&#30340;&#20219;&#21153;&#65292;&#26032;&#20219;&#21153;&#25191;&#34892;&#23436;&#20102;&#22914;&#26524;&#26102;&#38388;&#21040;&#20102;&#65292;&#23601;&#32487;&#32493;&#25191;&#34892;runUntilDate&#30340;&#20195;&#30721;&#12290;&#10;   &#10;2. &#32447;&#31243;&#30340;&#21462;&#28040;&#10;    - (void)cancel NS_AVAILABLE(10_5, 2_0);&#10;    // &#36825;&#37324;&#24182;&#19981;&#26159;&#20005;&#26684;&#24847;&#20041;&#19978;&#30340;&#32447;&#31243;&#30340;&#21462;&#28040;&#65292;&#21482;&#26159;&#25226;&#35813;&#32447;&#31243;&#30340;cannelled&#23646;&#24615;&#26631;&#35760;&#20026;YES&#29366;&#24577;&#26469;&#34920;&#31034;&#35813;&#32447;&#31243;&#21363;&#23558;&#35201;&#36864;&#20986;&#12290;&#10;    @property (readonly, getter=isCancelled) BOOL cancelled NS_AVAILABLE(10_5, 2_0);&#10;    // cannelled &#23601;&#26159;&#19968;&#20010;&#29992;&#26469;&#35760;&#24405;&#29366;&#24577;&#30340;&#23646;&#24615;&#65292;&#32447;&#31243;&#30340;&#21462;&#28040;&#25105;&#20204;&#35201;&#22312;main&#20989;&#25968;&#20013;&#33258;&#24049;&#23454;&#29616;&#12290;&#10;    // &#35201;&#23454;&#29616;&#21462;&#28040;&#21151;&#33021;&#65292;&#25105;&#20204;&#38656;&#35201;&#22312;&#32447;&#31243;&#30340;main&#20989;&#25968;&#20013;&#23450;&#26399;&#26816;&#26597;isCancelled&#29366;&#24577;&#26469;&#21028;&#26029;&#26159;&#21542;&#38656;&#35201;&#36864;&#20986;&#65292;&#24403;isCancelled&#20026;YES&#30340;&#26102;&#20505;&#65292;&#25105;&#20204;&#25163;&#21160;&#36864;&#20986;&#65292;&#22914;&#26524;&#25105;&#20204;&#27809;&#26377;&#22312;main&#20013;&#26816;&#26597;isCancelled&#29366;&#24577;&#65292;&#37027;&#20040;&#35843;&#29992;-(void)cancel;&#26041;&#27861;&#23558;&#27627;&#26080;&#24847;&#20041;&#12290;&#10;    &#10;3. &#32447;&#31243;&#30340;&#36864;&#20986;&#65306;(&#32447;&#31243;&#25191;&#34892;&#23436;&#27605;&#21518;&#33258;&#24049;&#36864;&#20986;&#65292;&#27491;&#24120;&#30340;&#29366;&#24577;)&#10;    + (void)exit; // &#21487;&#20197;&#35753;&#32447;&#31243;&#31435;&#21363;&#36864;&#20986;&#65292;&#20294;&#21518;&#26524;&#19981;&#21487;&#24819;&#35937;&#12290;&#10;    // &#25688;&#25220;&#65306;+exit;&#23646;&#20110;&#26680;&#24377;&#32423;&#21035;&#30340;API&#65292;&#35843;&#29992;&#20043;&#21518;&#20250;&#31435;&#21363;&#32456;&#27490;&#32447;&#31243;&#65292;&#21363;&#20351;&#20219;&#21153;&#36824;&#27809;&#26377;&#23436;&#25104;&#20063;&#20250;&#32456;&#27490;&#65292;&#36825;&#23601;&#38750;&#24120;&#26377;&#21487;&#33021;&#23548;&#33268;&#20869;&#23384;&#27844;&#28431;&#31561;&#38382;&#39064;&#12290;&#10;    // Apple&#25991;&#26723;&#35828;&#26126;&#65306;Invoking this method should be avoided as it does not give your thread a chance to clean up any resources it allocated during its execution.&#10;&#10;4. &#32447;&#31243;&#30340;&#36890;&#20449;&#65306;(&#23376;&#32447;&#31243;&#22238;&#21040;&#20027;&#32447;&#31243;&#25805;&#20316;&#65292;&#20027;&#32447;&#31243;&#22238;&#21040;&#23376;&#32447;&#31243;&#25805;&#20316;)&#10;    - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&#60;NSString *&#62; *)array;&#10;    - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait;&#10;&#9;// equivalent to the first method with kCFRunLoopCommonModes&#10;    // &#27880;&#24847;&#36825;&#37324;&#30340;wait&#19968;&#33324;&#24773;&#20917;&#19979;&#26159;NO&#10;    &#10;    - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&#60;NSString *&#62; *)array NS_AVAILABLE(10_5, 2_0);&#10;    - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait NS_AVAILABLE(10_5, 2_0);&#10;&#9;// equivalent to the first method with kCFRunLoopCommonModes&#10;    - (void)performSelectorInBackground:(SEL)aSelector withObject:(nullable id)arg NS_AVAILABLE(10_5, 2_0);&#10;    &#10;    // &#36825;&#20123;&#26041;&#27861;&#21644;detch&#19968;&#26679;&#26080;&#27861;&#37117;&#32447;&#31243;&#26356;&#35814;&#32454;&#30340;&#37197;&#32622;&#10;    // &#27880;&#24847;&#36825;&#37324;mode&#30340;&#31867;&#22411;&#65292;&#19982;runloop&#26377;&#20851;&#12290;&#22914;&#26524;&#21019;&#24314;&#30340;&#32447;&#31243;&#27809;&#26377;&#28155;&#21152;&#21040;runloop&#65292;perform&#30340;selector&#23558;&#26080;&#27861;&#25191;&#34892;&#12290;&#10;&#10;5. &#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#65306;&#10;    // &#27599;&#19968;&#20010;&#32447;&#31243;&#30340;&#32039;&#24613;&#31243;&#24230;&#19981;&#19968;&#26679;&#65292;&#26377;&#30340;&#32447;&#31243;&#24076;&#26395;&#23613;&#24555;&#32467;&#26463;&#65292;&#26377;&#30340;&#32447;&#31243;&#24182;&#19981;&#26159;&#37027;&#20040;&#30528;&#24613;&#65292;&#25152;&#20197;&#32447;&#31243;&#20063;&#38656;&#35201;&#20248;&#20808;&#32423;&#26469;&#35843;&#33410;&#32447;&#31243;&#30340;&#25191;&#34892;&#20808;&#21518;&#12290;&#10;    + (double)threadPriority;&#10;    + (BOOL)setThreadPriority:(double)p;&#10;    // &#20197;&#19978;&#20004;&#20010;&#31867;&#26041;&#27861;&#29992;&#20110;&#35774;&#32622;&#21644;&#33719;&#21462;&#24403;&#21069;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#65292;&#20197;&#21450;&#35774;&#32622;&#24403;&#21069;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#12290;&#10;    @property double threadPriority NS_AVAILABLE(10_6, 4_0); // To be deprecated; use qualityOfService below&#10;    @property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0); // read-only after the thread is started&#10;    // &#30001;&#20110;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#24448;&#24448;&#26159;&#19968;&#20010;&#27604;&#36739;&#25277;&#35937;&#24615;&#30340;&#19996;&#35199;&#65292;&#25152;&#20197;&#22312;iOS8&#20043;&#21518;&#65292;Apple&#25552;&#20379;&#20102;qualityOfService&#26522;&#20030;&#65292;&#24320;&#21457;&#32773;&#21487;&#20197;&#36890;&#36807;&#26522;&#20030;&#26469;&#35774;&#32622;&#20248;&#20808;&#32423;&#12290;&#10;    &#10;    // &#20854;&#20013;NSQualityOfService&#26377;&#37027;&#20123;&#21602;?&#10;    &#10;    typedef NS_ENUM(NSInteger, NSQualityOfService) &#123;&#10;    /* UserInteractive QoS is used for work directly involved in providing an interactive UI such as processing events or drawing to the screen. */&#10;    NSQualityOfServiceUserInteractive = 0x21,&#10;    &#10;    /* UserInitiated QoS is used for performing work that has been explicitly requested by the user and for which results must be immediately presented in order to allow for further user interaction.  For example, loading an email after a user has selected it in a message list. */&#10;    NSQualityOfServiceUserInitiated = 0x19,&#10;    &#10;    /* Utility QoS is used for performing work which the user is unlikely to be immediately waiting for the results.  This work may have been requested by the user or initiated automatically, does not prevent the user from further interaction, often operates at user-visible timescales and may have its progress indicated to the user by a non-modal progress indicator.  This work will run in an energy-efficient manner, in deference to higher QoS work when resources are constrained.  For example, periodic content updates or bulk file operations such as media import. */&#10;    NSQualityOfServiceUtility = 0x11,&#10;    &#10;    /* Background QoS is used for work that is not user initiated or visible.  In general, a user is unaware that this work is even happening and it will run in the most efficient manner while giving the most deference to higher QoS work.  For example, pre-fetching content, search indexing, backups, and syncing of data with external systems. */&#10;    NSQualityOfServiceBackground = 0x09,&#10;&#10;    /* Default QoS indicates the absence of QoS information.  Whenever possible QoS information will be inferred from other sources.  If such inference is not possible, a QoS between UserInitiated and Utility will be used. */&#10;    NSQualityOfServiceDefault = -1&#10;    &#125; NS_ENUM_AVAILABLE(10_10, 8_0);&#10;    &#10;6. &#20027;&#32447;&#31243;&#10;    @property (readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0);&#10;    #if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)&#10;    @property (class, readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0); // reports whether current thread is main&#10;    // &#21028;&#26029;&#24403;&#21069;&#32447;&#31243;&#26159;&#21542;&#20026;&#20027;&#32447;&#31243;&#10;    @property (class, readonly, strong) NSThread *mainThread NS_AVAILABLE(10_5, 2_0);&#10;    // &#21482;&#35835;&#65292;&#33719;&#21462;&#24403;&#21069;&#30340;&#20027;&#32447;&#31243;&#10;    &#10;7 &#32447;&#31243;&#36890;&#30693;&#10;    FOUNDATION_EXPORT NSNotificationName const NSWillBecomeMultiThreadedNotification;&#10;    // Posted when the first thread is detached from the current thread. &#24403;&#21069;&#32447;&#31243;&#27966;&#29983;&#20986;&#31532;&#19968;&#20010;&#20854;&#20182;&#32447;&#31243;&#26102;&#21457;&#36865;&#19968;&#27425;&#10;    FOUNDATION_EXPORT NSNotificationName const NSDidBecomeSingleThreadedNotification;&#10;    // &#36825;&#20010;&#23448;&#26041;&#27809;&#26377;&#32473;&#20219;&#20309;&#35299;&#37322;&#12289;&#12289;&#12289;&#10;    FOUNDATION_EXPORT NSNotificationName const NSThreadWillExitNotification;&#10;    // An NSThread object posts this notification when it receives the exit message, before the thread exits. &#32447;&#31243;&#36864;&#20986;&#21069;&#21457;&#36865;&#35813;&#36890;&#30693;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>下篇预告：GCD</p>
-</blockquote>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/09/24/multiple-thread-conclusion/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/" data-id="citwzsnmm003p5dhu5v4fzu02" data_title="iOS中的多线程简略总结（一）" data_summary="最近在笔试的过程中，总是会遇到多线程的话题，很显然这是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/" data-id="citwzuajl003p6ohufpf49zi3" data_title="iOS中的多线程简略总结（一）" data_summary="最近在笔试的过程中，总是会遇到多线程的话题，很显然这是..." class="article-share-link">Share</a>
       
 
       
@@ -194,7 +179,7 @@ var _hmt = _hmt || [];
 
 	  
 <span>
-Updated:<time datetime="2016-10-05T14:10:34.000Z" itemprop="dateModified">October 05 2016</time>
+Updated:<time datetime="2016-10-05T14:12:28.000Z" itemprop="dateModified">October 05 2016</time>
 </span>
 
 
@@ -251,7 +236,7 @@ Updated:<time datetime="2016-10-05T14:10:34.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/07/30/41-countless-imageView/" data-id="citwzsnmi003j5dhuk1ukq658" data_title="iOS简易轮播图的实现" data_summary="前言见过很多的iOS应用，都有无限轮播图，之前也看到过..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/07/30/41-countless-imageView/" data-id="citwzuajh003j6ohu1k3p9ykz" data_title="iOS简易轮播图的实现" data_summary="前言见过很多的iOS应用，都有无限轮播图，之前也看到过..." class="article-share-link">Share</a>
       
 
       
@@ -324,7 +309,7 @@ Updated:<time datetime="2016-07-30T11:45:12.000Z" itemprop="dateModified">July 3
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/" data-id="citwzsnn2004f5dhu4v6hup80" data_title="Detecting low Power Mode in Swift" data_summary="检测Swift中的低功耗模式
+	  <a data-url="http://qiuncheng.com/2016/07/07/40-detecting-low-power-mode-in-swift/" data-id="citwzuak2004f6ohuquuzgnnm" data_title="Detecting low Power Mode in Swift" data_summary="检测Swift中的低功耗模式
 翻译：原文地址：Dete..." class="article-share-link">Share</a>
       
 
@@ -393,7 +378,7 @@ Updated:<time datetime="2016-07-07T15:28:26.000Z" itemprop="dateModified">July 0
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="citwzsnk4000a5dhu3hll219f" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/05/28/39-animating-text-layers/" data-id="citwzuah3000a6ohuqzeictg0" data_title="[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK" data_summary="原文地址： Animating text layers..." class="article-share-link">Share</a>
       
 
       
@@ -505,7 +490,7 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="citwzsnkd000p5dhu60fpknf2" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
+	  <a data-url="http://qiuncheng.com/2016/05/02/38-Autolayout-3-anchor-visual/" data-id="citwzuaha000p6ohuui9l3upa" data_title="翻译Autolayout（3）" data_summary="Anchor notation（瞄点符号）
 继上篇《在..." class="article-share-link">Share</a>
       
 
@@ -586,7 +571,7 @@ Updated:<time datetime="2016-05-02T08:46:00.000Z" itemprop="dateModified">May 02
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="citwzsnlh00225dhuio6fcln6" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/13/37-tableview-dequeueWithIdentifier../" data-id="citwzuaii00226ohuwrpccbah" data_title="关于dequeueReuseableCellWithIdentifier与dequueReuseableCellWithCellWithIdentifier: forIndexPath的区别" data_summary="关于dequeueReuseableCellWithI..." class="article-share-link">Share</a>
       
 
       
@@ -657,7 +642,7 @@ Updated:<time datetime="2016-04-13T14:55:33.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="citwzsnn6004j5dhuek77vbr7" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/06/36-Autolayout-translate-02/" data-id="citwzuak5004j6ohu69pgfqub" data_title="AutoLayout翻译二--在代码中使用Autolayout" data_summary="前言：继上篇–翻译《Programing iOS9》-..." class="article-share-link">Share</a>
       
 
       
@@ -732,7 +717,7 @@ Updated:<time datetime="2016-04-06T14:26:32.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="citwzsnm0002s5dhusdf5qx2j" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/04/04/35-Autolayout-translate-01/" data-id="citwzuaj0002s6ohu55vqtkrn" data_title="《Programing iOS9》翻译（一）-Autolayout名词含义" data_summary="翻译《Programing iOS9》- Autola..." class="article-share-link">Share</a>
       
 
       
@@ -804,7 +789,7 @@ Updated:<time datetime="2016-04-04T06:39:22.000Z" itemprop="dateModified">April 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="citwzsnmx00455dhummmiotwq" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/21/34-xcode7-zhenjitiaoshi/" data-id="citwzuajv00456ohuyepxee38" data_title="Xcode7 真机测试出现 "The account ... has no team with ID ... 怎么办" data_summary="一直以来我的Xcode7都不能真机调试，而且一直报一个..." class="article-share-link">Share</a>
       
 
       
@@ -885,7 +870,7 @@ Updated:<time datetime="2016-03-21T10:24:41.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="citwzsnle001z5dhu2i79rbn6" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/33-self-_-differ/" data-id="citwzuaif001z6ohu111lejyo" data_title="关于self和下划线_的区别" data_summary="今天在做一个网络请求，在我自己的模型里包含三个变量；分..." class="article-share-link">Share</a>
       
 
       
@@ -953,7 +938,7 @@ Updated:<time datetime="2016-03-11T04:41:26.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="citwzsnkb000m5dhufvi6zcue" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2016/03/11/32-tabbar-frame/" data-id="citwzuah8000m6ohucq1f79p6" data_title="自定义TabBarButton Frame时VC title设置问题" data_summary="问题描述：(我觉得这个问题用gif图片来表示更好。)不..." class="article-share-link">Share</a>
       
 
       
@@ -1021,7 +1006,7 @@ Updated:<time datetime="2016-03-11T12:05:23.000Z" itemprop="dateModified">March 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="citwzsnlq002d5dhumbhv3suo" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/31/31-bye_2015-hello_2016/" data-id="citwzuaio002d6ohurvqg7z7c" data_title="你好2016，再见2015！" data_summary="人生的每个阶段都有着那个阶段的特殊意思。我们的大学也是..." class="article-share-link">Share</a>
       
 
       
@@ -1092,7 +1077,7 @@ Updated:<time datetime="2015-12-31T13:39:39.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="citwzsnjt00025dhuq6k4n3vc" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/20/30-blog-pause-update/" data-id="citwzuagr00026ohuiakllpfh" data_title="马上就要考试了,我要坚持一月不上网(:~~~" data_summary="2015年马上就要结束了，想想今年过的还挺快的。下周起..." class="article-share-link">Share</a>
       
 
       
@@ -1167,7 +1152,7 @@ Updated:<time datetime="2015-12-20T12:23:08.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="citwzsnmk003m5dhusn7rpmez" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
+	  <a data-url="http://qiuncheng.com/2015/12/11/29-ios-persist-data-not-over/" data-id="citwzuaji003m6ohuwqqznmvr" data_title="关于我是用过的iOS数据存储的一些总结[未完待续]" data_summary="前言
 关于自己目前学习遇到过的数据存储相关的一些总结，..." class="article-share-link">Share</a>
       
 
@@ -1237,7 +1222,7 @@ Updated:<time datetime="2015-12-11T06:48:57.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="citwzsnlm002a5dhusukgicua" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/08/28-iOS-black-autolayout/" data-id="citwzuaim002a6ohuv2eryjqk" data_title="你的4寸iPhone出现上下黑框了吗？" data_summary="对于iOS新手来说，其中最困难也是最麻烦的就包括Aut..." class="article-share-link">Share</a>
       
 
       
@@ -1305,7 +1290,7 @@ Updated:<time datetime="2015-12-08T12:41:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="citwzsnk100075dhuslmmf4b8" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/12/01/25-life-12-1-/" data-id="citwzuagz00076ohubeifzkd9" data_title="这就是生活！" data_summary="时间过得真快，今天都12月份了。马上又要到新的一年了。..." class="article-share-link">Share</a>
       
 
       
@@ -1379,7 +1364,7 @@ Updated:<time datetime="2015-12-01T02:55:04.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="citwzsnlt002i5dhuptf5fhsh" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
+	  <a data-url="http://qiuncheng.com/2015/11/24/25-git-command-all/" data-id="citwzuais002i6ohumm3reaj5" data_title="一张图帮你集齐所有git命令" data_summary="请别小看我哈，我可是大自然的搬运工吆~  
 
 继上篇博..." class="article-share-link">Share</a>
       
@@ -1460,7 +1445,7 @@ Updated:<time datetime="2015-11-24T13:25:09.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="citwzsnl4001o5dhuephvpnhy" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
+	  <a data-url="http://qiuncheng.com/2015/11/22/24-hexo-firebase-record-time/" data-id="citwzuai5001o6ohu4fmux066" data_title="博客添加了访问次数记录" data_summary="想看记录请滑动到最底部，HaHa~~
 
 意外的时刻发现..." class="article-share-link">Share</a>
       
@@ -1530,7 +1515,7 @@ Updated:<time datetime="2015-11-22T13:24:05.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="citwzsnmu00425dhu7jie6f4a" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/23-git-error-checkout/" data-id="citwzuajs00426ohul73wi3qz" data_title="error: Your local changes to the following files would be overwritten by checkout以及git常用命令" data_summary="git 问题回忆录最近使用git一直遇到问题，前段时间..." class="article-share-link">Share</a>
       
 
       
@@ -1601,7 +1586,7 @@ Updated:<time datetime="2015-12-11T06:54:02.000Z" itemprop="dateModified">Decemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="citwzsnmf003g5dhuz22in54c" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/21/22-ios-instance../" data-id="citwzuajf003g6ohujlut27ii" data_title="instance member 'gameView'cannot be used on type '...'" data_summary="貌似昨天也遇到这样的问题，但是却没有在意，只是在sta..." class="article-share-link">Share</a>
       
 
       
@@ -1673,7 +1658,7 @@ Updated:<time datetime="2015-11-21T11:48:50.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="citwzsnm400305dhu5df2x3op" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/" data-id="citwzuaj400306ohu1d585dpv" data_title="sendAsynchronousRequest竟然被弃用了！！！" data_summary="我去，iOS9改动太大，NSURLConnection..." class="article-share-link">Share</a>
       
 
       
@@ -1742,7 +1727,7 @@ Updated:<time datetime="2015-11-20T11:44:58.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="citwzsnkl00135dhu9rrzut6b" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/20-iOS-Stanford-iOS8/" data-id="citwzuahi00136ohualg5buo9" data_title="每一个iOS初学者都应该看看斯坦福大学白胡子《Developing iOS 8 Apps with Swift》视频" data_summary="前言不得不承认，在Swift出现以前对于没有天赋的人自..." class="article-share-link">Share</a>
       
 
       
@@ -1810,7 +1795,7 @@ Updated:<time datetime="2015-11-11T04:09:59.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="citwzsnku001d5dhudoqiaad7" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/11/11/19-iOS-http/" data-id="citwzuahx001d6ohunyf8n7tt" data_title="如何在iOS上优雅滴使用http://" data_summary="话说当我使用http://请求网络上一张图片时我发现我..." class="article-share-link">Share</a>
       
 
       
@@ -1880,7 +1865,7 @@ Updated:<time datetime="2015-11-11T02:39:52.000Z" itemprop="dateModified">Novemb
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="citwzsnma00395dhu28juv3ay" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/27/19-ios-push-modal/" data-id="citwzuaja00396ohuyz4a5v0s" data_title="push 与 modal的区别" data_summary="切换试图的两种方式，虽然经常用到，但还不是很了解，也是..." class="article-share-link">Share</a>
       
 
       
@@ -1954,7 +1939,7 @@ Updated:<time datetime="2015-10-27T14:44:40.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="citwzsnmp003w5dhu5d1lt1gx" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/16/17-iOS-image-browser/" data-id="citwzuajn003w6ohur5wx8rxm" data_title="iOS上简易图片浏览器的实现" data_summary="学习完了iOS的UI部分后还没有做过什么东西呢？于是就..." class="article-share-link">Share</a>
       
 
       
@@ -2026,7 +2011,7 @@ Updated:<time datetime="2015-10-18T01:28:51.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="citwzsnm2002x5dhupa0v28zs" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/10/09/16-interesting-ios-nav/" data-id="citwzuaj2002x6ohu49mt535t" data_title="“IOS上一个很有意思能解释“栈”的东西”" data_summary="【未完待续…】突然发现iOS上有一个很好滴能够解释“栈..." class="article-share-link">Share</a>
       
 
       
@@ -2098,7 +2083,7 @@ Updated:<time datetime="2015-10-09T13:52:53.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="citwzsnkw001g5dhu7c8ceev5" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
+	  <a data-url="http://qiuncheng.com/2015/09/29/15-yeliangchen-Swift/" data-id="citwzuahz001g6ohua4cd2c09" data_title="听说你叫Swift，在下叶良辰并不服！" data_summary="我叫叶良辰，我有一千种方式让你无法在这里呆下去。  
 ..." class="article-share-link">Share</a>
       
 
@@ -2174,7 +2159,7 @@ Updated:<time datetime="2015-10-01T14:09:11.000Z" itemprop="dateModified">Octobe
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="citwzsnl0001l5dhu8gywvuqc" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
+	  <a data-url="http://qiuncheng.com/2015/09/26/14-laoluo-GreatFeeling/" data-id="citwzuai2001l6ohufvkx20g7" data_title="不忘初心，方得始终" data_summary="不要因为走的太远就忘记了当初为什么出发！  
 
 没有记..." class="article-share-link">Share</a>
       
@@ -2246,7 +2231,7 @@ Updated:<time datetime="2015-09-26T08:21:02.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="citwzsnms003z5dhutse73tlj" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/13-hexo-git-problem/" data-id="citwzuajp003z6ohue37rjktz" data_title="git: fatal unable to auto-detect email address" data_summary="如题目所示，这两周一直无法更新Blog，原因就在此，之..." class="article-share-link">Share</a>
       
 
       
@@ -2315,7 +2300,7 @@ Updated:<time datetime="2015-09-21T17:11:32.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="citwzsnmc003c5dhu6o5v334h" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/21/12-mac-hostname/" data-id="citwzuajc003c6ohuyijd4ixi" data_title="mac主机名变成了bogon" data_summary="如下图，今天打开Mac terminal终端，发现主机..." class="article-share-link">Share</a>
       
 
       
@@ -2386,7 +2371,7 @@ Updated:<time datetime="2015-09-21T17:11:19.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="citwzsnla001w5dhuic6vcfxb" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/20/11-English-artical/" data-id="citwzuaic001w6ohub41ii8cc" data_title="其实英语文章并没有那么难看懂" data_summary="为什么好多大学生不爱看英文文章呢？说实话吧，我们的英语..." class="article-share-link">Share</a>
       
 
       
@@ -2455,7 +2440,7 @@ Updated:<time datetime="2015-09-21T17:11:01.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="citwzsnkh000u5dhuespu137e" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/09/10-python-talkfreely/" data-id="citwzuahe000u6ohu9rfz3unr" data_title="每个程序员都应该学习使用Python" data_summary="每个程序员都应该学习使用Python或Ruby如果你是..." class="article-share-link">Share</a>
       
 
       
@@ -2523,7 +2508,7 @@ Updated:<time datetime="2015-09-21T17:10:45.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="citwzsnlx002n5dhu13qbe061" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/9-python-coding-regular/" data-id="citwzuaiw002n6ohugcabp477" data_title="【python】python编码规范" data_summary="PEP介绍PEP是 Python Enhancemen..." class="article-share-link">Share</a>
       
 
       
@@ -2604,7 +2589,7 @@ int2 = functools.<span class="function"><span class="title">partial</span><span 
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="citwzsnlk00275dhuoqachor9" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/09/06/8-python-functools-partial/" data-id="citwzuaik00276ohu9c4u7xex" data_title="偏函数是什么－飘逸的python" data_summary="偏函数是什么？这真是一个好深的问题呢！因为之前都没有听..." class="article-share-link">Share</a>
       
 
       
@@ -2684,7 +2669,7 @@ Updated:<time datetime="2015-09-21T17:09:48.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="citwzsnm600335dhu697vcaea" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/29/7-python-oop/" data-id="citwzuaj600336ohuk0ukjjcm" data_title="python面向对象－类和封装" data_summary="之前学过java，也了解过面向对象。类与对象：类的封装..." class="article-share-link">Share</a>
       
 
       
@@ -2762,7 +2747,7 @@ Updated:<time datetime="2015-09-21T17:09:15.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="citwzsnm800365dhujiozjccn" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/27/6-python-random-funs/" data-id="citwzuaj800366ohuf29gok1g" data_title="python中random模块简析" data_summary="Python中的random用于生成随机数。下面简析下..." class="article-share-link">Share</a>
       
 
       
@@ -2833,7 +2818,7 @@ Updated:<time datetime="2015-09-21T17:08:58.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="citwzsnkn00165dhul6zlqugh" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/25/5-change-to-mac/" data-id="citwzuahm00166ohu5wv4iqk7" data_title="换Mac了，高兴的心情无法抑制！" data_summary="之前把我联想U410的超级本升级了win10，本来用着..." class="article-share-link">Share</a>
       
 
       
@@ -2904,7 +2889,7 @@ Updated:<time datetime="2015-09-21T17:08:37.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="citwzsnl8001s5dhuvfp7fhjq" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/05/4-win10-update/" data-id="citwzuai8001s6ohuyaquajbq" data_title="升级win10的一点小小的心得" data_summary="7月29日win10正式版发布了，我当时没有一点感觉，..." class="article-share-link">Share</a>
       
 
       
@@ -2974,7 +2959,7 @@ Updated:<time datetime="2015-09-21T17:07:42.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="citwzsnmz00485dhuzvu66rz5" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/03/3-img-markdown-desc/" data-id="citwzuajy00486ohuh2mnzezj" data_title="MarkDown改进-图片说明实现" data_summary="一直有个困惑，就是我无法在添加图片的时候在图片的下方添..." class="article-share-link">Share</a>
       
 
       
@@ -3044,7 +3029,7 @@ Updated:<time datetime="2015-09-21T17:14:24.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="citwzsnk7000h5dhugd80m3vr" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
+	  <a data-url="http://qiuncheng.com/2015/08/02/2-domain-github-dnspod/" data-id="citwzuah6000h6ohunn0gtwg2" data_title="域名和github绑定的问题" data_summary="之前没太注意，网上的教程在域名方面都推荐去goDadd..." class="article-share-link">Share</a>
       
 
       
@@ -3117,7 +3102,7 @@ Updated:<time datetime="2015-09-21T17:07:17.000Z" itemprop="dateModified">Septem
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="citwzsnks001a5dhug3lj8o1g" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
+	  <a data-url="http://qiuncheng.com/2015/07/29/1-new-domain-personal/" data-id="citwzuahu001a6ohuhbc1m2ux" data_title="博客正式启用了，欢迎访问！" data_summary="Hi, I am coming.
 
 
 

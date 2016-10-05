@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-10-05T14:10:34.000Z</updated>
+  <updated>2016-10-05T14:12:28.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/"/>
     <id>http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/</id>
     <published>2016-09-24T10:41:02.000Z</published>
-    <updated>2016-10-05T14:10:34.000Z</updated>
+    <updated>2016-10-05T14:12:28.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>最近在笔试的过程中，总是会遇到多线程的话题，很显然这是一个iOS上的通用话题。你懂了更好；不懂，那就说明你有问题了。</p>
 </blockquote>
@@ -52,6 +52,7 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <h4 id="首先：什么是线程？什么是进程？">首先：什么是线程？什么是进程？</h4><h5 id="线程：用于指代独立执行的代码路径">线程：用于指代独立执行的代码路径</h5><h5 id="进程：用于指代可执行的运行程序，一个进程可以包含多个线程">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</h5><h4 id="其次：iOS上的多线程有哪些：">其次：iOS上的多线程有哪些：</h4><h5 id="NSThread：封装性最差，偏底层，主要基于pthread">NSThread：封装性最差，偏底层，主要基于pthread</h5><h5 id="CGD：基于C的实现API，直接使用比较方便，主要基于block实现">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</h5><h5 id="NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</h5><h3 id="正文">正文</h3><h4 id="NSThread">NSThread</h4><h6 id="有何优点：">有何优点：</h6><ul>
 <li>轻量级较低，使用起来相对简单</li>
 </ul>
@@ -69,7 +70,35 @@
 <p>最近在笔试的过程中，总是会遇到多线程的话题，很显然这是一个iOS上的通用话题。你懂了更好；不懂，那就说明你有问题了。</p>
 </blockquote>
 <h3 id="前言">前言</h3><h5 id="队列类型">队列类型</h5><ol>
-]]>
+<li>并发队列</li>
+<li>串行队列 </li>
+</ol>
+<h5 id="执行类型">执行类型</h5><ol>
+<li>同步执行 ： 一个线程</li>
+<li>异步执行： 多个线程</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>同步执行</th>
+<th>异步执行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串行队列</td>
+<td>在当前线程，一个一个执行</td>
+<td>在不同线程，一个一个执行</td>
+</tr>
+<tr>
+<td>并行队列</td>
+<td>在当前线程，一个一个执行</td>
+<td>在不同线程，同时执行</td>
+</tr>
+</tbody>
+</table>]]>
+    
     </summary>
     
       <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
