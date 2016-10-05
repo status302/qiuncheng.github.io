@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
+  <meta charset="utf-8">
+  
+  <title>iOS中的多线程简略总结（一） | Hi,I&#39;m Qiuncheng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中的多线程简略总结（一）">
+<meta property="og:url" content="http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/index.html">
+<meta property="og:site_name" content="Hi,I'm Qiuncheng">
+<meta property="og:description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta property="og:updated_time" content="2016-10-05T14:10:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中的多线程简略总结（一）">
+<meta name="twitter:description" content="/*梦想启迪未来，创造改变世界！*/">
+<meta name="twitter:creator" content="@https://twitter.com/qiuncheng">
+  
+    <link rel="alternative" href="/atom.xml" title="Hi,I&#39;m Qiuncheng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="http://fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?true";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hi,I&#39;m Qiuncheng</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">/*每一秒我们都有机会让下一秒变得更好！*/</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about.html">Me</a>
+        
+          <a class="main-nav-link" href="/app.html">App</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-weibo-link" class="nav-icon" href="https://weibo.com/qiuncheng" title="Weibo" target="_blank"></a>
+        
+        
+          <a id="nav-twitter-link" class="nav-icon" href="https://twitter.com/qiuncheng" title="Twitter" target="_blank"></a>
+        
+        
+          <a id="nav-stackoverflow-link" class="nav-icon" href="http://stackoverflow.com/users/5353887/qiuncheng" title="Stackoverflow" target="_blank"></a>
+        
+        
+          <a id="nav-github-link" class="nav-icon" href="https://github.com/qiuncheng" title="Github" target="_blank"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed" target="_blank"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qiuncheng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-multiple-thread-conclusion" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/09/24/multiple-thread-conclusion/" class="article-date">
+  <time datetime="2016-09-24T10:41:02.000Z" itemprop="datePublished">September 24 2016</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/review/">review</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS中的多线程简略总结（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>Contents</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#队列类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">队列类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#执行类型"><span class="toc-number">1.0.2.</span> <span class="toc-text">执行类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#首先：什么是线程？什么是进程？"><span class="toc-number">1.1.</span> <span class="toc-text">首先：什么是线程？什么是进程？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线程：用于指代独立执行的代码路径"><span class="toc-number">1.1.1.</span> <span class="toc-text">线程：用于指代独立执行的代码路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#进程：用于指代可执行的运行程序，一个进程可以包含多个线程"><span class="toc-number">1.1.2.</span> <span class="toc-text">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其次：iOS上的多线程有哪些："><span class="toc-number">1.2.</span> <span class="toc-text">其次：iOS上的多线程有哪些：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#NSThread：封装性最差，偏底层，主要基于pthread"><span class="toc-number">1.2.1.</span> <span class="toc-text">NSThread：封装性最差，偏底层，主要基于pthread</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CGD：基于C的实现API，直接使用比较方便，主要基于block实现"><span class="toc-number">1.2.2.</span> <span class="toc-text">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现"><span class="toc-number">1.2.3.</span> <span class="toc-text">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NSThread"><span class="toc-number">2.1.</span> <span class="toc-text">NSThread</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#有何优点："><span class="toc-number">2.1.0.1.</span> <span class="toc-text">有何优点：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#有何缺点："><span class="toc-number">2.1.0.2.</span> <span class="toc-text">有何缺点：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线程如何使用？"><span class="toc-number">2.1.1.</span> <span class="toc-text">线程如何使用？</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#关于线程启动"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">关于线程启动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#关于线程的管理"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">关于线程的管理</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+        <blockquote>
+<p>最近在笔试的过程中，总是会遇到多线程的话题，很显然这是一个iOS上的通用话题。你懂了更好；不懂，那就说明你有问题了。</p>
+</blockquote>
+<h3 id="前言">前言</h3><h5 id="队列类型">队列类型</h5><ol>
+<li>并发队列</li>
+<li>串行队列 </li>
+</ol>
+<h5 id="执行类型">执行类型</h5><ol>
+<li>同步执行 ： 一个线程</li>
+<li>异步执行： 多个线程</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>同步执行</th>
+<th>异步执行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串行队列</td>
+<td>在当前线程，一个一个执行</td>
+<td>在不同线程，一个一个执行</td>
+</tr>
+<tr>
+<td>并行队列</td>
+<td>在当前线程，一个一个执行</td>
+<td>在不同线程，同时执行</td>
+</tr>
+</tbody>
+</table>
+<h4 id="首先：什么是线程？什么是进程？">首先：什么是线程？什么是进程？</h4><h5 id="线程：用于指代独立执行的代码路径">线程：用于指代独立执行的代码路径</h5><h5 id="进程：用于指代可执行的运行程序，一个进程可以包含多个线程">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</h5><h4 id="其次：iOS上的多线程有哪些：">其次：iOS上的多线程有哪些：</h4><h5 id="NSThread：封装性最差，偏底层，主要基于pthread">NSThread：封装性最差，偏底层，主要基于pthread</h5><h5 id="CGD：基于C的实现API，直接使用比较方便，主要基于block实现">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</h5><h5 id="NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</h5><h3 id="正文">正文</h3><h4 id="NSThread">NSThread</h4><h6 id="有何优点：">有何优点：</h6><ul>
+<li>轻量级较低，使用起来相对简单</li>
+</ul>
+<h6 id="有何缺点：">有何缺点：</h6><ul>
+<li>需要手动管理所有的线程活动，比如声明周期、线程的同步、睡眠、取消等</li>
+</ul>
+<h5 id="线程如何使用？">线程如何使用？</h5><h6 id="关于线程启动">关于线程启动</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. + (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;&#10;    //&#36825;&#37324;&#35201;&#20027;&#24847;&#19968;&#19979;&#65292;&#20351;&#29992;&#35813;&#26041;&#27861;&#20250;&#30452;&#25509;&#21019;&#24314;&#19968;&#20010;&#32447;&#31243;&#12290;&#32780;&#19988;&#35843;&#29992;&#35813;&#26041;&#27861;&#26159;&#27809;&#26377;&#36820;&#22238;&#20540;&#30340;&#65292;&#23601;&#26159;&#35828;&#26080;&#27861;&#20026;&#35813;&#32447;&#31243;&#20570;&#21518;&#32493;&#30340;&#25805;&#20316;&#12290;  &#10;    // selector: &#34920;&#31034;&#22312;&#35813;&#32447;&#31243;&#19979;&#35843;&#29992;&#30340;&#26041;&#27861;&#65307;  &#10;    // target: &#34920;&#31034;&#35841;&#21435;&#35843;&#29992;&#35813;&#26041;&#27861;&#65307;  &#10;    // argument: &#20256;&#20837;&#30340;&#21442;&#25968;&#12290;&#10;    &#10;2. + (void)detachNewThreadWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));&#10;    // &#36825;&#20010;&#26041;&#27861;&#21516;&#19978;&#65292;&#19981;&#36807;&#26159;&#20197;Block&#30340;&#26041;&#24335;&#22312;&#26032;&#32447;&#31243;&#37324;&#25191;&#34892;&#25805;&#20316;&#12290;&#10;    // &#27880;&#24847;&#65306;&#30446;&#21069;&#36825;&#20010;&#26159;iOS10&#19978;&#26032;&#20986;&#30340;&#12290;&#25152;&#20197;&#22312;iOS10&#19968;&#19979;&#26159;&#26080;&#27861;&#20351;&#29992;&#30340;&#12290;&#10;    &#10;3. - (instancetype)initWithTarget:(id)target selector:(SEL)selector object:(nullable id)argument NS_AVAILABLE(10_5, 2_0);&#10;    // init &#26041;&#27861;&#21021;&#22987;&#21270;&#32447;&#31243;&#24182;&#36820;&#22238;&#35813;NSThread&#23545;&#35937;&#65292;&#32447;&#31243;&#30340;&#20837;&#21475;&#20989;&#25968;&#20026;selector&#12290;&#21508;&#31181;&#21442;&#25968;&#21547;&#20041;&#21516;&#31532;&#19968;&#31181;&#26041;&#27861;&#12290;&#10;    // &#27880;&#24847;&#65306;&#20197;&#36825;&#31181;&#26041;&#24335;&#21021;&#22987;&#21270;&#30340;&#32447;&#31243;&#38656;&#35201;&#25163;&#21160;&#35843;&#29992;-(void)start;&#26041;&#27861;&#21551;&#21160;&#32447;&#31243;&#12290;&#10;    [yourThread start]; // &#21551;&#21160;&#32447;&#31243;&#10;    &#10;4. - (instancetype)initWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));&#10;    // &#36825;&#20010;&#36890;&#31532;&#19977;&#31181;&#26041;&#24335;&#65292;&#20182;&#20204;&#30340;&#20851;&#31995;&#21644;&#31532;&#19968;&#31181;&#31532;&#20108;&#31181;&#31867;&#20284;&#12290;&#10;    [yourThread start]; // &#21551;&#21160;&#32447;&#31243;</span><br></pre></td></tr></table></figure>
+<h6 id="关于线程的管理">关于线程的管理</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. &#32447;&#31243;&#30340;&#30561;&#30496;&#10;    + (void)sleepUntilDate:(NSDate *)date;&#10;    + (void)sleepForTimeInterval:(NSTimeInterval)ti;&#10;    // &#30456;&#24403;&#20110;&#25191;&#34892;&#20102;&#19968;&#20010;&#31561;&#24453;&#25805;&#20316;&#65292;&#22312;&#25191;&#34892;&#30340;&#25805;&#20316;&#20013;&#21363;&#20351;&#26377;&#20854;&#20182;&#20219;&#21153;&#20256;&#20837;runloop&#65292;runloop&#20063;&#19981;&#20250;&#30456;&#24212;&#65292;&#24517;&#39035;&#25226;&#20219;&#21153;&#23436;&#25104;&#21518;&#25165;&#25191;&#34892;&#20854;&#20182;&#20219;&#21153;&#12290;&#10;    // runUntilDate: &#34429;&#28982;&#20063;&#20250;&#38459;&#22622;&#32447;&#31243;&#65292;&#20294;&#26159;&#38459;&#22622;&#36807;&#31243;&#24182;&#19981;&#20250;&#22952;&#30861;&#26032;&#20219;&#21153;&#30340;&#25191;&#34892;&#65292;&#24403;&#26377;&#26032;&#20219;&#21153;&#30340;&#26102;&#20505;&#20250;&#20808;&#25191;&#34892;&#20449;&#25910;&#21040;&#30340;&#20219;&#21153;&#65292;&#26032;&#20219;&#21153;&#25191;&#34892;&#23436;&#20102;&#22914;&#26524;&#26102;&#38388;&#21040;&#20102;&#65292;&#23601;&#32487;&#32493;&#25191;&#34892;runUntilDate&#30340;&#20195;&#30721;&#12290;&#10;   &#10;2. &#32447;&#31243;&#30340;&#21462;&#28040;&#10;    - (void)cancel NS_AVAILABLE(10_5, 2_0);&#10;    // &#36825;&#37324;&#24182;&#19981;&#26159;&#20005;&#26684;&#24847;&#20041;&#19978;&#30340;&#32447;&#31243;&#30340;&#21462;&#28040;&#65292;&#21482;&#26159;&#25226;&#35813;&#32447;&#31243;&#30340;cannelled&#23646;&#24615;&#26631;&#35760;&#20026;YES&#29366;&#24577;&#26469;&#34920;&#31034;&#35813;&#32447;&#31243;&#21363;&#23558;&#35201;&#36864;&#20986;&#12290;&#10;    @property (readonly, getter=isCancelled) BOOL cancelled NS_AVAILABLE(10_5, 2_0);&#10;    // cannelled &#23601;&#26159;&#19968;&#20010;&#29992;&#26469;&#35760;&#24405;&#29366;&#24577;&#30340;&#23646;&#24615;&#65292;&#32447;&#31243;&#30340;&#21462;&#28040;&#25105;&#20204;&#35201;&#22312;main&#20989;&#25968;&#20013;&#33258;&#24049;&#23454;&#29616;&#12290;&#10;    // &#35201;&#23454;&#29616;&#21462;&#28040;&#21151;&#33021;&#65292;&#25105;&#20204;&#38656;&#35201;&#22312;&#32447;&#31243;&#30340;main&#20989;&#25968;&#20013;&#23450;&#26399;&#26816;&#26597;isCancelled&#29366;&#24577;&#26469;&#21028;&#26029;&#26159;&#21542;&#38656;&#35201;&#36864;&#20986;&#65292;&#24403;isCancelled&#20026;YES&#30340;&#26102;&#20505;&#65292;&#25105;&#20204;&#25163;&#21160;&#36864;&#20986;&#65292;&#22914;&#26524;&#25105;&#20204;&#27809;&#26377;&#22312;main&#20013;&#26816;&#26597;isCancelled&#29366;&#24577;&#65292;&#37027;&#20040;&#35843;&#29992;-(void)cancel;&#26041;&#27861;&#23558;&#27627;&#26080;&#24847;&#20041;&#12290;&#10;    &#10;3. &#32447;&#31243;&#30340;&#36864;&#20986;&#65306;(&#32447;&#31243;&#25191;&#34892;&#23436;&#27605;&#21518;&#33258;&#24049;&#36864;&#20986;&#65292;&#27491;&#24120;&#30340;&#29366;&#24577;)&#10;    + (void)exit; // &#21487;&#20197;&#35753;&#32447;&#31243;&#31435;&#21363;&#36864;&#20986;&#65292;&#20294;&#21518;&#26524;&#19981;&#21487;&#24819;&#35937;&#12290;&#10;    // &#25688;&#25220;&#65306;+exit;&#23646;&#20110;&#26680;&#24377;&#32423;&#21035;&#30340;API&#65292;&#35843;&#29992;&#20043;&#21518;&#20250;&#31435;&#21363;&#32456;&#27490;&#32447;&#31243;&#65292;&#21363;&#20351;&#20219;&#21153;&#36824;&#27809;&#26377;&#23436;&#25104;&#20063;&#20250;&#32456;&#27490;&#65292;&#36825;&#23601;&#38750;&#24120;&#26377;&#21487;&#33021;&#23548;&#33268;&#20869;&#23384;&#27844;&#28431;&#31561;&#38382;&#39064;&#12290;&#10;    // Apple&#25991;&#26723;&#35828;&#26126;&#65306;Invoking this method should be avoided as it does not give your thread a chance to clean up any resources it allocated during its execution.&#10;&#10;4. &#32447;&#31243;&#30340;&#36890;&#20449;&#65306;(&#23376;&#32447;&#31243;&#22238;&#21040;&#20027;&#32447;&#31243;&#25805;&#20316;&#65292;&#20027;&#32447;&#31243;&#22238;&#21040;&#23376;&#32447;&#31243;&#25805;&#20316;)&#10;    - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&#60;NSString *&#62; *)array;&#10;    - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait;&#10;&#9;// equivalent to the first method with kCFRunLoopCommonModes&#10;    // &#27880;&#24847;&#36825;&#37324;&#30340;wait&#19968;&#33324;&#24773;&#20917;&#19979;&#26159;NO&#10;    &#10;    - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&#60;NSString *&#62; *)array NS_AVAILABLE(10_5, 2_0);&#10;    - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait NS_AVAILABLE(10_5, 2_0);&#10;&#9;// equivalent to the first method with kCFRunLoopCommonModes&#10;    - (void)performSelectorInBackground:(SEL)aSelector withObject:(nullable id)arg NS_AVAILABLE(10_5, 2_0);&#10;    &#10;    // &#36825;&#20123;&#26041;&#27861;&#21644;detch&#19968;&#26679;&#26080;&#27861;&#37117;&#32447;&#31243;&#26356;&#35814;&#32454;&#30340;&#37197;&#32622;&#10;    // &#27880;&#24847;&#36825;&#37324;mode&#30340;&#31867;&#22411;&#65292;&#19982;runloop&#26377;&#20851;&#12290;&#22914;&#26524;&#21019;&#24314;&#30340;&#32447;&#31243;&#27809;&#26377;&#28155;&#21152;&#21040;runloop&#65292;perform&#30340;selector&#23558;&#26080;&#27861;&#25191;&#34892;&#12290;&#10;&#10;5. &#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#65306;&#10;    // &#27599;&#19968;&#20010;&#32447;&#31243;&#30340;&#32039;&#24613;&#31243;&#24230;&#19981;&#19968;&#26679;&#65292;&#26377;&#30340;&#32447;&#31243;&#24076;&#26395;&#23613;&#24555;&#32467;&#26463;&#65292;&#26377;&#30340;&#32447;&#31243;&#24182;&#19981;&#26159;&#37027;&#20040;&#30528;&#24613;&#65292;&#25152;&#20197;&#32447;&#31243;&#20063;&#38656;&#35201;&#20248;&#20808;&#32423;&#26469;&#35843;&#33410;&#32447;&#31243;&#30340;&#25191;&#34892;&#20808;&#21518;&#12290;&#10;    + (double)threadPriority;&#10;    + (BOOL)setThreadPriority:(double)p;&#10;    // &#20197;&#19978;&#20004;&#20010;&#31867;&#26041;&#27861;&#29992;&#20110;&#35774;&#32622;&#21644;&#33719;&#21462;&#24403;&#21069;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#65292;&#20197;&#21450;&#35774;&#32622;&#24403;&#21069;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#12290;&#10;    @property double threadPriority NS_AVAILABLE(10_6, 4_0); // To be deprecated; use qualityOfService below&#10;    @property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0); // read-only after the thread is started&#10;    // &#30001;&#20110;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#24448;&#24448;&#26159;&#19968;&#20010;&#27604;&#36739;&#25277;&#35937;&#24615;&#30340;&#19996;&#35199;&#65292;&#25152;&#20197;&#22312;iOS8&#20043;&#21518;&#65292;Apple&#25552;&#20379;&#20102;qualityOfService&#26522;&#20030;&#65292;&#24320;&#21457;&#32773;&#21487;&#20197;&#36890;&#36807;&#26522;&#20030;&#26469;&#35774;&#32622;&#20248;&#20808;&#32423;&#12290;&#10;    &#10;    // &#20854;&#20013;NSQualityOfService&#26377;&#37027;&#20123;&#21602;?&#10;    &#10;    typedef NS_ENUM(NSInteger, NSQualityOfService) &#123;&#10;    /* UserInteractive QoS is used for work directly involved in providing an interactive UI such as processing events or drawing to the screen. */&#10;    NSQualityOfServiceUserInteractive = 0x21,&#10;    &#10;    /* UserInitiated QoS is used for performing work that has been explicitly requested by the user and for which results must be immediately presented in order to allow for further user interaction.  For example, loading an email after a user has selected it in a message list. */&#10;    NSQualityOfServiceUserInitiated = 0x19,&#10;    &#10;    /* Utility QoS is used for performing work which the user is unlikely to be immediately waiting for the results.  This work may have been requested by the user or initiated automatically, does not prevent the user from further interaction, often operates at user-visible timescales and may have its progress indicated to the user by a non-modal progress indicator.  This work will run in an energy-efficient manner, in deference to higher QoS work when resources are constrained.  For example, periodic content updates or bulk file operations such as media import. */&#10;    NSQualityOfServiceUtility = 0x11,&#10;    &#10;    /* Background QoS is used for work that is not user initiated or visible.  In general, a user is unaware that this work is even happening and it will run in the most efficient manner while giving the most deference to higher QoS work.  For example, pre-fetching content, search indexing, backups, and syncing of data with external systems. */&#10;    NSQualityOfServiceBackground = 0x09,&#10;&#10;    /* Default QoS indicates the absence of QoS information.  Whenever possible QoS information will be inferred from other sources.  If such inference is not possible, a QoS between UserInitiated and Utility will be used. */&#10;    NSQualityOfServiceDefault = -1&#10;    &#125; NS_ENUM_AVAILABLE(10_10, 8_0);&#10;    &#10;6. &#20027;&#32447;&#31243;&#10;    @property (readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0);&#10;    #if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)&#10;    @property (class, readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0); // reports whether current thread is main&#10;    // &#21028;&#26029;&#24403;&#21069;&#32447;&#31243;&#26159;&#21542;&#20026;&#20027;&#32447;&#31243;&#10;    @property (class, readonly, strong) NSThread *mainThread NS_AVAILABLE(10_5, 2_0);&#10;    // &#21482;&#35835;&#65292;&#33719;&#21462;&#24403;&#21069;&#30340;&#20027;&#32447;&#31243;&#10;    &#10;7 &#32447;&#31243;&#36890;&#30693;&#10;    FOUNDATION_EXPORT NSNotificationName const NSWillBecomeMultiThreadedNotification;&#10;    // Posted when the first thread is detached from the current thread. &#24403;&#21069;&#32447;&#31243;&#27966;&#29983;&#20986;&#31532;&#19968;&#20010;&#20854;&#20182;&#32447;&#31243;&#26102;&#21457;&#36865;&#19968;&#27425;&#10;    FOUNDATION_EXPORT NSNotificationName const NSDidBecomeSingleThreadedNotification;&#10;    // &#36825;&#20010;&#23448;&#26041;&#27809;&#26377;&#32473;&#20219;&#20309;&#35299;&#37322;&#12289;&#12289;&#12289;&#10;    FOUNDATION_EXPORT NSNotificationName const NSThreadWillExitNotification;&#10;    // An NSThread object posts this notification when it receives the exit message, before the thread exits. &#32447;&#31243;&#36864;&#20986;&#21069;&#21457;&#36865;&#35813;&#36890;&#30693;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下篇预告：GCD</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <!-- 百度分享 Start -->
+	  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+	  <!-- 百度分享 End -->
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/review/">review</a></li></ul>
+
+	  
+<span>
+Updated:<time datetime="2016-10-05T14:10:34.000Z" itemprop="dateModified">October 05 2016</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/30/41-countless-imageView/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS简易轮播图的实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+<!-- 多说评论框 start -->
+
+<section id="comments">
+  <div class="ds-thread"  data-thread-key="/2016/09/24/multiple-thread-conclusion/" data-title="iOS中的多线程简略总结（一）" data-url="http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/" id="ds_thread">
+    <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
+  </div>
+</section>
+
+<!-- 多说评论框 end -->
+<!-- more -->
+</section>
+        
+          
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">Contents</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#队列类型"><span class="toc-number">1.0.1.</span> <span class="toc-text">队列类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#执行类型"><span class="toc-number">1.0.2.</span> <span class="toc-text">执行类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#首先：什么是线程？什么是进程？"><span class="toc-number">1.1.</span> <span class="toc-text">首先：什么是线程？什么是进程？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线程：用于指代独立执行的代码路径"><span class="toc-number">1.1.1.</span> <span class="toc-text">线程：用于指代独立执行的代码路径</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#进程：用于指代可执行的运行程序，一个进程可以包含多个线程"><span class="toc-number">1.1.2.</span> <span class="toc-text">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其次：iOS上的多线程有哪些："><span class="toc-number">1.2.</span> <span class="toc-text">其次：iOS上的多线程有哪些：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#NSThread：封装性最差，偏底层，主要基于pthread"><span class="toc-number">1.2.1.</span> <span class="toc-text">NSThread：封装性最差，偏底层，主要基于pthread</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CGD：基于C的实现API，直接使用比较方便，主要基于block实现"><span class="toc-number">1.2.2.</span> <span class="toc-text">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现"><span class="toc-number">1.2.3.</span> <span class="toc-text">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正文"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NSThread"><span class="toc-number">2.1.</span> <span class="toc-text">NSThread</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#有何优点："><span class="toc-number">2.1.0.1.</span> <span class="toc-text">有何优点：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#有何缺点："><span class="toc-number">2.1.0.2.</span> <span class="toc-text">有何缺点：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线程如何使用？"><span class="toc-number">2.1.1.</span> <span class="toc-text">线程如何使用？</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#关于线程启动"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">关于线程启动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#关于线程的管理"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">关于线程的管理</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+
+<aside id="sidebar">
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">ABOUT ME</h3>
+  <ul class="widget about-me">
+    
+    <li><img class="author" title="About me" src="/images/logogg.png" /></li>
+    
+    
+    <li>嗨，I am Qiuncheng</li>
+    
+    <li>西安南北雷无线电通讯学院本科僧一枚</li>
+    
+    <li>爱技术－爱设计－谷歌粉－苹果粉</li>
+    
+  </ul>
+</div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Weibo show</h3>
+    <div class="widget-weibo">
+      <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=2&isTitle=1&noborder=0&isWeibo=1&isFans=1&uid=3557569824&verifier=3f6f850a&colors=ddd,ddd,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Autolayout/">Autolayout</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML-CSS/">HTML/CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UITableView/">UITableView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Win10升级/">Win10升级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/">review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">TagCloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Autolayout/" style="font-size: 15.33px; color: #7e82bf">Autolayout</a> <a href="/tags/HTML-CSS/" style="font-size: 13px; color: #7dc3de">HTML/CSS</a> <a href="/tags/Hexo/" style="font-size: 16.5px; color: #7f62af">Hexo</a> <a href="/tags/Life/" style="font-size: 18.83px; color: #802190">Life</a> <a href="/tags/Mac/" style="font-size: 13px; color: #7dc3de">Mac</a> <a href="/tags/Markdown/" style="font-size: 13px; color: #7dc3de">Markdown</a> <a href="/tags/Swift/" style="font-size: 13px; color: #7dc3de">Swift</a> <a href="/tags/UITableView/" style="font-size: 13px; color: #7dc3de">UITableView</a> <a href="/tags/Win10升级/" style="font-size: 13px; color: #7dc3de">Win10升级</a> <a href="/tags/git/" style="font-size: 14.17px; color: #7ea3ce">git</a> <a href="/tags/iOS/" style="font-size: 20px; color: #800080">iOS</a> <a href="/tags/mac/" style="font-size: 13px; color: #7dc3de">mac</a> <a href="/tags/python/" style="font-size: 17.67px; color: #7f419f">python</a> <a href="/tags/review/" style="font-size: 13px; color: #7dc3de">review</a> <a href="/tags/回顾/" style="font-size: 13px; color: #7dc3de">回顾</a> <a href="/tags/翻译/" style="font-size: 16.5px; color: #7f62af">翻译</a> <a href="/tags/转载/" style="font-size: 14.17px; color: #7ea3ce">转载</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/24/multiple-thread-conclusion/">iOS中的多线程简略总结（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/30/41-countless-imageView/">iOS简易轮播图的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/07/40-detecting-low-power-mode-in-swift/">Detecting low Power Mode in Swift</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/28/39-animating-text-layers/">[译] Animating text layers using CoreAnimation and CoreText frameworks in iOS SDK</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/02/38-Autolayout-3-anchor-visual/">翻译Autolayout（3）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">Recent_comments</h3>
+  <ul class="widget ds-recent-comments" data-num-items="5" data-show-avatars="0" data-show-title="1" data-show-time="1"></ul>
+</div>
+<!-- 需要多说的公用代码 -->
+
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://yangqingfeng.com" target="_BLANK">青峰学长的主页</a></li>
+    
+    <li><a href="http://xferris.me:8080/" target="_BLANK">航航</a></li>
+    
+    <li><a href="http://simapps.cn" target="_BLANK">分形画板主页</a></li>
+    
+    <li><a href="http://blog.csdn.net/u011240877" target="_BLANK">张拭心的博客-Android方向</a></li>
+    
+    <li><a href="https://jiandanxinli.github.io" target="_BLANK">简单心理技术博客</a></li>
+    
+    <li><a href="http://www.jianshu.com/users/ee39ef1907f7/latest_articles" target="_BLANK">我的简书首页</a></li>
+    
+  </ul>
+</div>
+
+
+  
+
+</aside>
+
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015-2016 <a href="http://qiuncheng.com" target="_blank" title="Qiuncheng's Blog">Qiuncheng</a> • All rights reserved.<br>
+      Powered by <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/howiefh/hexo-theme-landscape-f" target="_blank" title="Landscape-F">Landscape-F</a><br>
+      <font id="detail_counter"></font>
+      <font id="sum_counter"></font>
+    </div>
+  </div>
+</footer>
+<script>
+var qiunchengblogFirebase = new Firebase("https://qiuncheng.firebaseio.com/");
+
+var current_url = decodeURI(window.location.pathname.replace(new RegExp('\\/|\\.', 'g'),"_"));
+// 获取总数，并将总访问量展示在页面上
+qiunchengblogFirebase.child("sum").on("value", function(data) {
+  var current_counter = data.val();
+  if( $("#sum_counter").length > 0  && current_counter >1 ){
+      $("#sum_counter").html(
+        "&nbsp;&nbsp;| &nbsp;&nbsp;总访问量&nbsp;<font style='color:#EA8'>"+ current_counter +"</font>&nbsp;次"
+       );
+  };
+});
+
+qiunchengblogFirebase.child("detail/"+current_url).on("value", function(data){
+  var detail_counter = data.val();
+  if($("#detail_counter").length > 0 && detail_counter > 1){
+    $("#detail_counter").html(
+      "本页访问量&nbsp;<font style='color:#EA8'>"+ detail_counter +"</font>&nbsp;次&nbsp;"
+    );
+  }
+});
+
+
+qiunchengblogFirebase.child("sum").transaction(function (current_counter) {
+  return (current_counter || 0) + 1;
+});
+
+qiunchengblogFirebase.child("detail/"+current_url).transaction(function (current_counter) {
+  return (current_counter || 0) + 1;
+});
+</script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about.html" class="mobile-nav-link">Me</a>
+  
+    <a href="/app.html" class="mobile-nav-link">App</a>
+  
+</nav>
+    
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"qiuncheng"};
+  (function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+<!-- 多说公共JS代码 end -->
+
+<!-- 百度分享 start -->
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","douban","bdysc","sqq","qq","hi","baidu","huaban","youdao","sdo","mail","xg","diandian","fx","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+-->
+<script src="/js/jquery.min.js" type="text/javascript"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js" type="text/javascript"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
+
+</div>
+<script src="/js/toc_aside_toggle.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[/*每一秒我们都有机会让下一秒变得更好！*/]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://qiuncheng.com/"/>
-  <updated>2016-07-30T11:45:12.000Z</updated>
+  <updated>2016-10-05T14:10:34.000Z</updated>
   <id>http://qiuncheng.com/</id>
   
   <author>
@@ -13,6 +13,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[iOS中的多线程简略总结（一）]]></title>
+    <link href="http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/"/>
+    <id>http://qiuncheng.com/2016/09/24/multiple-thread-conclusion/</id>
+    <published>2016-09-24T10:41:02.000Z</published>
+    <updated>2016-10-05T14:10:34.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>最近在笔试的过程中，总是会遇到多线程的话题，很显然这是一个iOS上的通用话题。你懂了更好；不懂，那就说明你有问题了。</p>
+</blockquote>
+<h3 id="前言">前言</h3><h5 id="队列类型">队列类型</h5><ol>
+<li>并发队列</li>
+<li>串行队列 </li>
+</ol>
+<h5 id="执行类型">执行类型</h5><ol>
+<li>同步执行 ： 一个线程</li>
+<li>异步执行： 多个线程</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>同步执行</th>
+<th>异步执行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串行队列</td>
+<td>在当前线程，一个一个执行</td>
+<td>在不同线程，一个一个执行</td>
+</tr>
+<tr>
+<td>并行队列</td>
+<td>在当前线程，一个一个执行</td>
+<td>在不同线程，同时执行</td>
+</tr>
+</tbody>
+</table>
+<h4 id="首先：什么是线程？什么是进程？">首先：什么是线程？什么是进程？</h4><h5 id="线程：用于指代独立执行的代码路径">线程：用于指代独立执行的代码路径</h5><h5 id="进程：用于指代可执行的运行程序，一个进程可以包含多个线程">进程：用于指代可执行的运行程序，一个进程可以包含多个线程</h5><h4 id="其次：iOS上的多线程有哪些：">其次：iOS上的多线程有哪些：</h4><h5 id="NSThread：封装性最差，偏底层，主要基于pthread">NSThread：封装性最差，偏底层，主要基于pthread</h5><h5 id="CGD：基于C的实现API，直接使用比较方便，主要基于block实现">CGD：基于C的实现API，直接使用比较方便，主要基于block实现</h5><h5 id="NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现">NSOperation：使用Objc对GCD的封装，在复杂的多线程处理中比较方便，主要基于队列实现</h5><h3 id="正文">正文</h3><h4 id="NSThread">NSThread</h4><h6 id="有何优点：">有何优点：</h6><ul>
+<li>轻量级较低，使用起来相对简单</li>
+</ul>
+<h6 id="有何缺点：">有何缺点：</h6><ul>
+<li>需要手动管理所有的线程活动，比如声明周期、线程的同步、睡眠、取消等</li>
+</ul>
+<h5 id="线程如何使用？">线程如何使用？</h5><h6 id="关于线程启动">关于线程启动</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. + (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;&#10;    //&#36825;&#37324;&#35201;&#20027;&#24847;&#19968;&#19979;&#65292;&#20351;&#29992;&#35813;&#26041;&#27861;&#20250;&#30452;&#25509;&#21019;&#24314;&#19968;&#20010;&#32447;&#31243;&#12290;&#32780;&#19988;&#35843;&#29992;&#35813;&#26041;&#27861;&#26159;&#27809;&#26377;&#36820;&#22238;&#20540;&#30340;&#65292;&#23601;&#26159;&#35828;&#26080;&#27861;&#20026;&#35813;&#32447;&#31243;&#20570;&#21518;&#32493;&#30340;&#25805;&#20316;&#12290;  &#10;    // selector: &#34920;&#31034;&#22312;&#35813;&#32447;&#31243;&#19979;&#35843;&#29992;&#30340;&#26041;&#27861;&#65307;  &#10;    // target: &#34920;&#31034;&#35841;&#21435;&#35843;&#29992;&#35813;&#26041;&#27861;&#65307;  &#10;    // argument: &#20256;&#20837;&#30340;&#21442;&#25968;&#12290;&#10;    &#10;2. + (void)detachNewThreadWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));&#10;    // &#36825;&#20010;&#26041;&#27861;&#21516;&#19978;&#65292;&#19981;&#36807;&#26159;&#20197;Block&#30340;&#26041;&#24335;&#22312;&#26032;&#32447;&#31243;&#37324;&#25191;&#34892;&#25805;&#20316;&#12290;&#10;    // &#27880;&#24847;&#65306;&#30446;&#21069;&#36825;&#20010;&#26159;iOS10&#19978;&#26032;&#20986;&#30340;&#12290;&#25152;&#20197;&#22312;iOS10&#19968;&#19979;&#26159;&#26080;&#27861;&#20351;&#29992;&#30340;&#12290;&#10;    &#10;3. - (instancetype)initWithTarget:(id)target selector:(SEL)selector object:(nullable id)argument NS_AVAILABLE(10_5, 2_0);&#10;    // init &#26041;&#27861;&#21021;&#22987;&#21270;&#32447;&#31243;&#24182;&#36820;&#22238;&#35813;NSThread&#23545;&#35937;&#65292;&#32447;&#31243;&#30340;&#20837;&#21475;&#20989;&#25968;&#20026;selector&#12290;&#21508;&#31181;&#21442;&#25968;&#21547;&#20041;&#21516;&#31532;&#19968;&#31181;&#26041;&#27861;&#12290;&#10;    // &#27880;&#24847;&#65306;&#20197;&#36825;&#31181;&#26041;&#24335;&#21021;&#22987;&#21270;&#30340;&#32447;&#31243;&#38656;&#35201;&#25163;&#21160;&#35843;&#29992;-(void)start;&#26041;&#27861;&#21551;&#21160;&#32447;&#31243;&#12290;&#10;    [yourThread start]; // &#21551;&#21160;&#32447;&#31243;&#10;    &#10;4. - (instancetype)initWithBlock:(void (^)(void))block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));&#10;    // &#36825;&#20010;&#36890;&#31532;&#19977;&#31181;&#26041;&#24335;&#65292;&#20182;&#20204;&#30340;&#20851;&#31995;&#21644;&#31532;&#19968;&#31181;&#31532;&#20108;&#31181;&#31867;&#20284;&#12290;&#10;    [yourThread start]; // &#21551;&#21160;&#32447;&#31243;</span><br></pre></td></tr></table></figure>
+<h6 id="关于线程的管理">关于线程的管理</h6><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. &#32447;&#31243;&#30340;&#30561;&#30496;&#10;    + (void)sleepUntilDate:(NSDate *)date;&#10;    + (void)sleepForTimeInterval:(NSTimeInterval)ti;&#10;    // &#30456;&#24403;&#20110;&#25191;&#34892;&#20102;&#19968;&#20010;&#31561;&#24453;&#25805;&#20316;&#65292;&#22312;&#25191;&#34892;&#30340;&#25805;&#20316;&#20013;&#21363;&#20351;&#26377;&#20854;&#20182;&#20219;&#21153;&#20256;&#20837;runloop&#65292;runloop&#20063;&#19981;&#20250;&#30456;&#24212;&#65292;&#24517;&#39035;&#25226;&#20219;&#21153;&#23436;&#25104;&#21518;&#25165;&#25191;&#34892;&#20854;&#20182;&#20219;&#21153;&#12290;&#10;    // runUntilDate: &#34429;&#28982;&#20063;&#20250;&#38459;&#22622;&#32447;&#31243;&#65292;&#20294;&#26159;&#38459;&#22622;&#36807;&#31243;&#24182;&#19981;&#20250;&#22952;&#30861;&#26032;&#20219;&#21153;&#30340;&#25191;&#34892;&#65292;&#24403;&#26377;&#26032;&#20219;&#21153;&#30340;&#26102;&#20505;&#20250;&#20808;&#25191;&#34892;&#20449;&#25910;&#21040;&#30340;&#20219;&#21153;&#65292;&#26032;&#20219;&#21153;&#25191;&#34892;&#23436;&#20102;&#22914;&#26524;&#26102;&#38388;&#21040;&#20102;&#65292;&#23601;&#32487;&#32493;&#25191;&#34892;runUntilDate&#30340;&#20195;&#30721;&#12290;&#10;   &#10;2. &#32447;&#31243;&#30340;&#21462;&#28040;&#10;    - (void)cancel NS_AVAILABLE(10_5, 2_0);&#10;    // &#36825;&#37324;&#24182;&#19981;&#26159;&#20005;&#26684;&#24847;&#20041;&#19978;&#30340;&#32447;&#31243;&#30340;&#21462;&#28040;&#65292;&#21482;&#26159;&#25226;&#35813;&#32447;&#31243;&#30340;cannelled&#23646;&#24615;&#26631;&#35760;&#20026;YES&#29366;&#24577;&#26469;&#34920;&#31034;&#35813;&#32447;&#31243;&#21363;&#23558;&#35201;&#36864;&#20986;&#12290;&#10;    @property (readonly, getter=isCancelled) BOOL cancelled NS_AVAILABLE(10_5, 2_0);&#10;    // cannelled &#23601;&#26159;&#19968;&#20010;&#29992;&#26469;&#35760;&#24405;&#29366;&#24577;&#30340;&#23646;&#24615;&#65292;&#32447;&#31243;&#30340;&#21462;&#28040;&#25105;&#20204;&#35201;&#22312;main&#20989;&#25968;&#20013;&#33258;&#24049;&#23454;&#29616;&#12290;&#10;    // &#35201;&#23454;&#29616;&#21462;&#28040;&#21151;&#33021;&#65292;&#25105;&#20204;&#38656;&#35201;&#22312;&#32447;&#31243;&#30340;main&#20989;&#25968;&#20013;&#23450;&#26399;&#26816;&#26597;isCancelled&#29366;&#24577;&#26469;&#21028;&#26029;&#26159;&#21542;&#38656;&#35201;&#36864;&#20986;&#65292;&#24403;isCancelled&#20026;YES&#30340;&#26102;&#20505;&#65292;&#25105;&#20204;&#25163;&#21160;&#36864;&#20986;&#65292;&#22914;&#26524;&#25105;&#20204;&#27809;&#26377;&#22312;main&#20013;&#26816;&#26597;isCancelled&#29366;&#24577;&#65292;&#37027;&#20040;&#35843;&#29992;-(void)cancel;&#26041;&#27861;&#23558;&#27627;&#26080;&#24847;&#20041;&#12290;&#10;    &#10;3. &#32447;&#31243;&#30340;&#36864;&#20986;&#65306;(&#32447;&#31243;&#25191;&#34892;&#23436;&#27605;&#21518;&#33258;&#24049;&#36864;&#20986;&#65292;&#27491;&#24120;&#30340;&#29366;&#24577;)&#10;    + (void)exit; // &#21487;&#20197;&#35753;&#32447;&#31243;&#31435;&#21363;&#36864;&#20986;&#65292;&#20294;&#21518;&#26524;&#19981;&#21487;&#24819;&#35937;&#12290;&#10;    // &#25688;&#25220;&#65306;+exit;&#23646;&#20110;&#26680;&#24377;&#32423;&#21035;&#30340;API&#65292;&#35843;&#29992;&#20043;&#21518;&#20250;&#31435;&#21363;&#32456;&#27490;&#32447;&#31243;&#65292;&#21363;&#20351;&#20219;&#21153;&#36824;&#27809;&#26377;&#23436;&#25104;&#20063;&#20250;&#32456;&#27490;&#65292;&#36825;&#23601;&#38750;&#24120;&#26377;&#21487;&#33021;&#23548;&#33268;&#20869;&#23384;&#27844;&#28431;&#31561;&#38382;&#39064;&#12290;&#10;    // Apple&#25991;&#26723;&#35828;&#26126;&#65306;Invoking this method should be avoided as it does not give your thread a chance to clean up any resources it allocated during its execution.&#10;&#10;4. &#32447;&#31243;&#30340;&#36890;&#20449;&#65306;(&#23376;&#32447;&#31243;&#22238;&#21040;&#20027;&#32447;&#31243;&#25805;&#20316;&#65292;&#20027;&#32447;&#31243;&#22238;&#21040;&#23376;&#32447;&#31243;&#25805;&#20316;)&#10;    - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&#60;NSString *&#62; *)array;&#10;    - (void)performSelectorOnMainThread:(SEL)aSelector withObject:(nullable id)arg waitUntilDone:(BOOL)wait;&#10;&#9;// equivalent to the first method with kCFRunLoopCommonModes&#10;    // &#27880;&#24847;&#36825;&#37324;&#30340;wait&#19968;&#33324;&#24773;&#20917;&#19979;&#26159;NO&#10;    &#10;    - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait modes:(nullable NSArray&#60;NSString *&#62; *)array NS_AVAILABLE(10_5, 2_0);&#10;    - (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(nullable id)arg waitUntilDone:(BOOL)wait NS_AVAILABLE(10_5, 2_0);&#10;&#9;// equivalent to the first method with kCFRunLoopCommonModes&#10;    - (void)performSelectorInBackground:(SEL)aSelector withObject:(nullable id)arg NS_AVAILABLE(10_5, 2_0);&#10;    &#10;    // &#36825;&#20123;&#26041;&#27861;&#21644;detch&#19968;&#26679;&#26080;&#27861;&#37117;&#32447;&#31243;&#26356;&#35814;&#32454;&#30340;&#37197;&#32622;&#10;    // &#27880;&#24847;&#36825;&#37324;mode&#30340;&#31867;&#22411;&#65292;&#19982;runloop&#26377;&#20851;&#12290;&#22914;&#26524;&#21019;&#24314;&#30340;&#32447;&#31243;&#27809;&#26377;&#28155;&#21152;&#21040;runloop&#65292;perform&#30340;selector&#23558;&#26080;&#27861;&#25191;&#34892;&#12290;&#10;&#10;5. &#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#65306;&#10;    // &#27599;&#19968;&#20010;&#32447;&#31243;&#30340;&#32039;&#24613;&#31243;&#24230;&#19981;&#19968;&#26679;&#65292;&#26377;&#30340;&#32447;&#31243;&#24076;&#26395;&#23613;&#24555;&#32467;&#26463;&#65292;&#26377;&#30340;&#32447;&#31243;&#24182;&#19981;&#26159;&#37027;&#20040;&#30528;&#24613;&#65292;&#25152;&#20197;&#32447;&#31243;&#20063;&#38656;&#35201;&#20248;&#20808;&#32423;&#26469;&#35843;&#33410;&#32447;&#31243;&#30340;&#25191;&#34892;&#20808;&#21518;&#12290;&#10;    + (double)threadPriority;&#10;    + (BOOL)setThreadPriority:(double)p;&#10;    // &#20197;&#19978;&#20004;&#20010;&#31867;&#26041;&#27861;&#29992;&#20110;&#35774;&#32622;&#21644;&#33719;&#21462;&#24403;&#21069;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#65292;&#20197;&#21450;&#35774;&#32622;&#24403;&#21069;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#12290;&#10;    @property double threadPriority NS_AVAILABLE(10_6, 4_0); // To be deprecated; use qualityOfService below&#10;    @property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0); // read-only after the thread is started&#10;    // &#30001;&#20110;&#32447;&#31243;&#30340;&#20248;&#20808;&#32423;&#24448;&#24448;&#26159;&#19968;&#20010;&#27604;&#36739;&#25277;&#35937;&#24615;&#30340;&#19996;&#35199;&#65292;&#25152;&#20197;&#22312;iOS8&#20043;&#21518;&#65292;Apple&#25552;&#20379;&#20102;qualityOfService&#26522;&#20030;&#65292;&#24320;&#21457;&#32773;&#21487;&#20197;&#36890;&#36807;&#26522;&#20030;&#26469;&#35774;&#32622;&#20248;&#20808;&#32423;&#12290;&#10;    &#10;    // &#20854;&#20013;NSQualityOfService&#26377;&#37027;&#20123;&#21602;?&#10;    &#10;    typedef NS_ENUM(NSInteger, NSQualityOfService) &#123;&#10;    /* UserInteractive QoS is used for work directly involved in providing an interactive UI such as processing events or drawing to the screen. */&#10;    NSQualityOfServiceUserInteractive = 0x21,&#10;    &#10;    /* UserInitiated QoS is used for performing work that has been explicitly requested by the user and for which results must be immediately presented in order to allow for further user interaction.  For example, loading an email after a user has selected it in a message list. */&#10;    NSQualityOfServiceUserInitiated = 0x19,&#10;    &#10;    /* Utility QoS is used for performing work which the user is unlikely to be immediately waiting for the results.  This work may have been requested by the user or initiated automatically, does not prevent the user from further interaction, often operates at user-visible timescales and may have its progress indicated to the user by a non-modal progress indicator.  This work will run in an energy-efficient manner, in deference to higher QoS work when resources are constrained.  For example, periodic content updates or bulk file operations such as media import. */&#10;    NSQualityOfServiceUtility = 0x11,&#10;    &#10;    /* Background QoS is used for work that is not user initiated or visible.  In general, a user is unaware that this work is even happening and it will run in the most efficient manner while giving the most deference to higher QoS work.  For example, pre-fetching content, search indexing, backups, and syncing of data with external systems. */&#10;    NSQualityOfServiceBackground = 0x09,&#10;&#10;    /* Default QoS indicates the absence of QoS information.  Whenever possible QoS information will be inferred from other sources.  If such inference is not possible, a QoS between UserInitiated and Utility will be used. */&#10;    NSQualityOfServiceDefault = -1&#10;    &#125; NS_ENUM_AVAILABLE(10_10, 8_0);&#10;    &#10;6. &#20027;&#32447;&#31243;&#10;    @property (readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0);&#10;    #if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)&#10;    @property (class, readonly) BOOL isMainThread NS_AVAILABLE(10_5, 2_0); // reports whether current thread is main&#10;    // &#21028;&#26029;&#24403;&#21069;&#32447;&#31243;&#26159;&#21542;&#20026;&#20027;&#32447;&#31243;&#10;    @property (class, readonly, strong) NSThread *mainThread NS_AVAILABLE(10_5, 2_0);&#10;    // &#21482;&#35835;&#65292;&#33719;&#21462;&#24403;&#21069;&#30340;&#20027;&#32447;&#31243;&#10;    &#10;7 &#32447;&#31243;&#36890;&#30693;&#10;    FOUNDATION_EXPORT NSNotificationName const NSWillBecomeMultiThreadedNotification;&#10;    // Posted when the first thread is detached from the current thread. &#24403;&#21069;&#32447;&#31243;&#27966;&#29983;&#20986;&#31532;&#19968;&#20010;&#20854;&#20182;&#32447;&#31243;&#26102;&#21457;&#36865;&#19968;&#27425;&#10;    FOUNDATION_EXPORT NSNotificationName const NSDidBecomeSingleThreadedNotification;&#10;    // &#36825;&#20010;&#23448;&#26041;&#27809;&#26377;&#32473;&#20219;&#20309;&#35299;&#37322;&#12289;&#12289;&#12289;&#10;    FOUNDATION_EXPORT NSNotificationName const NSThreadWillExitNotification;&#10;    // An NSThread object posts this notification when it receives the exit message, before the thread exits. &#32447;&#31243;&#36864;&#20986;&#21069;&#21457;&#36865;&#35813;&#36890;&#30693;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下篇预告：GCD</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>最近在笔试的过程中，总是会遇到多线程的话题，很显然这是一个iOS上的通用话题。你懂了更好；不懂，那就说明你有问题了。</p>
+</blockquote>
+<h3 id="前言">前言</h3><h5 id="队列类型">队列类型</h5><ol>
+]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
+    
+      <category term="review" scheme="http://qiuncheng.com/tags/review/"/>
+    
+      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
+    
+      <category term="review" scheme="http://qiuncheng.com/categories/iOS/review/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[iOS简易轮播图的实现]]></title>
@@ -881,36 +949,6 @@ notation</code>采用了一种相反的方式，它聚焦在简洁上，但是�
 <p>貌似昨天也遇到这样的问题，但是却没有在意，只是在<code>stackoverflow</code>上一下子找到了解决方案也没有在意，不过今天又遇到了这样的问题，确实让我很恼火，如下图所示，我要干什么就不在这里向大家说了。但是这里确实有错误，所以说这应该是一种规范吧，得找到相关东西，尽量避免以后出现这种错误，因此把它写出来应该影响会更深刻些。   </p>
 </blockquote>
 <p><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-0.png" alt="错误提示"><br>在<code>stackoverflow</code>上可以看到问题出在这里Xcode不知道gameView是谁！在这里我们在gameView前面添加了一个<code>self.</code>结果又出现了这个问题。如下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/iOSQQ20151121-1.png" alt="self.gameView错误"><br>]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/tags/iOS/"/>
-    
-      <category term="iOS" scheme="http://qiuncheng.com/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[sendAsynchronousRequest竟然被弃用了！！！]]></title>
-    <link href="http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/"/>
-    <id>http://qiuncheng.com/2015/11/19/21-iOS-sendAsynchronousRequest-deprecated/</id>
-    <published>2015-11-19T12:53:34.000Z</published>
-    <updated>2015-11-20T11:44:58.000Z</updated>
-    <content type="html"><![CDATA[<h6 id="我去，iOS9改动太大，NSURLConnection竟然被NSURLSession替代了。">我去，iOS9改动太大，<code>NSURLConnection</code>竟然被<code>NSURLSession</code>替代了。</h6><p>然而我看了半天<code>NSURLConnection</code>，刚学会怎么用，竟然告诉我不能用了。简直不能忍了。呜呜呜呜呜<del>~</del>  </p>
-<hr>
-<p>这是不是也提醒了我一件事，那就是Swift才是王道，看来apple也正在抛弃原来Objective-C的那些臃肿繁琐的东西呀，哈哈哈哈，好事情，不过我还得再去看看<code>NSURLSession</code>了，呜呜呜呜~~~~伐开心！！</p>
-<p>不管了，先来用下NSURLConnection实现一个小Demo再说吧，虽然舍弃了，但还是可以用的吗，仅仅是Wornning而已呀！</p>
-<hr>
-<a id="more"></a>
-<p><del>【Demo待更新！！！！】</del><br>好了现在回来更新Demo：  </p>
-<p>其实Demo就是很简单的—利用k780.com—上的API来实现在imageView上显示一张图片的功能,哈哈哈哈哈~~~原谅我只会这么简单的。其实我觉得用些简单的已经足够了。具体见下图：<br><img src="http://7xk67j.com1.z0.glb.clouddn.com/QQ20151120-2.png" alt="所有代码"></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h6 id="我去，iOS9改动太大，NSURLConnection竟然被NSURLSession替代了。">我去，iOS9改动太大，<code>NSURLConnection</code>竟然被<code>NSURLSession</code>替代了。</h6><p>然而我看了半天<code>NSURLConnection</code>，刚学会怎么用，竟然告诉我不能用了。简直不能忍了。呜呜呜呜呜<del>~</del>  </p>
-<hr>
-<p>这是不是也提醒了我一件事，那就是Swift才是王道，看来apple也正在抛弃原来Objective-C的那些臃肿繁琐的东西呀，哈哈哈哈，好事情，不过我还得再去看看<code>NSURLSession</code>了，呜呜呜呜~~~~伐开心！！</p>
-<p>不管了，先来用下NSURLConnection实现一个小Demo再说吧，虽然舍弃了，但还是可以用的吗，仅仅是Wornning而已呀！</p>
-<hr>]]>
     
     </summary>
     
