@@ -1,9 +1,9 @@
 # Site settings
-title: Your Blog
-SEOTitle: 你的博客 | Your Blog
+title: VSCCW
+SEOTitle: VSCCW | 代码如风
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: ""
+email: qiuncheng@gmail.com
+description: "测试测试"
 keyword: ""
 url: "http://huangxuan.me"              # your host, for absolute URL
 baseurl: "/huxblog-boilerplate"         # for example, '/blog' if your blog hosted on 'host/blog'
