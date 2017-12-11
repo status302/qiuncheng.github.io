@@ -3,20 +3,20 @@ title: VSCCW
 SEOTitle: VSCCW | 代码如风
 header-img: img/home-bg.jpg
 email: qiuncheng@gmail.com
-description: "测试测试"
-keyword: ""
-url: "http://huangxuan.me"              # your host, for absolute URL
+description: "vsccw的博客"
+keyword: "代码、iOS开发、理科男、极客人生"
+url: "https://vsccw.com"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-#twitter_username:  huxpro
-facebook_username:  huxpro
+weibo_username:     qiuncheng
+zhihu_username:     qiuncheng
+github_username:    qiuncheng
+twitter_username:  vsccw
+facebook_username:  qiuncheng
 
 
 
@@ -50,7 +50,7 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: huxblog
+duoshuo_username: qiuncheng
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
