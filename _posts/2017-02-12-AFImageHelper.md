@@ -251,6 +251,7 @@ func resize(toSize: CGSize, contentMode: UIImageContentMode = .scaleToFill) -> U
 > CGBitmapInfo：Component information for a bitmap image.  
 > BitmapImage: [![](http://7xk67j.com1.z0.glb.clouddn.com/IMG_0816.JPG)](http://etc.usf.edu/techease/win/images/what-is-the-difference-between-bitmap-and-vector-images/)
 具体代码如下：(实现起来也不是很复杂，如果自己真的写不出来，也是一种学习的思路)
+
 ```swift
 func roundCorners(cornerRadius: CGFloat) -> UIImage? {
         // If the image does not have an alpha layer, add one
