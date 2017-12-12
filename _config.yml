@@ -69,7 +69,7 @@ ga_domain: blog.vsccw.com
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "世界那么大，不写代码岂不白瞎。"
-sidebar-avatar: /img/avatar-vsccw.png
+sidebar-avatar: /img/avatar_vsccw.png
 
 
 
