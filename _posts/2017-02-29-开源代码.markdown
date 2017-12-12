@@ -9,7 +9,7 @@ tags:
     - 
 ---
 
-> “Hello，Let‘s go.’”
+> “Hello，Let‘s go.”
 
 ### 为什么要去阅读开源代码
 1. 学习到一些小技巧
