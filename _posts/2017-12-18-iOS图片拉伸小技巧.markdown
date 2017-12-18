@@ -2,7 +2,7 @@
 layout:     post
 title:      "iOS图片拉伸变形小技巧"
 subtitle:   "\"图片拉伸，在平常不过，如果你遇到拉伸后变形，那么此文，或许可以给你提供一些思路。\""
-date:       2017-12-16 10:30:00
+date:       2017-12-18 23:30:00
 author:     "vsccw"
 header-img: "img/post-bg-2015.jpg"
 tags:
