@@ -56,11 +56,11 @@ UIView.animate(withDuration: 5.0, delay: 0, options: [.allowUserInteraction, .au
 请抓住关键词：**拷贝**、**显示**、**屏幕**。拷贝是指返回的还是一个 layer 啊，显示和屏幕是指当前屏幕显示的样子啊。所以我觉得在这里将其理解为原当前移动状态中 Layer 的一份拷贝，既然这样，那就可以很轻松获取到移动状态下的 bounds 了啊。然后手动去判断是否包含点击的位置即可。
 
 好了，既然解决方案都已经出来了，那么就请看看解决之后的效果吧。下图所示：
-![](https://user-images.githubusercontent.com/9990834/34169233-af403f40-e521-11e7-8e39-74e0124c46fc.gif)
+![](https://user-images.githubusercontent.com/9990834/34170040-632ad23e-e524-11e7-93df-37be24b77253.gif)
 
 思路如上所示, 具体的代码如下所示：
 
-```
+```swift
 /// 添加手势
 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureAction(_:)))
 view.addGestureRecognizer(tapGesture)
@@ -79,7 +79,7 @@ guard let layer = redView.layer.presentation() else { return }
 
 完整代码如下所示:
 
-```
+```swift
 class ViewController: UIViewController {
    
     let redView = UIView(frame: CGRect(x: 100, y: 20, width: 100, height: 100))
