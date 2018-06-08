@@ -1,3 +1,10 @@
 {
-    "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "beautify.config": {
+    "indent_size": 2
+  },
+  "files.associations": {
+    "*.html": "jekyll"
+  }
 }
+
