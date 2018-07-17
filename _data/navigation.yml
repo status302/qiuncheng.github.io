@@ -17,3 +17,9 @@ header:
       zh-Hans:  关于
       zh-Hant:  關於
     url:        /about.html
+  - titles:
+      en:       Resume
+      zh:       简历
+      zh-Hans:  简历
+      zh-Hant:  簡歷
+    url:        https://resume.vsccw.com
