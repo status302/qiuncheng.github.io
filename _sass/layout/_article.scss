@@ -1,39 +1,43 @@
 .layout--article {
-  .article-footer {
-    &>span {
-      color: $text-color-l;
-    }
-    &>.article-license {
-      position: relative;
-      max-width: 30rem;
-      margin: .8rem 0;
+  .article__sharing {
+    margin: map-get($spacers, 4) 0;
+  }
+  .article__footer {
+    margin: map-get($spacers, 4) 0;
+    font-size: map-get($base, font-size-sm);
+    color: $text-color-l;
+    .article__license {
+      img {
+        height: map-get($base, font-size) * 1.6;
+      }
+      a {
+        @include link-colors($text-color, $main-color-1);
+      }
     }
   }
-
-  .article-previous-next {
+  .article__section-navigator {
+    padding-top: map-get($spacers, 3);
+    margin: map-get($spacers, 4) 0 map-get($spacers, 3) 0;
     word-wrap: break-word;
-    margin: map-get($base, vertical-space-lg) * 2 0 map-get($base, vertical-space-lg) 0;
-    padding-top: map-get($base, vertical-space-lg) / 2;
     @include split-line(top, 4px);
-    & > .article-previous, & > .article-next {
-      box-sizing: border-box;
+    & > .previous, & > .next {
       width: 50%;
       & > span {
         font-weight: map-get($base, font-weight-bold);
         color: $text-color-l;
       }
-      & > a{
+      & > a {
         display: block;
-        @include link-colors($text-color, $main-color-1, $main-color-1);
+        @include link-colors($text-color, $main-color-1);
       }
     }
-    & > .article-previous {
+    & > .previous {
       float: left;
-      padding-right: .5rem;
+      padding-right: map-get($spacers, 2);
     }
-    & > .article-next {
+    & > .next {
       float: right;
-      padding-left: .5rem;
+      padding-left: map-get($spacers, 2);
       text-align: right;
     }
   }

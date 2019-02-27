@@ -1,64 +1,96 @@
-{%- if post -%}
-  {%- assign cur_page = post -%}
-{%- elsif page -%}
-  {%- assign cur_page = page -%}
-{%- endif -%}
+{%- assign _author = site.data.authors[include.article.author] | default: site.author -%}
 
-{%- assign __source = page.pageview -%}
-{%- assign __target = site.data.variables.default.pageview -%}
-{%- include snippets/assign.html -%}
-{%- assign _pageview = __return -%}
+{%- if include.html != false -%}
 
-<div class="article-info clearfix">
-	{%- if page -%}
-    <meta itemprop="author" itemscope itemtype="https://schema.org/Person">
-      {%- if page.author -%}
-        <meta itemprop="name" content="{{ page.author }}"/>
-      {%- elsif site.author.name -%}
-        <meta itemprop="name" content="{{ site.author.name }}"/>
+  {%- include snippets/assign.html
+    target=site.data.variables.default.page.show_date
+    source0=layout.show_date source1=include.article.show_date -%}
+  {%- assign _show_date = __return -%}
+  {%- if _show_date and include.article.date -%}
+    {%- assign _show_date = true -%}
+  {%- else -%}
+    {%- assign _show_date = false -%}
+  {%- endif -%}
+
+  {%- include snippets/assign.html
+    target=site.data.variables.default.page.show_tags
+    source0=layout.show_tags source1=include.article.show_tags -%}
+  {%- assign _show_tags = __return -%}
+  {%- if _show_tags and include.article.tags[0] -%}
+    {%- assign _show_tags = true -%}
+  {%- else -%}
+    {%- assign _show_tags = false -%}
+  {%- endif -%}
+
+  {%- assign _show_author = include.article.author -%}
+
+  {%- include snippets/assign.html target=site.data.variables.default.page.pageview
+    source0=layout.pageview source1=page.pageview -%}
+  {%- assign _pageview = __return -%}
+  {%- if _pageview or include.show_pageview -%}
+    {%- assign _pageview = true -%}
+  {%- else -%}
+    {%- assign _pageview = false -%}
+  {%- endif -%}
+
+  {%- assign _paths_archive = site.paths.archive | default: site.data.variables.default.paths.archive -%}
+
+  {%- if _show_tags or _show_author or _show_date or _pageview -%}
+    <div class="article__info clearfix">
+      {%- if _show_tags -%}
+
+        <ul class="left-col menu">
+          {%- assign _tag_path = _paths_archive | append: '?tag=' -%}
+          {%- include snippets/prepend-baseurl.html path=_tag_path -%}
+
+          {%- for _tag in include.article.tags -%}
+            {%- assign _tag_path = __return -%}
+            {%- assign _tag_encode = _tag | strip | url_encode } -%}
+            <li>
+              <a class="button button--secondary button--pill button--sm"
+                href="{{ _tag_path | append: _tag_encode | replace: '//', '/' }}">{{ _tag }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
       {%- endif -%}
-    </meta>
-	{%- endif -%}
-    {%- if cur_page.tags[0] -%}
-      <ul class="article-info__left-col menu">
-        {%- if site.paths.all -%}
-          {%- assign all_path = site.paths.all -%}
-        {%- else -%}
-          {%- assign all_path = site.data.variables.default.paths.all -%}
-        {%- endif -%}
-        {%- for tag in cur_page.tags -%}
-          {%- assign _tag = tag | strip | url_encode } -%}
-          {%- assign __path = all_path | append: '?tag=' -%}
-          {%- include snippets/prepend-baseurl.html -%}
-          <li>
-            <a class="button button--secondary button--pill button--sm" href="{{ __return | append: _tag | replace: '//', '/' }}">{{ tag }}</a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
 
-    {%- if (_pageview or post) and cur_page.date -%}
-      <ul class="article-info__right-col menu">
-        {%- if _pageview or post -%}
-          {%- if site.leancloud.app_id and site.leancloud.app_key and site.leancloud.app_class -%}
-            {%- assign __locale = site.data.locale.VIEWS } -%}
-            {%- include snippets/locale-to-string.html -%}
-            <li class="pageview">
-              <span class="js-pageview" data-page-key="{{ cur_page.key }}">0</span> {{ __return }}
+      {%- if _show_author or _show_date or _pageview -%}
+        <ul class="right-col menu">
+          {%- if _show_author  -%}
+            <li><i class="fas fa-user"></i> <span>{{ _author.name }}</span></li>
+          {%- endif -%}
+
+          {%- if _show_date -%}
+            <li>
+              {%- include snippets/locale-to-string.html locale=site.data.locale.ARTICLE_DATE_FORMAT -%}
+              <i class="far fa-calendar-alt"></i> <span>{{ include.article.date | date: __return }}</span>
             </li>
           {%- endif -%}
-        {%- endif -%}
-        <li class="publish-date">
-          {%- assign __locale = site.data.locale.ARTICLE_DATE_FORMAT } -%}
-          {%- include snippets/locale-to-string.html -%}
-          {%- if post -%}
-            <span>{{ cur_page.date | date: __return }}</span>
-          {%- elsif page -%}
-            <time datetime="{{ page.date | date_to_xmlschema }}"
-              itemprop="datePublished">{{ cur_page.date | date: __return }}
-            </time>
+
+          {%- if _pageview -%}
+            {%- if site.pageview.provider -%}
+              {%- include snippets/locale-to-string.html locale=site.data.locale.VIEWS -%}
+              {%- assign _locale_views = __return -%}
+              <li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="{{ include.article.key }}">0</span> {{ _locale_views }}</li>
+            {%- endif -%}
           {%- endif -%}
-        </li>
-      </ul>
-    {%- endif -%}
-</div>
+        </ul>
+      {%- endif -%}
+
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+
+{%- if include.semantic != false -%}
+  {%- if _author -%}
+    <meta itemprop="author" content="{{ _author.name }}"/>
+  {%- endif -%}
+  {%- if include.article.date -%}
+    <meta itemprop="datePublished" content="{{ include.article.date | date_to_xmlschema }}">
+  {%- endif -%}
+  {%- if include.article.tags[0] -%}
+    {%- assign _keywords = include.article.tags | join: ',' %}
+    <meta itemprop="keywords" content="{{ _keywords }}">
+  {%- endif -%}
+{%- endif -%}

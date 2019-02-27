@@ -3,25 +3,36 @@
  */
 
 .footer {
-  @include flexbox;
+  @include flexbox();
   @include align-items(center);
-  background-color: $main-color-3;
   height: map-get($layout, footer-height);
-  .follow-me {
-    padding-top: 1rem;
-  }
+  background: $footer-background;
   p {
-    color: $text-color-3;
+    color: $footer-text-color;
   }
   a {
-    @include link-colors ($text-color-3, $main-color-1, $main-color-1);
+    @include link-colors ($footer-text-color, $main-color-1);
   }
   .site-info {
-    text-align: center;
+    margin: map-get($spacers, 3) auto 0 auto;
     font-size: map-get($base, font-size-xs);
-    margin: 1rem auto 0 auto;
+    text-align: center;
+    .menu {
+      line-height: map-get($base, line-height-xs);
+      & > * {
+        &:not(:last-child) {
+          @include split-line(right, default, $footer-text-color);
+          padding-right: map-get($spacers, 1);
+          margin-right: map-get($spacers, 1);
+        }
+      }
+    }
   }
-  .site-info__copyright {
-    line-height: map-get($base, line-height-xs);
+}
+.footer__author-links {
+  @include overflow(auto);
+  .author-links {
+    padding-top: map-get($spacers, 3);
+    text-align: center;
   }
 }

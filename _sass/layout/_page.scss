@@ -1,92 +1,99 @@
-.layout--page {
-  height: 100%;
-
-  .page__main {
+@include media-breakpoint-up(lg) {
+  body,
+  html,
+  .root,
+  .layout--page,
+  .page__viewport,
+  .page__grid {
     height: 100%;
+  }
+}
+
+.layout--page {
+  .page__actions {
+    position: fixed;
+    bottom: map-get($spacers, 5);
+    left: map-get($spacers, 3);
+    z-index: map-get($z-indexes, actions);
+    display: none;
+  }
+
+  .sidebar-button {
+    @include clickable($text-color-d, rgba($main-color-3, .75));
+  }
+
+  .page__sidebar {
+    z-index: map-get($z-indexes, sidebar);
+    display: block;
+    width: 80%;
+    max-width: map-get($layout, sidebar-width);
+    height: 100%;
+    background-color: $background-color;
+    @include split-line(right);
+    @include transition(transform map-get($animation, duration));
+    @include overflow(auto);
+    .sidebar-toc {
+      padding: map-get($spacers, 3) map-get($spacers, 3) map-get($spacers, 4) map-get($spacers, 4);
+    }
+  }
+
+  .page__mask {
+    @include modal(map-get($z-indexes, mask));
+    cursor: pointer;
   }
   &.layout--page--sidebar {
     .page__main {
       @include overflow(auto);
+      @media print {
+        @include overflow(unset);
+      }
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &.layout--page--sidebar {
+      .page__main {
+        @include overflow(unset);
+      }
     }
   }
 
   .page__main-inner {
     position: relative;
-    height: auto !important;
-    height: 100%;
     min-height: 100%;
+    color: $text-color;
+    background-color: $background-color;
 
-    .col-2 {
+    .col-aside {
       display: none;
-      float: right;
       & > aside {
-        box-sizing: border-box;
-        width: map-get($layout, aside-width);
         position: absolute;
-        overflow: hidden;
-      }
-      @include media-breakpoint-down(lg) {
-        float: none;
+        width: map-get($layout, aside-width);
+        @include overflow(hidden);
       }
     }
   }
 
   .page__content {
-    margin: 0 auto;
     padding-bottom: map-get($layout, footer-height);
+    margin: 0 auto;
+    @media print {
+      padding-bottom: 0;
+    }
   }
-
-  .page__comment {
-    padding-bottom: map-get($base, vertical-space-lg);
-  }
-
-  .page__actions {
-    position: absolute;
-    left: 1rem;
-    bottom: 1rem;
-    display: none;
-    z-index: 996;
-  }
-
-  .sidebar-button {
-    @include button-colors($text-color-d, rgba($main-color-3, .75));
-    border: 1px $border-color solid;
-  }
-
-  .page__sidebar {
-    display: block;
-    width: 80%;
-    max-width: map-get($layout, sidebar-width);
-    float: left;
-    height: 100%;
-    background-color: $background-color;
-    z-index: 998;
-    @include split-line(right);
-    @include transition(transform .4s);
-    @include overflow(auto);
-    box-sizing: border-box;
-    .sidebar-toc {
-      padding: 1rem 1rem 2rem 2rem;
+  .hide-footer {
+    .page__content {
+      padding-bottom: 0;
     }
   }
 
-  .page__mask {
-    background-color: $mask-color;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 997;
-    display: none;
-    cursor: pointer;
+  .page__comments {
+    margin: map-get($spacers, 4) 0;
   }
 
   .page__aside {
     .toc-aside {
-      padding: 1rem 0 1rem 3rem;
+      padding: map-get($spacers, 5) 0 map-get($spacers, 3) map-get($spacers, 5);
     }
-
   }
 
   .page__footer {
@@ -97,20 +104,13 @@
 
   .has-aside {
     .page__main-inner{
-      .col-1 {
-        margin-right: map-get($layout, aside-width);
-        @include media-breakpoint-down(lg) {
-          margin-right: 0;
-        }
-      }
-      .col-2 {
-        width: map-get($layout, aside-width);
+      .col-aside {
         position: relative;
         display: block;
-        &>aside {
+        width: map-get($layout, aside-width);
+        & > aside {
           &.fixed {
             position: fixed;
-            z-index: 2;
             -webkit-font-smoothing: subpixel-antialiased;
           }
         }
@@ -132,12 +132,36 @@
     }
 
     &.show-sidebar {
+      .page__actions {
+        visibility: hidden;
+      }
       .page__sidebar {
         @include transform(translate(0));
       }
       .page__mask {
-        display: block;
+        @include modal--show();
       }
     }
+  }
+
+  .hero--light {
+    .article__info {
+      color: $text-color-theme-light;
+    }
+  }
+  .hero--dark {
+    .article__info {
+      color: $text-color-theme-dark;
+    }
+  }
+}
+
+.page__main--immersive {
+  .page__header {
+    position: absolute;
+    width: 100%;
+  }
+  .hero__content {
+    padding-top: map-get($layout, header-height);
   }
 }

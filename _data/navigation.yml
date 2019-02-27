@@ -1,10 +1,9 @@
 header:
   - titles:
-      en:       Home
-      zh:       主页
-      zh-Hans:  主页
-      zh-Hant:  主頁
-    url:        /
+      en:      "Home"
+      zh:      "主页"
+      zh-Hans: "主页"
+      zh-Hant: "主頁"
   - titles:
       en:       Archive
       zh:       归档
@@ -17,6 +16,7 @@ header:
       zh-Hans:  关于
       zh-Hant:  關於
     url:        /about.html
+
   - titles:
       en:       Resume
       zh:       简历
